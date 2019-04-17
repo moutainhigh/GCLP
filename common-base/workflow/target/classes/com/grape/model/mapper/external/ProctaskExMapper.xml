@@ -1,0 +1,12 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.ProctaskExMapper">
+    
+     <select id="findTaskByNodeid" resultType="com.grape.model.db.Codetask" parameterType="map">
+        select ct.* from codetask ct,proctask pt 
+        where ct.id=pt.taskid 
+        and pt.productno=#{productno}
+        and pt.nodeid=#{nodeid}
+        and pt.runflg=#{runflg}
+    </select>
+    
+</mapper> 

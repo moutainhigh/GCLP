@@ -1,0 +1,18 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.WorkflowExMapper">
+    
+     <select id="findApproveUsers" resultType="com.grape.model.db.Userapprove" parameterType="map">
+			select per.* from workitem w , doctask d, exceptloaninfo e, userapprove p ,person per
+			where w.workid=d.workid 
+			and d.workid=e.workid 
+			and d.channelno=p.channelno 
+			and d.areaid=p.arerid 
+			and p.userid=per.workerid
+			and w.workid=#{workid} 
+			and w.node=#{nodeid} 
+			and (w.authuserid=#{userid} or w.authuserid is null) 
+			and (d.userid=#{userid} or (p.amtlow &lt;= e.expectapplyamount and p.amthigh &gt; e.expectapplyamount))
+			and exists (select 1 from userrole u,noderole n where u.roleid=n.roleid and u.workerid=p.userid and n.productno=d.productno and n.nodeid=w.node);
+    </select>
+    
+</mapper> 

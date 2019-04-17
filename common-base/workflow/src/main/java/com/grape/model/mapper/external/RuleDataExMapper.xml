@@ -1,0 +1,239 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.RuleDataExMapper">
+    
+    <!-- 地区上会审批金额 -->
+     <select id="approveamt" resultType="hashmap" parameterType="map">
+        select a.* from doctask d left outer join area a on d.areaid=a.areaid and d.workid=#{workid}
+    </select>
+    
+    <!-- 诉讼信息 -->
+     <select id="deliapplicateinfo" resultType="hashmap" parameterType="map">
+        select * from deliapplicateinfo where workid=#{workid}
+    </select>
+    
+     <select id="approveinfo" resultType="hashmap" parameterType="map">
+	    select count(1) refuseflg from custinfo c1 ,custinfo c2,workitem w 
+		where c1.cerdid=c2.cerdid 
+		and c2.workid=w.workid 
+		and w.stage='E7' 
+		and w.workid=#{workid}
+     </select>
+     
+    <!-- 诉讼信息 -->
+     <select id="litigationinfo" resultType="hashmap" parameterType="map">
+        select * from litigationinfo where workid=#{workid}
+    </select>
+    
+    <!-- 抵押物及区域信息  -->
+     <select id="mortgage" resultType="hashmap" parameterType="map">
+       select * from mortgage m,area a where m.areaid=a.areaid and workid=#{workid}
+    </select>
+    
+    <!-- 抵押物查档信息 -->
+     <select id="mortgagefiling" resultType="hashmap" parameterType="map">
+        select * from mortgagefiling t1,mortgage t2 where t2.id=t1.mortgagefilingid and t1.workid=#{workid}
+    </select>
+    
+    <!-- 借款申请信息 -->
+     <select id="loanappinfo" resultType="hashmap" parameterType="map">
+        select * from exceptloaninfo where workid=#{workid}
+    </select>
+    
+    <!-- 借款人资信评分信息 -->
+     <select id="custinfo2" resultType="hashmap" parameterType="map">
+        select * from (
+
+		<!--主借款人信息:年龄,婚姻状况,职业-->
+		select * from custinfo 
+		where workid=#{workid}
+		and custtype like '%1%'
+		
+		) temp1 left outer join
+		(
+		
+		<!--前手抵押机构:类金融机构-->
+		select workid,(case when mjjdorgcount2>=mjjdorgcount1 then mjjdorgcount2 else mjjdorgcount1 end) mjjdorgcount 
+		from (select workid,max(fronthandone) mjjdorgcount1,max(fronthandtwo) mjjdorgcount2 from mortgagefiling 
+		where workid=#{workid}
+		group by workid) mortgagefilingtemp
+		
+		) temp2 on temp1.workid=temp2.workid left outer join
+		(
+		
+		<!--当前是否有民间借贷记录:是-->
+		select workid,count(1) mjjdcount from debtinfo 
+		where workid=#{workid}
+		and havaloanflg='1'
+		group by workid
+		
+		) temp3 on temp1.workid=temp3.workid left outer join
+		(
+		
+		<!-- 抵押物区域与户籍匹配-->
+		select mortgage.workid,count(1) mortgagecount from mortgage,custinfo
+		where mortgage.workid=custinfo.workid
+		and custinfo.censusregisterprovvince=mortgage.houseaddressprovince 
+		and custinfo.censusregistercity=mortgage.houseaddresscity 
+		and mortgage.workid =#{workid}
+		group by mortgage.workid
+		
+		) temp4 on temp1.workid=temp4.workid left outer join
+		(
+		
+		<!-- 有非金融诉讼记录,未结案-->
+		select workid,count(1) litigcount from litigationinfo
+		where litigationinfo.litigationtype='0'
+		and litigationinfo.litigationstate='0'
+		and workid=#{workid}
+		group by workid
+		
+		) temp5 on temp1.workid=temp5.workid left outer join
+		(
+		
+		<!-- 12个月信用记录-->
+		select workid,count(case when isblackofloancredit='0' then 1 else 0 end ) loancount,
+		count(case when isblackofcreditcard='0' then 1 else 0 end ) cardcount,
+		sum(ifnull(totaloverduecount,0)) sumoverduecount,
+		max(ifnull(maxoverdueday,0)) maxoverduecount
+		from creditrecode 
+		where workid = #{workid}
+		and overdueperiod = '1'
+		group by workid
+		
+		) temp6 on temp1.workid=temp6.workid left outer join
+		(
+		<!--历史是否有民间借贷记录 -->
+		select workid,count(1) lsmjjdcount from debtinfo
+		where workid=#{workid}
+		and historicalhavaloanflg='1'
+		group by workid
+		) temp7 on temp1.workid=temp7.workid left outer join
+		(
+		<!--前手抵押机构:其他-->
+		select workid,count(1) qtorgcount from loaninfo 
+		where workid=#{workid}
+		and firstmortgageorg='3'
+		group by workid
+		
+		) temp8 on temp1.workid=temp8.workid left outer join
+		(
+		<!-- 当前是否逾期 -->
+		select workid,count(1) xyllcount from creditrecode
+		where workid=#{workid}
+		and isoverdue='1'
+		and overdueamount&gt;1000
+		) temp9 on temp1.workid=temp9.workid left outer join
+		(
+		
+		<!-- 近24个月信用记录相关数据-->
+		select workid,count(case when isblackofloancredit='0' then 1 else 0 end ) loancount2,
+		count(case when isblackofcreditcard='0' then 1 else 0 end ) cardcount2,
+		sum(ifnull(totaloverduecount,0)) sumoverduecount2,
+		max(ifnull(maxoverdueday,0)) maxoverduecount2
+		from creditrecode
+		where workid = #{workid}
+		and (overdueperiod = '0')
+		group by workid
+		) temp10 on temp1.workid=temp10.workid left outer join
+		(
+		
+		<!-- 是否有配偶信息-->
+		select workid,count(1) hasparnter from custinfo 
+		where ismarrow='1' 
+		and workid = #{workid} 
+		group by workid) temp11 on temp1.workid=temp11.workid left outer join 
+		(
+		
+		<!-- 是否无贷款和信用卡征信记录-->
+		select workid,count(case when isblackofloancredit='0' then 1 else 0 end ) isblackofloancredit,
+		count(case when isblackofcreditcard='0' then 1 else 0 end ) isblackofcreditcard
+		from creditrecode
+		where workid = #{workid}
+		group by workid ) temp12 on temp1.workid=temp12.workid
+
+    </select>
+    
+    <!-- 抵押物评分抵押物尽调信息 -->
+    <select id="delimortgage" resultType="hashmap" parameterType="map">
+        select * from delimortgage where id=#{mortgage.id}
+    </select>
+    <!-- 抵押物评分抵押物尽调信息 -->
+    <select id="delimortgage2" resultType="hashmap" parameterType="map">
+        select * from mortgage left outer join delimortgage on mortgage.id=delimortgage.id where mortgage.workid=#{workid}
+    </select>
+    
+    <!-- 抵押物评分抵押物尽调信息 -->
+    <select id="rulemortfiling" resultType="hashmap" parameterType="map">
+        select * from mortgagefiling where mortgagefilingid=#{mortgage.id}
+    </select>
+    <!-- 批复信息 -->
+    <select id="repaytoinfo" resultType="hashmap" parameterType="map">
+    	select * from repaytoinfo where workid=#{workid} and isfinilyflg='1'
+    </select>
+    <!-- 放款申请信息 -->
+    <select id="refundment" resultType="hashmap" parameterType="map">
+    	select workid,count(1) bufencount from paymentapplyinfo where workid=#{workid} and havechandeposit='1'
+    </select>
+    <!-- 是否有退款流程-->
+    <select id="havebackproc" resultType="hashmap" parameterType="map">
+    	select workid,count(1) backcount from paymentapplyinfo where workid=#{workid} and havebackproc='1'
+    </select>
+    <!-- 抵押物数量-->
+    <select id="mortgage2" resultType="hashmap" parameterType="map">
+    	select workid,count(1) mortgagecount from mortgage where workid=#{workid}
+    </select>
+    <select id="mortgagearea" resultType="hashmap" parameterType="map">
+    	select workid,count(1) mortgageareacount from mortgage
+    	left outer join area on area.areaid=mortgage.areaid
+    	 where workid=#{workid} and area.areatype='2'
+    </select>
+    <select id="chanapproval" resultType="hashmap" parameterType="map">
+    	select workid,count(1) chanapprovalcount from chanapprovalform
+    	join person on person.workerid = chanapprovalform.userid
+    	join organization on organization.organizationno=person.organizationid
+    	where workid=#{workid} 
+    	and facesignflg='1' and organization.orgbelongsto='02'
+    </select>
+    
+    <select id="chanapproval1" resultType="hashmap" parameterType="map">
+    	select workid,count(1) chanapprovalcount from chanapprovalform
+    	join person on person.workerid = chanapprovalform.userid
+    	join organization on organization.organizationno=person.organizationid
+    	where workid=#{workid} 
+    	and (facesignflg is not null and facesignflg!='') and organization.orgbelongsto='02'
+    </select>
+    
+    <!-- 深圳物业 -->
+    <select id="mortgage3" resultType="hashmap" parameterType="map">
+        select workid,count(1) mortgagecount from mortgage where workid=#{workid} and houseaddresscity='440300'
+    </select>
+    <!-- 当前是否逾期 -->
+    <select id="overdueinfo1" resultType="hashmap" parameterType="map">
+        select temp1.workid,temp1.overdueclearcount from (select workid,count(overdueclearflg) overdueclearcount from creditrecode 
+		where overdueclearflg='0' and overduecount>3 and overdueamount>=10000 and workid=#{workid}  group by workid) temp1
+    </select>
+    <!-- 征信信息 -->
+    <select id="creditrecode" resultType="hashmap" parameterType="map">
+        select * from creditrecode where workid=#{workid}
+    </select>
+    <!-- 征信信息2 贷款累计逾期次数 -->
+    <select id="creditrecode2" resultType="hashmap" parameterType="map">
+        select sum(case overdueperiod when '0' then '1' else '0' end) overdueperiod24flg,sum(totaloverduecount) totaloverduecount from creditrecode where workid=#{workid}
+    </select>
+    <!-- 征信信息3 贷款最高逾期天数 -->
+    <select id="creditrecode3" resultType="hashmap" parameterType="map">
+        select sum(case overdueperiod when '0' then '1' else '0' end) overdueperiod24flg,max(maxoverdueday) maxoverdueday from creditrecode where workid=#{workid}
+    </select>
+    <!-- 征信信息4 征信最高逾期天数 -->
+    <select id="creditrecode4" resultType="hashmap" parameterType="map">
+        select sum(case overdueperiod2 when '0' then '1' else '0' end) overdueperiod24flg,max(maxoverdueday2) maxoverdueday from creditrecode where workid=#{workid}
+    </select>
+    <!-- 风险楼盘 -->
+    <select id="riskhouse" resultType="hashmap" parameterType="map">
+        select workid,count(*) riskhousecount from mortgage where workid=#{workid}
+		and exists (select 1 from riskhouse where LOCATE(mortgage.martgagename,housename) or LOCATE(housename,mortgage.martgagename)) group by workid
+    </select>
+    <select id="approvalamount" resultType="hashmap" parameterType="map">
+    	select * from chanapprovalform where id = (select max(id) from chanapprovalform where workid=#{workid})
+    </select>
+</mapper> 

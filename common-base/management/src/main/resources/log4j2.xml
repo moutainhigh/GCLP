@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status="OFF"，可以去掉，它的含义为是否记录log4j2本身的event信息，默认是OFF -->
+<configuration status="OFF"> 
+	<property name="log.name" value="management" />
+    <property name="log.path" value="/root/dyitp/application/logs/management.log" />
+    
+    <!--先定义所有的appender -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}</file>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.name}.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    
+   	<root level="INFO" >
+        <appender-ref ref="console" />
+        <appender-ref ref="file" />
+    </root>
+    
+    <logger name="org.apache.ibatis" level="DEBUG"></logger>
+
+    <logger name="java.sql" level="DEBUG"></logger>
+
+    <logger name="org.springframework.transaction" level="DEBUG"></logger>
+    
+</configuration>

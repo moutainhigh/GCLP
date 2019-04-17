@@ -1,0 +1,53 @@
+server:
+  port: 8080
+  
+spring:
+  application:
+    name: zuul
+    
+logging:
+  level:
+    jdbc: error
+    jdbc.sqltiming: info
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+  config: classpath:log4j2.xml
+
+security:
+  basic:
+    enabled: false
+
+zuul:
+   routes: 
+      approval:
+          path: /approval/**
+          sensitive-headers: 
+          custom-sensitive-headers: true
+      home:
+          path: /home/**
+          sensitive-headers: 
+          custom-sensitive-headers: true
+      management:
+          path: /management/**
+          sensitive-headers: 
+          custom-sensitive-headers: true
+      auth:
+          path: /auth/**
+          sensitive-headers: 
+          custom-sensitive-headers: true
+      workflow:
+          path: /workflow/**
+          sensitive-headers: 
+          custom-sensitive-headers: true
+      eureka:
+          path: /eureka/**
+          sensitive-headers: 
+          custom-sensitive-headers: true
+      zuul:
+          path: /zuul/**
+          sensitive-headers: 
+          custom-sensitive-headers: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://172.18.168.240:8011/eureka/

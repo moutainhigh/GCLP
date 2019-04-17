@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.UserroleMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Userrole" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workerid" property="workerid" jdbcType="VARCHAR" />
+    <result column="roleid" property="roleid" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="authworkerid" property="authworkerid" jdbcType="VARCHAR" />
+    <result column="authstate" property="authstate" jdbcType="TIMESTAMP" />
+    <result column="authend" property="authend" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workerid, roleid, type, authworkerid, authstate, authend
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.UserroleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from userrole
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from userrole
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from userrole
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.UserroleExample" >
+    delete from userrole
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Userrole" >
+    insert into userrole (id, workerid, roleid, 
+      type, authworkerid, authstate, 
+      authend)
+    values (#{id,jdbcType=VARCHAR}, #{workerid,jdbcType=VARCHAR}, #{roleid,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{authworkerid,jdbcType=VARCHAR}, #{authstate,jdbcType=TIMESTAMP}, 
+      #{authend,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Userrole" >
+    insert into userrole
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workerid != null" >
+        workerid,
+      </if>
+      <if test="roleid != null" >
+        roleid,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="authworkerid != null" >
+        authworkerid,
+      </if>
+      <if test="authstate != null" >
+        authstate,
+      </if>
+      <if test="authend != null" >
+        authend,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workerid != null" >
+        #{workerid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="authworkerid != null" >
+        #{authworkerid,jdbcType=VARCHAR},
+      </if>
+      <if test="authstate != null" >
+        #{authstate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authend != null" >
+        #{authend,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.UserroleExample" resultType="java.lang.Integer" >
+    select count(*) from userrole
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update userrole
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workerid != null" >
+        workerid = #{record.workerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleid != null" >
+        roleid = #{record.roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authworkerid != null" >
+        authworkerid = #{record.authworkerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authstate != null" >
+        authstate = #{record.authstate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.authend != null" >
+        authend = #{record.authend,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update userrole
+    set id = #{record.id,jdbcType=VARCHAR},
+      workerid = #{record.workerid,jdbcType=VARCHAR},
+      roleid = #{record.roleid,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      authworkerid = #{record.authworkerid,jdbcType=VARCHAR},
+      authstate = #{record.authstate,jdbcType=TIMESTAMP},
+      authend = #{record.authend,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Userrole" >
+    update userrole
+    <set >
+      <if test="workerid != null" >
+        workerid = #{workerid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        roleid = #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="authworkerid != null" >
+        authworkerid = #{authworkerid,jdbcType=VARCHAR},
+      </if>
+      <if test="authstate != null" >
+        authstate = #{authstate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authend != null" >
+        authend = #{authend,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Userrole" >
+    update userrole
+    set workerid = #{workerid,jdbcType=VARCHAR},
+      roleid = #{roleid,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      authworkerid = #{authworkerid,jdbcType=VARCHAR},
+      authstate = #{authstate,jdbcType=TIMESTAMP},
+      authend = #{authend,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.AssetinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Assetinfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="cerdid" property="cerdid" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="assettype" property="assettype" jdbcType="VARCHAR" />
+    <result column="addresssarea" property="addresssarea" jdbcType="VARCHAR" />
+    <result column="addresscity" property="addresscity" jdbcType="VARCHAR" />
+    <result column="addressprov" property="addressprov" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="isprovidepaper" property="isprovidepaper" jdbcType="CHAR" />
+    <result column="propertyowner" property="propertyowner" jdbcType="VARCHAR" />
+    <result column="housenature" property="housenature" jdbcType="VARCHAR" />
+    <result column="housearea" property="housearea" jdbcType="VARCHAR" />
+    <result column="buytime" property="buytime" jdbcType="TIMESTAMP" />
+    <result column="buyprice" property="buyprice" jdbcType="DECIMAL" />
+    <result column="docchoosetype" property="docchoosetype" jdbcType="VARCHAR" />
+    <result column="assetsituation" property="assetsituation" jdbcType="VARCHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cerdid, workid, assettype, addresssarea, addresscity, addressprov, address, isprovidepaper, 
+    propertyowner, housenature, housearea, buytime, buyprice, docchoosetype, assetsituation, 
+    chgtl, chgdt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.AssetinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from assetinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from assetinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from assetinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.AssetinfoExample" >
+    delete from assetinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Assetinfo" >
+    insert into assetinfo (id, cerdid, workid, 
+      assettype, addresssarea, addresscity, 
+      addressprov, address, isprovidepaper, 
+      propertyowner, housenature, housearea, 
+      buytime, buyprice, docchoosetype, 
+      assetsituation, chgtl, chgdt
+      )
+    values (#{id,jdbcType=VARCHAR}, #{cerdid,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, 
+      #{assettype,jdbcType=VARCHAR}, #{addresssarea,jdbcType=VARCHAR}, #{addresscity,jdbcType=VARCHAR}, 
+      #{addressprov,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{isprovidepaper,jdbcType=CHAR}, 
+      #{propertyowner,jdbcType=VARCHAR}, #{housenature,jdbcType=VARCHAR}, #{housearea,jdbcType=VARCHAR}, 
+      #{buytime,jdbcType=TIMESTAMP}, #{buyprice,jdbcType=DECIMAL}, #{docchoosetype,jdbcType=VARCHAR}, 
+      #{assetsituation,jdbcType=VARCHAR}, #{chgtl,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Assetinfo" >
+    insert into assetinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cerdid != null" >
+        cerdid,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="assettype != null" >
+        assettype,
+      </if>
+      <if test="addresssarea != null" >
+        addresssarea,
+      </if>
+      <if test="addresscity != null" >
+        addresscity,
+      </if>
+      <if test="addressprov != null" >
+        addressprov,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="isprovidepaper != null" >
+        isprovidepaper,
+      </if>
+      <if test="propertyowner != null" >
+        propertyowner,
+      </if>
+      <if test="housenature != null" >
+        housenature,
+      </if>
+      <if test="housearea != null" >
+        housearea,
+      </if>
+      <if test="buytime != null" >
+        buytime,
+      </if>
+      <if test="buyprice != null" >
+        buyprice,
+      </if>
+      <if test="docchoosetype != null" >
+        docchoosetype,
+      </if>
+      <if test="assetsituation != null" >
+        assetsituation,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdid != null" >
+        #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="assettype != null" >
+        #{assettype,jdbcType=VARCHAR},
+      </if>
+      <if test="addresssarea != null" >
+        #{addresssarea,jdbcType=VARCHAR},
+      </if>
+      <if test="addresscity != null" >
+        #{addresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressprov != null" >
+        #{addressprov,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isprovidepaper != null" >
+        #{isprovidepaper,jdbcType=CHAR},
+      </if>
+      <if test="propertyowner != null" >
+        #{propertyowner,jdbcType=VARCHAR},
+      </if>
+      <if test="housenature != null" >
+        #{housenature,jdbcType=VARCHAR},
+      </if>
+      <if test="housearea != null" >
+        #{housearea,jdbcType=VARCHAR},
+      </if>
+      <if test="buytime != null" >
+        #{buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyprice != null" >
+        #{buyprice,jdbcType=DECIMAL},
+      </if>
+      <if test="docchoosetype != null" >
+        #{docchoosetype,jdbcType=VARCHAR},
+      </if>
+      <if test="assetsituation != null" >
+        #{assetsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.AssetinfoExample" resultType="java.lang.Integer" >
+    select count(*) from assetinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update assetinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerdid != null" >
+        cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assettype != null" >
+        assettype = #{record.assettype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addresssarea != null" >
+        addresssarea = #{record.addresssarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addresscity != null" >
+        addresscity = #{record.addresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressprov != null" >
+        addressprov = #{record.addressprov,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isprovidepaper != null" >
+        isprovidepaper = #{record.isprovidepaper,jdbcType=CHAR},
+      </if>
+      <if test="record.propertyowner != null" >
+        propertyowner = #{record.propertyowner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.housenature != null" >
+        housenature = #{record.housenature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.housearea != null" >
+        housearea = #{record.housearea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buytime != null" >
+        buytime = #{record.buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.buyprice != null" >
+        buyprice = #{record.buyprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.docchoosetype != null" >
+        docchoosetype = #{record.docchoosetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetsituation != null" >
+        assetsituation = #{record.assetsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update assetinfo
+    set id = #{record.id,jdbcType=VARCHAR},
+      cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      assettype = #{record.assettype,jdbcType=VARCHAR},
+      addresssarea = #{record.addresssarea,jdbcType=VARCHAR},
+      addresscity = #{record.addresscity,jdbcType=VARCHAR},
+      addressprov = #{record.addressprov,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      isprovidepaper = #{record.isprovidepaper,jdbcType=CHAR},
+      propertyowner = #{record.propertyowner,jdbcType=VARCHAR},
+      housenature = #{record.housenature,jdbcType=VARCHAR},
+      housearea = #{record.housearea,jdbcType=VARCHAR},
+      buytime = #{record.buytime,jdbcType=TIMESTAMP},
+      buyprice = #{record.buyprice,jdbcType=DECIMAL},
+      docchoosetype = #{record.docchoosetype,jdbcType=VARCHAR},
+      assetsituation = #{record.assetsituation,jdbcType=VARCHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Assetinfo" >
+    update assetinfo
+    <set >
+      <if test="cerdid != null" >
+        cerdid = #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="assettype != null" >
+        assettype = #{assettype,jdbcType=VARCHAR},
+      </if>
+      <if test="addresssarea != null" >
+        addresssarea = #{addresssarea,jdbcType=VARCHAR},
+      </if>
+      <if test="addresscity != null" >
+        addresscity = #{addresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressprov != null" >
+        addressprov = #{addressprov,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isprovidepaper != null" >
+        isprovidepaper = #{isprovidepaper,jdbcType=CHAR},
+      </if>
+      <if test="propertyowner != null" >
+        propertyowner = #{propertyowner,jdbcType=VARCHAR},
+      </if>
+      <if test="housenature != null" >
+        housenature = #{housenature,jdbcType=VARCHAR},
+      </if>
+      <if test="housearea != null" >
+        housearea = #{housearea,jdbcType=VARCHAR},
+      </if>
+      <if test="buytime != null" >
+        buytime = #{buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyprice != null" >
+        buyprice = #{buyprice,jdbcType=DECIMAL},
+      </if>
+      <if test="docchoosetype != null" >
+        docchoosetype = #{docchoosetype,jdbcType=VARCHAR},
+      </if>
+      <if test="assetsituation != null" >
+        assetsituation = #{assetsituation,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Assetinfo" >
+    update assetinfo
+    set cerdid = #{cerdid,jdbcType=VARCHAR},
+      workid = #{workid,jdbcType=VARCHAR},
+      assettype = #{assettype,jdbcType=VARCHAR},
+      addresssarea = #{addresssarea,jdbcType=VARCHAR},
+      addresscity = #{addresscity,jdbcType=VARCHAR},
+      addressprov = #{addressprov,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      isprovidepaper = #{isprovidepaper,jdbcType=CHAR},
+      propertyowner = #{propertyowner,jdbcType=VARCHAR},
+      housenature = #{housenature,jdbcType=VARCHAR},
+      housearea = #{housearea,jdbcType=VARCHAR},
+      buytime = #{buytime,jdbcType=TIMESTAMP},
+      buyprice = #{buyprice,jdbcType=DECIMAL},
+      docchoosetype = #{docchoosetype,jdbcType=VARCHAR},
+      assetsituation = #{assetsituation,jdbcType=VARCHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

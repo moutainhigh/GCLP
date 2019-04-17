@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ExcompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Excompany" >
+    <id column="comno" property="comno" jdbcType="VARCHAR" />
+    <result column="comname" property="comname" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="userKeyId" property="userkeyid" jdbcType="VARCHAR" />
+    <result column="accesskey" property="accesskey" jdbcType="VARCHAR" />
+    <result column="conid" property="conid" jdbcType="VARCHAR" />
+    <result column="url1" property="url1" jdbcType="VARCHAR" />
+    <result column="url2" property="url2" jdbcType="VARCHAR" />
+    <result column="url3" property="url3" jdbcType="VARCHAR" />
+    <result column="url4" property="url4" jdbcType="VARCHAR" />
+    <result column="url5" property="url5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    comno, comname, username, password, userKeyId, accesskey, conid, url1, url2, url3, 
+    url4, url5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ExcompanyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from excompany
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from excompany
+    where comno = #{comno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from excompany
+    where comno = #{comno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ExcompanyExample" >
+    delete from excompany
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Excompany" >
+    insert into excompany (comno, comname, username, 
+      password, userKeyId, accesskey, 
+      conid, url1, url2, 
+      url3, url4, url5)
+    values (#{comno,jdbcType=VARCHAR}, #{comname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{userkeyid,jdbcType=VARCHAR}, #{accesskey,jdbcType=VARCHAR}, 
+      #{conid,jdbcType=VARCHAR}, #{url1,jdbcType=VARCHAR}, #{url2,jdbcType=VARCHAR}, 
+      #{url3,jdbcType=VARCHAR}, #{url4,jdbcType=VARCHAR}, #{url5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Excompany" >
+    insert into excompany
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="comno != null" >
+        comno,
+      </if>
+      <if test="comname != null" >
+        comname,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="userkeyid != null" >
+        userKeyId,
+      </if>
+      <if test="accesskey != null" >
+        accesskey,
+      </if>
+      <if test="conid != null" >
+        conid,
+      </if>
+      <if test="url1 != null" >
+        url1,
+      </if>
+      <if test="url2 != null" >
+        url2,
+      </if>
+      <if test="url3 != null" >
+        url3,
+      </if>
+      <if test="url4 != null" >
+        url4,
+      </if>
+      <if test="url5 != null" >
+        url5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="comno != null" >
+        #{comno,jdbcType=VARCHAR},
+      </if>
+      <if test="comname != null" >
+        #{comname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userkeyid != null" >
+        #{userkeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="accesskey != null" >
+        #{accesskey,jdbcType=VARCHAR},
+      </if>
+      <if test="conid != null" >
+        #{conid,jdbcType=VARCHAR},
+      </if>
+      <if test="url1 != null" >
+        #{url1,jdbcType=VARCHAR},
+      </if>
+      <if test="url2 != null" >
+        #{url2,jdbcType=VARCHAR},
+      </if>
+      <if test="url3 != null" >
+        #{url3,jdbcType=VARCHAR},
+      </if>
+      <if test="url4 != null" >
+        #{url4,jdbcType=VARCHAR},
+      </if>
+      <if test="url5 != null" >
+        #{url5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ExcompanyExample" resultType="java.lang.Integer" >
+    select count(*) from excompany
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update excompany
+    <set >
+      <if test="record.comno != null" >
+        comno = #{record.comno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comname != null" >
+        comname = #{record.comname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userkeyid != null" >
+        userKeyId = #{record.userkeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accesskey != null" >
+        accesskey = #{record.accesskey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conid != null" >
+        conid = #{record.conid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url1 != null" >
+        url1 = #{record.url1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url2 != null" >
+        url2 = #{record.url2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url3 != null" >
+        url3 = #{record.url3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url4 != null" >
+        url4 = #{record.url4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url5 != null" >
+        url5 = #{record.url5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update excompany
+    set comno = #{record.comno,jdbcType=VARCHAR},
+      comname = #{record.comname,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      userKeyId = #{record.userkeyid,jdbcType=VARCHAR},
+      accesskey = #{record.accesskey,jdbcType=VARCHAR},
+      conid = #{record.conid,jdbcType=VARCHAR},
+      url1 = #{record.url1,jdbcType=VARCHAR},
+      url2 = #{record.url2,jdbcType=VARCHAR},
+      url3 = #{record.url3,jdbcType=VARCHAR},
+      url4 = #{record.url4,jdbcType=VARCHAR},
+      url5 = #{record.url5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Excompany" >
+    update excompany
+    <set >
+      <if test="comname != null" >
+        comname = #{comname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userkeyid != null" >
+        userKeyId = #{userkeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="accesskey != null" >
+        accesskey = #{accesskey,jdbcType=VARCHAR},
+      </if>
+      <if test="conid != null" >
+        conid = #{conid,jdbcType=VARCHAR},
+      </if>
+      <if test="url1 != null" >
+        url1 = #{url1,jdbcType=VARCHAR},
+      </if>
+      <if test="url2 != null" >
+        url2 = #{url2,jdbcType=VARCHAR},
+      </if>
+      <if test="url3 != null" >
+        url3 = #{url3,jdbcType=VARCHAR},
+      </if>
+      <if test="url4 != null" >
+        url4 = #{url4,jdbcType=VARCHAR},
+      </if>
+      <if test="url5 != null" >
+        url5 = #{url5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where comno = #{comno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Excompany" >
+    update excompany
+    set comname = #{comname,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      userKeyId = #{userkeyid,jdbcType=VARCHAR},
+      accesskey = #{accesskey,jdbcType=VARCHAR},
+      conid = #{conid,jdbcType=VARCHAR},
+      url1 = #{url1,jdbcType=VARCHAR},
+      url2 = #{url2,jdbcType=VARCHAR},
+      url3 = #{url3,jdbcType=VARCHAR},
+      url4 = #{url4,jdbcType=VARCHAR},
+      url5 = #{url5,jdbcType=VARCHAR}
+    where comno = #{comno,jdbcType=VARCHAR}
+  </update>
+</mapper>

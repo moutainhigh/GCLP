@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.DoctaskMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Doctask" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="departmentno" property="departmentno" jdbcType="VARCHAR" />
+    <result column="areaid" property="areaid" jdbcType="VARCHAR" />
+    <result column="channelno" property="channelno" jdbcType="VARCHAR" />
+    <result column="terrcaeno" property="terrcaeno" jdbcType="VARCHAR" />
+    <result column="aisleno" property="aisleno" jdbcType="VARCHAR" />
+    <result column="fundno" property="fundno" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="productno" property="productno" jdbcType="VARCHAR" />
+    <result column="applydate" property="applydate" jdbcType="TIMESTAMP" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="subsidycomno" property="subsidycomno" jdbcType="VARCHAR" />
+    <result column="contractno" property="contractno" jdbcType="VARCHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="intostate" property="intostate" jdbcType="VARCHAR" />
+    <result column="deviceid" property="deviceid" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="istolive" property="istolive" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, departmentno, areaid, channelno, terrcaeno, aisleno, fundno, state, productno, 
+    applydate, userid, subsidycomno, contractno, chgtl, chgdt, intostate, deviceid, level, 
+    istolive
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.DoctaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from doctask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from doctask
+    where workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from doctask
+    where workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.DoctaskExample" >
+    delete from doctask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Doctask" >
+    insert into doctask (workid, departmentno, areaid, 
+      channelno, terrcaeno, aisleno, 
+      fundno, state, productno, 
+      applydate, userid, subsidycomno, 
+      contractno, chgtl, chgdt, 
+      intostate, deviceid, level, 
+      istolive)
+    values (#{workid,jdbcType=VARCHAR}, #{departmentno,jdbcType=VARCHAR}, #{areaid,jdbcType=VARCHAR}, 
+      #{channelno,jdbcType=VARCHAR}, #{terrcaeno,jdbcType=VARCHAR}, #{aisleno,jdbcType=VARCHAR}, 
+      #{fundno,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{productno,jdbcType=VARCHAR}, 
+      #{applydate,jdbcType=TIMESTAMP}, #{userid,jdbcType=VARCHAR}, #{subsidycomno,jdbcType=VARCHAR}, 
+      #{contractno,jdbcType=VARCHAR}, #{chgtl,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{intostate,jdbcType=VARCHAR}, #{deviceid,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, 
+      #{istolive,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Doctask" >
+    insert into doctask
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="departmentno != null" >
+        departmentno,
+      </if>
+      <if test="areaid != null" >
+        areaid,
+      </if>
+      <if test="channelno != null" >
+        channelno,
+      </if>
+      <if test="terrcaeno != null" >
+        terrcaeno,
+      </if>
+      <if test="aisleno != null" >
+        aisleno,
+      </if>
+      <if test="fundno != null" >
+        fundno,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="productno != null" >
+        productno,
+      </if>
+      <if test="applydate != null" >
+        applydate,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="subsidycomno != null" >
+        subsidycomno,
+      </if>
+      <if test="contractno != null" >
+        contractno,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="intostate != null" >
+        intostate,
+      </if>
+      <if test="deviceid != null" >
+        deviceid,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="istolive != null" >
+        istolive,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentno != null" >
+        #{departmentno,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="channelno != null" >
+        #{channelno,jdbcType=VARCHAR},
+      </if>
+      <if test="terrcaeno != null" >
+        #{terrcaeno,jdbcType=VARCHAR},
+      </if>
+      <if test="aisleno != null" >
+        #{aisleno,jdbcType=VARCHAR},
+      </if>
+      <if test="fundno != null" >
+        #{fundno,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="applydate != null" >
+        #{applydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="subsidycomno != null" >
+        #{subsidycomno,jdbcType=VARCHAR},
+      </if>
+      <if test="contractno != null" >
+        #{contractno,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intostate != null" >
+        #{intostate,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceid != null" >
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="istolive != null" >
+        #{istolive,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.DoctaskExample" resultType="java.lang.Integer" >
+    select count(*) from doctask
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update doctask
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentno != null" >
+        departmentno = #{record.departmentno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaid != null" >
+        areaid = #{record.areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelno != null" >
+        channelno = #{record.channelno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terrcaeno != null" >
+        terrcaeno = #{record.terrcaeno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aisleno != null" >
+        aisleno = #{record.aisleno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fundno != null" >
+        fundno = #{record.fundno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productno != null" >
+        productno = #{record.productno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applydate != null" >
+        applydate = #{record.applydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subsidycomno != null" >
+        subsidycomno = #{record.subsidycomno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractno != null" >
+        contractno = #{record.contractno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.intostate != null" >
+        intostate = #{record.intostate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceid != null" >
+        deviceid = #{record.deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.istolive != null" >
+        istolive = #{record.istolive,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update doctask
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      departmentno = #{record.departmentno,jdbcType=VARCHAR},
+      areaid = #{record.areaid,jdbcType=VARCHAR},
+      channelno = #{record.channelno,jdbcType=VARCHAR},
+      terrcaeno = #{record.terrcaeno,jdbcType=VARCHAR},
+      aisleno = #{record.aisleno,jdbcType=VARCHAR},
+      fundno = #{record.fundno,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      productno = #{record.productno,jdbcType=VARCHAR},
+      applydate = #{record.applydate,jdbcType=TIMESTAMP},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      subsidycomno = #{record.subsidycomno,jdbcType=VARCHAR},
+      contractno = #{record.contractno,jdbcType=VARCHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      intostate = #{record.intostate,jdbcType=VARCHAR},
+      deviceid = #{record.deviceid,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR},
+      istolive = #{record.istolive,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Doctask" >
+    update doctask
+    <set >
+      <if test="departmentno != null" >
+        departmentno = #{departmentno,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        areaid = #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="channelno != null" >
+        channelno = #{channelno,jdbcType=VARCHAR},
+      </if>
+      <if test="terrcaeno != null" >
+        terrcaeno = #{terrcaeno,jdbcType=VARCHAR},
+      </if>
+      <if test="aisleno != null" >
+        aisleno = #{aisleno,jdbcType=VARCHAR},
+      </if>
+      <if test="fundno != null" >
+        fundno = #{fundno,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        productno = #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="applydate != null" >
+        applydate = #{applydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="subsidycomno != null" >
+        subsidycomno = #{subsidycomno,jdbcType=VARCHAR},
+      </if>
+      <if test="contractno != null" >
+        contractno = #{contractno,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intostate != null" >
+        intostate = #{intostate,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceid != null" >
+        deviceid = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="istolive != null" >
+        istolive = #{istolive,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Doctask" >
+    update doctask
+    set departmentno = #{departmentno,jdbcType=VARCHAR},
+      areaid = #{areaid,jdbcType=VARCHAR},
+      channelno = #{channelno,jdbcType=VARCHAR},
+      terrcaeno = #{terrcaeno,jdbcType=VARCHAR},
+      aisleno = #{aisleno,jdbcType=VARCHAR},
+      fundno = #{fundno,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      productno = #{productno,jdbcType=VARCHAR},
+      applydate = #{applydate,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=VARCHAR},
+      subsidycomno = #{subsidycomno,jdbcType=VARCHAR},
+      contractno = #{contractno,jdbcType=VARCHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      intostate = #{intostate,jdbcType=VARCHAR},
+      deviceid = #{deviceid,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      istolive = #{istolive,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

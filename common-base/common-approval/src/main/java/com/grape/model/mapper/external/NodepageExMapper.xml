@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.NodepageExMapper" >
+	<select id="selectNodePage" parameterType="map" resultType="com.grape.controller.request.NodepageBean">
+		select page.pagename,node.pageid as pageid,node.pagebutton as pagebutton,node.editflg as editflg,node.viewflg as viewflg,node.basepageflg as basepageflg,node.approvalpageflg as approvalpageflg from nodepage node
+		left outer join page page on page.pageid=node.pageid
+		where node.productno=#{productno} and node.nodeid=#{nodeid} order by node.pageid asc
+	</select>
+</mapper>

@@ -1,0 +1,127 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.SmsAlertsExMapper">
+	
+    <select id="findRepaymentList" resultType="map" parameterType="map">
+        select pl.workid,pl.nextrepaydate,pl.nextrefundmoney,c.custname,c.telnumber from  postloaninfo pl
+        
+        left outer join custinfo c on c.workid = pl.workid
+        left outer join doctask d on d.workid = pl.workid
+        where 1=1
+        	and c.custtype like '%1%'
+        <if test="startdate!=null and startdate!=''">
+           and pl.nextrepaydate &gt;= #{startdate, jdbcType = VARCHAR}
+        </if>
+        <if test="enddate!=null and enddate!=''">
+           and pl.nextrepaydate &lt;= #{enddate, jdbcType = VARCHAR}
+        </if>
+        <if test="productno!=null and productno!=''">
+           and d.productno = #{productno, jdbcType = VARCHAR}
+        </if>
+        order by pl.workid;	
+    </select>
+	
+	<select id="findOverdueList" resultType="map" parameterType="map">
+        select pl.workid,pl.overduenum,c.custname,c.telnumber from  postloaninfo pl
+        
+        left outer join custinfo c on c.workid = pl.workid
+        left outer join doctask d on d.workid = pl.workid
+        where 1=1
+        	and c.custtype like '%1%'
+        	and pl.overdueflg = 'Y'
+        <if test="productno!=null and productno!=''">
+            and d.productno = #{productno, jdbcType = VARCHAR}
+        </if>
+        order by pl.workid
+    </select>
+    
+    <select id="findOverdueListInChannel" resultType="map" parameterType="map">
+       select count(1) as size,d.channelno as organizationid from (select d.* from  postloaninfo pl
+        
+        left outer join custinfo c on c.workid = pl.workid
+        left outer join doctask d on d.workid = pl.workid
+        where 1=1
+        	and c.custtype = '1'
+        	and pl.overdueflg = 'Y'
+			and pl.overduenum = '1'
+		<if test="productno!=null and productno!=''">
+            and d.productno = #{productno, jdbcType = VARCHAR}
+        </if>
+        ) d group by d.channelno
+    </select>
+    
+    <select id="findOverdueListInTerrcae" resultType="map" parameterType="map">
+       select count(1) as size,d.terrcaeno as organizationid from (select d.* from  postloaninfo pl
+        
+        left outer join custinfo c on c.workid = pl.workid
+        left outer join doctask d on d.workid = pl.workid
+        where 1=1
+        	and c.custtype like '%1%'
+        	and pl.overdueflg = 'Y'
+			and pl.overduenum = '1'
+		<if test="productno!=null and productno!=''">
+            and d.productno = #{productno, jdbcType = VARCHAR}
+        </if>
+        ) d group by d.terrcaeno
+    </select>
+    
+    <select id="findOverdueListInAisle" resultType="map" parameterType="map">
+       select count(1) as size,d.aisleno as organizationid from (select d.* from  postloaninfo pl
+        
+        left outer join custinfo c on c.workid = pl.workid
+        left outer join doctask d on d.workid = pl.workid
+        where 1=1
+        	and c.custtype like '%1%'
+        	and pl.overdueflg = 'Y'
+			and pl.overduenum = '1'
+		<if test="productno!=null and productno!=''">
+            and d.productno = #{productno, jdbcType = VARCHAR}
+        </if>
+        ) d group by d.aisleno
+    </select>
+    
+    <select id="findOverdueListInFund" resultType="map" parameterType="map">
+       select count(1) as size,d.fundno as organizationid from (select d.* from  postloaninfo pl
+        
+        left outer join custinfo c on c.workid = pl.workid
+        left outer join doctask d on d.workid = pl.workid
+        where 1=1
+        	and c.custtype = '1'
+        	and pl.overdueflg = 'Y'
+			and pl.overduenum = '1'
+		<if test="productno!=null and productno!=''">
+            and d.productno = #{productno, jdbcType = VARCHAR}
+        </if>
+        ) d group by d.fundno
+    </select>
+	
+	<select id="findOverdueListInUserid" resultType="map" parameterType="map">
+       select count(1) as size,d.userid  from (select d.* from  postloaninfo pl
+        
+        left outer join custinfo c on c.workid = pl.workid
+        left outer join doctask d on d.workid = pl.workid
+        where 1=1
+        	and c.custtype like '%1%'
+        	and pl.overdueflg = 'Y'
+			and pl.overduenum = '1'
+		<if test="productno!=null and productno!=''">
+            and d.productno = #{productno, jdbcType = VARCHAR}
+        </if>
+        ) d group by d.userid
+    </select>
+      
+    <select id="findPersonInDaihou" resultType="com.grape.model.db.Person" parameterType="map">
+        select p.* from person p
+        
+        left outer join userrole ur on ur.workerid = p.workerid
+        
+        where 1=1
+        <if test="organizationid!=null and organizationid!=''">
+            and p.organizationid = #{organizationid, jdbcType = VARCHAR}
+        </if>
+        
+        <if test="roleid!=null and roleid!=''">
+            and ur.roleid = #{roleid, jdbcType = VARCHAR}
+        </if>
+        
+    </select>
+</mapper> 

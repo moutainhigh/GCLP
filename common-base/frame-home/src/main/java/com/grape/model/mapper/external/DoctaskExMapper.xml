@@ -1,0 +1,158 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.DoctaskExMapper">
+	
+    <select id="findDoctaskUnfinishAll" resultType="map" parameterType="map">
+        select doc.workid,doc.productno,doc.chgdt,c.cityname as city,o.organizationname,
+        ct.codflg as producttype,ct.coddes as producttypename,p.productname,
+        ci.custname as borrower,cm.juridical as borrower2,wi.node from doctask doc
+        left outer join area a on a.areaid = doc.areaid
+        left outer join city c on c.citycode = a.gbcode
+        left outer join organization o on o.organizationno = doc.channelno
+        left outer join applyinfoofcom cm on cm.workid = doc.workid and cm.applyertype like '%1%'
+        left outer join custinfo ci on ci.workid = doc.workid and ci.custtype like '%1%'
+        left outer join workitem wi on wi.workid = doc.workid
+        left outer join product p on p.productno = doc.productno,
+        codetable ct
+        
+        where 1=1
+        <if test="chgtl!=null and chgtl!=''">
+           and doc.chgtl=#{chgtl, jdbcType = VARCHAR}
+        </if>
+        and ct.codflg = p.producttype
+        
+        and ct.codtyp='PRODUCTTYPE' 
+        and doc.intostate = '1'
+        order by doc.chgdt desc
+    </select>
+	
+	<select id="countDoctaskUnfinishAll" resultType="Integer" >
+        select count(1) from doctask doc
+        left outer join area a on a.areaid = doc.areaid
+        left outer join city c on c.citycode = a.gbcode
+        left outer join organization o on o.organizationno = doc.channelno
+        left outer join applyinfoofcom cm on cm.workid = doc.workid and cm.applyertype like '%1%'
+        left outer join custinfo ci on ci.workid = doc.workid and ci.custtype like '%1%'
+        left outer join workitem wi on wi.workid = doc.workid
+        left outer join product p on p.productno = doc.productno,
+        codetable ct
+        
+        where 1=1
+        <if test="chgtl!=null and chgtl!=''">
+           and doc.chgtl=#{chgtl, jdbcType = VARCHAR}
+        </if>
+        and ct.codflg = p.producttype
+        
+        and ct.codtyp='PRODUCTTYPE' 
+        and doc.intostate = '1'
+        order by doc.chgdt desc
+        
+        
+    </select>
+	
+    
+    <select id="findCoborrower" resultType="String" parameterType="map">
+        select c.custname from custinfo c 
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and c.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        and c.custtype like '%2%'
+    </select>
+    
+    <select id="findCoborrower2" resultType="String" parameterType="map">
+        select cm.juridical from applyinfoofcom cm 
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and cm.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        and cm.applyertype like '%2%'
+    </select>
+    
+    <select id="findGuarantor" resultType="String" parameterType="map">
+        select c.custname from custinfo c 
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and c.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        and c.custtype like '%3%'
+    </select>
+    
+    <select id="findGuarantor2" resultType="String" parameterType="map">
+        select cm.juridical from applyinfoofcom cm 
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and cm.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        and cm.applyertype like '%3%'
+    </select>
+    
+    <select id="findMortgagor" resultType="String" parameterType="map">
+        select c.custname from custinfo c 
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and c.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        and c.custtype like '%4%'
+    </select>
+    <select id="findMortgagor2" resultType="String" parameterType="map">
+        select cm.juridical from applyinfoofcom cm 
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and cm.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        and cm.applyertype like '%4%'
+    </select>
+    
+    <select id="findHouseno" resultType="String" parameterType="map">
+        select m.houseno from mortgage m
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and m.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+    </select>
+	
+	<select id="findDoctaskForLive" resultType="map" parameterType="map">
+        select doc.workid,doc.productno,doc.chgdt,c.cityname as city,o.organizationname,
+        ct.codflg as producttype,ct.coddes as producttypename,p.productname,
+        ci.custname as borrower,cm.juridical as borrower2,li.type as node from liveinfo li
+        left outer join doctask doc on doc.workid = li.workid
+        left outer join area a on a.areaid = doc.areaid
+        left outer join city c on c.citycode = a.gbcode
+        left outer join organization o on o.organizationno = doc.channelno
+        left outer join applyinfoofcom cm on cm.workid = doc.workid and cm.applyertype like '%1%'
+        left outer join custinfo ci on ci.workid = doc.workid and ci.custtype like '%1%'
+        
+        left outer join product p on p.productno = doc.productno,
+        codetable ct
+        
+        where 1=1
+       
+       	and li.islive = 'Y'
+        and ct.codflg = p.producttype
+        
+        and ct.codtyp='PRODUCTTYPE' 
+       
+        order by doc.chgdt desc
+    </select>
+    
+    <select id="countDoctaskForLive" resultType="Integer">
+        select count(1) from liveinfo li
+        left outer join doctask doc on doc.workid = li.workid
+        left outer join area a on a.areaid = doc.areaid
+        left outer join city c on c.citycode = a.gbcode
+        left outer join organization o on o.organizationno = doc.channelno
+        left outer join applyinfoofcom cm on cm.workid = doc.workid and cm.applyertype like '%1%'
+        left outer join custinfo ci on ci.workid = doc.workid and ci.custtype like '%1%'
+        left outer join product p on p.productno = doc.productno,
+        codetable ct
+        
+        where 1=1
+       
+       	and li.islive = 'Y'
+        and ct.codflg = p.producttype
+        
+        and ct.codtyp='PRODUCTTYPE' 
+       
+        order by doc.chgdt desc
+    </select>
+</mapper> 

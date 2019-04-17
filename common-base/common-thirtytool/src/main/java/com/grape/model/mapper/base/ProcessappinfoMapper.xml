@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ProcessappinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Processappinfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="loanchangeflg" property="loanchangeflg" jdbcType="CHAR" />
+    <result column="agreeloanflg" property="agreeloanflg" jdbcType="CHAR" />
+    <result column="applyamount" property="applyamount" jdbcType="DECIMAL" />
+    <result column="applyrate" property="applyrate" jdbcType="DECIMAL" />
+    <result column="yearofapply" property="yearofapply" jdbcType="VARCHAR" />
+    <result column="repaymethod" property="repaymethod" jdbcType="VARCHAR" />
+    <result column="checkresult" property="checkresult" jdbcType="VARCHAR" />
+    <result column="approvetype" property="approvetype" jdbcType="VARCHAR" />
+    <result column="additionalinfo" property="additionalinfo" jdbcType="VARCHAR" />
+    <result column="approveperson" property="approveperson" jdbcType="VARCHAR" />
+    <result column="approvetime" property="approvetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.grape.model.db.Processappinfo" extends="BaseResultMap" >
+    <result column="checkview" property="checkview" jdbcType="LONGVARCHAR" />
+    <result column="approveview" property="approveview" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, loanchangeflg, agreeloanflg, applyamount, applyrate, yearofapply, repaymethod, 
+    checkresult, approvetype, additionalinfo, approveperson, approvetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    checkview, approveview
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.grape.model.db.ProcessappinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from processappinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ProcessappinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from processappinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from processappinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from processappinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ProcessappinfoExample" >
+    delete from processappinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Processappinfo" >
+    insert into processappinfo (id, workid, loanchangeflg, 
+      agreeloanflg, applyamount, applyrate, 
+      yearofapply, repaymethod, checkresult, 
+      approvetype, additionalinfo, approveperson, 
+      approvetime, checkview, approveview
+      )
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{loanchangeflg,jdbcType=CHAR}, 
+      #{agreeloanflg,jdbcType=CHAR}, #{applyamount,jdbcType=DECIMAL}, #{applyrate,jdbcType=DECIMAL}, 
+      #{yearofapply,jdbcType=VARCHAR}, #{repaymethod,jdbcType=VARCHAR}, #{checkresult,jdbcType=VARCHAR}, 
+      #{approvetype,jdbcType=VARCHAR}, #{additionalinfo,jdbcType=VARCHAR}, #{approveperson,jdbcType=VARCHAR}, 
+      #{approvetime,jdbcType=TIMESTAMP}, #{checkview,jdbcType=LONGVARCHAR}, #{approveview,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Processappinfo" >
+    insert into processappinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="loanchangeflg != null" >
+        loanchangeflg,
+      </if>
+      <if test="agreeloanflg != null" >
+        agreeloanflg,
+      </if>
+      <if test="applyamount != null" >
+        applyamount,
+      </if>
+      <if test="applyrate != null" >
+        applyrate,
+      </if>
+      <if test="yearofapply != null" >
+        yearofapply,
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod,
+      </if>
+      <if test="checkresult != null" >
+        checkresult,
+      </if>
+      <if test="approvetype != null" >
+        approvetype,
+      </if>
+      <if test="additionalinfo != null" >
+        additionalinfo,
+      </if>
+      <if test="approveperson != null" >
+        approveperson,
+      </if>
+      <if test="approvetime != null" >
+        approvetime,
+      </if>
+      <if test="checkview != null" >
+        checkview,
+      </if>
+      <if test="approveview != null" >
+        approveview,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="loanchangeflg != null" >
+        #{loanchangeflg,jdbcType=CHAR},
+      </if>
+      <if test="agreeloanflg != null" >
+        #{agreeloanflg,jdbcType=CHAR},
+      </if>
+      <if test="applyamount != null" >
+        #{applyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="applyrate != null" >
+        #{applyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="yearofapply != null" >
+        #{yearofapply,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymethod != null" >
+        #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="checkresult != null" >
+        #{checkresult,jdbcType=VARCHAR},
+      </if>
+      <if test="approvetype != null" >
+        #{approvetype,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalinfo != null" >
+        #{additionalinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="approveperson != null" >
+        #{approveperson,jdbcType=VARCHAR},
+      </if>
+      <if test="approvetime != null" >
+        #{approvetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkview != null" >
+        #{checkview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="approveview != null" >
+        #{approveview,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ProcessappinfoExample" resultType="java.lang.Integer" >
+    select count(*) from processappinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update processappinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanchangeflg != null" >
+        loanchangeflg = #{record.loanchangeflg,jdbcType=CHAR},
+      </if>
+      <if test="record.agreeloanflg != null" >
+        agreeloanflg = #{record.agreeloanflg,jdbcType=CHAR},
+      </if>
+      <if test="record.applyamount != null" >
+        applyamount = #{record.applyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.applyrate != null" >
+        applyrate = #{record.applyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yearofapply != null" >
+        yearofapply = #{record.yearofapply,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repaymethod != null" >
+        repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkresult != null" >
+        checkresult = #{record.checkresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvetype != null" >
+        approvetype = #{record.approvetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.additionalinfo != null" >
+        additionalinfo = #{record.additionalinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveperson != null" >
+        approveperson = #{record.approveperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvetime != null" >
+        approvetime = #{record.approvetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkview != null" >
+        checkview = #{record.checkview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.approveview != null" >
+        approveview = #{record.approveview,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update processappinfo
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      loanchangeflg = #{record.loanchangeflg,jdbcType=CHAR},
+      agreeloanflg = #{record.agreeloanflg,jdbcType=CHAR},
+      applyamount = #{record.applyamount,jdbcType=DECIMAL},
+      applyrate = #{record.applyrate,jdbcType=DECIMAL},
+      yearofapply = #{record.yearofapply,jdbcType=VARCHAR},
+      repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      checkresult = #{record.checkresult,jdbcType=VARCHAR},
+      approvetype = #{record.approvetype,jdbcType=VARCHAR},
+      additionalinfo = #{record.additionalinfo,jdbcType=VARCHAR},
+      approveperson = #{record.approveperson,jdbcType=VARCHAR},
+      approvetime = #{record.approvetime,jdbcType=TIMESTAMP},
+      checkview = #{record.checkview,jdbcType=LONGVARCHAR},
+      approveview = #{record.approveview,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update processappinfo
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      loanchangeflg = #{record.loanchangeflg,jdbcType=CHAR},
+      agreeloanflg = #{record.agreeloanflg,jdbcType=CHAR},
+      applyamount = #{record.applyamount,jdbcType=DECIMAL},
+      applyrate = #{record.applyrate,jdbcType=DECIMAL},
+      yearofapply = #{record.yearofapply,jdbcType=VARCHAR},
+      repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      checkresult = #{record.checkresult,jdbcType=VARCHAR},
+      approvetype = #{record.approvetype,jdbcType=VARCHAR},
+      additionalinfo = #{record.additionalinfo,jdbcType=VARCHAR},
+      approveperson = #{record.approveperson,jdbcType=VARCHAR},
+      approvetime = #{record.approvetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Processappinfo" >
+    update processappinfo
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="loanchangeflg != null" >
+        loanchangeflg = #{loanchangeflg,jdbcType=CHAR},
+      </if>
+      <if test="agreeloanflg != null" >
+        agreeloanflg = #{agreeloanflg,jdbcType=CHAR},
+      </if>
+      <if test="applyamount != null" >
+        applyamount = #{applyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="applyrate != null" >
+        applyrate = #{applyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="yearofapply != null" >
+        yearofapply = #{yearofapply,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="checkresult != null" >
+        checkresult = #{checkresult,jdbcType=VARCHAR},
+      </if>
+      <if test="approvetype != null" >
+        approvetype = #{approvetype,jdbcType=VARCHAR},
+      </if>
+      <if test="additionalinfo != null" >
+        additionalinfo = #{additionalinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="approveperson != null" >
+        approveperson = #{approveperson,jdbcType=VARCHAR},
+      </if>
+      <if test="approvetime != null" >
+        approvetime = #{approvetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkview != null" >
+        checkview = #{checkview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="approveview != null" >
+        approveview = #{approveview,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.grape.model.db.Processappinfo" >
+    update processappinfo
+    set workid = #{workid,jdbcType=VARCHAR},
+      loanchangeflg = #{loanchangeflg,jdbcType=CHAR},
+      agreeloanflg = #{agreeloanflg,jdbcType=CHAR},
+      applyamount = #{applyamount,jdbcType=DECIMAL},
+      applyrate = #{applyrate,jdbcType=DECIMAL},
+      yearofapply = #{yearofapply,jdbcType=VARCHAR},
+      repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      checkresult = #{checkresult,jdbcType=VARCHAR},
+      approvetype = #{approvetype,jdbcType=VARCHAR},
+      additionalinfo = #{additionalinfo,jdbcType=VARCHAR},
+      approveperson = #{approveperson,jdbcType=VARCHAR},
+      approvetime = #{approvetime,jdbcType=TIMESTAMP},
+      checkview = #{checkview,jdbcType=LONGVARCHAR},
+      approveview = #{approveview,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Processappinfo" >
+    update processappinfo
+    set workid = #{workid,jdbcType=VARCHAR},
+      loanchangeflg = #{loanchangeflg,jdbcType=CHAR},
+      agreeloanflg = #{agreeloanflg,jdbcType=CHAR},
+      applyamount = #{applyamount,jdbcType=DECIMAL},
+      applyrate = #{applyrate,jdbcType=DECIMAL},
+      yearofapply = #{yearofapply,jdbcType=VARCHAR},
+      repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      checkresult = #{checkresult,jdbcType=VARCHAR},
+      approvetype = #{approvetype,jdbcType=VARCHAR},
+      additionalinfo = #{additionalinfo,jdbcType=VARCHAR},
+      approveperson = #{approveperson,jdbcType=VARCHAR},
+      approvetime = #{approvetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.PhoneverificationMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Phoneverification" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="marriageabnormal" property="marriageabnormal" jdbcType="VARCHAR" />
+    <result column="marriageabnormalins" property="marriageabnormalins" jdbcType="VARCHAR" />
+    <result column="creditabnormal" property="creditabnormal" jdbcType="VARCHAR" />
+    <result column="creditabnormalins" property="creditabnormalins" jdbcType="VARCHAR" />
+    <result column="litigationabnormal" property="litigationabnormal" jdbcType="VARCHAR" />
+    <result column="litigationabnormalins" property="litigationabnormalins" jdbcType="VARCHAR" />
+    <result column="borrowingpurposes" property="borrowingpurposes" jdbcType="VARCHAR" />
+    <result column="repaymentsource" property="repaymentsource" jdbcType="VARCHAR" />
+    <result column="othermappers" property="othermappers" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, marriageabnormal, marriageabnormalins, creditabnormal, creditabnormalins, 
+    litigationabnormal, litigationabnormalins, borrowingpurposes, repaymentsource, othermappers, 
+    chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.PhoneverificationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from phoneverification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from phoneverification
+    where workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from phoneverification
+    where workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.PhoneverificationExample" >
+    delete from phoneverification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Phoneverification" >
+    insert into phoneverification (workid, marriageabnormal, marriageabnormalins, 
+      creditabnormal, creditabnormalins, litigationabnormal, 
+      litigationabnormalins, borrowingpurposes, 
+      repaymentsource, othermappers, chgdt, 
+      chgtl)
+    values (#{workid,jdbcType=VARCHAR}, #{marriageabnormal,jdbcType=VARCHAR}, #{marriageabnormalins,jdbcType=VARCHAR}, 
+      #{creditabnormal,jdbcType=VARCHAR}, #{creditabnormalins,jdbcType=VARCHAR}, #{litigationabnormal,jdbcType=VARCHAR}, 
+      #{litigationabnormalins,jdbcType=VARCHAR}, #{borrowingpurposes,jdbcType=VARCHAR}, 
+      #{repaymentsource,jdbcType=VARCHAR}, #{othermappers,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{chgtl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Phoneverification" >
+    insert into phoneverification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="marriageabnormal != null" >
+        marriageabnormal,
+      </if>
+      <if test="marriageabnormalins != null" >
+        marriageabnormalins,
+      </if>
+      <if test="creditabnormal != null" >
+        creditabnormal,
+      </if>
+      <if test="creditabnormalins != null" >
+        creditabnormalins,
+      </if>
+      <if test="litigationabnormal != null" >
+        litigationabnormal,
+      </if>
+      <if test="litigationabnormalins != null" >
+        litigationabnormalins,
+      </if>
+      <if test="borrowingpurposes != null" >
+        borrowingpurposes,
+      </if>
+      <if test="repaymentsource != null" >
+        repaymentsource,
+      </if>
+      <if test="othermappers != null" >
+        othermappers,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="marriageabnormal != null" >
+        #{marriageabnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="marriageabnormalins != null" >
+        #{marriageabnormalins,jdbcType=VARCHAR},
+      </if>
+      <if test="creditabnormal != null" >
+        #{creditabnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="creditabnormalins != null" >
+        #{creditabnormalins,jdbcType=VARCHAR},
+      </if>
+      <if test="litigationabnormal != null" >
+        #{litigationabnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="litigationabnormalins != null" >
+        #{litigationabnormalins,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowingpurposes != null" >
+        #{borrowingpurposes,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentsource != null" >
+        #{repaymentsource,jdbcType=VARCHAR},
+      </if>
+      <if test="othermappers != null" >
+        #{othermappers,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.PhoneverificationExample" resultType="java.lang.Integer" >
+    select count(*) from phoneverification
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update phoneverification
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marriageabnormal != null" >
+        marriageabnormal = #{record.marriageabnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marriageabnormalins != null" >
+        marriageabnormalins = #{record.marriageabnormalins,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditabnormal != null" >
+        creditabnormal = #{record.creditabnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditabnormalins != null" >
+        creditabnormalins = #{record.creditabnormalins,jdbcType=VARCHAR},
+      </if>
+      <if test="record.litigationabnormal != null" >
+        litigationabnormal = #{record.litigationabnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.litigationabnormalins != null" >
+        litigationabnormalins = #{record.litigationabnormalins,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowingpurposes != null" >
+        borrowingpurposes = #{record.borrowingpurposes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repaymentsource != null" >
+        repaymentsource = #{record.repaymentsource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.othermappers != null" >
+        othermappers = #{record.othermappers,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update phoneverification
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      marriageabnormal = #{record.marriageabnormal,jdbcType=VARCHAR},
+      marriageabnormalins = #{record.marriageabnormalins,jdbcType=VARCHAR},
+      creditabnormal = #{record.creditabnormal,jdbcType=VARCHAR},
+      creditabnormalins = #{record.creditabnormalins,jdbcType=VARCHAR},
+      litigationabnormal = #{record.litigationabnormal,jdbcType=VARCHAR},
+      litigationabnormalins = #{record.litigationabnormalins,jdbcType=VARCHAR},
+      borrowingpurposes = #{record.borrowingpurposes,jdbcType=VARCHAR},
+      repaymentsource = #{record.repaymentsource,jdbcType=VARCHAR},
+      othermappers = #{record.othermappers,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Phoneverification" >
+    update phoneverification
+    <set >
+      <if test="marriageabnormal != null" >
+        marriageabnormal = #{marriageabnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="marriageabnormalins != null" >
+        marriageabnormalins = #{marriageabnormalins,jdbcType=VARCHAR},
+      </if>
+      <if test="creditabnormal != null" >
+        creditabnormal = #{creditabnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="creditabnormalins != null" >
+        creditabnormalins = #{creditabnormalins,jdbcType=VARCHAR},
+      </if>
+      <if test="litigationabnormal != null" >
+        litigationabnormal = #{litigationabnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="litigationabnormalins != null" >
+        litigationabnormalins = #{litigationabnormalins,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowingpurposes != null" >
+        borrowingpurposes = #{borrowingpurposes,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentsource != null" >
+        repaymentsource = #{repaymentsource,jdbcType=VARCHAR},
+      </if>
+      <if test="othermappers != null" >
+        othermappers = #{othermappers,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Phoneverification" >
+    update phoneverification
+    set marriageabnormal = #{marriageabnormal,jdbcType=VARCHAR},
+      marriageabnormalins = #{marriageabnormalins,jdbcType=VARCHAR},
+      creditabnormal = #{creditabnormal,jdbcType=VARCHAR},
+      creditabnormalins = #{creditabnormalins,jdbcType=VARCHAR},
+      litigationabnormal = #{litigationabnormal,jdbcType=VARCHAR},
+      litigationabnormalins = #{litigationabnormalins,jdbcType=VARCHAR},
+      borrowingpurposes = #{borrowingpurposes,jdbcType=VARCHAR},
+      repaymentsource = #{repaymentsource,jdbcType=VARCHAR},
+      othermappers = #{othermappers,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

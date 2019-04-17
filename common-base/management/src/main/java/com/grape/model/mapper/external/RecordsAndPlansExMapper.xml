@@ -1,0 +1,66 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.RecordsAndPlansExMapper">
+    <select id="repayplanmainBean" resultType="com.grape.controller.reponse.bean.RepayplanmainBean" parameterType="map">
+        select custinfo.custname,repaytoinfo.sumofamount,
+        case when house.sum = 0 then 0 else repaytoinfo.sumofamount/house.sum end cvs,
+        repaytoinfo.totaluseamount,repaytoinfo.totaluseterm,
+        repaytoinfo.loanlimittime,repaytoinfo.interestrate,codetable.coddes icoddes,
+        pc.realinterestrate,pc.coddes rcoddes,bnkaccount.repayaccountbnk,
+        bnkaccount.repayaccountname,bnkaccount.repayaccount,repaytoinfo.repaymethod
+        from repaytoinfo repaytoinfo
+        left join codetable codetable on codetable.codflg=repaytoinfo.interestratetype and
+        codetable.codtyp='INTERESTRATETYPE'
+        left join (select p.workid,p.realinterestrate,c.coddes from postloaninfo p,codetable c where
+        c.codflg=p.realinterestrate
+        and c.codtyp='INTERESTRATETYPE') pc on pc.workid=repaytoinfo.workid
+        left join custinfo custinfo on repaytoinfo.workid=custinfo.workid and custinfo.custtype like '%1%'
+        left join bnkaccount bnkaccount on bnkaccount.workid=repaytoinfo.workid
+        left join (select houseassess.workid,SUM(houseassess.assess_control_total) sum from houseassess GROUP BY
+        houseassess.workid)
+        house on house.workid=repaytoinfo.workid where repaytoinfo.isfinilyflg='1'
+        <if test=" workid !=null and workid !='' ">
+            and repaytoinfo.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="repaymentplanBeanlist" resultType="com.grape.controller.reponse.bean.RepaymentplanBean"
+            parameterType="map">
+        select repayterm,repayamount,repaycapital,repayaccrual,loanbalance from repayplan where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and repayplan.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        ORDER BY repayplan.repayterm asc limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="repaymentplanBeanCount" resultType="Integer" parameterType="map">
+        select count(1) from repayplan where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and repayplan.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getrepaytoinfo" resultType="com.grape.model.db.Repaytoinfo" parameterType="map">
+        select * from repaytoinfo where isfinilyflg='1'
+        <if test=" workid !=null and workid !='' ">
+            and workid = #{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getProduct" resultType="map" parameterType="map">
+        select product.productno,product.producttype from doctask doctask
+        LEFT JOIN product product on product.productno=doctask.productno
+        <if test=" workid !=null and workid !='' ">
+            where doctask.workid=#{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getPostloaninfo" resultType="com.grape.model.db.Postloaninfo" parameterType="map">
+        select * from postloaninfo
+        LEFT JOIN applyforex applyforex on applyforex.workid=postloaninfo.workid
+        <if test=" workid !=null and workid !='' ">
+            where applyforex.newworkid = #{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+</mapper>

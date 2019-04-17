@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.EquipmentMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Equipment" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="pltip" property="pltip" jdbcType="VARCHAR" />
+    <result column="pltport" property="pltport" jdbcType="VARCHAR" />
+    <result column="mcuuser" property="mcuuser" jdbcType="VARCHAR" />
+    <result column="mcupwd" property="mcupwd" jdbcType="VARCHAR" />
+    <result column="deviceid" property="deviceid" jdbcType="VARCHAR" />
+    <result column="src" property="src" jdbcType="VARCHAR" />
+    <result column="chan" property="chan" jdbcType="VARCHAR" />
+    <result column="manu" property="manu" jdbcType="VARCHAR" />
+    <result column="domainid" property="domainid" jdbcType="VARCHAR" />
+    <result column="puid" property="puid" jdbcType="VARCHAR" />
+    <result column=" highport" property="highport" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, pltip, pltport, mcuuser, mcupwd, deviceid, src, chan, manu, domainid, puid, " highport"
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.EquipmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from equipment
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from equipment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.EquipmentExample" >
+    delete from equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Equipment" >
+    insert into equipment (id, pltip, pltport, 
+      mcuuser, mcupwd, deviceid, 
+      src, chan, manu, domainid, 
+      puid, " highport")
+    values (#{id,jdbcType=VARCHAR}, #{pltip,jdbcType=VARCHAR}, #{pltport,jdbcType=VARCHAR}, 
+      #{mcuuser,jdbcType=VARCHAR}, #{mcupwd,jdbcType=VARCHAR}, #{deviceid,jdbcType=VARCHAR}, 
+      #{src,jdbcType=VARCHAR}, #{chan,jdbcType=VARCHAR}, #{manu,jdbcType=VARCHAR}, #{domainid,jdbcType=VARCHAR}, 
+      #{puid,jdbcType=VARCHAR}, #{highport,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Equipment" >
+    insert into equipment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pltip != null" >
+        pltip,
+      </if>
+      <if test="pltport != null" >
+        pltport,
+      </if>
+      <if test="mcuuser != null" >
+        mcuuser,
+      </if>
+      <if test="mcupwd != null" >
+        mcupwd,
+      </if>
+      <if test="deviceid != null" >
+        deviceid,
+      </if>
+      <if test="src != null" >
+        src,
+      </if>
+      <if test="chan != null" >
+        chan,
+      </if>
+      <if test="manu != null" >
+        manu,
+      </if>
+      <if test="domainid != null" >
+        domainid,
+      </if>
+      <if test="puid != null" >
+        puid,
+      </if>
+      <if test="highport != null" >
+        " highport",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pltip != null" >
+        #{pltip,jdbcType=VARCHAR},
+      </if>
+      <if test="pltport != null" >
+        #{pltport,jdbcType=VARCHAR},
+      </if>
+      <if test="mcuuser != null" >
+        #{mcuuser,jdbcType=VARCHAR},
+      </if>
+      <if test="mcupwd != null" >
+        #{mcupwd,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceid != null" >
+        #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="src != null" >
+        #{src,jdbcType=VARCHAR},
+      </if>
+      <if test="chan != null" >
+        #{chan,jdbcType=VARCHAR},
+      </if>
+      <if test="manu != null" >
+        #{manu,jdbcType=VARCHAR},
+      </if>
+      <if test="domainid != null" >
+        #{domainid,jdbcType=VARCHAR},
+      </if>
+      <if test="puid != null" >
+        #{puid,jdbcType=VARCHAR},
+      </if>
+      <if test="highport != null" >
+        #{highport,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.EquipmentExample" resultType="java.lang.Integer" >
+    select count(*) from equipment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update equipment
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pltip != null" >
+        pltip = #{record.pltip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pltport != null" >
+        pltport = #{record.pltport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mcuuser != null" >
+        mcuuser = #{record.mcuuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mcupwd != null" >
+        mcupwd = #{record.mcupwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceid != null" >
+        deviceid = #{record.deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.src != null" >
+        src = #{record.src,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chan != null" >
+        chan = #{record.chan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manu != null" >
+        manu = #{record.manu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.domainid != null" >
+        domainid = #{record.domainid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.puid != null" >
+        puid = #{record.puid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.highport != null" >
+        " highport" = #{record.highport,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update equipment
+    set id = #{record.id,jdbcType=VARCHAR},
+      pltip = #{record.pltip,jdbcType=VARCHAR},
+      pltport = #{record.pltport,jdbcType=VARCHAR},
+      mcuuser = #{record.mcuuser,jdbcType=VARCHAR},
+      mcupwd = #{record.mcupwd,jdbcType=VARCHAR},
+      deviceid = #{record.deviceid,jdbcType=VARCHAR},
+      src = #{record.src,jdbcType=VARCHAR},
+      chan = #{record.chan,jdbcType=VARCHAR},
+      manu = #{record.manu,jdbcType=VARCHAR},
+      domainid = #{record.domainid,jdbcType=VARCHAR},
+      puid = #{record.puid,jdbcType=VARCHAR},
+      " highport" = #{record.highport,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Equipment" >
+    update equipment
+    <set >
+      <if test="pltip != null" >
+        pltip = #{pltip,jdbcType=VARCHAR},
+      </if>
+      <if test="pltport != null" >
+        pltport = #{pltport,jdbcType=VARCHAR},
+      </if>
+      <if test="mcuuser != null" >
+        mcuuser = #{mcuuser,jdbcType=VARCHAR},
+      </if>
+      <if test="mcupwd != null" >
+        mcupwd = #{mcupwd,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceid != null" >
+        deviceid = #{deviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="src != null" >
+        src = #{src,jdbcType=VARCHAR},
+      </if>
+      <if test="chan != null" >
+        chan = #{chan,jdbcType=VARCHAR},
+      </if>
+      <if test="manu != null" >
+        manu = #{manu,jdbcType=VARCHAR},
+      </if>
+      <if test="domainid != null" >
+        domainid = #{domainid,jdbcType=VARCHAR},
+      </if>
+      <if test="puid != null" >
+        puid = #{puid,jdbcType=VARCHAR},
+      </if>
+      <if test="highport != null" >
+        " highport" = #{highport,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Equipment" >
+    update equipment
+    set pltip = #{pltip,jdbcType=VARCHAR},
+      pltport = #{pltport,jdbcType=VARCHAR},
+      mcuuser = #{mcuuser,jdbcType=VARCHAR},
+      mcupwd = #{mcupwd,jdbcType=VARCHAR},
+      deviceid = #{deviceid,jdbcType=VARCHAR},
+      src = #{src,jdbcType=VARCHAR},
+      chan = #{chan,jdbcType=VARCHAR},
+      manu = #{manu,jdbcType=VARCHAR},
+      domainid = #{domainid,jdbcType=VARCHAR},
+      puid = #{puid,jdbcType=VARCHAR},
+      " highport" = #{highport,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

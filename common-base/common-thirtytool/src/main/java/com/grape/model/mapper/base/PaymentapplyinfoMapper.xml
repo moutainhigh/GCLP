@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.PaymentapplyinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Paymentapplyinfo" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="loantype" property="loantype" jdbcType="CHAR" />
+    <result column="applicationtime" property="applicationtime" jdbcType="TIMESTAMP" />
+    <result column="examinationrate" property="examinationrate" jdbcType="DECIMAL" />
+    <result column="totalfee" property="totalfee" jdbcType="DECIMAL" />
+    <result column="situationsuggest" property="situationsuggest" jdbcType="VARCHAR" />
+    <result column="statesignnote" property="statesignnote" jdbcType="VARCHAR" />
+    <result column="statesignflg" property="statesignflg" jdbcType="CHAR" />
+    <result column="pactsignnote" property="pactsignnote" jdbcType="VARCHAR" />
+    <result column="pactsignflg" property="pactsignflg" jdbcType="CHAR" />
+    <result column="debtbacknote" property="debtbacknote" jdbcType="VARCHAR" />
+    <result column="debtbackflg" property="debtbackflg" jdbcType="CHAR" />
+    <result column="priloanapplynote" property="priloanapplynote" jdbcType="VARCHAR" />
+    <result column="priloanapplyflg" property="priloanapplyflg" jdbcType="CHAR" />
+    <result column="chanpromisenote" property="chanpromisenote" jdbcType="VARCHAR" />
+    <result column="chanpromiseflg" property="chanpromiseflg" jdbcType="CHAR" />
+    <result column="suggesttakenote" property="suggesttakenote" jdbcType="VARCHAR" />
+    <result column="suggesttakeflg" property="suggesttakeflg" jdbcType="CHAR" />
+    <result column="havechandeposit" property="havechandeposit" jdbcType="CHAR" />
+    <result column="singledeposit" property="singledeposit" jdbcType="DECIMAL" />
+    <result column="singledepositdate" property="singledepositdate" jdbcType="TIMESTAMP" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="channelsinglebond" property="channelsinglebond" jdbcType="DECIMAL" />
+    <result column="chargesbefore" property="chargesbefore" jdbcType="DECIMAL" />
+    <result column="custprepaidinterest" property="custprepaidinterest" jdbcType="DECIMAL" />
+    <result column="actualdays" property="actualdays" jdbcType="VARCHAR" />
+    <result column="havebackproc" property="havebackproc" jdbcType="CHAR" />
+    <result column="interestreceivable" property="interestreceivable" jdbcType="DECIMAL" />
+    <result column="notarizationflg" property="notarizationflg" jdbcType="CHAR" />
+    <result column="notarizationnote" property="notarizationnote" jdbcType="VARCHAR" />
+    <result column="backcardflg" property="backcardflg" jdbcType="CHAR" />
+    <result column="backcardnote" property="backcardnote" jdbcType="VARCHAR" />
+    <result column="redempbuildingflg" property="redempbuildingflg" jdbcType="CHAR" />
+    <result column="redempbuildingnote" property="redempbuildingnote" jdbcType="VARCHAR" />
+    <result column="outandinaccountflg" property="outandinaccountflg" jdbcType="CHAR" />
+    <result column="outandinaccountnote" property="outandinaccountnote" jdbcType="VARCHAR" />
+    <result column="facesignflg" property="facesignflg" jdbcType="CHAR" />
+    <result column="facesignnote" property="facesignnote" jdbcType="VARCHAR" />
+    <result column="publiccardflg" property="publiccardflg" jdbcType="CHAR" />
+    <result column="publiccardnote" property="publiccardnote" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="accountname" property="accountname" jdbcType="VARCHAR" />
+    <result column="bnk" property="bnk" jdbcType="VARCHAR" />
+    <result column="servicecharge" property="servicecharge" jdbcType="DECIMAL" />
+    <result column="proxyrate" property="proxyrate" jdbcType="DECIMAL" />
+    <result column="proxycharge" property="proxycharge" jdbcType="DECIMAL" />
+    <result column="examinationfee" property="examinationfee" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, loantype, applicationtime, examinationrate, totalfee, situationsuggest, statesignnote, 
+    statesignflg, pactsignnote, pactsignflg, debtbacknote, debtbackflg, priloanapplynote, 
+    priloanapplyflg, chanpromisenote, chanpromiseflg, suggesttakenote, suggesttakeflg, 
+    havechandeposit, singledeposit, singledepositdate, chgdt, chgtl, channelsinglebond, 
+    chargesbefore, custprepaidinterest, actualdays, havebackproc, interestreceivable, 
+    notarizationflg, notarizationnote, backcardflg, backcardnote, redempbuildingflg, 
+    redempbuildingnote, outandinaccountflg, outandinaccountnote, facesignflg, facesignnote, 
+    publiccardflg, publiccardnote, account, accountname, bnk, servicecharge, proxyrate, 
+    proxycharge, examinationfee
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.PaymentapplyinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from paymentapplyinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from paymentapplyinfo
+    where workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from paymentapplyinfo
+    where workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.PaymentapplyinfoExample" >
+    delete from paymentapplyinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Paymentapplyinfo" >
+    insert into paymentapplyinfo (workid, loantype, applicationtime, 
+      examinationrate, totalfee, situationsuggest, 
+      statesignnote, statesignflg, pactsignnote, 
+      pactsignflg, debtbacknote, debtbackflg, 
+      priloanapplynote, priloanapplyflg, chanpromisenote, 
+      chanpromiseflg, suggesttakenote, suggesttakeflg, 
+      havechandeposit, singledeposit, singledepositdate, 
+      chgdt, chgtl, channelsinglebond, 
+      chargesbefore, custprepaidinterest, actualdays, 
+      havebackproc, interestreceivable, notarizationflg, 
+      notarizationnote, backcardflg, backcardnote, 
+      redempbuildingflg, redempbuildingnote, outandinaccountflg, 
+      outandinaccountnote, facesignflg, facesignnote, 
+      publiccardflg, publiccardnote, account, 
+      accountname, bnk, servicecharge, 
+      proxyrate, proxycharge, examinationfee
+      )
+    values (#{workid,jdbcType=VARCHAR}, #{loantype,jdbcType=CHAR}, #{applicationtime,jdbcType=TIMESTAMP}, 
+      #{examinationrate,jdbcType=DECIMAL}, #{totalfee,jdbcType=DECIMAL}, #{situationsuggest,jdbcType=VARCHAR}, 
+      #{statesignnote,jdbcType=VARCHAR}, #{statesignflg,jdbcType=CHAR}, #{pactsignnote,jdbcType=VARCHAR}, 
+      #{pactsignflg,jdbcType=CHAR}, #{debtbacknote,jdbcType=VARCHAR}, #{debtbackflg,jdbcType=CHAR}, 
+      #{priloanapplynote,jdbcType=VARCHAR}, #{priloanapplyflg,jdbcType=CHAR}, #{chanpromisenote,jdbcType=VARCHAR}, 
+      #{chanpromiseflg,jdbcType=CHAR}, #{suggesttakenote,jdbcType=VARCHAR}, #{suggesttakeflg,jdbcType=CHAR}, 
+      #{havechandeposit,jdbcType=CHAR}, #{singledeposit,jdbcType=DECIMAL}, #{singledepositdate,jdbcType=TIMESTAMP}, 
+      #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}, #{channelsinglebond,jdbcType=DECIMAL}, 
+      #{chargesbefore,jdbcType=DECIMAL}, #{custprepaidinterest,jdbcType=DECIMAL}, #{actualdays,jdbcType=VARCHAR}, 
+      #{havebackproc,jdbcType=CHAR}, #{interestreceivable,jdbcType=DECIMAL}, #{notarizationflg,jdbcType=CHAR}, 
+      #{notarizationnote,jdbcType=VARCHAR}, #{backcardflg,jdbcType=CHAR}, #{backcardnote,jdbcType=VARCHAR}, 
+      #{redempbuildingflg,jdbcType=CHAR}, #{redempbuildingnote,jdbcType=VARCHAR}, #{outandinaccountflg,jdbcType=CHAR}, 
+      #{outandinaccountnote,jdbcType=VARCHAR}, #{facesignflg,jdbcType=CHAR}, #{facesignnote,jdbcType=VARCHAR}, 
+      #{publiccardflg,jdbcType=CHAR}, #{publiccardnote,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{accountname,jdbcType=VARCHAR}, #{bnk,jdbcType=VARCHAR}, #{servicecharge,jdbcType=DECIMAL}, 
+      #{proxyrate,jdbcType=DECIMAL}, #{proxycharge,jdbcType=DECIMAL}, #{examinationfee,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Paymentapplyinfo" >
+    insert into paymentapplyinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="loantype != null" >
+        loantype,
+      </if>
+      <if test="applicationtime != null" >
+        applicationtime,
+      </if>
+      <if test="examinationrate != null" >
+        examinationrate,
+      </if>
+      <if test="totalfee != null" >
+        totalfee,
+      </if>
+      <if test="situationsuggest != null" >
+        situationsuggest,
+      </if>
+      <if test="statesignnote != null" >
+        statesignnote,
+      </if>
+      <if test="statesignflg != null" >
+        statesignflg,
+      </if>
+      <if test="pactsignnote != null" >
+        pactsignnote,
+      </if>
+      <if test="pactsignflg != null" >
+        pactsignflg,
+      </if>
+      <if test="debtbacknote != null" >
+        debtbacknote,
+      </if>
+      <if test="debtbackflg != null" >
+        debtbackflg,
+      </if>
+      <if test="priloanapplynote != null" >
+        priloanapplynote,
+      </if>
+      <if test="priloanapplyflg != null" >
+        priloanapplyflg,
+      </if>
+      <if test="chanpromisenote != null" >
+        chanpromisenote,
+      </if>
+      <if test="chanpromiseflg != null" >
+        chanpromiseflg,
+      </if>
+      <if test="suggesttakenote != null" >
+        suggesttakenote,
+      </if>
+      <if test="suggesttakeflg != null" >
+        suggesttakeflg,
+      </if>
+      <if test="havechandeposit != null" >
+        havechandeposit,
+      </if>
+      <if test="singledeposit != null" >
+        singledeposit,
+      </if>
+      <if test="singledepositdate != null" >
+        singledepositdate,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="channelsinglebond != null" >
+        channelsinglebond,
+      </if>
+      <if test="chargesbefore != null" >
+        chargesbefore,
+      </if>
+      <if test="custprepaidinterest != null" >
+        custprepaidinterest,
+      </if>
+      <if test="actualdays != null" >
+        actualdays,
+      </if>
+      <if test="havebackproc != null" >
+        havebackproc,
+      </if>
+      <if test="interestreceivable != null" >
+        interestreceivable,
+      </if>
+      <if test="notarizationflg != null" >
+        notarizationflg,
+      </if>
+      <if test="notarizationnote != null" >
+        notarizationnote,
+      </if>
+      <if test="backcardflg != null" >
+        backcardflg,
+      </if>
+      <if test="backcardnote != null" >
+        backcardnote,
+      </if>
+      <if test="redempbuildingflg != null" >
+        redempbuildingflg,
+      </if>
+      <if test="redempbuildingnote != null" >
+        redempbuildingnote,
+      </if>
+      <if test="outandinaccountflg != null" >
+        outandinaccountflg,
+      </if>
+      <if test="outandinaccountnote != null" >
+        outandinaccountnote,
+      </if>
+      <if test="facesignflg != null" >
+        facesignflg,
+      </if>
+      <if test="facesignnote != null" >
+        facesignnote,
+      </if>
+      <if test="publiccardflg != null" >
+        publiccardflg,
+      </if>
+      <if test="publiccardnote != null" >
+        publiccardnote,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="accountname != null" >
+        accountname,
+      </if>
+      <if test="bnk != null" >
+        bnk,
+      </if>
+      <if test="servicecharge != null" >
+        servicecharge,
+      </if>
+      <if test="proxyrate != null" >
+        proxyrate,
+      </if>
+      <if test="proxycharge != null" >
+        proxycharge,
+      </if>
+      <if test="examinationfee != null" >
+        examinationfee,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="loantype != null" >
+        #{loantype,jdbcType=CHAR},
+      </if>
+      <if test="applicationtime != null" >
+        #{applicationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examinationrate != null" >
+        #{examinationrate,jdbcType=DECIMAL},
+      </if>
+      <if test="totalfee != null" >
+        #{totalfee,jdbcType=DECIMAL},
+      </if>
+      <if test="situationsuggest != null" >
+        #{situationsuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="statesignnote != null" >
+        #{statesignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="statesignflg != null" >
+        #{statesignflg,jdbcType=CHAR},
+      </if>
+      <if test="pactsignnote != null" >
+        #{pactsignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="pactsignflg != null" >
+        #{pactsignflg,jdbcType=CHAR},
+      </if>
+      <if test="debtbacknote != null" >
+        #{debtbacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="debtbackflg != null" >
+        #{debtbackflg,jdbcType=CHAR},
+      </if>
+      <if test="priloanapplynote != null" >
+        #{priloanapplynote,jdbcType=VARCHAR},
+      </if>
+      <if test="priloanapplyflg != null" >
+        #{priloanapplyflg,jdbcType=CHAR},
+      </if>
+      <if test="chanpromisenote != null" >
+        #{chanpromisenote,jdbcType=VARCHAR},
+      </if>
+      <if test="chanpromiseflg != null" >
+        #{chanpromiseflg,jdbcType=CHAR},
+      </if>
+      <if test="suggesttakenote != null" >
+        #{suggesttakenote,jdbcType=VARCHAR},
+      </if>
+      <if test="suggesttakeflg != null" >
+        #{suggesttakeflg,jdbcType=CHAR},
+      </if>
+      <if test="havechandeposit != null" >
+        #{havechandeposit,jdbcType=CHAR},
+      </if>
+      <if test="singledeposit != null" >
+        #{singledeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="singledepositdate != null" >
+        #{singledepositdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="channelsinglebond != null" >
+        #{channelsinglebond,jdbcType=DECIMAL},
+      </if>
+      <if test="chargesbefore != null" >
+        #{chargesbefore,jdbcType=DECIMAL},
+      </if>
+      <if test="custprepaidinterest != null" >
+        #{custprepaidinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="actualdays != null" >
+        #{actualdays,jdbcType=VARCHAR},
+      </if>
+      <if test="havebackproc != null" >
+        #{havebackproc,jdbcType=CHAR},
+      </if>
+      <if test="interestreceivable != null" >
+        #{interestreceivable,jdbcType=DECIMAL},
+      </if>
+      <if test="notarizationflg != null" >
+        #{notarizationflg,jdbcType=CHAR},
+      </if>
+      <if test="notarizationnote != null" >
+        #{notarizationnote,jdbcType=VARCHAR},
+      </if>
+      <if test="backcardflg != null" >
+        #{backcardflg,jdbcType=CHAR},
+      </if>
+      <if test="backcardnote != null" >
+        #{backcardnote,jdbcType=VARCHAR},
+      </if>
+      <if test="redempbuildingflg != null" >
+        #{redempbuildingflg,jdbcType=CHAR},
+      </if>
+      <if test="redempbuildingnote != null" >
+        #{redempbuildingnote,jdbcType=VARCHAR},
+      </if>
+      <if test="outandinaccountflg != null" >
+        #{outandinaccountflg,jdbcType=CHAR},
+      </if>
+      <if test="outandinaccountnote != null" >
+        #{outandinaccountnote,jdbcType=VARCHAR},
+      </if>
+      <if test="facesignflg != null" >
+        #{facesignflg,jdbcType=CHAR},
+      </if>
+      <if test="facesignnote != null" >
+        #{facesignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="publiccardflg != null" >
+        #{publiccardflg,jdbcType=CHAR},
+      </if>
+      <if test="publiccardnote != null" >
+        #{publiccardnote,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null" >
+        #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="bnk != null" >
+        #{bnk,jdbcType=VARCHAR},
+      </if>
+      <if test="servicecharge != null" >
+        #{servicecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="proxyrate != null" >
+        #{proxyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="proxycharge != null" >
+        #{proxycharge,jdbcType=DECIMAL},
+      </if>
+      <if test="examinationfee != null" >
+        #{examinationfee,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.PaymentapplyinfoExample" resultType="java.lang.Integer" >
+    select count(*) from paymentapplyinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update paymentapplyinfo
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loantype != null" >
+        loantype = #{record.loantype,jdbcType=CHAR},
+      </if>
+      <if test="record.applicationtime != null" >
+        applicationtime = #{record.applicationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examinationrate != null" >
+        examinationrate = #{record.examinationrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalfee != null" >
+        totalfee = #{record.totalfee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.situationsuggest != null" >
+        situationsuggest = #{record.situationsuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statesignnote != null" >
+        statesignnote = #{record.statesignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statesignflg != null" >
+        statesignflg = #{record.statesignflg,jdbcType=CHAR},
+      </if>
+      <if test="record.pactsignnote != null" >
+        pactsignnote = #{record.pactsignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pactsignflg != null" >
+        pactsignflg = #{record.pactsignflg,jdbcType=CHAR},
+      </if>
+      <if test="record.debtbacknote != null" >
+        debtbacknote = #{record.debtbacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.debtbackflg != null" >
+        debtbackflg = #{record.debtbackflg,jdbcType=CHAR},
+      </if>
+      <if test="record.priloanapplynote != null" >
+        priloanapplynote = #{record.priloanapplynote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priloanapplyflg != null" >
+        priloanapplyflg = #{record.priloanapplyflg,jdbcType=CHAR},
+      </if>
+      <if test="record.chanpromisenote != null" >
+        chanpromisenote = #{record.chanpromisenote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chanpromiseflg != null" >
+        chanpromiseflg = #{record.chanpromiseflg,jdbcType=CHAR},
+      </if>
+      <if test="record.suggesttakenote != null" >
+        suggesttakenote = #{record.suggesttakenote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suggesttakeflg != null" >
+        suggesttakeflg = #{record.suggesttakeflg,jdbcType=CHAR},
+      </if>
+      <if test="record.havechandeposit != null" >
+        havechandeposit = #{record.havechandeposit,jdbcType=CHAR},
+      </if>
+      <if test="record.singledeposit != null" >
+        singledeposit = #{record.singledeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.singledepositdate != null" >
+        singledepositdate = #{record.singledepositdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelsinglebond != null" >
+        channelsinglebond = #{record.channelsinglebond,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chargesbefore != null" >
+        chargesbefore = #{record.chargesbefore,jdbcType=DECIMAL},
+      </if>
+      <if test="record.custprepaidinterest != null" >
+        custprepaidinterest = #{record.custprepaidinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.actualdays != null" >
+        actualdays = #{record.actualdays,jdbcType=VARCHAR},
+      </if>
+      <if test="record.havebackproc != null" >
+        havebackproc = #{record.havebackproc,jdbcType=CHAR},
+      </if>
+      <if test="record.interestreceivable != null" >
+        interestreceivable = #{record.interestreceivable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.notarizationflg != null" >
+        notarizationflg = #{record.notarizationflg,jdbcType=CHAR},
+      </if>
+      <if test="record.notarizationnote != null" >
+        notarizationnote = #{record.notarizationnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backcardflg != null" >
+        backcardflg = #{record.backcardflg,jdbcType=CHAR},
+      </if>
+      <if test="record.backcardnote != null" >
+        backcardnote = #{record.backcardnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.redempbuildingflg != null" >
+        redempbuildingflg = #{record.redempbuildingflg,jdbcType=CHAR},
+      </if>
+      <if test="record.redempbuildingnote != null" >
+        redempbuildingnote = #{record.redempbuildingnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outandinaccountflg != null" >
+        outandinaccountflg = #{record.outandinaccountflg,jdbcType=CHAR},
+      </if>
+      <if test="record.outandinaccountnote != null" >
+        outandinaccountnote = #{record.outandinaccountnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facesignflg != null" >
+        facesignflg = #{record.facesignflg,jdbcType=CHAR},
+      </if>
+      <if test="record.facesignnote != null" >
+        facesignnote = #{record.facesignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publiccardflg != null" >
+        publiccardflg = #{record.publiccardflg,jdbcType=CHAR},
+      </if>
+      <if test="record.publiccardnote != null" >
+        publiccardnote = #{record.publiccardnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountname != null" >
+        accountname = #{record.accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bnk != null" >
+        bnk = #{record.bnk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicecharge != null" >
+        servicecharge = #{record.servicecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.proxyrate != null" >
+        proxyrate = #{record.proxyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.proxycharge != null" >
+        proxycharge = #{record.proxycharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examinationfee != null" >
+        examinationfee = #{record.examinationfee,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update paymentapplyinfo
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      loantype = #{record.loantype,jdbcType=CHAR},
+      applicationtime = #{record.applicationtime,jdbcType=TIMESTAMP},
+      examinationrate = #{record.examinationrate,jdbcType=DECIMAL},
+      totalfee = #{record.totalfee,jdbcType=DECIMAL},
+      situationsuggest = #{record.situationsuggest,jdbcType=VARCHAR},
+      statesignnote = #{record.statesignnote,jdbcType=VARCHAR},
+      statesignflg = #{record.statesignflg,jdbcType=CHAR},
+      pactsignnote = #{record.pactsignnote,jdbcType=VARCHAR},
+      pactsignflg = #{record.pactsignflg,jdbcType=CHAR},
+      debtbacknote = #{record.debtbacknote,jdbcType=VARCHAR},
+      debtbackflg = #{record.debtbackflg,jdbcType=CHAR},
+      priloanapplynote = #{record.priloanapplynote,jdbcType=VARCHAR},
+      priloanapplyflg = #{record.priloanapplyflg,jdbcType=CHAR},
+      chanpromisenote = #{record.chanpromisenote,jdbcType=VARCHAR},
+      chanpromiseflg = #{record.chanpromiseflg,jdbcType=CHAR},
+      suggesttakenote = #{record.suggesttakenote,jdbcType=VARCHAR},
+      suggesttakeflg = #{record.suggesttakeflg,jdbcType=CHAR},
+      havechandeposit = #{record.havechandeposit,jdbcType=CHAR},
+      singledeposit = #{record.singledeposit,jdbcType=DECIMAL},
+      singledepositdate = #{record.singledepositdate,jdbcType=TIMESTAMP},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      channelsinglebond = #{record.channelsinglebond,jdbcType=DECIMAL},
+      chargesbefore = #{record.chargesbefore,jdbcType=DECIMAL},
+      custprepaidinterest = #{record.custprepaidinterest,jdbcType=DECIMAL},
+      actualdays = #{record.actualdays,jdbcType=VARCHAR},
+      havebackproc = #{record.havebackproc,jdbcType=CHAR},
+      interestreceivable = #{record.interestreceivable,jdbcType=DECIMAL},
+      notarizationflg = #{record.notarizationflg,jdbcType=CHAR},
+      notarizationnote = #{record.notarizationnote,jdbcType=VARCHAR},
+      backcardflg = #{record.backcardflg,jdbcType=CHAR},
+      backcardnote = #{record.backcardnote,jdbcType=VARCHAR},
+      redempbuildingflg = #{record.redempbuildingflg,jdbcType=CHAR},
+      redempbuildingnote = #{record.redempbuildingnote,jdbcType=VARCHAR},
+      outandinaccountflg = #{record.outandinaccountflg,jdbcType=CHAR},
+      outandinaccountnote = #{record.outandinaccountnote,jdbcType=VARCHAR},
+      facesignflg = #{record.facesignflg,jdbcType=CHAR},
+      facesignnote = #{record.facesignnote,jdbcType=VARCHAR},
+      publiccardflg = #{record.publiccardflg,jdbcType=CHAR},
+      publiccardnote = #{record.publiccardnote,jdbcType=VARCHAR},
+      account = #{record.account,jdbcType=VARCHAR},
+      accountname = #{record.accountname,jdbcType=VARCHAR},
+      bnk = #{record.bnk,jdbcType=VARCHAR},
+      servicecharge = #{record.servicecharge,jdbcType=DECIMAL},
+      proxyrate = #{record.proxyrate,jdbcType=DECIMAL},
+      proxycharge = #{record.proxycharge,jdbcType=DECIMAL},
+      examinationfee = #{record.examinationfee,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Paymentapplyinfo" >
+    update paymentapplyinfo
+    <set >
+      <if test="loantype != null" >
+        loantype = #{loantype,jdbcType=CHAR},
+      </if>
+      <if test="applicationtime != null" >
+        applicationtime = #{applicationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examinationrate != null" >
+        examinationrate = #{examinationrate,jdbcType=DECIMAL},
+      </if>
+      <if test="totalfee != null" >
+        totalfee = #{totalfee,jdbcType=DECIMAL},
+      </if>
+      <if test="situationsuggest != null" >
+        situationsuggest = #{situationsuggest,jdbcType=VARCHAR},
+      </if>
+      <if test="statesignnote != null" >
+        statesignnote = #{statesignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="statesignflg != null" >
+        statesignflg = #{statesignflg,jdbcType=CHAR},
+      </if>
+      <if test="pactsignnote != null" >
+        pactsignnote = #{pactsignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="pactsignflg != null" >
+        pactsignflg = #{pactsignflg,jdbcType=CHAR},
+      </if>
+      <if test="debtbacknote != null" >
+        debtbacknote = #{debtbacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="debtbackflg != null" >
+        debtbackflg = #{debtbackflg,jdbcType=CHAR},
+      </if>
+      <if test="priloanapplynote != null" >
+        priloanapplynote = #{priloanapplynote,jdbcType=VARCHAR},
+      </if>
+      <if test="priloanapplyflg != null" >
+        priloanapplyflg = #{priloanapplyflg,jdbcType=CHAR},
+      </if>
+      <if test="chanpromisenote != null" >
+        chanpromisenote = #{chanpromisenote,jdbcType=VARCHAR},
+      </if>
+      <if test="chanpromiseflg != null" >
+        chanpromiseflg = #{chanpromiseflg,jdbcType=CHAR},
+      </if>
+      <if test="suggesttakenote != null" >
+        suggesttakenote = #{suggesttakenote,jdbcType=VARCHAR},
+      </if>
+      <if test="suggesttakeflg != null" >
+        suggesttakeflg = #{suggesttakeflg,jdbcType=CHAR},
+      </if>
+      <if test="havechandeposit != null" >
+        havechandeposit = #{havechandeposit,jdbcType=CHAR},
+      </if>
+      <if test="singledeposit != null" >
+        singledeposit = #{singledeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="singledepositdate != null" >
+        singledepositdate = #{singledepositdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="channelsinglebond != null" >
+        channelsinglebond = #{channelsinglebond,jdbcType=DECIMAL},
+      </if>
+      <if test="chargesbefore != null" >
+        chargesbefore = #{chargesbefore,jdbcType=DECIMAL},
+      </if>
+      <if test="custprepaidinterest != null" >
+        custprepaidinterest = #{custprepaidinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="actualdays != null" >
+        actualdays = #{actualdays,jdbcType=VARCHAR},
+      </if>
+      <if test="havebackproc != null" >
+        havebackproc = #{havebackproc,jdbcType=CHAR},
+      </if>
+      <if test="interestreceivable != null" >
+        interestreceivable = #{interestreceivable,jdbcType=DECIMAL},
+      </if>
+      <if test="notarizationflg != null" >
+        notarizationflg = #{notarizationflg,jdbcType=CHAR},
+      </if>
+      <if test="notarizationnote != null" >
+        notarizationnote = #{notarizationnote,jdbcType=VARCHAR},
+      </if>
+      <if test="backcardflg != null" >
+        backcardflg = #{backcardflg,jdbcType=CHAR},
+      </if>
+      <if test="backcardnote != null" >
+        backcardnote = #{backcardnote,jdbcType=VARCHAR},
+      </if>
+      <if test="redempbuildingflg != null" >
+        redempbuildingflg = #{redempbuildingflg,jdbcType=CHAR},
+      </if>
+      <if test="redempbuildingnote != null" >
+        redempbuildingnote = #{redempbuildingnote,jdbcType=VARCHAR},
+      </if>
+      <if test="outandinaccountflg != null" >
+        outandinaccountflg = #{outandinaccountflg,jdbcType=CHAR},
+      </if>
+      <if test="outandinaccountnote != null" >
+        outandinaccountnote = #{outandinaccountnote,jdbcType=VARCHAR},
+      </if>
+      <if test="facesignflg != null" >
+        facesignflg = #{facesignflg,jdbcType=CHAR},
+      </if>
+      <if test="facesignnote != null" >
+        facesignnote = #{facesignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="publiccardflg != null" >
+        publiccardflg = #{publiccardflg,jdbcType=CHAR},
+      </if>
+      <if test="publiccardnote != null" >
+        publiccardnote = #{publiccardnote,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null" >
+        accountname = #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="bnk != null" >
+        bnk = #{bnk,jdbcType=VARCHAR},
+      </if>
+      <if test="servicecharge != null" >
+        servicecharge = #{servicecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="proxyrate != null" >
+        proxyrate = #{proxyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="proxycharge != null" >
+        proxycharge = #{proxycharge,jdbcType=DECIMAL},
+      </if>
+      <if test="examinationfee != null" >
+        examinationfee = #{examinationfee,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Paymentapplyinfo" >
+    update paymentapplyinfo
+    set loantype = #{loantype,jdbcType=CHAR},
+      applicationtime = #{applicationtime,jdbcType=TIMESTAMP},
+      examinationrate = #{examinationrate,jdbcType=DECIMAL},
+      totalfee = #{totalfee,jdbcType=DECIMAL},
+      situationsuggest = #{situationsuggest,jdbcType=VARCHAR},
+      statesignnote = #{statesignnote,jdbcType=VARCHAR},
+      statesignflg = #{statesignflg,jdbcType=CHAR},
+      pactsignnote = #{pactsignnote,jdbcType=VARCHAR},
+      pactsignflg = #{pactsignflg,jdbcType=CHAR},
+      debtbacknote = #{debtbacknote,jdbcType=VARCHAR},
+      debtbackflg = #{debtbackflg,jdbcType=CHAR},
+      priloanapplynote = #{priloanapplynote,jdbcType=VARCHAR},
+      priloanapplyflg = #{priloanapplyflg,jdbcType=CHAR},
+      chanpromisenote = #{chanpromisenote,jdbcType=VARCHAR},
+      chanpromiseflg = #{chanpromiseflg,jdbcType=CHAR},
+      suggesttakenote = #{suggesttakenote,jdbcType=VARCHAR},
+      suggesttakeflg = #{suggesttakeflg,jdbcType=CHAR},
+      havechandeposit = #{havechandeposit,jdbcType=CHAR},
+      singledeposit = #{singledeposit,jdbcType=DECIMAL},
+      singledepositdate = #{singledepositdate,jdbcType=TIMESTAMP},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      channelsinglebond = #{channelsinglebond,jdbcType=DECIMAL},
+      chargesbefore = #{chargesbefore,jdbcType=DECIMAL},
+      custprepaidinterest = #{custprepaidinterest,jdbcType=DECIMAL},
+      actualdays = #{actualdays,jdbcType=VARCHAR},
+      havebackproc = #{havebackproc,jdbcType=CHAR},
+      interestreceivable = #{interestreceivable,jdbcType=DECIMAL},
+      notarizationflg = #{notarizationflg,jdbcType=CHAR},
+      notarizationnote = #{notarizationnote,jdbcType=VARCHAR},
+      backcardflg = #{backcardflg,jdbcType=CHAR},
+      backcardnote = #{backcardnote,jdbcType=VARCHAR},
+      redempbuildingflg = #{redempbuildingflg,jdbcType=CHAR},
+      redempbuildingnote = #{redempbuildingnote,jdbcType=VARCHAR},
+      outandinaccountflg = #{outandinaccountflg,jdbcType=CHAR},
+      outandinaccountnote = #{outandinaccountnote,jdbcType=VARCHAR},
+      facesignflg = #{facesignflg,jdbcType=CHAR},
+      facesignnote = #{facesignnote,jdbcType=VARCHAR},
+      publiccardflg = #{publiccardflg,jdbcType=CHAR},
+      publiccardnote = #{publiccardnote,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      accountname = #{accountname,jdbcType=VARCHAR},
+      bnk = #{bnk,jdbcType=VARCHAR},
+      servicecharge = #{servicecharge,jdbcType=DECIMAL},
+      proxyrate = #{proxyrate,jdbcType=DECIMAL},
+      proxycharge = #{proxycharge,jdbcType=DECIMAL},
+      examinationfee = #{examinationfee,jdbcType=DECIMAL}
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

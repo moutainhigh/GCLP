@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.ContractExMapper" >
+    <select id="selectContractInfo" parameterType="map" resultType="com.grape.controller.reponse.ConstractBean">
+  		select con.*,pro.productname from contract con
+  		left outer join product pro on con.productno=pro.productno
+  		<if test="area!=null and area!=''">
+  			and con.aera=#{area}
+  		</if>
+  		<if test="channo!=null and channo!=''">
+  			and con.channelno=#{channo}
+  		</if>
+  		<if test="contractname!=null and contractname!=''">
+  			and con.filename=#{contractname}
+  		</if>
+  		<if test="state!=null and state!=''">
+  			and con.state=#{state}
+  		</if>
+  		limit #{pagenum},#{pagesize}
+    </select>
+    
+    <select id="selectContractInfoCount" parameterType="map" resultType="Integer">
+  		select count(*) from contract con
+  		left outer join product pro on con.productno=pro.productno
+  		<if test="area!=null and area!=''">
+  			and con.aera=#{area}
+  		</if>
+  		<if test="channo!=null and channo!=''">
+  			and con.channelno=#{channo}
+  		</if>
+  		<if test="contractname!=null and contractname!=''">
+  			and con.filename=#{contractname}
+  		</if>
+  		<if test="state!=null and state!=''">
+  			and con.state=#{state}
+  		</if>
+    </select>
+</mapper>

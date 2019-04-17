@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.SmsparamExMapper" >
+    <select id="querySmsparamByOption" parameterType="map" resultType="com.grape.model.db.Smsparam">
+        SELECT * from smsparam
+	    <where>
+		    <if test="sendflg!=null">
+		    	 sendflg = #{sendflg}
+		    </if>
+		    <if test="templatecode!=null">
+		    	and templatecode like "%" #{templatecode} "%"
+		    </if>
+		    <if test="sendtype!=null">
+		    	and sendtype = #{sendtype}
+		    </if>
+			<if test="productno!=null">
+				and productno = #{productno}
+			</if>
+	    </where>
+	        limit #{pagenum},#{pagesize}
+	</select>
+	
+	<select id="querySmsparamByOptionCount" parameterType="map" resultType="Integer">
+        SELECT count(*) from smsparam
+	    <where>
+		    <if test="sendflg!=null">
+		    	 sendflg = #{sendflg}
+		    </if>
+		    <if test="templatecode!=null">
+		    	and templatecode like "%" #{templatecode} "%"
+		    </if>
+		    <if test="sendtype!=null">
+		    	and sendtype = #{sendtype}
+		    </if>
+		    <if test="productno!=null">
+				and productno = #{productno}
+			</if>
+	    </where>
+	</select>
+</mapper>

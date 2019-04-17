@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.CodeofpointsMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Codeofpoints" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="columnname" property="columnname" jdbcType="VARCHAR" />
+    <result column="scoringrubrics" property="scoringrubrics" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="DECIMAL" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, columnname, scoringrubrics, grade, chgtl, chgdt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.CodeofpointsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from codeofpoints
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from codeofpoints
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from codeofpoints
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.CodeofpointsExample" >
+    delete from codeofpoints
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Codeofpoints" >
+    insert into codeofpoints (id, columnname, scoringrubrics, 
+      grade, chgtl, chgdt
+      )
+    values (#{id,jdbcType=INTEGER}, #{columnname,jdbcType=VARCHAR}, #{scoringrubrics,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=DECIMAL}, #{chgtl,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Codeofpoints" >
+    insert into codeofpoints
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="columnname != null" >
+        columnname,
+      </if>
+      <if test="scoringrubrics != null" >
+        scoringrubrics,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="columnname != null" >
+        #{columnname,jdbcType=VARCHAR},
+      </if>
+      <if test="scoringrubrics != null" >
+        #{scoringrubrics,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=DECIMAL},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.CodeofpointsExample" resultType="java.lang.Integer" >
+    select count(*) from codeofpoints
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update codeofpoints
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.columnname != null" >
+        columnname = #{record.columnname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scoringrubrics != null" >
+        scoringrubrics = #{record.scoringrubrics,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grade != null" >
+        grade = #{record.grade,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update codeofpoints
+    set id = #{record.id,jdbcType=INTEGER},
+      columnname = #{record.columnname,jdbcType=VARCHAR},
+      scoringrubrics = #{record.scoringrubrics,jdbcType=VARCHAR},
+      grade = #{record.grade,jdbcType=DECIMAL},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Codeofpoints" >
+    update codeofpoints
+    <set >
+      <if test="columnname != null" >
+        columnname = #{columnname,jdbcType=VARCHAR},
+      </if>
+      <if test="scoringrubrics != null" >
+        scoringrubrics = #{scoringrubrics,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=DECIMAL},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Codeofpoints" >
+    update codeofpoints
+    set columnname = #{columnname,jdbcType=VARCHAR},
+      scoringrubrics = #{scoringrubrics,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=DECIMAL},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

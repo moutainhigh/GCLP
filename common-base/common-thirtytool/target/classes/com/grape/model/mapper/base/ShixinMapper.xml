@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ShixinMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Shixin" >
+    <id column="keyid" property="keyid" jdbcType="VARCHAR" />
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="typet" property="typet" jdbcType="VARCHAR" />
+    <result column="typetname" property="typetname" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="sslong" property="sslong" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="casenum" property="casenum" jdbcType="VARCHAR" />
+    <result column="court" property="court" jdbcType="VARCHAR" />
+    <result column="timetype" property="timetype" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="sx_sf" property="sxSf" jdbcType="VARCHAR" />
+    <result column="sx_fb" property="sxFb" jdbcType="VARCHAR" />
+    <result column="sx_wh" property="sxWh" jdbcType="VARCHAR" />
+    <result column="sx_dw" property="sxDw" jdbcType="VARCHAR" />
+    <result column="wlmoney" property="wlmoney" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.grape.model.db.Shixin" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="sx_lx" property="sxLx" jdbcType="LONGVARCHAR" />
+    <result column="sx_jt" property="sxJt" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    keyid, workid, typet, typetname, title, sslong, name, id, casenum, court, timetype, 
+    state, sx_sf, sx_fb, sx_wh, sx_dw, wlmoney, chgdt, chgtl
+  </sql>
+  <sql id="Blob_Column_List" >
+    content, remark, sx_lx, sx_jt
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.grape.model.db.ShixinExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shixin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ShixinExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shixin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from shixin
+    where keyid = #{keyid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from shixin
+    where keyid = #{keyid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ShixinExample" >
+    delete from shixin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Shixin" >
+    insert into shixin (keyid, workid, typet, 
+      typetname, title, sslong, 
+      name, id, casenum, 
+      court, timetype, state, 
+      sx_sf, sx_fb, sx_wh, sx_dw, 
+      wlmoney, chgdt, chgtl, 
+      content, remark, sx_lx, 
+      sx_jt)
+    values (#{keyid,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{typet,jdbcType=VARCHAR}, 
+      #{typetname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{sslong,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{casenum,jdbcType=VARCHAR}, 
+      #{court,jdbcType=VARCHAR}, #{timetype,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{sxSf,jdbcType=VARCHAR}, #{sxFb,jdbcType=VARCHAR}, #{sxWh,jdbcType=VARCHAR}, #{sxDw,jdbcType=VARCHAR}, 
+      #{wlmoney,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR}, #{sxLx,jdbcType=LONGVARCHAR}, 
+      #{sxJt,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Shixin" >
+    insert into shixin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="keyid != null" >
+        keyid,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="typet != null" >
+        typet,
+      </if>
+      <if test="typetname != null" >
+        typetname,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="sslong != null" >
+        sslong,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="casenum != null" >
+        casenum,
+      </if>
+      <if test="court != null" >
+        court,
+      </if>
+      <if test="timetype != null" >
+        timetype,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="sxSf != null" >
+        sx_sf,
+      </if>
+      <if test="sxFb != null" >
+        sx_fb,
+      </if>
+      <if test="sxWh != null" >
+        sx_wh,
+      </if>
+      <if test="sxDw != null" >
+        sx_dw,
+      </if>
+      <if test="wlmoney != null" >
+        wlmoney,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="sxLx != null" >
+        sx_lx,
+      </if>
+      <if test="sxJt != null" >
+        sx_jt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="keyid != null" >
+        #{keyid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="typet != null" >
+        #{typet,jdbcType=VARCHAR},
+      </if>
+      <if test="typetname != null" >
+        #{typetname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sslong != null" >
+        #{sslong,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="casenum != null" >
+        #{casenum,jdbcType=VARCHAR},
+      </if>
+      <if test="court != null" >
+        #{court,jdbcType=VARCHAR},
+      </if>
+      <if test="timetype != null" >
+        #{timetype,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="sxSf != null" >
+        #{sxSf,jdbcType=VARCHAR},
+      </if>
+      <if test="sxFb != null" >
+        #{sxFb,jdbcType=VARCHAR},
+      </if>
+      <if test="sxWh != null" >
+        #{sxWh,jdbcType=VARCHAR},
+      </if>
+      <if test="sxDw != null" >
+        #{sxDw,jdbcType=VARCHAR},
+      </if>
+      <if test="wlmoney != null" >
+        #{wlmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sxLx != null" >
+        #{sxLx,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sxJt != null" >
+        #{sxJt,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ShixinExample" resultType="java.lang.Integer" >
+    select count(*) from shixin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shixin
+    <set >
+      <if test="record.keyid != null" >
+        keyid = #{record.keyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typet != null" >
+        typet = #{record.typet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typetname != null" >
+        typetname = #{record.typetname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sslong != null" >
+        sslong = #{record.sslong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.casenum != null" >
+        casenum = #{record.casenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.court != null" >
+        court = #{record.court,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timetype != null" >
+        timetype = #{record.timetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sxSf != null" >
+        sx_sf = #{record.sxSf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sxFb != null" >
+        sx_fb = #{record.sxFb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sxWh != null" >
+        sx_wh = #{record.sxWh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sxDw != null" >
+        sx_dw = #{record.sxDw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wlmoney != null" >
+        wlmoney = #{record.wlmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sxLx != null" >
+        sx_lx = #{record.sxLx,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sxJt != null" >
+        sx_jt = #{record.sxJt,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update shixin
+    set keyid = #{record.keyid,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      typet = #{record.typet,jdbcType=VARCHAR},
+      typetname = #{record.typetname,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      sslong = #{record.sslong,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      id = #{record.id,jdbcType=VARCHAR},
+      casenum = #{record.casenum,jdbcType=VARCHAR},
+      court = #{record.court,jdbcType=VARCHAR},
+      timetype = #{record.timetype,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      sx_sf = #{record.sxSf,jdbcType=VARCHAR},
+      sx_fb = #{record.sxFb,jdbcType=VARCHAR},
+      sx_wh = #{record.sxWh,jdbcType=VARCHAR},
+      sx_dw = #{record.sxDw,jdbcType=VARCHAR},
+      wlmoney = #{record.wlmoney,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR},
+      remark = #{record.remark,jdbcType=LONGVARCHAR},
+      sx_lx = #{record.sxLx,jdbcType=LONGVARCHAR},
+      sx_jt = #{record.sxJt,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shixin
+    set keyid = #{record.keyid,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      typet = #{record.typet,jdbcType=VARCHAR},
+      typetname = #{record.typetname,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      sslong = #{record.sslong,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      id = #{record.id,jdbcType=VARCHAR},
+      casenum = #{record.casenum,jdbcType=VARCHAR},
+      court = #{record.court,jdbcType=VARCHAR},
+      timetype = #{record.timetype,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      sx_sf = #{record.sxSf,jdbcType=VARCHAR},
+      sx_fb = #{record.sxFb,jdbcType=VARCHAR},
+      sx_wh = #{record.sxWh,jdbcType=VARCHAR},
+      sx_dw = #{record.sxDw,jdbcType=VARCHAR},
+      wlmoney = #{record.wlmoney,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Shixin" >
+    update shixin
+    <set >
+      <if test="typet != null" >
+        typet = #{typet,jdbcType=VARCHAR},
+      </if>
+      <if test="typetname != null" >
+        typetname = #{typetname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sslong != null" >
+        sslong = #{sslong,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="casenum != null" >
+        casenum = #{casenum,jdbcType=VARCHAR},
+      </if>
+      <if test="court != null" >
+        court = #{court,jdbcType=VARCHAR},
+      </if>
+      <if test="timetype != null" >
+        timetype = #{timetype,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="sxSf != null" >
+        sx_sf = #{sxSf,jdbcType=VARCHAR},
+      </if>
+      <if test="sxFb != null" >
+        sx_fb = #{sxFb,jdbcType=VARCHAR},
+      </if>
+      <if test="sxWh != null" >
+        sx_wh = #{sxWh,jdbcType=VARCHAR},
+      </if>
+      <if test="sxDw != null" >
+        sx_dw = #{sxDw,jdbcType=VARCHAR},
+      </if>
+      <if test="wlmoney != null" >
+        wlmoney = #{wlmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sxLx != null" >
+        sx_lx = #{sxLx,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sxJt != null" >
+        sx_jt = #{sxJt,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where keyid = #{keyid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.grape.model.db.Shixin" >
+    update shixin
+    set typet = #{typet,jdbcType=VARCHAR},
+      typetname = #{typetname,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      sslong = #{sslong,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      id = #{id,jdbcType=VARCHAR},
+      casenum = #{casenum,jdbcType=VARCHAR},
+      court = #{court,jdbcType=VARCHAR},
+      timetype = #{timetype,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      sx_sf = #{sxSf,jdbcType=VARCHAR},
+      sx_fb = #{sxFb,jdbcType=VARCHAR},
+      sx_wh = #{sxWh,jdbcType=VARCHAR},
+      sx_dw = #{sxDw,jdbcType=VARCHAR},
+      wlmoney = #{wlmoney,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR},
+      sx_lx = #{sxLx,jdbcType=LONGVARCHAR},
+      sx_jt = #{sxJt,jdbcType=LONGVARCHAR}
+    where keyid = #{keyid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Shixin" >
+    update shixin
+    set typet = #{typet,jdbcType=VARCHAR},
+      typetname = #{typetname,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      sslong = #{sslong,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      id = #{id,jdbcType=VARCHAR},
+      casenum = #{casenum,jdbcType=VARCHAR},
+      court = #{court,jdbcType=VARCHAR},
+      timetype = #{timetype,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      sx_sf = #{sxSf,jdbcType=VARCHAR},
+      sx_fb = #{sxFb,jdbcType=VARCHAR},
+      sx_wh = #{sxWh,jdbcType=VARCHAR},
+      sx_dw = #{sxDw,jdbcType=VARCHAR},
+      wlmoney = #{wlmoney,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where keyid = #{keyid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

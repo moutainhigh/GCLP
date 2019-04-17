@@ -1,0 +1,61 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.UserinfoExMapper">
+	
+  
+
+ <select id="findRoleinfoByParam" resultType="com.grape.controller.reponse.bean.Roleinfo" parameterType="map">
+        select ur.roleid,r.rolename
+        from userrole ur
+        left outer join role r on r.roleid=ur.roleid
+        where 
+            1=1 
+         
+        <!-- 工作号-->
+         <if test="workerid!=null and workerid!=''">
+           and ur.workerid=#{workerid, jdbcType = VARCHAR}
+        </if>
+        
+    </select>
+     <select id="findMenuinfoByParam" resultType="com.grape.controller.reponse.bean.Menuinfo" parameterType="map">
+        select distinct rm.menuid,rm.editflg,rm.viewflg,m.menuname 
+        from rolemenu rm
+        left outer join menu m on m.menuid = rm.menuid
+        where 
+            1=1 
+         
+        <!-- 用户所有角色-->
+        <if test=" roleids != null">
+            and rm.roleid in 
+            <foreach collection="roleids" item="listItem" open="(" close=")" separator="," >
+             #{listItem}
+            </foreach>
+         </if>
+        	and rm.menutype='1'
+    </select>
+    
+    <select id="findPersonByWorkeridOrPhone" resultType="com.grape.model.db.Person" parameterType="map">
+        select * from person p
+        where 
+            1=1 
+         
+        <!-- 工作号-->
+         <if test="workerid!=null and workerid!=''">
+           and p.workerid=#{workerid, jdbcType = VARCHAR}
+        </if>
+        <if test="mobilephone!=null and mobilephone!=''">
+           or p.mobilephone=#{mobilephone, jdbcType = VARCHAR}
+        </if>
+    </select>
+    
+     <select id="findUserroleByWorkerid" resultType="com.grape.model.db.Userrole" parameterType="map">
+        select * from userrole ur
+        where 
+            1=1 
+         
+        <!-- 工作号-->
+         <if test="workerid!=null and workerid!=''">
+           and ur.workerid=#{workerid, jdbcType = VARCHAR}
+        </if>
+        
+    </select>
+</mapper> 

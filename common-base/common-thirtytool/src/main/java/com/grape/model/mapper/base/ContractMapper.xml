@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ContractMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Contract" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="productno" property="productno" jdbcType="VARCHAR" />
+    <result column="aera" property="aera" jdbcType="VARCHAR" />
+    <result column="channelno" property="channelno" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="uploadperson" property="uploadperson" jdbcType="VARCHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, productno, aera, channelno, filename, time, uploadperson, chgtl, chgdt, url, 
+    state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ContractExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from contract
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from contract
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from contract
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ContractExample" >
+    delete from contract
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Contract" >
+    insert into contract (id, productno, aera, 
+      channelno, filename, time, 
+      uploadperson, chgtl, chgdt, 
+      url, state)
+    values (#{id,jdbcType=VARCHAR}, #{productno,jdbcType=VARCHAR}, #{aera,jdbcType=VARCHAR}, 
+      #{channelno,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{uploadperson,jdbcType=VARCHAR}, #{chgtl,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{url,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Contract" >
+    insert into contract
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productno != null" >
+        productno,
+      </if>
+      <if test="aera != null" >
+        aera,
+      </if>
+      <if test="channelno != null" >
+        channelno,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="uploadperson != null" >
+        uploadperson,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="aera != null" >
+        #{aera,jdbcType=VARCHAR},
+      </if>
+      <if test="channelno != null" >
+        #{channelno,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadperson != null" >
+        #{uploadperson,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ContractExample" resultType="java.lang.Integer" >
+    select count(*) from contract
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update contract
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productno != null" >
+        productno = #{record.productno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aera != null" >
+        aera = #{record.aera,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelno != null" >
+        channelno = #{record.channelno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filename != null" >
+        filename = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uploadperson != null" >
+        uploadperson = #{record.uploadperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update contract
+    set id = #{record.id,jdbcType=VARCHAR},
+      productno = #{record.productno,jdbcType=VARCHAR},
+      aera = #{record.aera,jdbcType=VARCHAR},
+      channelno = #{record.channelno,jdbcType=VARCHAR},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      uploadperson = #{record.uploadperson,jdbcType=VARCHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      url = #{record.url,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Contract" >
+    update contract
+    <set >
+      <if test="productno != null" >
+        productno = #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="aera != null" >
+        aera = #{aera,jdbcType=VARCHAR},
+      </if>
+      <if test="channelno != null" >
+        channelno = #{channelno,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadperson != null" >
+        uploadperson = #{uploadperson,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Contract" >
+    update contract
+    set productno = #{productno,jdbcType=VARCHAR},
+      aera = #{aera,jdbcType=VARCHAR},
+      channelno = #{channelno,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      uploadperson = #{uploadperson,jdbcType=VARCHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      url = #{url,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

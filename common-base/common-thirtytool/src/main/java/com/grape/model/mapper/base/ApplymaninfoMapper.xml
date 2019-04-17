@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ApplymaninfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Applymaninfo" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <id column="cerdid" property="cerdid" jdbcType="VARCHAR" />
+    <result column="custtype" property="custtype" jdbcType="VARCHAR" />
+    <result column="custname" property="custname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="cerdidaddress" property="cerdidaddress" jdbcType="VARCHAR" />
+    <result column="birthdate" property="birthdate" jdbcType="TIMESTAMP" />
+    <result column="telnumber" property="telnumber" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="VARCHAR" />
+    <result column="familyaddress" property="familyaddress" jdbcType="VARCHAR" />
+    <result column="register" property="register" jdbcType="VARCHAR" />
+    <result column="nativeplace" property="nativeplace" jdbcType="VARCHAR" />
+    <result column="marrystate" property="marrystate" jdbcType="VARCHAR" />
+    <result column="divorcedate" property="divorcedate" jdbcType="TIMESTAMP" />
+    <result column="divorcesign" property="divorcesign" jdbcType="VARCHAR" />
+    <result column="estatestate" property="estatestate" jdbcType="VARCHAR" />
+    <result column="havechildflg" property="havechildflg" jdbcType="CHAR" />
+    <result column="childcount" property="childcount" jdbcType="VARCHAR" />
+    <result column="childdescription" property="childdescription" jdbcType="VARCHAR" />
+    <result column="dangerjobflg" property="dangerjobflg" jdbcType="CHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="comname" property="comname" jdbcType="VARCHAR" />
+    <result column="comproperty" property="comproperty" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="monthincome" property="monthincome" jdbcType="DECIMAL" />
+    <result column="realcomaddress" property="realcomaddress" jdbcType="VARCHAR" />
+    <result column="receipt" property="receipt" jdbcType="DECIMAL" />
+    <result column="netmargin" property="netmargin" jdbcType="DECIMAL" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.grape.model.db.Applymaninfo" extends="BaseResultMap" >
+    <result column="busdescription" property="busdescription" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, cerdid, custtype, custname, sex, cerdidaddress, birthdate, telnumber, age, 
+    familyaddress, register, nativeplace, marrystate, divorcedate, divorcesign, estatestate, 
+    havechildflg, childcount, childdescription, dangerjobflg, job, comname, comproperty, 
+    position, monthincome, realcomaddress, receipt, netmargin, chgdt, chgtl
+  </sql>
+  <sql id="Blob_Column_List" >
+    busdescription
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.grape.model.db.ApplymaninfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from applymaninfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ApplymaninfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from applymaninfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from applymaninfo
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from applymaninfo
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ApplymaninfoExample" >
+    delete from applymaninfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Applymaninfo" >
+    insert into applymaninfo (workid, cerdid, custtype, 
+      custname, sex, cerdidaddress, 
+      birthdate, telnumber, age, 
+      familyaddress, register, nativeplace, 
+      marrystate, divorcedate, divorcesign, 
+      estatestate, havechildflg, childcount, 
+      childdescription, dangerjobflg, job, 
+      comname, comproperty, position, 
+      monthincome, realcomaddress, receipt, 
+      netmargin, chgdt, chgtl, 
+      busdescription)
+    values (#{workid,jdbcType=VARCHAR}, #{cerdid,jdbcType=VARCHAR}, #{custtype,jdbcType=VARCHAR}, 
+      #{custname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{cerdidaddress,jdbcType=VARCHAR}, 
+      #{birthdate,jdbcType=TIMESTAMP}, #{telnumber,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, 
+      #{familyaddress,jdbcType=VARCHAR}, #{register,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, 
+      #{marrystate,jdbcType=VARCHAR}, #{divorcedate,jdbcType=TIMESTAMP}, #{divorcesign,jdbcType=VARCHAR}, 
+      #{estatestate,jdbcType=VARCHAR}, #{havechildflg,jdbcType=CHAR}, #{childcount,jdbcType=VARCHAR}, 
+      #{childdescription,jdbcType=VARCHAR}, #{dangerjobflg,jdbcType=CHAR}, #{job,jdbcType=VARCHAR}, 
+      #{comname,jdbcType=VARCHAR}, #{comproperty,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{monthincome,jdbcType=DECIMAL}, #{realcomaddress,jdbcType=VARCHAR}, #{receipt,jdbcType=DECIMAL}, 
+      #{netmargin,jdbcType=DECIMAL}, #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}, 
+      #{busdescription,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Applymaninfo" >
+    insert into applymaninfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="cerdid != null" >
+        cerdid,
+      </if>
+      <if test="custtype != null" >
+        custtype,
+      </if>
+      <if test="custname != null" >
+        custname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="cerdidaddress != null" >
+        cerdidaddress,
+      </if>
+      <if test="birthdate != null" >
+        birthdate,
+      </if>
+      <if test="telnumber != null" >
+        telnumber,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="familyaddress != null" >
+        familyaddress,
+      </if>
+      <if test="register != null" >
+        register,
+      </if>
+      <if test="nativeplace != null" >
+        nativeplace,
+      </if>
+      <if test="marrystate != null" >
+        marrystate,
+      </if>
+      <if test="divorcedate != null" >
+        divorcedate,
+      </if>
+      <if test="divorcesign != null" >
+        divorcesign,
+      </if>
+      <if test="estatestate != null" >
+        estatestate,
+      </if>
+      <if test="havechildflg != null" >
+        havechildflg,
+      </if>
+      <if test="childcount != null" >
+        childcount,
+      </if>
+      <if test="childdescription != null" >
+        childdescription,
+      </if>
+      <if test="dangerjobflg != null" >
+        dangerjobflg,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="comname != null" >
+        comname,
+      </if>
+      <if test="comproperty != null" >
+        comproperty,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="monthincome != null" >
+        monthincome,
+      </if>
+      <if test="realcomaddress != null" >
+        realcomaddress,
+      </if>
+      <if test="receipt != null" >
+        receipt,
+      </if>
+      <if test="netmargin != null" >
+        netmargin,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="busdescription != null" >
+        busdescription,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdid != null" >
+        #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="custtype != null" >
+        #{custtype,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdidaddress != null" >
+        #{cerdidaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null" >
+        #{birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telnumber != null" >
+        #{telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddress != null" >
+        #{familyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="register != null" >
+        #{register,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null" >
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="marrystate != null" >
+        #{marrystate,jdbcType=VARCHAR},
+      </if>
+      <if test="divorcedate != null" >
+        #{divorcedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="divorcesign != null" >
+        #{divorcesign,jdbcType=VARCHAR},
+      </if>
+      <if test="estatestate != null" >
+        #{estatestate,jdbcType=VARCHAR},
+      </if>
+      <if test="havechildflg != null" >
+        #{havechildflg,jdbcType=CHAR},
+      </if>
+      <if test="childcount != null" >
+        #{childcount,jdbcType=VARCHAR},
+      </if>
+      <if test="childdescription != null" >
+        #{childdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerjobflg != null" >
+        #{dangerjobflg,jdbcType=CHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="comname != null" >
+        #{comname,jdbcType=VARCHAR},
+      </if>
+      <if test="comproperty != null" >
+        #{comproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="monthincome != null" >
+        #{monthincome,jdbcType=DECIMAL},
+      </if>
+      <if test="realcomaddress != null" >
+        #{realcomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receipt != null" >
+        #{receipt,jdbcType=DECIMAL},
+      </if>
+      <if test="netmargin != null" >
+        #{netmargin,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="busdescription != null" >
+        #{busdescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ApplymaninfoExample" resultType="java.lang.Integer" >
+    select count(*) from applymaninfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update applymaninfo
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerdid != null" >
+        cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custtype != null" >
+        custtype = #{record.custtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custname != null" >
+        custname = #{record.custname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerdidaddress != null" >
+        cerdidaddress = #{record.cerdidaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthdate != null" >
+        birthdate = #{record.birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.telnumber != null" >
+        telnumber = #{record.telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyaddress != null" >
+        familyaddress = #{record.familyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.register != null" >
+        register = #{record.register,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativeplace != null" >
+        nativeplace = #{record.nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marrystate != null" >
+        marrystate = #{record.marrystate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.divorcedate != null" >
+        divorcedate = #{record.divorcedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.divorcesign != null" >
+        divorcesign = #{record.divorcesign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.estatestate != null" >
+        estatestate = #{record.estatestate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.havechildflg != null" >
+        havechildflg = #{record.havechildflg,jdbcType=CHAR},
+      </if>
+      <if test="record.childcount != null" >
+        childcount = #{record.childcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.childdescription != null" >
+        childdescription = #{record.childdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dangerjobflg != null" >
+        dangerjobflg = #{record.dangerjobflg,jdbcType=CHAR},
+      </if>
+      <if test="record.job != null" >
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comname != null" >
+        comname = #{record.comname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comproperty != null" >
+        comproperty = #{record.comproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthincome != null" >
+        monthincome = #{record.monthincome,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realcomaddress != null" >
+        realcomaddress = #{record.realcomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receipt != null" >
+        receipt = #{record.receipt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.netmargin != null" >
+        netmargin = #{record.netmargin,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busdescription != null" >
+        busdescription = #{record.busdescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update applymaninfo
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      custtype = #{record.custtype,jdbcType=VARCHAR},
+      custname = #{record.custname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      cerdidaddress = #{record.cerdidaddress,jdbcType=VARCHAR},
+      birthdate = #{record.birthdate,jdbcType=TIMESTAMP},
+      telnumber = #{record.telnumber,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=VARCHAR},
+      familyaddress = #{record.familyaddress,jdbcType=VARCHAR},
+      register = #{record.register,jdbcType=VARCHAR},
+      nativeplace = #{record.nativeplace,jdbcType=VARCHAR},
+      marrystate = #{record.marrystate,jdbcType=VARCHAR},
+      divorcedate = #{record.divorcedate,jdbcType=TIMESTAMP},
+      divorcesign = #{record.divorcesign,jdbcType=VARCHAR},
+      estatestate = #{record.estatestate,jdbcType=VARCHAR},
+      havechildflg = #{record.havechildflg,jdbcType=CHAR},
+      childcount = #{record.childcount,jdbcType=VARCHAR},
+      childdescription = #{record.childdescription,jdbcType=VARCHAR},
+      dangerjobflg = #{record.dangerjobflg,jdbcType=CHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      comname = #{record.comname,jdbcType=VARCHAR},
+      comproperty = #{record.comproperty,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      monthincome = #{record.monthincome,jdbcType=DECIMAL},
+      realcomaddress = #{record.realcomaddress,jdbcType=VARCHAR},
+      receipt = #{record.receipt,jdbcType=DECIMAL},
+      netmargin = #{record.netmargin,jdbcType=DECIMAL},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      busdescription = #{record.busdescription,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update applymaninfo
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      custtype = #{record.custtype,jdbcType=VARCHAR},
+      custname = #{record.custname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      cerdidaddress = #{record.cerdidaddress,jdbcType=VARCHAR},
+      birthdate = #{record.birthdate,jdbcType=TIMESTAMP},
+      telnumber = #{record.telnumber,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=VARCHAR},
+      familyaddress = #{record.familyaddress,jdbcType=VARCHAR},
+      register = #{record.register,jdbcType=VARCHAR},
+      nativeplace = #{record.nativeplace,jdbcType=VARCHAR},
+      marrystate = #{record.marrystate,jdbcType=VARCHAR},
+      divorcedate = #{record.divorcedate,jdbcType=TIMESTAMP},
+      divorcesign = #{record.divorcesign,jdbcType=VARCHAR},
+      estatestate = #{record.estatestate,jdbcType=VARCHAR},
+      havechildflg = #{record.havechildflg,jdbcType=CHAR},
+      childcount = #{record.childcount,jdbcType=VARCHAR},
+      childdescription = #{record.childdescription,jdbcType=VARCHAR},
+      dangerjobflg = #{record.dangerjobflg,jdbcType=CHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      comname = #{record.comname,jdbcType=VARCHAR},
+      comproperty = #{record.comproperty,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      monthincome = #{record.monthincome,jdbcType=DECIMAL},
+      realcomaddress = #{record.realcomaddress,jdbcType=VARCHAR},
+      receipt = #{record.receipt,jdbcType=DECIMAL},
+      netmargin = #{record.netmargin,jdbcType=DECIMAL},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Applymaninfo" >
+    update applymaninfo
+    <set >
+      <if test="custtype != null" >
+        custtype = #{custtype,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        custname = #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdidaddress != null" >
+        cerdidaddress = #{cerdidaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null" >
+        birthdate = #{birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telnumber != null" >
+        telnumber = #{telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddress != null" >
+        familyaddress = #{familyaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="register != null" >
+        register = #{register,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null" >
+        nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="marrystate != null" >
+        marrystate = #{marrystate,jdbcType=VARCHAR},
+      </if>
+      <if test="divorcedate != null" >
+        divorcedate = #{divorcedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="divorcesign != null" >
+        divorcesign = #{divorcesign,jdbcType=VARCHAR},
+      </if>
+      <if test="estatestate != null" >
+        estatestate = #{estatestate,jdbcType=VARCHAR},
+      </if>
+      <if test="havechildflg != null" >
+        havechildflg = #{havechildflg,jdbcType=CHAR},
+      </if>
+      <if test="childcount != null" >
+        childcount = #{childcount,jdbcType=VARCHAR},
+      </if>
+      <if test="childdescription != null" >
+        childdescription = #{childdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerjobflg != null" >
+        dangerjobflg = #{dangerjobflg,jdbcType=CHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="comname != null" >
+        comname = #{comname,jdbcType=VARCHAR},
+      </if>
+      <if test="comproperty != null" >
+        comproperty = #{comproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="monthincome != null" >
+        monthincome = #{monthincome,jdbcType=DECIMAL},
+      </if>
+      <if test="realcomaddress != null" >
+        realcomaddress = #{realcomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receipt != null" >
+        receipt = #{receipt,jdbcType=DECIMAL},
+      </if>
+      <if test="netmargin != null" >
+        netmargin = #{netmargin,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="busdescription != null" >
+        busdescription = #{busdescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.grape.model.db.Applymaninfo" >
+    update applymaninfo
+    set custtype = #{custtype,jdbcType=VARCHAR},
+      custname = #{custname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      cerdidaddress = #{cerdidaddress,jdbcType=VARCHAR},
+      birthdate = #{birthdate,jdbcType=TIMESTAMP},
+      telnumber = #{telnumber,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      familyaddress = #{familyaddress,jdbcType=VARCHAR},
+      register = #{register,jdbcType=VARCHAR},
+      nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      marrystate = #{marrystate,jdbcType=VARCHAR},
+      divorcedate = #{divorcedate,jdbcType=TIMESTAMP},
+      divorcesign = #{divorcesign,jdbcType=VARCHAR},
+      estatestate = #{estatestate,jdbcType=VARCHAR},
+      havechildflg = #{havechildflg,jdbcType=CHAR},
+      childcount = #{childcount,jdbcType=VARCHAR},
+      childdescription = #{childdescription,jdbcType=VARCHAR},
+      dangerjobflg = #{dangerjobflg,jdbcType=CHAR},
+      job = #{job,jdbcType=VARCHAR},
+      comname = #{comname,jdbcType=VARCHAR},
+      comproperty = #{comproperty,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      monthincome = #{monthincome,jdbcType=DECIMAL},
+      realcomaddress = #{realcomaddress,jdbcType=VARCHAR},
+      receipt = #{receipt,jdbcType=DECIMAL},
+      netmargin = #{netmargin,jdbcType=DECIMAL},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      busdescription = #{busdescription,jdbcType=LONGVARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Applymaninfo" >
+    update applymaninfo
+    set custtype = #{custtype,jdbcType=VARCHAR},
+      custname = #{custname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      cerdidaddress = #{cerdidaddress,jdbcType=VARCHAR},
+      birthdate = #{birthdate,jdbcType=TIMESTAMP},
+      telnumber = #{telnumber,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      familyaddress = #{familyaddress,jdbcType=VARCHAR},
+      register = #{register,jdbcType=VARCHAR},
+      nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      marrystate = #{marrystate,jdbcType=VARCHAR},
+      divorcedate = #{divorcedate,jdbcType=TIMESTAMP},
+      divorcesign = #{divorcesign,jdbcType=VARCHAR},
+      estatestate = #{estatestate,jdbcType=VARCHAR},
+      havechildflg = #{havechildflg,jdbcType=CHAR},
+      childcount = #{childcount,jdbcType=VARCHAR},
+      childdescription = #{childdescription,jdbcType=VARCHAR},
+      dangerjobflg = #{dangerjobflg,jdbcType=CHAR},
+      job = #{job,jdbcType=VARCHAR},
+      comname = #{comname,jdbcType=VARCHAR},
+      comproperty = #{comproperty,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      monthincome = #{monthincome,jdbcType=DECIMAL},
+      realcomaddress = #{realcomaddress,jdbcType=VARCHAR},
+      receipt = #{receipt,jdbcType=DECIMAL},
+      netmargin = #{netmargin,jdbcType=DECIMAL},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.SharemanMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Shareman" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="cerdid" property="cerdid" jdbcType="VARCHAR" />
+    <result column="sharetype" property="sharetype" jdbcType="VARCHAR" />
+    <result column="sharename" property="sharename" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="investmentrate" property="investmentrate" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, cerdid, sharetype, sharename, country, age, amount, investmentrate, remark, 
+    chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.SharemanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shareman
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from shareman
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shareman
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.SharemanExample" >
+    delete from shareman
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Shareman" >
+    insert into shareman (id, workid, cerdid, 
+      sharetype, sharename, country, 
+      age, amount, investmentrate, 
+      remark, chgdt, chgtl
+      )
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{cerdid,jdbcType=VARCHAR}, 
+      #{sharetype,jdbcType=VARCHAR}, #{sharename,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{age,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{investmentrate,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Shareman" >
+    insert into shareman
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="cerdid != null" >
+        cerdid,
+      </if>
+      <if test="sharetype != null" >
+        sharetype,
+      </if>
+      <if test="sharename != null" >
+        sharename,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="investmentrate != null" >
+        investmentrate,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdid != null" >
+        #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="sharetype != null" >
+        #{sharetype,jdbcType=VARCHAR},
+      </if>
+      <if test="sharename != null" >
+        #{sharename,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="investmentrate != null" >
+        #{investmentrate,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.SharemanExample" resultType="java.lang.Integer" >
+    select count(*) from shareman
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shareman
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerdid != null" >
+        cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sharetype != null" >
+        sharetype = #{record.sharetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sharename != null" >
+        sharename = #{record.sharename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.investmentrate != null" >
+        investmentrate = #{record.investmentrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shareman
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      sharetype = #{record.sharetype,jdbcType=VARCHAR},
+      sharename = #{record.sharename,jdbcType=VARCHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      investmentrate = #{record.investmentrate,jdbcType=DECIMAL},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Shareman" >
+    update shareman
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdid != null" >
+        cerdid = #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="sharetype != null" >
+        sharetype = #{sharetype,jdbcType=VARCHAR},
+      </if>
+      <if test="sharename != null" >
+        sharename = #{sharename,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="investmentrate != null" >
+        investmentrate = #{investmentrate,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Shareman" >
+    update shareman
+    set workid = #{workid,jdbcType=VARCHAR},
+      cerdid = #{cerdid,jdbcType=VARCHAR},
+      sharetype = #{sharetype,jdbcType=VARCHAR},
+      sharename = #{sharename,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      investmentrate = #{investmentrate,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

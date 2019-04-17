@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.RedemptiontypeMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Redemptiontype" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="beloanbank" property="beloanbank" jdbcType="VARCHAR" />
+    <result column="newloanbank" property="newloanbank" jdbcType="VARCHAR" />
+    <result column="applyamount" property="applyamount" jdbcType="DECIMAL" />
+    <result column="osumofamount" property="osumofamount" jdbcType="DECIMAL" />
+    <result column="redemaccountname" property="redemaccountname" jdbcType="VARCHAR" />
+    <result column="orepayaccountname" property="orepayaccountname" jdbcType="VARCHAR" />
+    <result column="redemaccount" property="redemaccount" jdbcType="VARCHAR" />
+    <result column="orepayaccount" property="orepayaccount" jdbcType="VARCHAR" />
+    <result column="orepayaccountbnk" property="orepayaccountbnk" jdbcType="VARCHAR" />
+    <result column="redemccountbnk" property="redemccountbnk" jdbcType="VARCHAR" />
+    <result column="isthirdpartyrepay" property="isthirdpartyrepay" jdbcType="VARCHAR" />
+    <result column="isthirdpartyredem" property="isthirdpartyredem" jdbcType="VARCHAR" />
+    <result column="redemdescription" property="redemdescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, beloanbank, newloanbank, applyamount, osumofamount, redemaccountname, 
+    orepayaccountname, redemaccount, orepayaccount, orepayaccountbnk, redemccountbnk, 
+    isthirdpartyrepay, isthirdpartyredem, redemdescription
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.RedemptiontypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from redemptiontype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from redemptiontype
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from redemptiontype
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.RedemptiontypeExample" >
+    delete from redemptiontype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Redemptiontype" >
+    insert into redemptiontype (id, workid, beloanbank, 
+      newloanbank, applyamount, osumofamount, 
+      redemaccountname, orepayaccountname, redemaccount, 
+      orepayaccount, orepayaccountbnk, redemccountbnk, 
+      isthirdpartyrepay, isthirdpartyredem, redemdescription
+      )
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{beloanbank,jdbcType=VARCHAR}, 
+      #{newloanbank,jdbcType=VARCHAR}, #{applyamount,jdbcType=DECIMAL}, #{osumofamount,jdbcType=DECIMAL}, 
+      #{redemaccountname,jdbcType=VARCHAR}, #{orepayaccountname,jdbcType=VARCHAR}, #{redemaccount,jdbcType=VARCHAR}, 
+      #{orepayaccount,jdbcType=VARCHAR}, #{orepayaccountbnk,jdbcType=VARCHAR}, #{redemccountbnk,jdbcType=VARCHAR}, 
+      #{isthirdpartyrepay,jdbcType=VARCHAR}, #{isthirdpartyredem,jdbcType=VARCHAR}, #{redemdescription,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Redemptiontype" >
+    insert into redemptiontype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="beloanbank != null" >
+        beloanbank,
+      </if>
+      <if test="newloanbank != null" >
+        newloanbank,
+      </if>
+      <if test="applyamount != null" >
+        applyamount,
+      </if>
+      <if test="osumofamount != null" >
+        osumofamount,
+      </if>
+      <if test="redemaccountname != null" >
+        redemaccountname,
+      </if>
+      <if test="orepayaccountname != null" >
+        orepayaccountname,
+      </if>
+      <if test="redemaccount != null" >
+        redemaccount,
+      </if>
+      <if test="orepayaccount != null" >
+        orepayaccount,
+      </if>
+      <if test="orepayaccountbnk != null" >
+        orepayaccountbnk,
+      </if>
+      <if test="redemccountbnk != null" >
+        redemccountbnk,
+      </if>
+      <if test="isthirdpartyrepay != null" >
+        isthirdpartyrepay,
+      </if>
+      <if test="isthirdpartyredem != null" >
+        isthirdpartyredem,
+      </if>
+      <if test="redemdescription != null" >
+        redemdescription,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="beloanbank != null" >
+        #{beloanbank,jdbcType=VARCHAR},
+      </if>
+      <if test="newloanbank != null" >
+        #{newloanbank,jdbcType=VARCHAR},
+      </if>
+      <if test="applyamount != null" >
+        #{applyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="osumofamount != null" >
+        #{osumofamount,jdbcType=DECIMAL},
+      </if>
+      <if test="redemaccountname != null" >
+        #{redemaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="orepayaccountname != null" >
+        #{orepayaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="redemaccount != null" >
+        #{redemaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="orepayaccount != null" >
+        #{orepayaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="orepayaccountbnk != null" >
+        #{orepayaccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="redemccountbnk != null" >
+        #{redemccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="isthirdpartyrepay != null" >
+        #{isthirdpartyrepay,jdbcType=VARCHAR},
+      </if>
+      <if test="isthirdpartyredem != null" >
+        #{isthirdpartyredem,jdbcType=VARCHAR},
+      </if>
+      <if test="redemdescription != null" >
+        #{redemdescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.RedemptiontypeExample" resultType="java.lang.Integer" >
+    select count(*) from redemptiontype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update redemptiontype
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beloanbank != null" >
+        beloanbank = #{record.beloanbank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newloanbank != null" >
+        newloanbank = #{record.newloanbank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyamount != null" >
+        applyamount = #{record.applyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.osumofamount != null" >
+        osumofamount = #{record.osumofamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.redemaccountname != null" >
+        redemaccountname = #{record.redemaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orepayaccountname != null" >
+        orepayaccountname = #{record.orepayaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.redemaccount != null" >
+        redemaccount = #{record.redemaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orepayaccount != null" >
+        orepayaccount = #{record.orepayaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orepayaccountbnk != null" >
+        orepayaccountbnk = #{record.orepayaccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.redemccountbnk != null" >
+        redemccountbnk = #{record.redemccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isthirdpartyrepay != null" >
+        isthirdpartyrepay = #{record.isthirdpartyrepay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isthirdpartyredem != null" >
+        isthirdpartyredem = #{record.isthirdpartyredem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.redemdescription != null" >
+        redemdescription = #{record.redemdescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update redemptiontype
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      beloanbank = #{record.beloanbank,jdbcType=VARCHAR},
+      newloanbank = #{record.newloanbank,jdbcType=VARCHAR},
+      applyamount = #{record.applyamount,jdbcType=DECIMAL},
+      osumofamount = #{record.osumofamount,jdbcType=DECIMAL},
+      redemaccountname = #{record.redemaccountname,jdbcType=VARCHAR},
+      orepayaccountname = #{record.orepayaccountname,jdbcType=VARCHAR},
+      redemaccount = #{record.redemaccount,jdbcType=VARCHAR},
+      orepayaccount = #{record.orepayaccount,jdbcType=VARCHAR},
+      orepayaccountbnk = #{record.orepayaccountbnk,jdbcType=VARCHAR},
+      redemccountbnk = #{record.redemccountbnk,jdbcType=VARCHAR},
+      isthirdpartyrepay = #{record.isthirdpartyrepay,jdbcType=VARCHAR},
+      isthirdpartyredem = #{record.isthirdpartyredem,jdbcType=VARCHAR},
+      redemdescription = #{record.redemdescription,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Redemptiontype" >
+    update redemptiontype
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="beloanbank != null" >
+        beloanbank = #{beloanbank,jdbcType=VARCHAR},
+      </if>
+      <if test="newloanbank != null" >
+        newloanbank = #{newloanbank,jdbcType=VARCHAR},
+      </if>
+      <if test="applyamount != null" >
+        applyamount = #{applyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="osumofamount != null" >
+        osumofamount = #{osumofamount,jdbcType=DECIMAL},
+      </if>
+      <if test="redemaccountname != null" >
+        redemaccountname = #{redemaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="orepayaccountname != null" >
+        orepayaccountname = #{orepayaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="redemaccount != null" >
+        redemaccount = #{redemaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="orepayaccount != null" >
+        orepayaccount = #{orepayaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="orepayaccountbnk != null" >
+        orepayaccountbnk = #{orepayaccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="redemccountbnk != null" >
+        redemccountbnk = #{redemccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="isthirdpartyrepay != null" >
+        isthirdpartyrepay = #{isthirdpartyrepay,jdbcType=VARCHAR},
+      </if>
+      <if test="isthirdpartyredem != null" >
+        isthirdpartyredem = #{isthirdpartyredem,jdbcType=VARCHAR},
+      </if>
+      <if test="redemdescription != null" >
+        redemdescription = #{redemdescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Redemptiontype" >
+    update redemptiontype
+    set workid = #{workid,jdbcType=VARCHAR},
+      beloanbank = #{beloanbank,jdbcType=VARCHAR},
+      newloanbank = #{newloanbank,jdbcType=VARCHAR},
+      applyamount = #{applyamount,jdbcType=DECIMAL},
+      osumofamount = #{osumofamount,jdbcType=DECIMAL},
+      redemaccountname = #{redemaccountname,jdbcType=VARCHAR},
+      orepayaccountname = #{orepayaccountname,jdbcType=VARCHAR},
+      redemaccount = #{redemaccount,jdbcType=VARCHAR},
+      orepayaccount = #{orepayaccount,jdbcType=VARCHAR},
+      orepayaccountbnk = #{orepayaccountbnk,jdbcType=VARCHAR},
+      redemccountbnk = #{redemccountbnk,jdbcType=VARCHAR},
+      isthirdpartyrepay = #{isthirdpartyrepay,jdbcType=VARCHAR},
+      isthirdpartyredem = #{isthirdpartyredem,jdbcType=VARCHAR},
+      redemdescription = #{redemdescription,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ReservationsMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Reservations" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="reservationtime" property="reservationtime" jdbcType="TIMESTAMP" />
+    <result column="custname" property="custname" jdbcType="VARCHAR" />
+    <result column="reservationplace" property="reservationplace" jdbcType="VARCHAR" />
+    <result column="custcontactway" property="custcontactway" jdbcType="VARCHAR" />
+    <result column="dueofplanform" property="dueofplanform" jdbcType="VARCHAR" />
+    <result column="chanassistant" property="chanassistant" jdbcType="VARCHAR" />
+    <result column="relationworkid" property="relationworkid" jdbcType="VARCHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, reservationtime, custname, reservationplace, custcontactway, dueofplanform, chanassistant, 
+    relationworkid, chgtl, chgdt, workid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ReservationsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from reservations
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from reservations
+    where workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from reservations
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ReservationsExample" >
+    delete from reservations
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Reservations" >
+    insert into reservations (id, reservationtime, custname, 
+      reservationplace, custcontactway, dueofplanform, 
+      chanassistant, relationworkid, chgtl, 
+      chgdt, workid)
+    values (#{id,jdbcType=VARCHAR}, #{reservationtime,jdbcType=TIMESTAMP}, #{custname,jdbcType=VARCHAR}, 
+      #{reservationplace,jdbcType=VARCHAR}, #{custcontactway,jdbcType=VARCHAR}, #{dueofplanform,jdbcType=VARCHAR}, 
+      #{chanassistant,jdbcType=VARCHAR}, #{relationworkid,jdbcType=VARCHAR}, #{chgtl,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=TIMESTAMP}, #{workid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Reservations" >
+    insert into reservations
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="reservationtime != null" >
+        reservationtime,
+      </if>
+      <if test="custname != null" >
+        custname,
+      </if>
+      <if test="reservationplace != null" >
+        reservationplace,
+      </if>
+      <if test="custcontactway != null" >
+        custcontactway,
+      </if>
+      <if test="dueofplanform != null" >
+        dueofplanform,
+      </if>
+      <if test="chanassistant != null" >
+        chanassistant,
+      </if>
+      <if test="relationworkid != null" >
+        relationworkid,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="reservationtime != null" >
+        #{reservationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custname != null" >
+        #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="reservationplace != null" >
+        #{reservationplace,jdbcType=VARCHAR},
+      </if>
+      <if test="custcontactway != null" >
+        #{custcontactway,jdbcType=VARCHAR},
+      </if>
+      <if test="dueofplanform != null" >
+        #{dueofplanform,jdbcType=VARCHAR},
+      </if>
+      <if test="chanassistant != null" >
+        #{chanassistant,jdbcType=VARCHAR},
+      </if>
+      <if test="relationworkid != null" >
+        #{relationworkid,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ReservationsExample" resultType="java.lang.Integer" >
+    select count(*) from reservations
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update reservations
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservationtime != null" >
+        reservationtime = #{record.reservationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.custname != null" >
+        custname = #{record.custname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservationplace != null" >
+        reservationplace = #{record.reservationplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custcontactway != null" >
+        custcontactway = #{record.custcontactway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dueofplanform != null" >
+        dueofplanform = #{record.dueofplanform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chanassistant != null" >
+        chanassistant = #{record.chanassistant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relationworkid != null" >
+        relationworkid = #{record.relationworkid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update reservations
+    set id = #{record.id,jdbcType=VARCHAR},
+      reservationtime = #{record.reservationtime,jdbcType=TIMESTAMP},
+      custname = #{record.custname,jdbcType=VARCHAR},
+      reservationplace = #{record.reservationplace,jdbcType=VARCHAR},
+      custcontactway = #{record.custcontactway,jdbcType=VARCHAR},
+      dueofplanform = #{record.dueofplanform,jdbcType=VARCHAR},
+      chanassistant = #{record.chanassistant,jdbcType=VARCHAR},
+      relationworkid = #{record.relationworkid,jdbcType=VARCHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      workid = #{record.workid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Reservations" >
+    update reservations
+    <set >
+      <if test="reservationtime != null" >
+        reservationtime = #{reservationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="custname != null" >
+        custname = #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="reservationplace != null" >
+        reservationplace = #{reservationplace,jdbcType=VARCHAR},
+      </if>
+      <if test="custcontactway != null" >
+        custcontactway = #{custcontactway,jdbcType=VARCHAR},
+      </if>
+      <if test="dueofplanform != null" >
+        dueofplanform = #{dueofplanform,jdbcType=VARCHAR},
+      </if>
+      <if test="chanassistant != null" >
+        chanassistant = #{chanassistant,jdbcType=VARCHAR},
+      </if>
+      <if test="relationworkid != null" >
+        relationworkid = #{relationworkid,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Reservations" >
+    update reservations
+    set reservationtime = #{reservationtime,jdbcType=TIMESTAMP},
+      custname = #{custname,jdbcType=VARCHAR},
+      reservationplace = #{reservationplace,jdbcType=VARCHAR},
+      custcontactway = #{custcontactway,jdbcType=VARCHAR},
+      dueofplanform = #{dueofplanform,jdbcType=VARCHAR},
+      chanassistant = #{chanassistant,jdbcType=VARCHAR},
+      relationworkid = #{relationworkid,jdbcType=VARCHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      workid = #{workid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.WorkflowExMapper" >
+	<select id="selectWorkflow" resultType="com.grape.controller.request.FlowHandleRequest" parameterType="map">
+		select item.workid,item.node as nodeid,item.branch as branchid,item.fork as forkid,doc.productno as processid from workitem item
+		 left outer join doctask doc on doc.workid=item.workid
+		 where item.workid=#{workid} and item.node=#{nodeid}
+	</select>
+</mapper>

@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.DebtinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Debtinfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="cerdid" property="cerdid" jdbcType="VARCHAR" />
+    <result column="debttype" property="debttype" jdbcType="VARCHAR" />
+    <result column="borrowman" property="borrowman" jdbcType="VARCHAR" />
+    <result column="fananceorg" property="fananceorg" jdbcType="VARCHAR" />
+    <result column="totalloan" property="totalloan" jdbcType="DECIMAL" />
+    <result column="borrowremain" property="borrowremain" jdbcType="DECIMAL" />
+    <result column="startdate" property="startdate" jdbcType="TIMESTAMP" />
+    <result column="enddate" property="enddate" jdbcType="TIMESTAMP" />
+    <result column="pledgeno" property="pledgeno" jdbcType="VARCHAR" />
+    <result column="pledgeaddress" property="pledgeaddress" jdbcType="VARCHAR" />
+    <result column="usefulposition" property="usefulposition" jdbcType="DECIMAL" />
+    <result column="usedposition" property="usedposition" jdbcType="DECIMAL" />
+    <result column="debtinforemark" property="debtinforemark" jdbcType="VARCHAR" />
+    <result column="havaloanflg" property="havaloanflg" jdbcType="CHAR" />
+    <result column="conversion" property="conversion" jdbcType="DECIMAL" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="addressprov" property="addressprov" jdbcType="VARCHAR" />
+    <result column="addresscity" property="addresscity" jdbcType="VARCHAR" />
+    <result column="addressarea" property="addressarea" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="historicalhavaloanflg" property="historicalhavaloanflg" jdbcType="VARCHAR" />
+    <result column="noofcertificate" property="noofcertificate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, cerdid, debttype, borrowman, fananceorg, totalloan, borrowremain, startdate, 
+    enddate, pledgeno, pledgeaddress, usefulposition, usedposition, debtinforemark, havaloanflg, 
+    conversion, chgdt, chgtl, addressprov, addresscity, addressarea, address, historicalhavaloanflg, 
+    noofcertificate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.DebtinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from debtinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from debtinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from debtinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.DebtinfoExample" >
+    delete from debtinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Debtinfo" >
+    insert into debtinfo (id, workid, cerdid, 
+      debttype, borrowman, fananceorg, 
+      totalloan, borrowremain, startdate, 
+      enddate, pledgeno, pledgeaddress, 
+      usefulposition, usedposition, debtinforemark, 
+      havaloanflg, conversion, chgdt, 
+      chgtl, addressprov, addresscity, 
+      addressarea, address, historicalhavaloanflg, 
+      noofcertificate)
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{cerdid,jdbcType=VARCHAR}, 
+      #{debttype,jdbcType=VARCHAR}, #{borrowman,jdbcType=VARCHAR}, #{fananceorg,jdbcType=VARCHAR}, 
+      #{totalloan,jdbcType=DECIMAL}, #{borrowremain,jdbcType=DECIMAL}, #{startdate,jdbcType=TIMESTAMP}, 
+      #{enddate,jdbcType=TIMESTAMP}, #{pledgeno,jdbcType=VARCHAR}, #{pledgeaddress,jdbcType=VARCHAR}, 
+      #{usefulposition,jdbcType=DECIMAL}, #{usedposition,jdbcType=DECIMAL}, #{debtinforemark,jdbcType=VARCHAR}, 
+      #{havaloanflg,jdbcType=CHAR}, #{conversion,jdbcType=DECIMAL}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{chgtl,jdbcType=VARCHAR}, #{addressprov,jdbcType=VARCHAR}, #{addresscity,jdbcType=VARCHAR}, 
+      #{addressarea,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{historicalhavaloanflg,jdbcType=VARCHAR}, 
+      #{noofcertificate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Debtinfo" >
+    insert into debtinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="cerdid != null" >
+        cerdid,
+      </if>
+      <if test="debttype != null" >
+        debttype,
+      </if>
+      <if test="borrowman != null" >
+        borrowman,
+      </if>
+      <if test="fananceorg != null" >
+        fananceorg,
+      </if>
+      <if test="totalloan != null" >
+        totalloan,
+      </if>
+      <if test="borrowremain != null" >
+        borrowremain,
+      </if>
+      <if test="startdate != null" >
+        startdate,
+      </if>
+      <if test="enddate != null" >
+        enddate,
+      </if>
+      <if test="pledgeno != null" >
+        pledgeno,
+      </if>
+      <if test="pledgeaddress != null" >
+        pledgeaddress,
+      </if>
+      <if test="usefulposition != null" >
+        usefulposition,
+      </if>
+      <if test="usedposition != null" >
+        usedposition,
+      </if>
+      <if test="debtinforemark != null" >
+        debtinforemark,
+      </if>
+      <if test="havaloanflg != null" >
+        havaloanflg,
+      </if>
+      <if test="conversion != null" >
+        conversion,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="addressprov != null" >
+        addressprov,
+      </if>
+      <if test="addresscity != null" >
+        addresscity,
+      </if>
+      <if test="addressarea != null" >
+        addressarea,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="historicalhavaloanflg != null" >
+        historicalhavaloanflg,
+      </if>
+      <if test="noofcertificate != null" >
+        noofcertificate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdid != null" >
+        #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="debttype != null" >
+        #{debttype,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowman != null" >
+        #{borrowman,jdbcType=VARCHAR},
+      </if>
+      <if test="fananceorg != null" >
+        #{fananceorg,jdbcType=VARCHAR},
+      </if>
+      <if test="totalloan != null" >
+        #{totalloan,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowremain != null" >
+        #{borrowremain,jdbcType=DECIMAL},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pledgeno != null" >
+        #{pledgeno,jdbcType=VARCHAR},
+      </if>
+      <if test="pledgeaddress != null" >
+        #{pledgeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="usefulposition != null" >
+        #{usefulposition,jdbcType=DECIMAL},
+      </if>
+      <if test="usedposition != null" >
+        #{usedposition,jdbcType=DECIMAL},
+      </if>
+      <if test="debtinforemark != null" >
+        #{debtinforemark,jdbcType=VARCHAR},
+      </if>
+      <if test="havaloanflg != null" >
+        #{havaloanflg,jdbcType=CHAR},
+      </if>
+      <if test="conversion != null" >
+        #{conversion,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="addressprov != null" >
+        #{addressprov,jdbcType=VARCHAR},
+      </if>
+      <if test="addresscity != null" >
+        #{addresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressarea != null" >
+        #{addressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="historicalhavaloanflg != null" >
+        #{historicalhavaloanflg,jdbcType=VARCHAR},
+      </if>
+      <if test="noofcertificate != null" >
+        #{noofcertificate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.DebtinfoExample" resultType="java.lang.Integer" >
+    select count(*) from debtinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update debtinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerdid != null" >
+        cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.debttype != null" >
+        debttype = #{record.debttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowman != null" >
+        borrowman = #{record.borrowman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fananceorg != null" >
+        fananceorg = #{record.fananceorg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalloan != null" >
+        totalloan = #{record.totalloan,jdbcType=DECIMAL},
+      </if>
+      <if test="record.borrowremain != null" >
+        borrowremain = #{record.borrowremain,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startdate != null" >
+        startdate = #{record.startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enddate != null" >
+        enddate = #{record.enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pledgeno != null" >
+        pledgeno = #{record.pledgeno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pledgeaddress != null" >
+        pledgeaddress = #{record.pledgeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usefulposition != null" >
+        usefulposition = #{record.usefulposition,jdbcType=DECIMAL},
+      </if>
+      <if test="record.usedposition != null" >
+        usedposition = #{record.usedposition,jdbcType=DECIMAL},
+      </if>
+      <if test="record.debtinforemark != null" >
+        debtinforemark = #{record.debtinforemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.havaloanflg != null" >
+        havaloanflg = #{record.havaloanflg,jdbcType=CHAR},
+      </if>
+      <if test="record.conversion != null" >
+        conversion = #{record.conversion,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressprov != null" >
+        addressprov = #{record.addressprov,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addresscity != null" >
+        addresscity = #{record.addresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressarea != null" >
+        addressarea = #{record.addressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historicalhavaloanflg != null" >
+        historicalhavaloanflg = #{record.historicalhavaloanflg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noofcertificate != null" >
+        noofcertificate = #{record.noofcertificate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update debtinfo
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      debttype = #{record.debttype,jdbcType=VARCHAR},
+      borrowman = #{record.borrowman,jdbcType=VARCHAR},
+      fananceorg = #{record.fananceorg,jdbcType=VARCHAR},
+      totalloan = #{record.totalloan,jdbcType=DECIMAL},
+      borrowremain = #{record.borrowremain,jdbcType=DECIMAL},
+      startdate = #{record.startdate,jdbcType=TIMESTAMP},
+      enddate = #{record.enddate,jdbcType=TIMESTAMP},
+      pledgeno = #{record.pledgeno,jdbcType=VARCHAR},
+      pledgeaddress = #{record.pledgeaddress,jdbcType=VARCHAR},
+      usefulposition = #{record.usefulposition,jdbcType=DECIMAL},
+      usedposition = #{record.usedposition,jdbcType=DECIMAL},
+      debtinforemark = #{record.debtinforemark,jdbcType=VARCHAR},
+      havaloanflg = #{record.havaloanflg,jdbcType=CHAR},
+      conversion = #{record.conversion,jdbcType=DECIMAL},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      addressprov = #{record.addressprov,jdbcType=VARCHAR},
+      addresscity = #{record.addresscity,jdbcType=VARCHAR},
+      addressarea = #{record.addressarea,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      historicalhavaloanflg = #{record.historicalhavaloanflg,jdbcType=VARCHAR},
+      noofcertificate = #{record.noofcertificate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Debtinfo" >
+    update debtinfo
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdid != null" >
+        cerdid = #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="debttype != null" >
+        debttype = #{debttype,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowman != null" >
+        borrowman = #{borrowman,jdbcType=VARCHAR},
+      </if>
+      <if test="fananceorg != null" >
+        fananceorg = #{fananceorg,jdbcType=VARCHAR},
+      </if>
+      <if test="totalloan != null" >
+        totalloan = #{totalloan,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowremain != null" >
+        borrowremain = #{borrowremain,jdbcType=DECIMAL},
+      </if>
+      <if test="startdate != null" >
+        startdate = #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        enddate = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pledgeno != null" >
+        pledgeno = #{pledgeno,jdbcType=VARCHAR},
+      </if>
+      <if test="pledgeaddress != null" >
+        pledgeaddress = #{pledgeaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="usefulposition != null" >
+        usefulposition = #{usefulposition,jdbcType=DECIMAL},
+      </if>
+      <if test="usedposition != null" >
+        usedposition = #{usedposition,jdbcType=DECIMAL},
+      </if>
+      <if test="debtinforemark != null" >
+        debtinforemark = #{debtinforemark,jdbcType=VARCHAR},
+      </if>
+      <if test="havaloanflg != null" >
+        havaloanflg = #{havaloanflg,jdbcType=CHAR},
+      </if>
+      <if test="conversion != null" >
+        conversion = #{conversion,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="addressprov != null" >
+        addressprov = #{addressprov,jdbcType=VARCHAR},
+      </if>
+      <if test="addresscity != null" >
+        addresscity = #{addresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressarea != null" >
+        addressarea = #{addressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="historicalhavaloanflg != null" >
+        historicalhavaloanflg = #{historicalhavaloanflg,jdbcType=VARCHAR},
+      </if>
+      <if test="noofcertificate != null" >
+        noofcertificate = #{noofcertificate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Debtinfo" >
+    update debtinfo
+    set workid = #{workid,jdbcType=VARCHAR},
+      cerdid = #{cerdid,jdbcType=VARCHAR},
+      debttype = #{debttype,jdbcType=VARCHAR},
+      borrowman = #{borrowman,jdbcType=VARCHAR},
+      fananceorg = #{fananceorg,jdbcType=VARCHAR},
+      totalloan = #{totalloan,jdbcType=DECIMAL},
+      borrowremain = #{borrowremain,jdbcType=DECIMAL},
+      startdate = #{startdate,jdbcType=TIMESTAMP},
+      enddate = #{enddate,jdbcType=TIMESTAMP},
+      pledgeno = #{pledgeno,jdbcType=VARCHAR},
+      pledgeaddress = #{pledgeaddress,jdbcType=VARCHAR},
+      usefulposition = #{usefulposition,jdbcType=DECIMAL},
+      usedposition = #{usedposition,jdbcType=DECIMAL},
+      debtinforemark = #{debtinforemark,jdbcType=VARCHAR},
+      havaloanflg = #{havaloanflg,jdbcType=CHAR},
+      conversion = #{conversion,jdbcType=DECIMAL},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      addressprov = #{addressprov,jdbcType=VARCHAR},
+      addresscity = #{addresscity,jdbcType=VARCHAR},
+      addressarea = #{addressarea,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      historicalhavaloanflg = #{historicalhavaloanflg,jdbcType=VARCHAR},
+      noofcertificate = #{noofcertificate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

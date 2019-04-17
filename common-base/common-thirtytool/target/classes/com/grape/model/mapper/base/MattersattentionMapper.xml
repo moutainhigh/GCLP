@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.MattersattentionMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Mattersattention" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="noticecount1" property="noticecount1" jdbcType="DECIMAL" />
+    <result column="noticecount2" property="noticecount2" jdbcType="DECIMAL" />
+    <result column="noticedate" property="noticedate" jdbcType="TIMESTAMP" />
+    <result column="noticetype" property="noticetype" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.grape.model.db.Mattersattention" extends="BaseResultMap" >
+    <result column="notice1" property="notice1" jdbcType="LONGVARCHAR" />
+    <result column="notice2" property="notice2" jdbcType="LONGVARCHAR" />
+    <result column="notice3" property="notice3" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, noticecount1, noticecount2, noticedate, noticetype
+  </sql>
+  <sql id="Blob_Column_List" >
+    notice1, notice2, notice3
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.grape.model.db.MattersattentionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mattersattention
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.MattersattentionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mattersattention
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from mattersattention
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mattersattention
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.MattersattentionExample" >
+    delete from mattersattention
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Mattersattention" >
+    insert into mattersattention (id, workid, noticecount1, 
+      noticecount2, noticedate, noticetype, 
+      notice1, notice2, notice3
+      )
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{noticecount1,jdbcType=DECIMAL}, 
+      #{noticecount2,jdbcType=DECIMAL}, #{noticedate,jdbcType=TIMESTAMP}, #{noticetype,jdbcType=VARCHAR}, 
+      #{notice1,jdbcType=LONGVARCHAR}, #{notice2,jdbcType=LONGVARCHAR}, #{notice3,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Mattersattention" >
+    insert into mattersattention
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="noticecount1 != null" >
+        noticecount1,
+      </if>
+      <if test="noticecount2 != null" >
+        noticecount2,
+      </if>
+      <if test="noticedate != null" >
+        noticedate,
+      </if>
+      <if test="noticetype != null" >
+        noticetype,
+      </if>
+      <if test="notice1 != null" >
+        notice1,
+      </if>
+      <if test="notice2 != null" >
+        notice2,
+      </if>
+      <if test="notice3 != null" >
+        notice3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="noticecount1 != null" >
+        #{noticecount1,jdbcType=DECIMAL},
+      </if>
+      <if test="noticecount2 != null" >
+        #{noticecount2,jdbcType=DECIMAL},
+      </if>
+      <if test="noticedate != null" >
+        #{noticedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noticetype != null" >
+        #{noticetype,jdbcType=VARCHAR},
+      </if>
+      <if test="notice1 != null" >
+        #{notice1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notice2 != null" >
+        #{notice2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notice3 != null" >
+        #{notice3,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.MattersattentionExample" resultType="java.lang.Integer" >
+    select count(*) from mattersattention
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mattersattention
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noticecount1 != null" >
+        noticecount1 = #{record.noticecount1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.noticecount2 != null" >
+        noticecount2 = #{record.noticecount2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.noticedate != null" >
+        noticedate = #{record.noticedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.noticetype != null" >
+        noticetype = #{record.noticetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notice1 != null" >
+        notice1 = #{record.notice1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.notice2 != null" >
+        notice2 = #{record.notice2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.notice3 != null" >
+        notice3 = #{record.notice3,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update mattersattention
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      noticecount1 = #{record.noticecount1,jdbcType=DECIMAL},
+      noticecount2 = #{record.noticecount2,jdbcType=DECIMAL},
+      noticedate = #{record.noticedate,jdbcType=TIMESTAMP},
+      noticetype = #{record.noticetype,jdbcType=VARCHAR},
+      notice1 = #{record.notice1,jdbcType=LONGVARCHAR},
+      notice2 = #{record.notice2,jdbcType=LONGVARCHAR},
+      notice3 = #{record.notice3,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mattersattention
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      noticecount1 = #{record.noticecount1,jdbcType=DECIMAL},
+      noticecount2 = #{record.noticecount2,jdbcType=DECIMAL},
+      noticedate = #{record.noticedate,jdbcType=TIMESTAMP},
+      noticetype = #{record.noticetype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Mattersattention" >
+    update mattersattention
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="noticecount1 != null" >
+        noticecount1 = #{noticecount1,jdbcType=DECIMAL},
+      </if>
+      <if test="noticecount2 != null" >
+        noticecount2 = #{noticecount2,jdbcType=DECIMAL},
+      </if>
+      <if test="noticedate != null" >
+        noticedate = #{noticedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noticetype != null" >
+        noticetype = #{noticetype,jdbcType=VARCHAR},
+      </if>
+      <if test="notice1 != null" >
+        notice1 = #{notice1,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notice2 != null" >
+        notice2 = #{notice2,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notice3 != null" >
+        notice3 = #{notice3,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.grape.model.db.Mattersattention" >
+    update mattersattention
+    set workid = #{workid,jdbcType=VARCHAR},
+      noticecount1 = #{noticecount1,jdbcType=DECIMAL},
+      noticecount2 = #{noticecount2,jdbcType=DECIMAL},
+      noticedate = #{noticedate,jdbcType=TIMESTAMP},
+      noticetype = #{noticetype,jdbcType=VARCHAR},
+      notice1 = #{notice1,jdbcType=LONGVARCHAR},
+      notice2 = #{notice2,jdbcType=LONGVARCHAR},
+      notice3 = #{notice3,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Mattersattention" >
+    update mattersattention
+    set workid = #{workid,jdbcType=VARCHAR},
+      noticecount1 = #{noticecount1,jdbcType=DECIMAL},
+      noticecount2 = #{noticecount2,jdbcType=DECIMAL},
+      noticedate = #{noticedate,jdbcType=TIMESTAMP},
+      noticetype = #{noticetype,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

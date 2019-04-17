@@ -1,0 +1,210 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.AccountExMapper">
+    <select id="statisticalAccount" resultType="com.grape.controller.reponse.StatisticalAccountResponse"
+            parameterType="map">
+        select
+        cast(SUM(temp1.singledepositSum) AS DECIMAL (19, 5)) singledepositSum,
+        cast(SUM(temp1.marginbalanceSum) AS DECIMAL (19, 5)) marginbalanceSum,
+        cast(SUM(temp1.accountremianSum) AS DECIMAL (19, 5)) accountremianSum
+        from (SELECT organization.organizationno,organization.organizationname,dp.singledepositSum,
+        SUM(CASE WHEN account.accounttype='01' then account.marginbalance else 0 end) marginbalanceSum,
+        SUM(CASE WHEN account.accounttype='02' then account.accountremian else 0 end) accountremianSum
+        from account account
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" checktype == '01'.toString() ">
+                LEFT JOIN organization organization on organization.organizationno=account.accountbakno
+                LEFT JOIN (select doctask.channelno,SUM(paymentapplyinfo.singledeposit) singledepositSum from
+                doctask,paymentapplyinfo
+                where doctask.workid=paymentapplyinfo.workid GROUP BY doctask.channelno) dp on
+                dp.channelno=organization.organizationno
+                where account.accountorg=#{organizationno , jdbcType=VARCHAR} and organization.orgbelongsto='01'
+            </if>
+            <if test=" checktype == '02'.toString() ">
+                LEFT JOIN organization organization on organization.organizationno=account.accountorg
+                LEFT JOIN (select doctask.terrcaeno,SUM(paymentapplyinfo.singledeposit) singledepositSum from
+                doctask,paymentapplyinfo
+                where doctask.workid=paymentapplyinfo.workid GROUP BY doctask.terrcaeno) dp on
+                dp.terrcaeno=organization.organizationno
+                where account.accountbakno=#{organizationno , jdbcType=VARCHAR} and organization.orgbelongsto='02'
+            </if>
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            LEFT JOIN organization organization on organization.organizationno=account.accountbakno
+            LEFT JOIN (select doctask.channelno,SUM(paymentapplyinfo.singledeposit) singledepositSum from
+            doctask,paymentapplyinfo
+            where doctask.workid=paymentapplyinfo.workid GROUP BY doctask.channelno) dp on
+            dp.channelno=organization.organizationno
+            where account.accountbakno=#{organizationno , jdbcType=VARCHAR} and organization.orgbelongsto='01'
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            LEFT JOIN organization organization on organization.organizationno=account.accountbakno
+            LEFT JOIN (select doctask.terrcaeno,SUM(paymentapplyinfo.singledeposit) singledepositSum from
+            doctask,paymentapplyinfo
+            where doctask.workid=paymentapplyinfo.workid GROUP BY doctask.terrcaeno) dp on
+            dp.terrcaeno=organization.organizationno
+            where account.accountorg=#{organizationno , jdbcType=VARCHAR} and organization.orgbelongsto='04'
+        </if>
+        GROUP BY organization.organizationno,organization.organizationname,dp.singledepositSum) temp1
+    </select>
+
+    <select id="seeAccountList" resultType="com.grape.controller.reponse.bean.SeeAccountListBean" parameterType="map">
+        SELECT organization.organizationno,organization.organizationname,dp.singledepositSum,
+        SUM(CASE WHEN account.accounttype='01' then account.marginbalance else 0 end) marginbalanceSum,
+        SUM(CASE WHEN account.accounttype='02' then account.accountremian else 0 end) accountremianSum
+        from account account
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" checktype == '01'.toString() ">
+                LEFT JOIN organization organization on organization.organizationno=account.accountbakno
+                LEFT JOIN (select doctask.channelno,SUM(paymentapplyinfo.singledeposit) singledepositSum from
+                doctask,paymentapplyinfo
+                where doctask.workid=paymentapplyinfo.workid GROUP BY doctask.channelno) dp on
+                dp.channelno=organization.organizationno
+                where account.accountorg=#{organizationno , jdbcType=VARCHAR} and organization.orgbelongsto='01'
+            </if>
+            <if test=" checktype == '02'.toString() ">
+                LEFT JOIN organization organization on organization.organizationno=account.accountorg
+                LEFT JOIN (select doctask.terrcaeno,SUM(paymentapplyinfo.singledeposit) singledepositSum from
+                doctask,paymentapplyinfo
+                where doctask.workid=paymentapplyinfo.workid GROUP BY doctask.terrcaeno) dp on
+                dp.terrcaeno=organization.organizationno
+                where account.accountbakno=#{organizationno , jdbcType=VARCHAR} and organization.orgbelongsto='02'
+            </if>
+        </if>
+        GROUP BY organization.organizationno,organization.organizationname,dp.singledepositSum limit
+        #{pagenum},#{pagesize}
+    </select>
+
+    <select id="seeAccountCount" resultType="Integer" parameterType="map">
+        select count(1) from
+        (SELECT organization.organizationno,organization.organizationname,dp.singledepositSum,
+        SUM(CASE WHEN account.accounttype='01' then account.marginbalance else 0 end) marginbalanceSum,
+        SUM(CASE WHEN account.accounttype='02' then account.accountremian else 0 end) accountremianSum
+        from account account
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" checktype == '01'.toString() ">
+                LEFT JOIN organization organization on organization.organizationno=account.accountbakno
+                LEFT JOIN (select doctask.channelno,SUM(paymentapplyinfo.singledeposit) singledepositSum from
+                doctask,paymentapplyinfo
+                where doctask.workid=paymentapplyinfo.workid GROUP BY doctask.channelno) dp on
+                dp.channelno=organization.organizationno
+                where account.accountorg=#{organizationno , jdbcType=VARCHAR} and organization.orgbelongsto='01'
+            </if>
+            <if test=" checktype == '02'.toString() ">
+                LEFT JOIN organization organization on organization.organizationno=account.accountorg
+                LEFT JOIN (select doctask.terrcaeno,SUM(paymentapplyinfo.singledeposit) singledepositSum from
+                doctask,paymentapplyinfo
+                where doctask.workid=paymentapplyinfo.workid GROUP BY doctask.terrcaeno) dp on
+                dp.terrcaeno=organization.organizationno
+                where account.accountbakno=#{organizationno , jdbcType=VARCHAR} and organization.orgbelongsto='02'
+            </if>
+        </if>
+        GROUP BY organization.organizationno,organization.organizationname,dp.singledepositSum) temp1
+    </select>
+
+    <select id="getAccount" resultType="com.grape.model.db.Account" parameterType="map">
+        select * from account where 1=1
+        <if test=" accountbakno !=null and accountbakno !='' ">
+            and account.accountbakno=#{accountbakno , jdbcType=VARCHAR}
+        </if>
+        <if test=" accountorg !=null and accountorg !='' ">
+            and account.accountorg=#{accountorg , jdbcType=VARCHAR}
+        </if>
+        <if test=" accounttype !=null and accounttype !='' ">
+            and account.accounttype=#{accounttype , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="seeTradingList" resultType="com.grape.controller.reponse.bean.SeeTradingBean" parameterType="map">
+        select transaction.transtime,transaction.transamount,transaction.tradingnote,person.workername dealman
+        from (account,transaction) LEFT JOIN person person on person.workerid=transaction.dealman
+        where transaction.accountno=account.accountno
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" orgtype == '01'.toString() ">
+                and account.accountorg=#{accountorg , jdbcType=VARCHAR}
+                and account.accountbakno=#{accountbakno , jdbcType=VARCHAR}
+                and account.accounttype=#{accounttype , jdbcType=VARCHAR}
+            </if>
+            <if test=" orgtype == '02'.toString() ">
+                and account.accountbakno=#{accountorg , jdbcType=VARCHAR}
+                and account.accountorg=#{accountbakno , jdbcType=VARCHAR}
+                and account.accounttype=#{accounttype , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and account.accountbakno=#{accountorg , jdbcType=VARCHAR}
+            and account.accounttype=#{accounttype , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and account.accountorg=#{accountorg , jdbcType=VARCHAR}
+            and account.accounttype=#{accounttype , jdbcType=VARCHAR}
+        </if>
+        limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="seeTradingCount" resultType="Integer" parameterType="map">
+        select count(1) from (account,transaction)
+        LEFT JOIN person person on person.workerid=transaction.dealman
+        where transaction.accountno=account.accountno
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" orgtype == '01'.toString() ">
+                and account.accountorg=#{accountorg , jdbcType=VARCHAR}
+                and account.accountbakno=#{accountbakno , jdbcType=VARCHAR}
+                and account.accounttype=#{accounttype , jdbcType=VARCHAR}
+            </if>
+            <if test=" orgtype == '02'.toString() ">
+                and account.accountbakno=#{accountorg , jdbcType=VARCHAR}
+                and account.accountorg=#{accountbakno , jdbcType=VARCHAR}
+                and account.accounttype=#{accounttype , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and account.accountbakno=#{accountorg , jdbcType=VARCHAR}
+            and account.accounttype=#{accounttype , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and account.accountorg=#{accountorg , jdbcType=VARCHAR}
+            and account.accounttype=#{accounttype , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="seeSingleList" resultType="com.grape.controller.reponse.bean.SeeTradingBean" parameterType="map">
+        select paymentapplyinfo.singledepositdate transtime,paymentapplyinfo.singledeposit transamount,
+        paymentapplyinfo.workid tradingnote,person.workername dealman
+        from (doctask,paymentapplyinfo) LEFT JOIN person person on person.workerid=paymentapplyinfo.chgtl
+        where doctask.workid=paymentapplyinfo.workid
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" orgtype == '01'.toString() ">
+                and doctask.channelno=#{accountbakno , jdbcType=VARCHAR}
+            </if>
+            <if test=" orgtype == '02'.toString() ">
+                and doctask.fundno=#{accountbakno , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno=#{accountorg , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno=#{accountorg , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="seeSingleCount" resultType="Integer" parameterType="map">
+        select count(1) from (doctask,paymentapplyinfo)
+        LEFT JOIN person person on person.workerid=paymentapplyinfo.chgtl
+        where doctask.workid=paymentapplyinfo.workid
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" orgtype == '01'.toString() ">
+                and doctask.channelno=#{accountbakno , jdbcType=VARCHAR}
+            </if>
+            <if test=" orgtype == '02'.toString() ">
+                and doctask.fundno=#{accountbakno , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno=#{accountorg , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno=#{accountorg , jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

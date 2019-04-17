@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.workflow.model.mapper.WorkhistMapperExtra">
+
+	<select id="findWorkHishByWorkid" parameterType="map"
+		resultType="map">
+		SELECT workhist.id,
+		workhistory.workid ,
+		workhistory.userid ,
+		workhistory.node ,
+		workhistory.OPERATION ,
+		workhistory.NOTATION,
+		workhistory.OPERDATE ,
+		workhistory.OPERTIME ,
+		workhistory.NEXTNODE,
+		workproc.PROCESS,
+		workproc.CREATOR ,
+		workproc.CREATEDATE ,
+		workproc.CREATETIME ,
+		organization.BNKNO ,
+		organization.BNKNM,
+		person.tlrname
+		from workhistory
+		join workproc on (workhistory.workid=workproc.workid)
+		join organization on (workproc.DEPARTID=organization.BNKNO)
+		left outer join person on (workhistory.userid = person.workerid)
+		where workhistory.workid =#{workid,jdbcType=VARCHAR}
+		and workhistory.operation!='CHECKOUT'
+		and workhistory.operation!='CHECKIN'
+		order by workhist.id
+	</select>
+
+	<select id="findWorkHishByWorkid2" resultType="com.grape.model.db.Workhistory"
+		parameterType="map">
+		select * from
+		(select * from workhistory where workid = #{workid,jdbcType=VARCHAR}
+		and (operation!='CHECKOUT' and operation!='CHECKIN')
+		order by id desc)
+		where rownum &lt; 2
+	</select>
+
+</mapper>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.SmsparamMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Smsparam" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="accesskeyid" property="accesskeyid" jdbcType="VARCHAR" />
+    <result column="accesskeysecret" property="accesskeysecret" jdbcType="VARCHAR" />
+    <result column="msgsign" property="msgsign" jdbcType="VARCHAR" />
+    <result column="templatecode" property="templatecode" jdbcType="VARCHAR" />
+    <result column="productno" property="productno" jdbcType="VARCHAR" />
+    <result column="sendfreq" property="sendfreq" jdbcType="VARCHAR" />
+    <result column="sendtype" property="sendtype" jdbcType="VARCHAR" />
+    <result column="sendchance" property="sendchance" jdbcType="VARCHAR" />
+    <result column="sendflg" property="sendflg" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, accesskeyid, accesskeysecret, msgsign, templatecode, productno, sendfreq, sendtype, 
+    sendchance, sendflg, chgdt, chgtl, description
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.SmsparamExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from smsparam
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from smsparam
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from smsparam
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.SmsparamExample" >
+    delete from smsparam
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Smsparam" >
+    insert into smsparam (id, accesskeyid, accesskeysecret, 
+      msgsign, templatecode, productno, 
+      sendfreq, sendtype, sendchance, 
+      sendflg, chgdt, chgtl, 
+      description)
+    values (#{id,jdbcType=VARCHAR}, #{accesskeyid,jdbcType=VARCHAR}, #{accesskeysecret,jdbcType=VARCHAR}, 
+      #{msgsign,jdbcType=VARCHAR}, #{templatecode,jdbcType=VARCHAR}, #{productno,jdbcType=VARCHAR}, 
+      #{sendfreq,jdbcType=VARCHAR}, #{sendtype,jdbcType=VARCHAR}, #{sendchance,jdbcType=VARCHAR}, 
+      #{sendflg,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Smsparam" >
+    insert into smsparam
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accesskeyid != null" >
+        accesskeyid,
+      </if>
+      <if test="accesskeysecret != null" >
+        accesskeysecret,
+      </if>
+      <if test="msgsign != null" >
+        msgsign,
+      </if>
+      <if test="templatecode != null" >
+        templatecode,
+      </if>
+      <if test="productno != null" >
+        productno,
+      </if>
+      <if test="sendfreq != null" >
+        sendfreq,
+      </if>
+      <if test="sendtype != null" >
+        sendtype,
+      </if>
+      <if test="sendchance != null" >
+        sendchance,
+      </if>
+      <if test="sendflg != null" >
+        sendflg,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="accesskeyid != null" >
+        #{accesskeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="accesskeysecret != null" >
+        #{accesskeysecret,jdbcType=VARCHAR},
+      </if>
+      <if test="msgsign != null" >
+        #{msgsign,jdbcType=VARCHAR},
+      </if>
+      <if test="templatecode != null" >
+        #{templatecode,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="sendfreq != null" >
+        #{sendfreq,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtype != null" >
+        #{sendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="sendchance != null" >
+        #{sendchance,jdbcType=VARCHAR},
+      </if>
+      <if test="sendflg != null" >
+        #{sendflg,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.SmsparamExample" resultType="java.lang.Integer" >
+    select count(*) from smsparam
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update smsparam
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accesskeyid != null" >
+        accesskeyid = #{record.accesskeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accesskeysecret != null" >
+        accesskeysecret = #{record.accesskeysecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgsign != null" >
+        msgsign = #{record.msgsign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templatecode != null" >
+        templatecode = #{record.templatecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productno != null" >
+        productno = #{record.productno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendfreq != null" >
+        sendfreq = #{record.sendfreq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendtype != null" >
+        sendtype = #{record.sendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendchance != null" >
+        sendchance = #{record.sendchance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendflg != null" >
+        sendflg = #{record.sendflg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update smsparam
+    set id = #{record.id,jdbcType=VARCHAR},
+      accesskeyid = #{record.accesskeyid,jdbcType=VARCHAR},
+      accesskeysecret = #{record.accesskeysecret,jdbcType=VARCHAR},
+      msgsign = #{record.msgsign,jdbcType=VARCHAR},
+      templatecode = #{record.templatecode,jdbcType=VARCHAR},
+      productno = #{record.productno,jdbcType=VARCHAR},
+      sendfreq = #{record.sendfreq,jdbcType=VARCHAR},
+      sendtype = #{record.sendtype,jdbcType=VARCHAR},
+      sendchance = #{record.sendchance,jdbcType=VARCHAR},
+      sendflg = #{record.sendflg,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Smsparam" >
+    update smsparam
+    <set >
+      <if test="accesskeyid != null" >
+        accesskeyid = #{accesskeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="accesskeysecret != null" >
+        accesskeysecret = #{accesskeysecret,jdbcType=VARCHAR},
+      </if>
+      <if test="msgsign != null" >
+        msgsign = #{msgsign,jdbcType=VARCHAR},
+      </if>
+      <if test="templatecode != null" >
+        templatecode = #{templatecode,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        productno = #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="sendfreq != null" >
+        sendfreq = #{sendfreq,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtype != null" >
+        sendtype = #{sendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="sendchance != null" >
+        sendchance = #{sendchance,jdbcType=VARCHAR},
+      </if>
+      <if test="sendflg != null" >
+        sendflg = #{sendflg,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Smsparam" >
+    update smsparam
+    set accesskeyid = #{accesskeyid,jdbcType=VARCHAR},
+      accesskeysecret = #{accesskeysecret,jdbcType=VARCHAR},
+      msgsign = #{msgsign,jdbcType=VARCHAR},
+      templatecode = #{templatecode,jdbcType=VARCHAR},
+      productno = #{productno,jdbcType=VARCHAR},
+      sendfreq = #{sendfreq,jdbcType=VARCHAR},
+      sendtype = #{sendtype,jdbcType=VARCHAR},
+      sendchance = #{sendchance,jdbcType=VARCHAR},
+      sendflg = #{sendflg,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.RepayfollowMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Repayfollow" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="followman" property="followman" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="custno" property="custno" jdbcType="VARCHAR" />
+    <result column="repaydate" property="repaydate" jdbcType="TIMESTAMP" />
+    <result column="repayamount" property="repayamount" jdbcType="DECIMAL" />
+    <result column="followdate" property="followdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.grape.model.db.Repayfollow" extends="BaseResultMap" >
+    <result column="followcontent" property="followcontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, followman, workid, custno, repaydate, repayamount, followdate
+  </sql>
+  <sql id="Blob_Column_List" >
+    followcontent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.grape.model.db.RepayfollowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from repayfollow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.RepayfollowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from repayfollow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from repayfollow
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from repayfollow
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.RepayfollowExample" >
+    delete from repayfollow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Repayfollow" >
+    insert into repayfollow (id, followman, workid, 
+      custno, repaydate, repayamount, 
+      followdate, followcontent)
+    values (#{id,jdbcType=VARCHAR}, #{followman,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, 
+      #{custno,jdbcType=VARCHAR}, #{repaydate,jdbcType=TIMESTAMP}, #{repayamount,jdbcType=DECIMAL}, 
+      #{followdate,jdbcType=TIMESTAMP}, #{followcontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Repayfollow" >
+    insert into repayfollow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="followman != null" >
+        followman,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="custno != null" >
+        custno,
+      </if>
+      <if test="repaydate != null" >
+        repaydate,
+      </if>
+      <if test="repayamount != null" >
+        repayamount,
+      </if>
+      <if test="followdate != null" >
+        followdate,
+      </if>
+      <if test="followcontent != null" >
+        followcontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="followman != null" >
+        #{followman,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="custno != null" >
+        #{custno,jdbcType=VARCHAR},
+      </if>
+      <if test="repaydate != null" >
+        #{repaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repayamount != null" >
+        #{repayamount,jdbcType=DECIMAL},
+      </if>
+      <if test="followdate != null" >
+        #{followdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followcontent != null" >
+        #{followcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.RepayfollowExample" resultType="java.lang.Integer" >
+    select count(*) from repayfollow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update repayfollow
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.followman != null" >
+        followman = #{record.followman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custno != null" >
+        custno = #{record.custno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repaydate != null" >
+        repaydate = #{record.repaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.repayamount != null" >
+        repayamount = #{record.repayamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.followdate != null" >
+        followdate = #{record.followdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.followcontent != null" >
+        followcontent = #{record.followcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update repayfollow
+    set id = #{record.id,jdbcType=VARCHAR},
+      followman = #{record.followman,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      custno = #{record.custno,jdbcType=VARCHAR},
+      repaydate = #{record.repaydate,jdbcType=TIMESTAMP},
+      repayamount = #{record.repayamount,jdbcType=DECIMAL},
+      followdate = #{record.followdate,jdbcType=TIMESTAMP},
+      followcontent = #{record.followcontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update repayfollow
+    set id = #{record.id,jdbcType=VARCHAR},
+      followman = #{record.followman,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      custno = #{record.custno,jdbcType=VARCHAR},
+      repaydate = #{record.repaydate,jdbcType=TIMESTAMP},
+      repayamount = #{record.repayamount,jdbcType=DECIMAL},
+      followdate = #{record.followdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Repayfollow" >
+    update repayfollow
+    <set >
+      <if test="followman != null" >
+        followman = #{followman,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="custno != null" >
+        custno = #{custno,jdbcType=VARCHAR},
+      </if>
+      <if test="repaydate != null" >
+        repaydate = #{repaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repayamount != null" >
+        repayamount = #{repayamount,jdbcType=DECIMAL},
+      </if>
+      <if test="followdate != null" >
+        followdate = #{followdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="followcontent != null" >
+        followcontent = #{followcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.grape.model.db.Repayfollow" >
+    update repayfollow
+    set followman = #{followman,jdbcType=VARCHAR},
+      workid = #{workid,jdbcType=VARCHAR},
+      custno = #{custno,jdbcType=VARCHAR},
+      repaydate = #{repaydate,jdbcType=TIMESTAMP},
+      repayamount = #{repayamount,jdbcType=DECIMAL},
+      followdate = #{followdate,jdbcType=TIMESTAMP},
+      followcontent = #{followcontent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Repayfollow" >
+    update repayfollow
+    set followman = #{followman,jdbcType=VARCHAR},
+      workid = #{workid,jdbcType=VARCHAR},
+      custno = #{custno,jdbcType=VARCHAR},
+      repaydate = #{repaydate,jdbcType=TIMESTAMP},
+      repayamount = #{repayamount,jdbcType=DECIMAL},
+      followdate = #{followdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

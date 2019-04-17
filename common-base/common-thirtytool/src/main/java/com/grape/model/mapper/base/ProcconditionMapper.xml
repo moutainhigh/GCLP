@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ProcconditionMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Proccondition" >
+    <id column="conditionid" property="conditionid" jdbcType="VARCHAR" />
+    <result column="nodeid" property="nodeid" jdbcType="VARCHAR" />
+    <result column="conds" property="conds" jdbcType="VARCHAR" />
+    <result column="appear" property="appear" jdbcType="VARCHAR" />
+    <result column="tonode" property="tonode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    conditionid, nodeid, conds, appear, tonode
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ProcconditionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from proccondition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from proccondition
+    where conditionid = #{conditionid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from proccondition
+    where conditionid = #{conditionid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ProcconditionExample" >
+    delete from proccondition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Proccondition" >
+    insert into proccondition (conditionid, nodeid, conds, 
+      appear, tonode)
+    values (#{conditionid,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, #{conds,jdbcType=VARCHAR}, 
+      #{appear,jdbcType=VARCHAR}, #{tonode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Proccondition" >
+    insert into proccondition
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="conditionid != null" >
+        conditionid,
+      </if>
+      <if test="nodeid != null" >
+        nodeid,
+      </if>
+      <if test="conds != null" >
+        conds,
+      </if>
+      <if test="appear != null" >
+        appear,
+      </if>
+      <if test="tonode != null" >
+        tonode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="conditionid != null" >
+        #{conditionid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="conds != null" >
+        #{conds,jdbcType=VARCHAR},
+      </if>
+      <if test="appear != null" >
+        #{appear,jdbcType=VARCHAR},
+      </if>
+      <if test="tonode != null" >
+        #{tonode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ProcconditionExample" resultType="java.lang.Integer" >
+    select count(*) from proccondition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update proccondition
+    <set >
+      <if test="record.conditionid != null" >
+        conditionid = #{record.conditionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nodeid != null" >
+        nodeid = #{record.nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conds != null" >
+        conds = #{record.conds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appear != null" >
+        appear = #{record.appear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tonode != null" >
+        tonode = #{record.tonode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update proccondition
+    set conditionid = #{record.conditionid,jdbcType=VARCHAR},
+      nodeid = #{record.nodeid,jdbcType=VARCHAR},
+      conds = #{record.conds,jdbcType=VARCHAR},
+      appear = #{record.appear,jdbcType=VARCHAR},
+      tonode = #{record.tonode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Proccondition" >
+    update proccondition
+    <set >
+      <if test="nodeid != null" >
+        nodeid = #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="conds != null" >
+        conds = #{conds,jdbcType=VARCHAR},
+      </if>
+      <if test="appear != null" >
+        appear = #{appear,jdbcType=VARCHAR},
+      </if>
+      <if test="tonode != null" >
+        tonode = #{tonode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where conditionid = #{conditionid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Proccondition" >
+    update proccondition
+    set nodeid = #{nodeid,jdbcType=VARCHAR},
+      conds = #{conds,jdbcType=VARCHAR},
+      appear = #{appear,jdbcType=VARCHAR},
+      tonode = #{tonode,jdbcType=VARCHAR}
+    where conditionid = #{conditionid,jdbcType=VARCHAR}
+  </update>
+</mapper>

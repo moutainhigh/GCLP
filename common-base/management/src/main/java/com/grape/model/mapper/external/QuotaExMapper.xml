@@ -1,0 +1,326 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.QuotaExMapper">
+    <select id="getstatisticalQuota" resultType="com.grape.controller.reponse.bean.StatisticalQuota"
+            parameterType="map">
+        select SUM(temp1.totalcreditline) totalquota,SUM(temp1.remainingamount) remainingquota,
+        SUM(temp1.monthlendingquota) monthlendingquota,SUM(temp1.totallendingquota) totallendingquota,
+        CASE when SUM(temp1.totalcreditline)=0 then 0 else
+        (SUM(temp1.totalcreditline)-SUM(temp1.remainingamount))/SUM(temp1.totalcreditline) end usedquota
+        from (select
+        accountquota.totalcreditline,accountquota.remainingamount,dpM.monthlendingquota,dpT.totallendingquota
+        from account account
+        left join accountquota accountquota on account.linenumber=accountquota.linenumber
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" checktype == '01'.toString() ">
+                left join organization organization on account.accountbakno=organization.organizationno
+                left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) monthlendingquota from
+                postloaninfo,doctask
+                where postloaninfo.workid=doctask.workid
+                and postloaninfo.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+                and postloaninfo.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+                GROUP BY doctask.channelno) dpM on dpM.channelno=organization.organizationno
+                left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) totallendingquota from
+                postloaninfo,doctask
+                where postloaninfo.workid=doctask.workid GROUP BY doctask.channelno) dpT on
+                dpT.channelno=organization.organizationno
+            </if>
+            <if test=" checktype == '02'.toString() ">
+                left join organization organization on account.accountorg=organization.organizationno
+                left join (select doctask.fundno,SUM(postloaninfo.approvedmoney) monthlendingquota from
+                postloaninfo,doctask
+                where postloaninfo.workid=doctask.workid
+                and postloaninfo.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+                and postloaninfo.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+                GROUP BY doctask.fundno) dpM on dpM.fundno=organization.organizationno
+                left join (select doctask.fundno,SUM(postloaninfo.approvedmoney) totallendingquota from
+                postloaninfo,doctask
+                where postloaninfo.workid=doctask.workid GROUP BY doctask.fundno) dpT on
+                dpT.fundno=organization.organizationno
+            </if>
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            left join organization organization on account.accountbakno=organization.organizationno
+            left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) monthlendingquota from
+            postloaninfo,doctask
+            where postloaninfo.workid=doctask.workid
+            and postloaninfo.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+            and postloaninfo.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+            GROUP BY doctask.channelno) dpM on dpM.channelno=organization.organizationno
+            left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) totallendingquota from
+            postloaninfo,doctask
+            where postloaninfo.workid=doctask.workid GROUP BY doctask.channelno) dpT on
+            dpT.channelno=organization.organizationno
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            left join organization organization on account.accountbakno=organization.organizationno
+            left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) monthlendingquota from
+            postloaninfo,doctask
+            where postloaninfo.workid=doctask.workid
+            and postloaninfo.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+            and postloaninfo.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+            GROUP BY doctask.channelno) dpM on dpM.channelno=organization.organizationno
+            left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) totallendingquota from
+            postloaninfo,doctask
+            where postloaninfo.workid=doctask.workid GROUP BY doctask.channelno) dpT on
+            dpT.channelno=organization.organizationno
+            left join chanproduct chanproduct on organization.organizationno=chanproduct.organizationno
+            left join product product on chanproduct.productno=product.productno
+        </if>
+        where account.accounttype='01'
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" checktype == '01'.toString() ">
+                and account.accountorg=#{organizationno , jdbcType=VARCHAR}
+                and organization.orgbelongsto='01'
+            </if>
+            <if test=" checktype == '02'.toString() ">
+                and account.accountbakno=#{organizationno , jdbcType=VARCHAR}
+                and organization.orgbelongsto='02'
+            </if>
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and organization.organizationno=#{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and product.fundcomno=#{organizationno , jdbcType=VARCHAR}
+            and organization.orgbelongsto='01'
+            GROUP BY
+            accountquota.totalcreditline,accountquota.remainingamount,dpM.monthlendingquota,dpT.totallendingquota
+        </if>
+        )temp1
+    </select>
+
+    <select id="seeQuotaListBean" resultType="com.grape.controller.reponse.bean.SeeQuotaListBean" parameterType="map">
+        select organization.organizationno,organization.organizationname,organization.orgbelongsto,
+        accountquota.totalcreditline,accountquota.mortgageamount,accountquota.foreclosurefloorlines,
+        accountquota.remainingamount,account.accountremian,account.freezeamount,account.marginbalance,
+        accountquota.chgdt,account.accountno,dpM.monthlendingquota,dpT.totallendingquota,
+        cast((case when accountquota.mortgageratio=0 then 0 else account.marginbalance/accountquota.mortgageratio end)
+        AS DECIMAL (19, 5))mortgageratio,
+        cast((case when accountquota.foreclosurefloorratio=0 then 0 else
+        account.marginbalance/accountquota.foreclosurefloorratio end) AS DECIMAL (19, 5))foreclosurefloorratio
+        from account account
+        left join accountquota accountquota on account.linenumber=accountquota.linenumber
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" checktype == '01'.toString() ">
+                left join organization organization on account.accountbakno=organization.organizationno
+                left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) monthlendingquota from
+                postloaninfo,doctask
+                where postloaninfo.workid=doctask.workid
+                and postloaninfo.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+                and postloaninfo.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+                GROUP BY doctask.channelno) dpM on dpM.channelno=organization.organizationno
+                left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) totallendingquota from
+                postloaninfo,doctask
+                where postloaninfo.workid=doctask.workid GROUP BY doctask.channelno) dpT on
+                dpT.channelno=organization.organizationno
+            </if>
+            <if test=" checktype == '02'.toString() ">
+                left join organization organization on account.accountorg=organization.organizationno
+                left join (select doctask.fundno,SUM(postloaninfo.approvedmoney) monthlendingquota from
+                postloaninfo,doctask
+                where postloaninfo.workid=doctask.workid
+                and postloaninfo.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+                and postloaninfo.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+                GROUP BY doctask.fundno) dpM on dpM.fundno=organization.organizationno
+                left join (select doctask.fundno,SUM(postloaninfo.approvedmoney) totallendingquota from
+                postloaninfo,doctask
+                where postloaninfo.workid=doctask.workid GROUP BY doctask.fundno) dpT on
+                dpT.fundno=organization.organizationno
+            </if>
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            left join organization organization on account.accountbakno=organization.organizationno
+            left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) monthlendingquota from
+            postloaninfo,doctask
+            where postloaninfo.workid=doctask.workid
+            and postloaninfo.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+            and postloaninfo.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+            GROUP BY doctask.channelno) dpM on dpM.channelno=organization.organizationno
+            left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) totallendingquota from
+            postloaninfo,doctask
+            where postloaninfo.workid=doctask.workid GROUP BY doctask.channelno) dpT on
+            dpT.channelno=organization.organizationno
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            left join organization organization on account.accountbakno=organization.organizationno
+            left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) monthlendingquota from
+            postloaninfo,doctask
+            where postloaninfo.workid=doctask.workid
+            and postloaninfo.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+            and postloaninfo.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+            GROUP BY doctask.channelno) dpM on dpM.channelno=organization.organizationno
+            left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) totallendingquota from
+            postloaninfo,doctask
+            where postloaninfo.workid=doctask.workid GROUP BY doctask.channelno) dpT on
+            dpT.channelno=organization.organizationno
+            left join chanproduct chanproduct on organization.organizationno=chanproduct.organizationno
+            left join product product on chanproduct.productno=product.productno
+        </if>
+        where account.accounttype='01'
+        <if test=" orgbelongsto == '04'.toString() ">
+            <if test=" checktype == '01'.toString() ">
+                and account.accountorg=#{organizationno , jdbcType=VARCHAR}
+                and organization.orgbelongsto='01'
+            </if>
+            <if test=" checktype == '02'.toString() ">
+                and account.accountbakno=#{organizationno , jdbcType=VARCHAR}
+                and organization.orgbelongsto='02'
+            </if>
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and organization.organizationno=#{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and product.fundcomno=#{organizationno , jdbcType=VARCHAR}
+            and organization.orgbelongsto='01'
+            GROUP BY organization.organizationno,organization.organizationname,organization.orgbelongsto,
+            accountquota.totalcreditline,accountquota.mortgageamount,accountquota.foreclosurefloorlines,
+            accountquota.remainingamount,account.accountremian,account.freezeamount,account.marginbalance,
+            accountquota.chgdt,account.accountno,dpM.monthlendingquota,dpT.totallendingquota,mortgageratio,foreclosurefloorratio
+        </if>
+        limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="seeQuotaCount" resultType="Integer" parameterType="map">
+        <if test=" orgbelongsto == '04'.toString() ">
+            select count(1) from account account
+            left join accountquota accountquota on account.linenumber=accountquota.linenumber
+            <if test=" checktype == '01'.toString() ">
+                left join organization organization on account.accountbakno=organization.organizationno
+            </if>
+            <if test=" checktype == '02'.toString() ">
+                left join organization organization on account.accountorg=organization.organizationno
+            </if>
+            where account.accounttype='01'
+            <if test=" checktype == '01'.toString() ">
+                and account.accountorg=#{organizationno , jdbcType=VARCHAR}
+                and organization.orgbelongsto='01'
+            </if>
+            <if test=" checktype == '02'.toString() ">
+                and account.accountbakno=#{organizationno , jdbcType=VARCHAR}
+                and organization.orgbelongsto='02'
+            </if>
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            select count(1) from account account
+            left join accountquota accountquota on account.linenumber=accountquota.linenumber
+            left join organization organization on account.accountbakno=organization.organizationno
+            where account.accounttype='01'
+            and account.accountbakno=#{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            select count(*) from
+            (select count(1) from account account
+            left join accountquota accountquota on account.linenumber=accountquota.linenumber
+            left join organization organization on account.accountbakno=organization.organizationno
+            left join chanproduct chanproduct on organization.organizationno=chanproduct.organizationno
+            left join product product on chanproduct.productno=product.productno
+            where account.accounttype='01'
+            and product.fundcomno=#{organizationno , jdbcType=VARCHAR}
+            and organization.orgbelongsto='01' GROUP BY account.accountno) temp1
+        </if>
+    </select>
+
+
+    <select id="getStatisticalAreaQuota" resultType="com.grape.controller.reponse.bean.StatisticalAreaQuota"
+            parameterType="map">
+        select accountquota.totalcreditline,dpM.monthlendingquota,dpT.totallendingquota
+        from account account
+        left join accountquota accountquota on account.linenumber=accountquota.linenumber
+        left join organization organization on account.accountbakno=organization.organizationno
+        left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) monthlendingquota from postloaninfo,doctask
+        where postloaninfo.workid=doctask.workid
+        and postloaninfo.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+        and postloaninfo.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+        GROUP BY doctask.channelno) dpM on dpM.channelno=organization.organizationno
+        left join (select doctask.channelno,SUM(postloaninfo.approvedmoney) totallendingquota from postloaninfo,doctask
+        where postloaninfo.workid=doctask.workid GROUP BY doctask.channelno) dpT on
+        dpT.channelno=organization.organizationno
+        <if test=" accountno !=null and accountno !='' ">
+            where account.accountno = #{accountno , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getseeAreaQuotalist" resultType="com.grape.controller.reponse.bean.SeeAreaQuotaListBean"
+            parameterType="map">
+        select
+        area.areaname,SUM(pA.approvedmoney) monthlendingquota,SUM(pB.approvedmoney) totallendingquota
+        from (doctask,area,account)
+        LEFT JOIN postloaninfo pA on pA.workid=doctask.workid
+        and pA.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+        and pA.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+        LEFT JOIN postloaninfo pB on pB.workid=doctask.workid
+        where doctask.areaid=area.areaid and doctask.channelno=account.accountbakno
+        <if test=" accountno !=null and accountno !='' ">
+            and account.accountno=#{accountno , jdbcType=VARCHAR}
+        </if>
+        GROUP BY area.areaname limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="getseeAreaQuotaCount" resultType="Integer" parameterType="map">
+        select count(1) from
+        (select area.areaname,SUM(pA.approvedmoney) monthlendingquota,SUM(pB.approvedmoney) totallendingquota
+        from (doctask,area,account)
+        LEFT JOIN postloaninfo pA on pA.workid=doctask.workid
+        and pA.firstloandate &gt;= #{firstday , jdbcType=TIMESTAMP}
+        and pA.firstloandate &lt; #{lastday , jdbcType=TIMESTAMP}
+        LEFT JOIN postloaninfo pB on pB.workid=doctask.workid
+        where doctask.areaid=area.areaid and doctask.channelno=account.accountbakno
+        <if test=" accountno !=null and accountno !='' ">
+            and account.accountno=#{accountno , jdbcType=VARCHAR}
+        </if>
+        GROUP BY area.areaname) temp1
+    </select>
+
+
+    <select id="getChangeRecordList" resultType="com.grape.controller.reponse.bean.ChangeRecordListBean"
+            parameterType="map">
+        select t.transtime,t.transamount,t.tradingnote,p.workername AS dealman from transaction t,person p
+        where t.dealman=p.workerid AND t.balancetype='3'
+        <if test=" accountno !=null and accountno !='' ">
+            and t.accountno=#{accountno , jdbcType=VARCHAR}
+        </if>
+        ORDER BY t.transtime desc limit  #{pagenum},#{pagesize}
+    </select>
+
+    <select id="getChangeRecordCount" resultType="Integer" parameterType="map">
+        select count(1) from transaction t,person p where t.dealman=p.workerid AND t.balancetype='3'
+        <if test=" accountno !=null and accountno !='' ">
+            and t.accountno=#{accountno , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="getAccountquota" resultType="com.grape.model.db.Accountquota" parameterType="map">
+        select accountquota.* from account,accountquota where account.linenumber=accountquota.linenumber
+        <if test=" accountno !=null and accountno !='' ">
+            and account.accountno=#{accountno , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getDoctaskInfo" resultType="map" parameterType="map">
+        SELECT repaytoinfo.sumofamount,product.producttype,account.linenumber
+        from doctask doctask
+        LEFT JOIN repaytoinfo repaytoinfo on doctask.workid=repaytoinfo.workid and repaytoinfo.isfinilyflg='1'
+        LEFT JOIN product product on doctask.productno=product.productno
+        LEFT JOIN account account on account.accountbakno=doctask.channelno and account.accountorg=doctask.terrcaeno and
+        account.accounttype='01'
+        <if test=" workid !=null and workid !='' ">
+            where doctask.workid=#{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getAccountInfo" resultType="com.grape.model.db.Account" parameterType="String">
+        select * from account where 1=1
+        <if test=" value !=null and value !='' ">
+            and linenumber=#{value}
+        </if>
+    </select>
+
+    <select id="getAccountquotaInfo" resultType="com.grape.model.db.Accountquota" parameterType="String">
+        select * from accountquota where 1=1
+        <if test=" value !=null and value !='' ">
+            and linenumbersenior=#{value}
+        </if>
+    </select>
+</mapper>

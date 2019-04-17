@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.DepartmentRoleMapper" >
+    <select id="selectByCompno" parameterType="map" resultType="map">
+  	SELECT
+		temp.rolename,
+		person.workername
+	FROM
+		person
+	LEFT JOIN (
+		SELECT
+			role.roleid,
+			role.rolename,
+			workerid
+		FROM
+			role
+		LEFT JOIN userrole ON role.roleid = userrole.roleid
+	) temp ON person.workerid = temp.workerid
+  where person.organizationid = #{organizationid}
+    </select>
+</mapper>

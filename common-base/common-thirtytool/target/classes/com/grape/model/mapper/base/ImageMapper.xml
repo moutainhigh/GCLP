@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ImageMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Image" >
+    <id column="imageid" property="imageid" jdbcType="VARCHAR" />
+    <result column="imagetype" property="imagetype" jdbcType="VARCHAR" />
+    <result column="imagename" property="imagename" jdbcType="VARCHAR" />
+    <result column="rootdir" property="rootdir" jdbcType="VARCHAR" />
+    <result column="absolutedir" property="absolutedir" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="savetype" property="savetype" jdbcType="VARCHAR" />
+    <result column="saveaddress" property="saveaddress" jdbcType="VARCHAR" />
+    <result column="nodeid" property="nodeid" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    imageid, imagetype, imagename, rootdir, absolutedir, workid, savetype, saveaddress, 
+    nodeid, chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ImageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from image
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from image
+    where imageid = #{imageid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from image
+    where imageid = #{imageid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ImageExample" >
+    delete from image
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Image" >
+    insert into image (imageid, imagetype, imagename, 
+      rootdir, absolutedir, workid, 
+      savetype, saveaddress, nodeid, 
+      chgdt, chgtl)
+    values (#{imageid,jdbcType=VARCHAR}, #{imagetype,jdbcType=VARCHAR}, #{imagename,jdbcType=VARCHAR}, 
+      #{rootdir,jdbcType=VARCHAR}, #{absolutedir,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, 
+      #{savetype,jdbcType=VARCHAR}, #{saveaddress,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Image" >
+    insert into image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imageid != null" >
+        imageid,
+      </if>
+      <if test="imagetype != null" >
+        imagetype,
+      </if>
+      <if test="imagename != null" >
+        imagename,
+      </if>
+      <if test="rootdir != null" >
+        rootdir,
+      </if>
+      <if test="absolutedir != null" >
+        absolutedir,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="savetype != null" >
+        savetype,
+      </if>
+      <if test="saveaddress != null" >
+        saveaddress,
+      </if>
+      <if test="nodeid != null" >
+        nodeid,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imageid != null" >
+        #{imageid,jdbcType=VARCHAR},
+      </if>
+      <if test="imagetype != null" >
+        #{imagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="imagename != null" >
+        #{imagename,jdbcType=VARCHAR},
+      </if>
+      <if test="rootdir != null" >
+        #{rootdir,jdbcType=VARCHAR},
+      </if>
+      <if test="absolutedir != null" >
+        #{absolutedir,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="savetype != null" >
+        #{savetype,jdbcType=VARCHAR},
+      </if>
+      <if test="saveaddress != null" >
+        #{saveaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ImageExample" resultType="java.lang.Integer" >
+    select count(*) from image
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update image
+    <set >
+      <if test="record.imageid != null" >
+        imageid = #{record.imageid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imagetype != null" >
+        imagetype = #{record.imagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imagename != null" >
+        imagename = #{record.imagename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rootdir != null" >
+        rootdir = #{record.rootdir,jdbcType=VARCHAR},
+      </if>
+      <if test="record.absolutedir != null" >
+        absolutedir = #{record.absolutedir,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.savetype != null" >
+        savetype = #{record.savetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saveaddress != null" >
+        saveaddress = #{record.saveaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nodeid != null" >
+        nodeid = #{record.nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update image
+    set imageid = #{record.imageid,jdbcType=VARCHAR},
+      imagetype = #{record.imagetype,jdbcType=VARCHAR},
+      imagename = #{record.imagename,jdbcType=VARCHAR},
+      rootdir = #{record.rootdir,jdbcType=VARCHAR},
+      absolutedir = #{record.absolutedir,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      savetype = #{record.savetype,jdbcType=VARCHAR},
+      saveaddress = #{record.saveaddress,jdbcType=VARCHAR},
+      nodeid = #{record.nodeid,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Image" >
+    update image
+    <set >
+      <if test="imagetype != null" >
+        imagetype = #{imagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="imagename != null" >
+        imagename = #{imagename,jdbcType=VARCHAR},
+      </if>
+      <if test="rootdir != null" >
+        rootdir = #{rootdir,jdbcType=VARCHAR},
+      </if>
+      <if test="absolutedir != null" >
+        absolutedir = #{absolutedir,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="savetype != null" >
+        savetype = #{savetype,jdbcType=VARCHAR},
+      </if>
+      <if test="saveaddress != null" >
+        saveaddress = #{saveaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        nodeid = #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where imageid = #{imageid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Image" >
+    update image
+    set imagetype = #{imagetype,jdbcType=VARCHAR},
+      imagename = #{imagename,jdbcType=VARCHAR},
+      rootdir = #{rootdir,jdbcType=VARCHAR},
+      absolutedir = #{absolutedir,jdbcType=VARCHAR},
+      workid = #{workid,jdbcType=VARCHAR},
+      savetype = #{savetype,jdbcType=VARCHAR},
+      saveaddress = #{saveaddress,jdbcType=VARCHAR},
+      nodeid = #{nodeid,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where imageid = #{imageid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.MortgagefilingMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Mortgagefiling" >
+    <id column="mortgagefilingid" property="mortgagefilingid" jdbcType="VARCHAR" />
+    <result column="mortgageid" property="mortgageid" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="isnetsign" property="isnetsign" jdbcType="CHAR" />
+    <result column="closecount" property="closecount" jdbcType="VARCHAR" />
+    <result column="endclosetime" property="endclosetime" jdbcType="VARCHAR" />
+    <result column="endclosedate" property="endclosedate" jdbcType="TIMESTAMP" />
+    <result column="ismortgageclose" property="ismortgageclose" jdbcType="VARCHAR" />
+    <result column="legaldispute" property="legaldispute" jdbcType="VARCHAR" />
+    <result column="mortgagestate" property="mortgagestate" jdbcType="VARCHAR" />
+    <result column="mortgagecomorbank" property="mortgagecomorbank" jdbcType="VARCHAR" />
+    <result column="queriesofmonth" property="queriesofmonth" jdbcType="VARCHAR" />
+    <result column="fronthandone" property="fronthandone" jdbcType="VARCHAR" />
+    <result column="queriesoftotal" property="queriesoftotal" jdbcType="VARCHAR" />
+    <result column="mortgages1" property="mortgages1" jdbcType="VARCHAR" />
+    <result column="mortgagesman1" property="mortgagesman1" jdbcType="VARCHAR" />
+    <result column="mortgages2" property="mortgages2" jdbcType="VARCHAR" />
+    <result column="mortgagesman2" property="mortgagesman2" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="oneagency" property="oneagency" jdbcType="VARCHAR" />
+    <result column="fronthandtwo" property="fronthandtwo" jdbcType="VARCHAR" />
+    <result column="twoagency" property="twoagency" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mortgagefilingid, mortgageid, workid, isnetsign, closecount, endclosetime, endclosedate, 
+    ismortgageclose, legaldispute, mortgagestate, mortgagecomorbank, queriesofmonth, 
+    fronthandone, queriesoftotal, mortgages1, mortgagesman1, mortgages2, mortgagesman2, 
+    chgdt, chgtl, oneagency, fronthandtwo, twoagency
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.MortgagefilingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mortgagefiling
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from mortgagefiling
+    where mortgagefilingid = #{mortgagefilingid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mortgagefiling
+    where mortgagefilingid = #{mortgagefilingid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.MortgagefilingExample" >
+    delete from mortgagefiling
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Mortgagefiling" >
+    insert into mortgagefiling (mortgagefilingid, mortgageid, workid, 
+      isnetsign, closecount, endclosetime, 
+      endclosedate, ismortgageclose, legaldispute, 
+      mortgagestate, mortgagecomorbank, queriesofmonth, 
+      fronthandone, queriesoftotal, mortgages1, 
+      mortgagesman1, mortgages2, mortgagesman2, 
+      chgdt, chgtl, oneagency, 
+      fronthandtwo, twoagency)
+    values (#{mortgagefilingid,jdbcType=VARCHAR}, #{mortgageid,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, 
+      #{isnetsign,jdbcType=CHAR}, #{closecount,jdbcType=VARCHAR}, #{endclosetime,jdbcType=VARCHAR}, 
+      #{endclosedate,jdbcType=TIMESTAMP}, #{ismortgageclose,jdbcType=VARCHAR}, #{legaldispute,jdbcType=VARCHAR}, 
+      #{mortgagestate,jdbcType=VARCHAR}, #{mortgagecomorbank,jdbcType=VARCHAR}, #{queriesofmonth,jdbcType=VARCHAR}, 
+      #{fronthandone,jdbcType=VARCHAR}, #{queriesoftotal,jdbcType=VARCHAR}, #{mortgages1,jdbcType=VARCHAR}, 
+      #{mortgagesman1,jdbcType=VARCHAR}, #{mortgages2,jdbcType=VARCHAR}, #{mortgagesman2,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}, #{oneagency,jdbcType=VARCHAR}, 
+      #{fronthandtwo,jdbcType=VARCHAR}, #{twoagency,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Mortgagefiling" >
+    insert into mortgagefiling
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mortgagefilingid != null" >
+        mortgagefilingid,
+      </if>
+      <if test="mortgageid != null" >
+        mortgageid,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="isnetsign != null" >
+        isnetsign,
+      </if>
+      <if test="closecount != null" >
+        closecount,
+      </if>
+      <if test="endclosetime != null" >
+        endclosetime,
+      </if>
+      <if test="endclosedate != null" >
+        endclosedate,
+      </if>
+      <if test="ismortgageclose != null" >
+        ismortgageclose,
+      </if>
+      <if test="legaldispute != null" >
+        legaldispute,
+      </if>
+      <if test="mortgagestate != null" >
+        mortgagestate,
+      </if>
+      <if test="mortgagecomorbank != null" >
+        mortgagecomorbank,
+      </if>
+      <if test="queriesofmonth != null" >
+        queriesofmonth,
+      </if>
+      <if test="fronthandone != null" >
+        fronthandone,
+      </if>
+      <if test="queriesoftotal != null" >
+        queriesoftotal,
+      </if>
+      <if test="mortgages1 != null" >
+        mortgages1,
+      </if>
+      <if test="mortgagesman1 != null" >
+        mortgagesman1,
+      </if>
+      <if test="mortgages2 != null" >
+        mortgages2,
+      </if>
+      <if test="mortgagesman2 != null" >
+        mortgagesman2,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="oneagency != null" >
+        oneagency,
+      </if>
+      <if test="fronthandtwo != null" >
+        fronthandtwo,
+      </if>
+      <if test="twoagency != null" >
+        twoagency,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mortgagefilingid != null" >
+        #{mortgagefilingid,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgageid != null" >
+        #{mortgageid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="isnetsign != null" >
+        #{isnetsign,jdbcType=CHAR},
+      </if>
+      <if test="closecount != null" >
+        #{closecount,jdbcType=VARCHAR},
+      </if>
+      <if test="endclosetime != null" >
+        #{endclosetime,jdbcType=VARCHAR},
+      </if>
+      <if test="endclosedate != null" >
+        #{endclosedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ismortgageclose != null" >
+        #{ismortgageclose,jdbcType=VARCHAR},
+      </if>
+      <if test="legaldispute != null" >
+        #{legaldispute,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagestate != null" >
+        #{mortgagestate,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagecomorbank != null" >
+        #{mortgagecomorbank,jdbcType=VARCHAR},
+      </if>
+      <if test="queriesofmonth != null" >
+        #{queriesofmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="fronthandone != null" >
+        #{fronthandone,jdbcType=VARCHAR},
+      </if>
+      <if test="queriesoftotal != null" >
+        #{queriesoftotal,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgages1 != null" >
+        #{mortgages1,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagesman1 != null" >
+        #{mortgagesman1,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgages2 != null" >
+        #{mortgages2,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagesman2 != null" >
+        #{mortgagesman2,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="oneagency != null" >
+        #{oneagency,jdbcType=VARCHAR},
+      </if>
+      <if test="fronthandtwo != null" >
+        #{fronthandtwo,jdbcType=VARCHAR},
+      </if>
+      <if test="twoagency != null" >
+        #{twoagency,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.MortgagefilingExample" resultType="java.lang.Integer" >
+    select count(*) from mortgagefiling
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mortgagefiling
+    <set >
+      <if test="record.mortgagefilingid != null" >
+        mortgagefilingid = #{record.mortgagefilingid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgageid != null" >
+        mortgageid = #{record.mortgageid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isnetsign != null" >
+        isnetsign = #{record.isnetsign,jdbcType=CHAR},
+      </if>
+      <if test="record.closecount != null" >
+        closecount = #{record.closecount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endclosetime != null" >
+        endclosetime = #{record.endclosetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endclosedate != null" >
+        endclosedate = #{record.endclosedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ismortgageclose != null" >
+        ismortgageclose = #{record.ismortgageclose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legaldispute != null" >
+        legaldispute = #{record.legaldispute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagestate != null" >
+        mortgagestate = #{record.mortgagestate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagecomorbank != null" >
+        mortgagecomorbank = #{record.mortgagecomorbank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queriesofmonth != null" >
+        queriesofmonth = #{record.queriesofmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fronthandone != null" >
+        fronthandone = #{record.fronthandone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queriesoftotal != null" >
+        queriesoftotal = #{record.queriesoftotal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgages1 != null" >
+        mortgages1 = #{record.mortgages1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagesman1 != null" >
+        mortgagesman1 = #{record.mortgagesman1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgages2 != null" >
+        mortgages2 = #{record.mortgages2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagesman2 != null" >
+        mortgagesman2 = #{record.mortgagesman2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oneagency != null" >
+        oneagency = #{record.oneagency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fronthandtwo != null" >
+        fronthandtwo = #{record.fronthandtwo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.twoagency != null" >
+        twoagency = #{record.twoagency,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mortgagefiling
+    set mortgagefilingid = #{record.mortgagefilingid,jdbcType=VARCHAR},
+      mortgageid = #{record.mortgageid,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      isnetsign = #{record.isnetsign,jdbcType=CHAR},
+      closecount = #{record.closecount,jdbcType=VARCHAR},
+      endclosetime = #{record.endclosetime,jdbcType=VARCHAR},
+      endclosedate = #{record.endclosedate,jdbcType=TIMESTAMP},
+      ismortgageclose = #{record.ismortgageclose,jdbcType=VARCHAR},
+      legaldispute = #{record.legaldispute,jdbcType=VARCHAR},
+      mortgagestate = #{record.mortgagestate,jdbcType=VARCHAR},
+      mortgagecomorbank = #{record.mortgagecomorbank,jdbcType=VARCHAR},
+      queriesofmonth = #{record.queriesofmonth,jdbcType=VARCHAR},
+      fronthandone = #{record.fronthandone,jdbcType=VARCHAR},
+      queriesoftotal = #{record.queriesoftotal,jdbcType=VARCHAR},
+      mortgages1 = #{record.mortgages1,jdbcType=VARCHAR},
+      mortgagesman1 = #{record.mortgagesman1,jdbcType=VARCHAR},
+      mortgages2 = #{record.mortgages2,jdbcType=VARCHAR},
+      mortgagesman2 = #{record.mortgagesman2,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      oneagency = #{record.oneagency,jdbcType=VARCHAR},
+      fronthandtwo = #{record.fronthandtwo,jdbcType=VARCHAR},
+      twoagency = #{record.twoagency,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Mortgagefiling" >
+    update mortgagefiling
+    <set >
+      <if test="mortgageid != null" >
+        mortgageid = #{mortgageid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="isnetsign != null" >
+        isnetsign = #{isnetsign,jdbcType=CHAR},
+      </if>
+      <if test="closecount != null" >
+        closecount = #{closecount,jdbcType=VARCHAR},
+      </if>
+      <if test="endclosetime != null" >
+        endclosetime = #{endclosetime,jdbcType=VARCHAR},
+      </if>
+      <if test="endclosedate != null" >
+        endclosedate = #{endclosedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ismortgageclose != null" >
+        ismortgageclose = #{ismortgageclose,jdbcType=VARCHAR},
+      </if>
+      <if test="legaldispute != null" >
+        legaldispute = #{legaldispute,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagestate != null" >
+        mortgagestate = #{mortgagestate,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagecomorbank != null" >
+        mortgagecomorbank = #{mortgagecomorbank,jdbcType=VARCHAR},
+      </if>
+      <if test="queriesofmonth != null" >
+        queriesofmonth = #{queriesofmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="fronthandone != null" >
+        fronthandone = #{fronthandone,jdbcType=VARCHAR},
+      </if>
+      <if test="queriesoftotal != null" >
+        queriesoftotal = #{queriesoftotal,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgages1 != null" >
+        mortgages1 = #{mortgages1,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagesman1 != null" >
+        mortgagesman1 = #{mortgagesman1,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgages2 != null" >
+        mortgages2 = #{mortgages2,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagesman2 != null" >
+        mortgagesman2 = #{mortgagesman2,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="oneagency != null" >
+        oneagency = #{oneagency,jdbcType=VARCHAR},
+      </if>
+      <if test="fronthandtwo != null" >
+        fronthandtwo = #{fronthandtwo,jdbcType=VARCHAR},
+      </if>
+      <if test="twoagency != null" >
+        twoagency = #{twoagency,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mortgagefilingid = #{mortgagefilingid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Mortgagefiling" >
+    update mortgagefiling
+    set mortgageid = #{mortgageid,jdbcType=VARCHAR},
+      workid = #{workid,jdbcType=VARCHAR},
+      isnetsign = #{isnetsign,jdbcType=CHAR},
+      closecount = #{closecount,jdbcType=VARCHAR},
+      endclosetime = #{endclosetime,jdbcType=VARCHAR},
+      endclosedate = #{endclosedate,jdbcType=TIMESTAMP},
+      ismortgageclose = #{ismortgageclose,jdbcType=VARCHAR},
+      legaldispute = #{legaldispute,jdbcType=VARCHAR},
+      mortgagestate = #{mortgagestate,jdbcType=VARCHAR},
+      mortgagecomorbank = #{mortgagecomorbank,jdbcType=VARCHAR},
+      queriesofmonth = #{queriesofmonth,jdbcType=VARCHAR},
+      fronthandone = #{fronthandone,jdbcType=VARCHAR},
+      queriesoftotal = #{queriesoftotal,jdbcType=VARCHAR},
+      mortgages1 = #{mortgages1,jdbcType=VARCHAR},
+      mortgagesman1 = #{mortgagesman1,jdbcType=VARCHAR},
+      mortgages2 = #{mortgages2,jdbcType=VARCHAR},
+      mortgagesman2 = #{mortgagesman2,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      oneagency = #{oneagency,jdbcType=VARCHAR},
+      fronthandtwo = #{fronthandtwo,jdbcType=VARCHAR},
+      twoagency = #{twoagency,jdbcType=VARCHAR}
+    where mortgagefilingid = #{mortgagefilingid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.AccessruleMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Accessrule" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="productno" property="productno" jdbcType="VARCHAR" />
+    <result column="rulename" property="rulename" jdbcType="VARCHAR" />
+    <result column="expression" property="expression" jdbcType="VARCHAR" />
+    <result column="admittancetype" property="admittancetype" jdbcType="CHAR" />
+    <result column="isattention" property="isattention" jdbcType="CHAR" />
+    <result column="isworkidtice" property="isworkidtice" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="validtype" property="validtype" jdbcType="VARCHAR" />
+    <result column="rulestype" property="rulestype" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, productno, rulename, expression, admittancetype, isattention, isworkidtice, remark, 
+    validtype, rulestype, state, chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.AccessruleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from accessrule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from accessrule
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from accessrule
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.AccessruleExample" >
+    delete from accessrule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Accessrule" >
+    insert into accessrule (id, productno, rulename, 
+      expression, admittancetype, isattention, 
+      isworkidtice, remark, validtype, 
+      rulestype, state, chgdt, 
+      chgtl)
+    values (#{id,jdbcType=VARCHAR}, #{productno,jdbcType=VARCHAR}, #{rulename,jdbcType=VARCHAR}, 
+      #{expression,jdbcType=VARCHAR}, #{admittancetype,jdbcType=CHAR}, #{isattention,jdbcType=CHAR}, 
+      #{isworkidtice,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{validtype,jdbcType=VARCHAR}, 
+      #{rulestype,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{chgtl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Accessrule" >
+    insert into accessrule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productno != null" >
+        productno,
+      </if>
+      <if test="rulename != null" >
+        rulename,
+      </if>
+      <if test="expression != null" >
+        expression,
+      </if>
+      <if test="admittancetype != null" >
+        admittancetype,
+      </if>
+      <if test="isattention != null" >
+        isattention,
+      </if>
+      <if test="isworkidtice != null" >
+        isworkidtice,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="validtype != null" >
+        validtype,
+      </if>
+      <if test="rulestype != null" >
+        rulestype,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="rulename != null" >
+        #{rulename,jdbcType=VARCHAR},
+      </if>
+      <if test="expression != null" >
+        #{expression,jdbcType=VARCHAR},
+      </if>
+      <if test="admittancetype != null" >
+        #{admittancetype,jdbcType=CHAR},
+      </if>
+      <if test="isattention != null" >
+        #{isattention,jdbcType=CHAR},
+      </if>
+      <if test="isworkidtice != null" >
+        #{isworkidtice,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="validtype != null" >
+        #{validtype,jdbcType=VARCHAR},
+      </if>
+      <if test="rulestype != null" >
+        #{rulestype,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.AccessruleExample" resultType="java.lang.Integer" >
+    select count(*) from accessrule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update accessrule
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productno != null" >
+        productno = #{record.productno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rulename != null" >
+        rulename = #{record.rulename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expression != null" >
+        expression = #{record.expression,jdbcType=VARCHAR},
+      </if>
+      <if test="record.admittancetype != null" >
+        admittancetype = #{record.admittancetype,jdbcType=CHAR},
+      </if>
+      <if test="record.isattention != null" >
+        isattention = #{record.isattention,jdbcType=CHAR},
+      </if>
+      <if test="record.isworkidtice != null" >
+        isworkidtice = #{record.isworkidtice,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validtype != null" >
+        validtype = #{record.validtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rulestype != null" >
+        rulestype = #{record.rulestype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update accessrule
+    set id = #{record.id,jdbcType=VARCHAR},
+      productno = #{record.productno,jdbcType=VARCHAR},
+      rulename = #{record.rulename,jdbcType=VARCHAR},
+      expression = #{record.expression,jdbcType=VARCHAR},
+      admittancetype = #{record.admittancetype,jdbcType=CHAR},
+      isattention = #{record.isattention,jdbcType=CHAR},
+      isworkidtice = #{record.isworkidtice,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      validtype = #{record.validtype,jdbcType=VARCHAR},
+      rulestype = #{record.rulestype,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Accessrule" >
+    update accessrule
+    <set >
+      <if test="productno != null" >
+        productno = #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="rulename != null" >
+        rulename = #{rulename,jdbcType=VARCHAR},
+      </if>
+      <if test="expression != null" >
+        expression = #{expression,jdbcType=VARCHAR},
+      </if>
+      <if test="admittancetype != null" >
+        admittancetype = #{admittancetype,jdbcType=CHAR},
+      </if>
+      <if test="isattention != null" >
+        isattention = #{isattention,jdbcType=CHAR},
+      </if>
+      <if test="isworkidtice != null" >
+        isworkidtice = #{isworkidtice,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="validtype != null" >
+        validtype = #{validtype,jdbcType=VARCHAR},
+      </if>
+      <if test="rulestype != null" >
+        rulestype = #{rulestype,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Accessrule" >
+    update accessrule
+    set productno = #{productno,jdbcType=VARCHAR},
+      rulename = #{rulename,jdbcType=VARCHAR},
+      expression = #{expression,jdbcType=VARCHAR},
+      admittancetype = #{admittancetype,jdbcType=CHAR},
+      isattention = #{isattention,jdbcType=CHAR},
+      isworkidtice = #{isworkidtice,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      validtype = #{validtype,jdbcType=VARCHAR},
+      rulestype = #{rulestype,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

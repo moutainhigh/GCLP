@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.MortgageMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Mortgage" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="mortgagetype" property="mortgagetype" jdbcType="VARCHAR" />
+    <result column="propertyowner" property="propertyowner" jdbcType="VARCHAR" />
+    <result column="houseaddressprovince" property="houseaddressprovince" jdbcType="VARCHAR" />
+    <result column="houseaddresscity" property="houseaddresscity" jdbcType="VARCHAR" />
+    <result column="houseaddressarea" property="houseaddressarea" jdbcType="VARCHAR" />
+    <result column="houseaddressdetail" property="houseaddressdetail" jdbcType="VARCHAR" />
+    <result column="areaid" property="areaid" jdbcType="VARCHAR" />
+    <result column="martgagename" property="martgagename" jdbcType="VARCHAR" />
+    <result column="floorarea" property="floorarea" jdbcType="VARCHAR" />
+    <result column="landuseage" property="landuseage" jdbcType="VARCHAR" />
+    <result column="landuseenddate" property="landuseenddate" jdbcType="TIMESTAMP" />
+    <result column="landusestartdate" property="landusestartdate" jdbcType="TIMESTAMP" />
+    <result column="mortgagefirsttype" property="mortgagefirsttype" jdbcType="VARCHAR" />
+    <result column="mortgagesecondtype" property="mortgagesecondtype" jdbcType="VARCHAR" />
+    <result column="otherlandpurpose" property="otherlandpurpose" jdbcType="VARCHAR" />
+    <result column="landpurpose" property="landpurpose" jdbcType="VARCHAR" />
+    <result column="otherhousepurpose" property="otherhousepurpose" jdbcType="VARCHAR" />
+    <result column="housepurpose" property="housepurpose" jdbcType="VARCHAR" />
+    <result column="registrationdate" property="registrationdate" jdbcType="TIMESTAMP" />
+    <result column="housefinishdate" property="housefinishdate" jdbcType="TIMESTAMP" />
+    <result column="buyhousedate" property="buyhousedate" jdbcType="TIMESTAMP" />
+    <result column="houseage" property="houseage" jdbcType="VARCHAR" />
+    <result column="landproperty" property="landproperty" jdbcType="VARCHAR" />
+    <result column="houseproperty" property="houseproperty" jdbcType="VARCHAR" />
+    <result column="propertystate" property="propertystate" jdbcType="CHAR" />
+    <result column="nousetime" property="nousetime" jdbcType="VARCHAR" />
+    <result column="nousearea" property="nousearea" jdbcType="VARCHAR" />
+    <result column="netreportamount" property="netreportamount" jdbcType="DECIMAL" />
+    <result column="netreportprice" property="netreportprice" jdbcType="DECIMAL" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="housesoloflg" property="housesoloflg" jdbcType="CHAR" />
+    <result column="certificateurl" property="certificateurl" jdbcType="VARCHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="houseno" property="houseno" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="landcertificateno" property="landcertificateno" jdbcType="VARCHAR" />
+    <result column="islandcertificate" property="islandcertificate" jdbcType="VARCHAR" />
+    <result column="propertytype" property="propertytype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mortgagetype, propertyowner, houseaddressprovince, houseaddresscity, houseaddressarea, 
+    houseaddressdetail, areaid, martgagename, floorarea, landuseage, landuseenddate, 
+    landusestartdate, mortgagefirsttype, mortgagesecondtype, otherlandpurpose, landpurpose, 
+    otherhousepurpose, housepurpose, registrationdate, housefinishdate, buyhousedate, 
+    houseage, landproperty, houseproperty, propertystate, nousetime, nousearea, netreportamount, 
+    netreportprice, workid, housesoloflg, certificateurl, chgtl, chgdt, houseno, description, 
+    landcertificateno, islandcertificate, propertytype
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.MortgageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mortgage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from mortgage
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mortgage
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.MortgageExample" >
+    delete from mortgage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Mortgage" >
+    insert into mortgage (id, mortgagetype, propertyowner, 
+      houseaddressprovince, houseaddresscity, 
+      houseaddressarea, houseaddressdetail, areaid, 
+      martgagename, floorarea, landuseage, 
+      landuseenddate, landusestartdate, mortgagefirsttype, 
+      mortgagesecondtype, otherlandpurpose, landpurpose, 
+      otherhousepurpose, housepurpose, registrationdate, 
+      housefinishdate, buyhousedate, houseage, 
+      landproperty, houseproperty, propertystate, 
+      nousetime, nousearea, netreportamount, 
+      netreportprice, workid, housesoloflg, 
+      certificateurl, chgtl, chgdt, 
+      houseno, description, landcertificateno, 
+      islandcertificate, propertytype)
+    values (#{id,jdbcType=VARCHAR}, #{mortgagetype,jdbcType=VARCHAR}, #{propertyowner,jdbcType=VARCHAR}, 
+      #{houseaddressprovince,jdbcType=VARCHAR}, #{houseaddresscity,jdbcType=VARCHAR}, 
+      #{houseaddressarea,jdbcType=VARCHAR}, #{houseaddressdetail,jdbcType=VARCHAR}, #{areaid,jdbcType=VARCHAR}, 
+      #{martgagename,jdbcType=VARCHAR}, #{floorarea,jdbcType=VARCHAR}, #{landuseage,jdbcType=VARCHAR}, 
+      #{landuseenddate,jdbcType=TIMESTAMP}, #{landusestartdate,jdbcType=TIMESTAMP}, #{mortgagefirsttype,jdbcType=VARCHAR}, 
+      #{mortgagesecondtype,jdbcType=VARCHAR}, #{otherlandpurpose,jdbcType=VARCHAR}, #{landpurpose,jdbcType=VARCHAR}, 
+      #{otherhousepurpose,jdbcType=VARCHAR}, #{housepurpose,jdbcType=VARCHAR}, #{registrationdate,jdbcType=TIMESTAMP}, 
+      #{housefinishdate,jdbcType=TIMESTAMP}, #{buyhousedate,jdbcType=TIMESTAMP}, #{houseage,jdbcType=VARCHAR}, 
+      #{landproperty,jdbcType=VARCHAR}, #{houseproperty,jdbcType=VARCHAR}, #{propertystate,jdbcType=CHAR}, 
+      #{nousetime,jdbcType=VARCHAR}, #{nousearea,jdbcType=VARCHAR}, #{netreportamount,jdbcType=DECIMAL}, 
+      #{netreportprice,jdbcType=DECIMAL}, #{workid,jdbcType=VARCHAR}, #{housesoloflg,jdbcType=CHAR}, 
+      #{certificateurl,jdbcType=VARCHAR}, #{chgtl,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{houseno,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{landcertificateno,jdbcType=VARCHAR}, 
+      #{islandcertificate,jdbcType=VARCHAR}, #{propertytype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Mortgage" >
+    insert into mortgage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mortgagetype != null" >
+        mortgagetype,
+      </if>
+      <if test="propertyowner != null" >
+        propertyowner,
+      </if>
+      <if test="houseaddressprovince != null" >
+        houseaddressprovince,
+      </if>
+      <if test="houseaddresscity != null" >
+        houseaddresscity,
+      </if>
+      <if test="houseaddressarea != null" >
+        houseaddressarea,
+      </if>
+      <if test="houseaddressdetail != null" >
+        houseaddressdetail,
+      </if>
+      <if test="areaid != null" >
+        areaid,
+      </if>
+      <if test="martgagename != null" >
+        martgagename,
+      </if>
+      <if test="floorarea != null" >
+        floorarea,
+      </if>
+      <if test="landuseage != null" >
+        landuseage,
+      </if>
+      <if test="landuseenddate != null" >
+        landuseenddate,
+      </if>
+      <if test="landusestartdate != null" >
+        landusestartdate,
+      </if>
+      <if test="mortgagefirsttype != null" >
+        mortgagefirsttype,
+      </if>
+      <if test="mortgagesecondtype != null" >
+        mortgagesecondtype,
+      </if>
+      <if test="otherlandpurpose != null" >
+        otherlandpurpose,
+      </if>
+      <if test="landpurpose != null" >
+        landpurpose,
+      </if>
+      <if test="otherhousepurpose != null" >
+        otherhousepurpose,
+      </if>
+      <if test="housepurpose != null" >
+        housepurpose,
+      </if>
+      <if test="registrationdate != null" >
+        registrationdate,
+      </if>
+      <if test="housefinishdate != null" >
+        housefinishdate,
+      </if>
+      <if test="buyhousedate != null" >
+        buyhousedate,
+      </if>
+      <if test="houseage != null" >
+        houseage,
+      </if>
+      <if test="landproperty != null" >
+        landproperty,
+      </if>
+      <if test="houseproperty != null" >
+        houseproperty,
+      </if>
+      <if test="propertystate != null" >
+        propertystate,
+      </if>
+      <if test="nousetime != null" >
+        nousetime,
+      </if>
+      <if test="nousearea != null" >
+        nousearea,
+      </if>
+      <if test="netreportamount != null" >
+        netreportamount,
+      </if>
+      <if test="netreportprice != null" >
+        netreportprice,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="housesoloflg != null" >
+        housesoloflg,
+      </if>
+      <if test="certificateurl != null" >
+        certificateurl,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="houseno != null" >
+        houseno,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="landcertificateno != null" >
+        landcertificateno,
+      </if>
+      <if test="islandcertificate != null" >
+        islandcertificate,
+      </if>
+      <if test="propertytype != null" >
+        propertytype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagetype != null" >
+        #{mortgagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyowner != null" >
+        #{propertyowner,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddressprovince != null" >
+        #{houseaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddresscity != null" >
+        #{houseaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddressarea != null" >
+        #{houseaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddressdetail != null" >
+        #{houseaddressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="martgagename != null" >
+        #{martgagename,jdbcType=VARCHAR},
+      </if>
+      <if test="floorarea != null" >
+        #{floorarea,jdbcType=VARCHAR},
+      </if>
+      <if test="landuseage != null" >
+        #{landuseage,jdbcType=VARCHAR},
+      </if>
+      <if test="landuseenddate != null" >
+        #{landuseenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="landusestartdate != null" >
+        #{landusestartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mortgagefirsttype != null" >
+        #{mortgagefirsttype,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagesecondtype != null" >
+        #{mortgagesecondtype,jdbcType=VARCHAR},
+      </if>
+      <if test="otherlandpurpose != null" >
+        #{otherlandpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="landpurpose != null" >
+        #{landpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="otherhousepurpose != null" >
+        #{otherhousepurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="housepurpose != null" >
+        #{housepurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationdate != null" >
+        #{registrationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="housefinishdate != null" >
+        #{housefinishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyhousedate != null" >
+        #{buyhousedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="houseage != null" >
+        #{houseage,jdbcType=VARCHAR},
+      </if>
+      <if test="landproperty != null" >
+        #{landproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="houseproperty != null" >
+        #{houseproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="propertystate != null" >
+        #{propertystate,jdbcType=CHAR},
+      </if>
+      <if test="nousetime != null" >
+        #{nousetime,jdbcType=VARCHAR},
+      </if>
+      <if test="nousearea != null" >
+        #{nousearea,jdbcType=VARCHAR},
+      </if>
+      <if test="netreportamount != null" >
+        #{netreportamount,jdbcType=DECIMAL},
+      </if>
+      <if test="netreportprice != null" >
+        #{netreportprice,jdbcType=DECIMAL},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="housesoloflg != null" >
+        #{housesoloflg,jdbcType=CHAR},
+      </if>
+      <if test="certificateurl != null" >
+        #{certificateurl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="houseno != null" >
+        #{houseno,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="landcertificateno != null" >
+        #{landcertificateno,jdbcType=VARCHAR},
+      </if>
+      <if test="islandcertificate != null" >
+        #{islandcertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="propertytype != null" >
+        #{propertytype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.MortgageExample" resultType="java.lang.Integer" >
+    select count(*) from mortgage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mortgage
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagetype != null" >
+        mortgagetype = #{record.mortgagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propertyowner != null" >
+        propertyowner = #{record.propertyowner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseaddressprovince != null" >
+        houseaddressprovince = #{record.houseaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseaddresscity != null" >
+        houseaddresscity = #{record.houseaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseaddressarea != null" >
+        houseaddressarea = #{record.houseaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseaddressdetail != null" >
+        houseaddressdetail = #{record.houseaddressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaid != null" >
+        areaid = #{record.areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.martgagename != null" >
+        martgagename = #{record.martgagename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.floorarea != null" >
+        floorarea = #{record.floorarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landuseage != null" >
+        landuseage = #{record.landuseage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landuseenddate != null" >
+        landuseenddate = #{record.landuseenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.landusestartdate != null" >
+        landusestartdate = #{record.landusestartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mortgagefirsttype != null" >
+        mortgagefirsttype = #{record.mortgagefirsttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagesecondtype != null" >
+        mortgagesecondtype = #{record.mortgagesecondtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherlandpurpose != null" >
+        otherlandpurpose = #{record.otherlandpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landpurpose != null" >
+        landpurpose = #{record.landpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherhousepurpose != null" >
+        otherhousepurpose = #{record.otherhousepurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.housepurpose != null" >
+        housepurpose = #{record.housepurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrationdate != null" >
+        registrationdate = #{record.registrationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.housefinishdate != null" >
+        housefinishdate = #{record.housefinishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.buyhousedate != null" >
+        buyhousedate = #{record.buyhousedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.houseage != null" >
+        houseage = #{record.houseage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landproperty != null" >
+        landproperty = #{record.landproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseproperty != null" >
+        houseproperty = #{record.houseproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propertystate != null" >
+        propertystate = #{record.propertystate,jdbcType=CHAR},
+      </if>
+      <if test="record.nousetime != null" >
+        nousetime = #{record.nousetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nousearea != null" >
+        nousearea = #{record.nousearea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netreportamount != null" >
+        netreportamount = #{record.netreportamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.netreportprice != null" >
+        netreportprice = #{record.netreportprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.housesoloflg != null" >
+        housesoloflg = #{record.housesoloflg,jdbcType=CHAR},
+      </if>
+      <if test="record.certificateurl != null" >
+        certificateurl = #{record.certificateurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.houseno != null" >
+        houseno = #{record.houseno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landcertificateno != null" >
+        landcertificateno = #{record.landcertificateno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.islandcertificate != null" >
+        islandcertificate = #{record.islandcertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propertytype != null" >
+        propertytype = #{record.propertytype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mortgage
+    set id = #{record.id,jdbcType=VARCHAR},
+      mortgagetype = #{record.mortgagetype,jdbcType=VARCHAR},
+      propertyowner = #{record.propertyowner,jdbcType=VARCHAR},
+      houseaddressprovince = #{record.houseaddressprovince,jdbcType=VARCHAR},
+      houseaddresscity = #{record.houseaddresscity,jdbcType=VARCHAR},
+      houseaddressarea = #{record.houseaddressarea,jdbcType=VARCHAR},
+      houseaddressdetail = #{record.houseaddressdetail,jdbcType=VARCHAR},
+      areaid = #{record.areaid,jdbcType=VARCHAR},
+      martgagename = #{record.martgagename,jdbcType=VARCHAR},
+      floorarea = #{record.floorarea,jdbcType=VARCHAR},
+      landuseage = #{record.landuseage,jdbcType=VARCHAR},
+      landuseenddate = #{record.landuseenddate,jdbcType=TIMESTAMP},
+      landusestartdate = #{record.landusestartdate,jdbcType=TIMESTAMP},
+      mortgagefirsttype = #{record.mortgagefirsttype,jdbcType=VARCHAR},
+      mortgagesecondtype = #{record.mortgagesecondtype,jdbcType=VARCHAR},
+      otherlandpurpose = #{record.otherlandpurpose,jdbcType=VARCHAR},
+      landpurpose = #{record.landpurpose,jdbcType=VARCHAR},
+      otherhousepurpose = #{record.otherhousepurpose,jdbcType=VARCHAR},
+      housepurpose = #{record.housepurpose,jdbcType=VARCHAR},
+      registrationdate = #{record.registrationdate,jdbcType=TIMESTAMP},
+      housefinishdate = #{record.housefinishdate,jdbcType=TIMESTAMP},
+      buyhousedate = #{record.buyhousedate,jdbcType=TIMESTAMP},
+      houseage = #{record.houseage,jdbcType=VARCHAR},
+      landproperty = #{record.landproperty,jdbcType=VARCHAR},
+      houseproperty = #{record.houseproperty,jdbcType=VARCHAR},
+      propertystate = #{record.propertystate,jdbcType=CHAR},
+      nousetime = #{record.nousetime,jdbcType=VARCHAR},
+      nousearea = #{record.nousearea,jdbcType=VARCHAR},
+      netreportamount = #{record.netreportamount,jdbcType=DECIMAL},
+      netreportprice = #{record.netreportprice,jdbcType=DECIMAL},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      housesoloflg = #{record.housesoloflg,jdbcType=CHAR},
+      certificateurl = #{record.certificateurl,jdbcType=VARCHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      houseno = #{record.houseno,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      landcertificateno = #{record.landcertificateno,jdbcType=VARCHAR},
+      islandcertificate = #{record.islandcertificate,jdbcType=VARCHAR},
+      propertytype = #{record.propertytype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Mortgage" >
+    update mortgage
+    <set >
+      <if test="mortgagetype != null" >
+        mortgagetype = #{mortgagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyowner != null" >
+        propertyowner = #{propertyowner,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddressprovince != null" >
+        houseaddressprovince = #{houseaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddresscity != null" >
+        houseaddresscity = #{houseaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddressarea != null" >
+        houseaddressarea = #{houseaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddressdetail != null" >
+        houseaddressdetail = #{houseaddressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        areaid = #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="martgagename != null" >
+        martgagename = #{martgagename,jdbcType=VARCHAR},
+      </if>
+      <if test="floorarea != null" >
+        floorarea = #{floorarea,jdbcType=VARCHAR},
+      </if>
+      <if test="landuseage != null" >
+        landuseage = #{landuseage,jdbcType=VARCHAR},
+      </if>
+      <if test="landuseenddate != null" >
+        landuseenddate = #{landuseenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="landusestartdate != null" >
+        landusestartdate = #{landusestartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mortgagefirsttype != null" >
+        mortgagefirsttype = #{mortgagefirsttype,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagesecondtype != null" >
+        mortgagesecondtype = #{mortgagesecondtype,jdbcType=VARCHAR},
+      </if>
+      <if test="otherlandpurpose != null" >
+        otherlandpurpose = #{otherlandpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="landpurpose != null" >
+        landpurpose = #{landpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="otherhousepurpose != null" >
+        otherhousepurpose = #{otherhousepurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="housepurpose != null" >
+        housepurpose = #{housepurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationdate != null" >
+        registrationdate = #{registrationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="housefinishdate != null" >
+        housefinishdate = #{housefinishdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyhousedate != null" >
+        buyhousedate = #{buyhousedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="houseage != null" >
+        houseage = #{houseage,jdbcType=VARCHAR},
+      </if>
+      <if test="landproperty != null" >
+        landproperty = #{landproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="houseproperty != null" >
+        houseproperty = #{houseproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="propertystate != null" >
+        propertystate = #{propertystate,jdbcType=CHAR},
+      </if>
+      <if test="nousetime != null" >
+        nousetime = #{nousetime,jdbcType=VARCHAR},
+      </if>
+      <if test="nousearea != null" >
+        nousearea = #{nousearea,jdbcType=VARCHAR},
+      </if>
+      <if test="netreportamount != null" >
+        netreportamount = #{netreportamount,jdbcType=DECIMAL},
+      </if>
+      <if test="netreportprice != null" >
+        netreportprice = #{netreportprice,jdbcType=DECIMAL},
+      </if>
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="housesoloflg != null" >
+        housesoloflg = #{housesoloflg,jdbcType=CHAR},
+      </if>
+      <if test="certificateurl != null" >
+        certificateurl = #{certificateurl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="houseno != null" >
+        houseno = #{houseno,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="landcertificateno != null" >
+        landcertificateno = #{landcertificateno,jdbcType=VARCHAR},
+      </if>
+      <if test="islandcertificate != null" >
+        islandcertificate = #{islandcertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="propertytype != null" >
+        propertytype = #{propertytype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Mortgage" >
+    update mortgage
+    set mortgagetype = #{mortgagetype,jdbcType=VARCHAR},
+      propertyowner = #{propertyowner,jdbcType=VARCHAR},
+      houseaddressprovince = #{houseaddressprovince,jdbcType=VARCHAR},
+      houseaddresscity = #{houseaddresscity,jdbcType=VARCHAR},
+      houseaddressarea = #{houseaddressarea,jdbcType=VARCHAR},
+      houseaddressdetail = #{houseaddressdetail,jdbcType=VARCHAR},
+      areaid = #{areaid,jdbcType=VARCHAR},
+      martgagename = #{martgagename,jdbcType=VARCHAR},
+      floorarea = #{floorarea,jdbcType=VARCHAR},
+      landuseage = #{landuseage,jdbcType=VARCHAR},
+      landuseenddate = #{landuseenddate,jdbcType=TIMESTAMP},
+      landusestartdate = #{landusestartdate,jdbcType=TIMESTAMP},
+      mortgagefirsttype = #{mortgagefirsttype,jdbcType=VARCHAR},
+      mortgagesecondtype = #{mortgagesecondtype,jdbcType=VARCHAR},
+      otherlandpurpose = #{otherlandpurpose,jdbcType=VARCHAR},
+      landpurpose = #{landpurpose,jdbcType=VARCHAR},
+      otherhousepurpose = #{otherhousepurpose,jdbcType=VARCHAR},
+      housepurpose = #{housepurpose,jdbcType=VARCHAR},
+      registrationdate = #{registrationdate,jdbcType=TIMESTAMP},
+      housefinishdate = #{housefinishdate,jdbcType=TIMESTAMP},
+      buyhousedate = #{buyhousedate,jdbcType=TIMESTAMP},
+      houseage = #{houseage,jdbcType=VARCHAR},
+      landproperty = #{landproperty,jdbcType=VARCHAR},
+      houseproperty = #{houseproperty,jdbcType=VARCHAR},
+      propertystate = #{propertystate,jdbcType=CHAR},
+      nousetime = #{nousetime,jdbcType=VARCHAR},
+      nousearea = #{nousearea,jdbcType=VARCHAR},
+      netreportamount = #{netreportamount,jdbcType=DECIMAL},
+      netreportprice = #{netreportprice,jdbcType=DECIMAL},
+      workid = #{workid,jdbcType=VARCHAR},
+      housesoloflg = #{housesoloflg,jdbcType=CHAR},
+      certificateurl = #{certificateurl,jdbcType=VARCHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      houseno = #{houseno,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      landcertificateno = #{landcertificateno,jdbcType=VARCHAR},
+      islandcertificate = #{islandcertificate,jdbcType=VARCHAR},
+      propertytype = #{propertytype,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

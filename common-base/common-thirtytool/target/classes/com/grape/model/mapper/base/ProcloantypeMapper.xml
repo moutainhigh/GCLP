@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ProcloantypeMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Procloantype" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="productno" property="productno" jdbcType="VARCHAR" />
+    <result column="termofloan" property="termofloan" jdbcType="VARCHAR" />
+    <result column="subloanflg" property="subloanflg" jdbcType="CHAR" />
+    <result column="firstloanratio" property="firstloanratio" jdbcType="DECIMAL" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, productno, termofloan, subloanflg, firstloanratio, chgtl, chgdt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ProcloantypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from procloantype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from procloantype
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from procloantype
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ProcloantypeExample" >
+    delete from procloantype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Procloantype" >
+    insert into procloantype (id, productno, termofloan, 
+      subloanflg, firstloanratio, chgtl, 
+      chgdt)
+    values (#{id,jdbcType=VARCHAR}, #{productno,jdbcType=VARCHAR}, #{termofloan,jdbcType=VARCHAR}, 
+      #{subloanflg,jdbcType=CHAR}, #{firstloanratio,jdbcType=DECIMAL}, #{chgtl,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Procloantype" >
+    insert into procloantype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productno != null" >
+        productno,
+      </if>
+      <if test="termofloan != null" >
+        termofloan,
+      </if>
+      <if test="subloanflg != null" >
+        subloanflg,
+      </if>
+      <if test="firstloanratio != null" >
+        firstloanratio,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="termofloan != null" >
+        #{termofloan,jdbcType=VARCHAR},
+      </if>
+      <if test="subloanflg != null" >
+        #{subloanflg,jdbcType=CHAR},
+      </if>
+      <if test="firstloanratio != null" >
+        #{firstloanratio,jdbcType=DECIMAL},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ProcloantypeExample" resultType="java.lang.Integer" >
+    select count(*) from procloantype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update procloantype
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productno != null" >
+        productno = #{record.productno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termofloan != null" >
+        termofloan = #{record.termofloan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subloanflg != null" >
+        subloanflg = #{record.subloanflg,jdbcType=CHAR},
+      </if>
+      <if test="record.firstloanratio != null" >
+        firstloanratio = #{record.firstloanratio,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update procloantype
+    set id = #{record.id,jdbcType=VARCHAR},
+      productno = #{record.productno,jdbcType=VARCHAR},
+      termofloan = #{record.termofloan,jdbcType=VARCHAR},
+      subloanflg = #{record.subloanflg,jdbcType=CHAR},
+      firstloanratio = #{record.firstloanratio,jdbcType=DECIMAL},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Procloantype" >
+    update procloantype
+    <set >
+      <if test="productno != null" >
+        productno = #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="termofloan != null" >
+        termofloan = #{termofloan,jdbcType=VARCHAR},
+      </if>
+      <if test="subloanflg != null" >
+        subloanflg = #{subloanflg,jdbcType=CHAR},
+      </if>
+      <if test="firstloanratio != null" >
+        firstloanratio = #{firstloanratio,jdbcType=DECIMAL},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Procloantype" >
+    update procloantype
+    set productno = #{productno,jdbcType=VARCHAR},
+      termofloan = #{termofloan,jdbcType=VARCHAR},
+      subloanflg = #{subloanflg,jdbcType=CHAR},
+      firstloanratio = #{firstloanratio,jdbcType=DECIMAL},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

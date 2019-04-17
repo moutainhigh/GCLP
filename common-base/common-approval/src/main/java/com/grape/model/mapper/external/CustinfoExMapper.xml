@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.CustinfoExMapper" >
+	<select id="selectCustmarrowinfo" parameterType="map" resultType="com.grape.controller.reponse.Custmarrow">
+		select cust.*,liga.*,cred.* from custinfo cust
+		left outer join litigationinfo liga on cust.workid=liga.workid and cust.cerdid=liga.cerdid
+		left outer join creditrecode cred on cust.workid=cred.workid and cred.cerdid=cust.cerdid
+		where cust.workid=#{workid} and cust.cerdid=#{cerdid}
+	</select>
+	
+	<select id="selectCustinfoByWorkid" parameterType="map" resultType="com.grape.model.db.Custinfo">
+		select * from custinfo where workid = #{workid}
+	</select>
+	</mapper>

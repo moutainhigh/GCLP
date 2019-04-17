@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.ApplyforexFMapper" >
+	<select id="statisticalRepay" resultType="com.grape.controller.request.StatisticalRepay" parameterType="map">
+		select DATEDIFF(p.nextrepaydate,SYSDATE()) reminddays,
+		sum(r.refundmoney) refundmoneySum,sum(r.refundinterest) refundinterestSum,
+		sum(r.refundinterest)+sum(o.defaultinterest) penaltIinterestSum,
+		sum(r.delayingpayment) rdelayingSum,sum(r.breachofcontract) breachofcontractSum,
+		sum(o.overduecorpus) overduecorpusSum,sum(o.overdueaccrual) overdueaccrualSum,
+		sum(o.defaultinterest) defaultinterestSum,sum(o.delayingpayment) odelayingSum,p.addoverduedaynum
+		from postloaninfo p
+		left join repayinfo r on r.workid=p.workid
+		left join overdue o on o.workid=p.workid
+		where 1=1
+			and p.workid = #{workid}
+		GROUP BY p.addoverduedaynum,reminddays
+	</select>
+	
+	<select id="selectRepaycapital" resultType="com.grape.model.db.Repayplan">
+		SELECT repaycapital from repayplan where workid = #{workid} ORDER BY repayterm desc LIMIT 1
+	</select>
+	
+	<select id="isApplyforex" resultType="com.grape.model.db.Repayplan">
+	 select repaydate from repayplan 
+	 LEFT OUTER JOIN postloaninfo on repayplan.workid = postloaninfo.workid and postloaninfo.overdueflg &lt;> 'Y'
+	 where repayplan.workid=#{workid}
+   	 ORDER BY repaydate desc
+	</select>
+</mapper>

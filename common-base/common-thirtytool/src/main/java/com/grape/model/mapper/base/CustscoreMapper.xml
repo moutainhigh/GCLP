@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.CustscoreMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Custscore" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="startcustgrade" property="startcustgrade" jdbcType="DECIMAL" />
+    <result column="endcustgrade" property="endcustgrade" jdbcType="DECIMAL" />
+    <result column="startmortgrade" property="startmortgrade" jdbcType="DECIMAL" />
+    <result column="endmortgrade" property="endmortgrade" jdbcType="DECIMAL" />
+    <result column="custleavel" property="custleavel" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, startcustgrade, endcustgrade, startmortgrade, endmortgrade, custleavel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.CustscoreExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from custscore
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from custscore
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from custscore
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.CustscoreExample" >
+    delete from custscore
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Custscore" >
+    insert into custscore (id, startcustgrade, endcustgrade, 
+      startmortgrade, endmortgrade, custleavel
+      )
+    values (#{id,jdbcType=VARCHAR}, #{startcustgrade,jdbcType=DECIMAL}, #{endcustgrade,jdbcType=DECIMAL}, 
+      #{startmortgrade,jdbcType=DECIMAL}, #{endmortgrade,jdbcType=DECIMAL}, #{custleavel,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Custscore" >
+    insert into custscore
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="startcustgrade != null" >
+        startcustgrade,
+      </if>
+      <if test="endcustgrade != null" >
+        endcustgrade,
+      </if>
+      <if test="startmortgrade != null" >
+        startmortgrade,
+      </if>
+      <if test="endmortgrade != null" >
+        endmortgrade,
+      </if>
+      <if test="custleavel != null" >
+        custleavel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="startcustgrade != null" >
+        #{startcustgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="endcustgrade != null" >
+        #{endcustgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="startmortgrade != null" >
+        #{startmortgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="endmortgrade != null" >
+        #{endmortgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="custleavel != null" >
+        #{custleavel,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.CustscoreExample" resultType="java.lang.Integer" >
+    select count(*) from custscore
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update custscore
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startcustgrade != null" >
+        startcustgrade = #{record.startcustgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endcustgrade != null" >
+        endcustgrade = #{record.endcustgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="record.startmortgrade != null" >
+        startmortgrade = #{record.startmortgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endmortgrade != null" >
+        endmortgrade = #{record.endmortgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="record.custleavel != null" >
+        custleavel = #{record.custleavel,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update custscore
+    set id = #{record.id,jdbcType=VARCHAR},
+      startcustgrade = #{record.startcustgrade,jdbcType=DECIMAL},
+      endcustgrade = #{record.endcustgrade,jdbcType=DECIMAL},
+      startmortgrade = #{record.startmortgrade,jdbcType=DECIMAL},
+      endmortgrade = #{record.endmortgrade,jdbcType=DECIMAL},
+      custleavel = #{record.custleavel,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Custscore" >
+    update custscore
+    <set >
+      <if test="startcustgrade != null" >
+        startcustgrade = #{startcustgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="endcustgrade != null" >
+        endcustgrade = #{endcustgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="startmortgrade != null" >
+        startmortgrade = #{startmortgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="endmortgrade != null" >
+        endmortgrade = #{endmortgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="custleavel != null" >
+        custleavel = #{custleavel,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Custscore" >
+    update custscore
+    set startcustgrade = #{startcustgrade,jdbcType=DECIMAL},
+      endcustgrade = #{endcustgrade,jdbcType=DECIMAL},
+      startmortgrade = #{startmortgrade,jdbcType=DECIMAL},
+      endmortgrade = #{endmortgrade,jdbcType=DECIMAL},
+      custleavel = #{custleavel,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

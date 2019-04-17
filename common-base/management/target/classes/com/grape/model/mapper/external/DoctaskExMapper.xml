@@ -1,0 +1,437 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.DoctaskExMapper">
+    <select id="doctaskList" resultType="com.grape.controller.reponse.bean.DoctaskListBean" parameterType="map">
+        select doctask.workid,area.areaname,organization.organizationno,organization.organizationname,pc.coddes,
+        pc.productname,pc.productno,custinfo.custname,doctask.applydate,productnode.nodename,productnode.nodeid
+        from doctask doctask
+        left join area area on area.areaid=doctask.areaid
+        left join organization organization on doctask.channelno=organization.organizationno
+        left join (select p.productno,p.productname,c.coddes from product p,codetable c
+        where p.producttype=c.codflg and c.codtyp='PRODUCTTYPE') pc on doctask.productno=pc.productno
+        left join custinfo custinfo on doctask.workid=custinfo.workid and custinfo.custtype like '%1%'
+        left join workitem workitem on doctask.workid=workitem.workid
+        left join productnode productnode on productnode.nodeid=workitem.node
+        left join person person on person.workerid=doctask.userid
+        left join department department on department.departmentno=doctask.departmentno
+        where (productnode.type='task' or (productnode.type='end' and workitem.fork = '0' and workitem.branch = '0'))
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" nodeid !=null and nodeid !='' ">
+            and productnode.nodename = #{nodeid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and pc.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" workid !=null and workid !='' ">
+            and doctask.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" custname !=null and custname !='' ">
+            and custinfo.custname like CONCAT(CONCAT('%', #{custname}), '%')
+        </if>
+        <if test=" cerdid !=null and cerdid !='' ">
+            and custinfo.cerdid = #{cerdid , jdbcType=VARCHAR}
+        </if>
+        <if test=" houseno !=null and houseno !='' ">
+            and exists(select 1 from mortgage where mortgage.workid=doctask.workid and
+            houseno=#{houseno , jdbcType=VARCHAR})
+        </if>
+        <if test=" istolive !=null and istolive !='' ">
+            and doctask.istolive = #{istolive , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+            <if test=" plevel != '9'.toString() ">
+                and (doctask.userid = #{workerid , jdbcType=VARCHAR} or person.supervisor =
+                #{workerid , jdbcType=VARCHAR})
+            </if>
+            <if test=" plevel == '9'.toString() and dlevel !=  '1'.toString() ">
+                and doctask.departmentno = #{departmentno , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        ORDER BY doctask.workid desc
+        limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="doctaskCount" resultType="Integer" parameterType="map">
+        select count(1) from doctask doctask
+        left join area area on area.areaid=doctask.areaid
+        left join organization organization on doctask.channelno=organization.organizationno
+        left join (select p.productno,p.productname,c.coddes from product p,codetable c
+        where p.producttype=c.codflg and c.codtyp='PRODUCTTYPE') pc on doctask.productno=pc.productno
+        left join custinfo custinfo on doctask.workid=custinfo.workid and custinfo.custtype like '%1%'
+        left join workitem workitem on doctask.workid=workitem.workid
+        left join productnode productnode on productnode.nodeid=workitem.node
+        left join person person on person.workerid=doctask.userid
+        left join department department on department.departmentno=doctask.departmentno
+        where (productnode.type='task' or (productnode.type='end' and workitem.fork = '0' and workitem.branch = '0'))
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" nodeid !=null and nodeid !='' ">
+            and productnode.nodename = #{nodeid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and pc.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" workid !=null and workid !='' ">
+            and doctask.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" custname !=null and custname !='' ">
+            and custinfo.custname like CONCAT(CONCAT('%', #{custname}), '%')
+        </if>
+        <if test=" cerdid !=null and cerdid !='' ">
+            and custinfo.cerdid = #{cerdid , jdbcType=VARCHAR}
+        </if>
+        <if test=" houseno !=null and houseno !='' ">
+            and exists(select 1 from mortgage where mortgage.workid=doctask.workid and
+            houseno=#{houseno , jdbcType=VARCHAR})
+        </if>
+        <if test=" istolive !=null and istolive !='' ">
+            and doctask.istolive = #{istolive , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+            <if test=" plevel != '9'.toString() ">
+                and (doctask.userid = #{workerid , jdbcType=VARCHAR} or person.supervisor =
+                #{workerid , jdbcType=VARCHAR})
+            </if>
+            <if test=" plevel == '9'.toString() and dlevel !=  '1'.toString() ">
+                and doctask.departmentno = #{departmentno , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="backlogList" resultType="com.grape.controller.reponse.bean.DoctaskListBean" parameterType="map">
+        select d.workid,area.areaname,organization.organizationno,organization.organizationname,pc.coddes,
+        pc.productname,pc.productno,custinfo.custname,d.applydate,productnode.nodename,productnode.nodeid
+        from (workitem w , doctask d, userapprove p ,person per,area area,organization organization,
+        (select p.productno,p.productname,c.coddes from product p,codetable c where p.producttype=c.codflg and
+        c.codtyp='PRODUCTTYPE') pc,
+        (select * from custinfo where custinfo.custtype like '%1%') custinfo,productnode productnode)
+        left join exceptloaninfo e on e.workid=d.workid
+        where w.workid=d.workid and d.channelno=p.channelno and d.areaid=p.arerid and p.productno=d.productno
+        and organization.organizationno=d.channelno and d.areaid=area.areaid and pc.productno=d.productno
+        and custinfo.workid=d.workid and productnode.nodeid=w.node and productnode.type='task'
+        and p.userid=per.workerid and p.userid=#{userid , jdbcType=VARCHAR}
+        <if test="processflg == '1'.toString()">
+            and (d.workid in (select his.workid from workhistory his where d.workid=his.workid and
+            his.userid=#{userid , jdbcType=VARCHAR}))
+            and (w.authuserid!=#{userid , jdbcType=VARCHAR} or (w.authuserid is null and not exists (
+            select 1 from userrole u,noderole n
+            where u.roleid=n.roleid and u.workerid=p.userid and n.productno=d.productno and n.nodeid=w.node and
+            u.workerid=#{userid , jdbcType=VARCHAR})
+            and (d.userid=#{userid , jdbcType=VARCHAR} or (p.amtlow &lt;= e.expectapplyamount
+            and p.amthigh &gt; e.expectapplyamount ))))
+        </if>
+        <if test="processflg == '2'.toString()">
+            and (w.authuserid=#{userid , jdbcType=VARCHAR} or (w.authuserid is null and exists (
+            select 1 from userrole u,noderole n
+            where u.roleid=n.roleid and u.workerid=p.userid and n.productno=d.productno and n.nodeid=w.node and
+            u.workerid=#{userid , jdbcType=VARCHAR})
+            and (d.userid=#{userid , jdbcType=VARCHAR} or (p.amtlow &lt;= e.expectapplyamount
+            and p.amthigh &gt; e.expectapplyamount ))))
+        </if>
+        <if test="processflg == '1,2'.toString() or processflg == '2,1'.toString()">
+            and (w.authuserid=#{userid , jdbcType=VARCHAR}
+            or (d.workid in (select his.workid from workhistory his where d.workid=his.workid and
+            his.userid=#{userid , jdbcType=VARCHAR})
+            and (w.authuserid !=#{userid , jdbcType=VARCHAR}
+            or (w.authuserid is null and not exists (
+            select 1 from userrole u,noderole n
+            where u.roleid=n.roleid and u.workerid=p.userid and n.productno=d.productno and n.nodeid=w.node and
+            u.workerid=#{userid , jdbcType=VARCHAR})
+            and (d.userid=#{userid , jdbcType=VARCHAR} or (p.amtlow &lt;= e.expectapplyamount
+            and p.amthigh &gt; e.expectapplyamount )))))
+            or (w.authuserid is null and exists (
+            select 1 from userrole u,noderole n
+            where u.roleid=n.roleid and u.workerid=p.userid and n.productno=d.productno and n.nodeid=w.node and
+            u.workerid=#{userid , jdbcType=VARCHAR})
+            and (d.userid=#{userid , jdbcType=VARCHAR} or (p.amtlow &lt;= e.expectapplyamount
+            and p.amthigh &gt; e.expectapplyamount ))))
+        </if>
+        and d.intostate is null
+        and not exists (select 1 from doctasksign
+        where doctasksign.workid=w.workid and doctasksign.nodeid=w.node and
+        doctasksign.userid=#{userid , jdbcType=VARCHAR})
+        <if test=" startDate !=null ">
+            and d.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and d.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" nodeid !=null and nodeid !='' ">
+            and productnode.nodename = #{nodeid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and pc.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" workid !=null and workid !='' ">
+            and d.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" custname !=null and custname !='' ">
+            and custinfo.custname like CONCAT(CONCAT('%', #{custname}), '%')
+        </if>
+        <if test=" cerdid !=null and cerdid !='' ">
+            and custinfo.cerdid = #{cerdid , jdbcType=VARCHAR}
+        </if>
+        <if test=" houseno !=null and houseno !='' ">
+            and exists(select 1 from mortgage where mortgage.workid=d.workid and houseno=#{houseno , jdbcType=VARCHAR})
+        </if>
+        ORDER BY d.workid desc
+        limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="backlogCount" resultType="Integer" parameterType="map">
+        select count(1)
+        from (workitem w , doctask d, userapprove p ,person per,area area,organization organization,
+        (select p.productno,p.productname,c.coddes from product p,codetable c where p.producttype=c.codflg and
+        c.codtyp='PRODUCTTYPE') pc,
+        (select * from custinfo where custinfo.custtype like '%1%') custinfo,productnode productnode)
+        left join exceptloaninfo e on e.workid=d.workid
+        where w.workid=d.workid and d.channelno=p.channelno and d.areaid=p.arerid and p.productno=d.productno
+        and organization.organizationno=d.channelno and d.areaid=area.areaid and pc.productno=d.productno
+        and custinfo.workid=d.workid and productnode.nodeid=w.node and productnode.type='task'
+        and p.userid=per.workerid and p.userid=#{userid , jdbcType=VARCHAR}
+        <if test="processflg == '1'.toString()">
+            and (d.workid in (select his.workid from workhistory his where d.workid=his.workid and
+            his.userid=#{userid , jdbcType=VARCHAR}))
+            and (w.authuserid!=#{userid , jdbcType=VARCHAR} or (w.authuserid is null and not exists (
+            select 1 from userrole u,noderole n
+            where u.roleid=n.roleid and u.workerid=p.userid and n.productno=d.productno and n.nodeid=w.node and
+            u.workerid=#{userid , jdbcType=VARCHAR})
+            and (d.userid=#{userid , jdbcType=VARCHAR} or (p.amtlow &lt;= e.expectapplyamount
+            and p.amthigh &gt; e.expectapplyamount ))))
+        </if>
+        <if test="processflg == '2'.toString()">
+            and (w.authuserid=#{userid , jdbcType=VARCHAR} or (w.authuserid is null and exists (
+            select 1 from userrole u,noderole n
+            where u.roleid=n.roleid and u.workerid=p.userid and n.productno=d.productno and n.nodeid=w.node and
+            u.workerid=#{userid , jdbcType=VARCHAR})
+            and (d.userid=#{userid , jdbcType=VARCHAR} or (p.amtlow &lt;= e.expectapplyamount
+            and p.amthigh &gt; e.expectapplyamount ))))
+        </if>
+        <if test="processflg == '1,2'.toString() or processflg == '2,1'.toString()">
+            and (w.authuserid=#{userid , jdbcType=VARCHAR}
+            or (d.workid in (select his.workid from workhistory his where d.workid=his.workid and
+            his.userid=#{userid , jdbcType=VARCHAR})
+            and (w.authuserid !=#{userid , jdbcType=VARCHAR}
+            or (w.authuserid is null and not exists (
+            select 1 from userrole u,noderole n
+            where u.roleid=n.roleid and u.workerid=p.userid and n.productno=d.productno and n.nodeid=w.node and
+            u.workerid=#{userid , jdbcType=VARCHAR})
+            and (d.userid=#{userid , jdbcType=VARCHAR} or (p.amtlow &lt;= e.expectapplyamount
+            and p.amthigh &gt; e.expectapplyamount )))))
+            or (w.authuserid is null and exists (
+            select 1 from userrole u,noderole n
+            where u.roleid=n.roleid and u.workerid=p.userid and n.productno=d.productno and n.nodeid=w.node and
+            u.workerid=#{userid , jdbcType=VARCHAR})
+            and (d.userid=#{userid , jdbcType=VARCHAR} or (p.amtlow &lt;= e.expectapplyamount
+            and p.amthigh &gt; e.expectapplyamount ))))
+        </if>
+        and d.intostate is null
+        and not exists (select 1 from doctasksign
+        where doctasksign.workid=w.workid and doctasksign.nodeid=w.node and
+        doctasksign.userid=#{userid , jdbcType=VARCHAR})
+        <if test=" startDate !=null ">
+            and d.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and d.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" nodeid !=null and nodeid !='' ">
+            and productnode.nodename = #{nodeid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and pc.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" workid !=null and workid !='' ">
+            and d.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" custname !=null and custname !='' ">
+            and custinfo.custname like CONCAT(CONCAT('%', #{custname}), '%')
+        </if>
+        <if test=" cerdid !=null and cerdid !='' ">
+            and custinfo.cerdid = #{cerdid , jdbcType=VARCHAR}
+        </if>
+        <if test=" houseno !=null and houseno !='' ">
+            and exists(select 1 from mortgage where mortgage.workid=d.workid and houseno=#{houseno , jdbcType=VARCHAR})
+        </if>
+    </select>
+
+
+    <select id="rolloverList" resultType="com.grape.controller.reponse.bean.DoctaskListBean" parameterType="map">
+        select doctask.workid,area.areaname,organization.organizationno,organization.organizationname,pc.coddes,
+        pc.productname,pc.productno,custinfo.custname,doctask.applydate,productnode.nodename,productnode.nodeid
+        from (doctask,postloaninfo)
+        left join area area on area.areaid=doctask.areaid
+        left join organization organization on doctask.channelno=organization.organizationno
+        left join (select p.productno,p.productname,c.coddes from product p,codetable c
+        where p.producttype=c.codflg and c.codtyp='PRODUCTTYPE') pc on doctask.productno=pc.productno
+        left join custinfo custinfo on doctask.workid=custinfo.workid and custinfo.custtype like '%1%'
+        left join workitem workitem on doctask.workid=workitem.workid
+        left join productnode productnode on productnode.nodeid=workitem.node
+        left join person person on person.workerid=doctask.userid
+        left join department department on department.departmentno=doctask.departmentno
+        left join (select workid,max(repayterm) repayterm from repayplan GROUP BY workid) plan on
+        plan.workid=postloaninfo.workid
+        where (productnode.type='task' or (productnode.type='end' and workitem.fork = '0' and workitem.branch = '0'))
+        and doctask.workid=postloaninfo.workid and (postloaninfo.overdueflg='N' or postloaninfo.overdueflg is null)
+        and postloaninfo.nextrefundissue=plan.repayterm
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" nodeid !=null and nodeid !='' ">
+            and workitem.node = #{nodeid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and pc.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" workid !=null and workid !='' ">
+            and doctask.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" custname !=null and custname !='' ">
+            and custinfo.custname LIKE #{custname , jdbcType=VARCHAR}
+        </if>
+        <if test=" cerdid !=null and cerdid !='' ">
+            and custinfo.cerdid = #{cerdid , jdbcType=VARCHAR}
+        </if>
+        <if test=" houseno !=null and houseno !='' ">
+            and exists(select 1 from mortgage where mortgage.workid=doctask.workid and
+            houseno=#{houseno , jdbcType=VARCHAR})
+        </if>
+        <if test=" istolive !=null and istolive !='' ">
+            and doctask.istolive = #{istolive , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+            <if test=" plevel != '9'.toString() ">
+                and (doctask.userid = #{workerid , jdbcType=VARCHAR} or person.supervisor =
+                #{workerid , jdbcType=VARCHAR})
+            </if>
+            <if test=" plevel == '9'.toString() and dlevel !=  '1'.toString() ">
+                and doctask.departmentno = #{departmentno , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        ORDER BY doctask.workid desc
+        limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="rolloverCount" resultType="Integer" parameterType="map">
+        select count(1) from (doctask,postloaninfo)
+        left join area area on area.areaid=doctask.areaid
+        left join organization organization on doctask.channelno=organization.organizationno
+        left join (select p.productno,p.productname,c.coddes from product p,codetable c
+        where p.producttype=c.codflg and c.codtyp='PRODUCTTYPE') pc on doctask.productno=pc.productno
+        left join custinfo custinfo on doctask.workid=custinfo.workid and custinfo.custtype like '%1%'
+        left join workitem workitem on doctask.workid=workitem.workid
+        left join productnode productnode on productnode.nodeid=workitem.node
+        left join person person on person.workerid=doctask.userid
+        left join department department on department.departmentno=doctask.departmentno
+        left join (select workid,max(repayterm) repayterm from repayplan GROUP BY workid) plan on
+        plan.workid=postloaninfo.workid
+        where (productnode.type='task' or (productnode.type='end' and workitem.fork = '0' and workitem.branch = '0'))
+        and doctask.workid=postloaninfo.workid and (postloaninfo.overdueflg='N' or postloaninfo.overdueflg is null)
+        and postloaninfo.nextrefundissue=plan.repayterm
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" nodeid !=null and nodeid !='' ">
+            and workitem.node = #{nodeid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and pc.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" workid !=null and workid !='' ">
+            and doctask.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" custname !=null and custname !='' ">
+            and custinfo.custname = #{custname , jdbcType=VARCHAR}
+        </if>
+        <if test=" cerdid !=null and cerdid !='' ">
+            and custinfo.cerdid = #{cerdid , jdbcType=VARCHAR}
+        </if>
+        <if test=" houseno !=null and houseno !='' ">
+            and exists(select 1 from mortgage where mortgage.workid=doctask.workid and
+            houseno=#{houseno , jdbcType=VARCHAR})
+        </if>
+        <if test=" istolive !=null and istolive !='' ">
+            and doctask.istolive = #{istolive , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+            <if test=" plevel != '9'.toString() ">
+                and (doctask.userid = #{workerid , jdbcType=VARCHAR} or person.supervisor =
+                #{workerid , jdbcType=VARCHAR})
+            </if>
+            <if test=" plevel == '9'.toString() and dlevel !=  '1'.toString() ">
+                and doctask.departmentno = #{departmentno , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="getcoborrower" resultType="String" parameterType="map">
+		select custname from custinfo where custtype like '%2%' and workid = #{workid , jdbcType=VARCHAR}
+	</select>
+    <select id="getguarantor" resultType="String" parameterType="map">
+		select custname from custinfo where custtype like '%3%' and workid = #{workid , jdbcType=VARCHAR}
+	</select>
+    <select id="getmortgagor" resultType="String" parameterType="map">
+		select custname from custinfo where custtype like '%4%' and workid = #{workid , jdbcType=VARCHAR}
+	</select>
+    <select id="gethouseid" resultType="String" parameterType="map">
+		select houseno from mortgage where workid = #{workid , jdbcType=VARCHAR}
+	</select>
+
+    <select id="getUserOfOrg" resultType="com.grape.controller.reponse.bean.UserOfOrgBean" parameterType="map">
+        select person.workerid,person.supervisor,person.`level` plevel,department.departmentno,
+        department.`level` dlevel,organization.organizationno,organization.orgbelongsto
+        from person person
+        left join department department on person.department=department.departmentno
+        left join organization organization on person.organizationid=organization.organizationno where 1=1
+        <if test=" workerid !=null and workerid !='' ">
+            and person.workerid = #{workerid , jdbcType=VARCHAR}
+        </if>
+        <if test=" mobilephone !=null and mobilephone !='' ">
+            or person.mobilephone = #{mobilephone , jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

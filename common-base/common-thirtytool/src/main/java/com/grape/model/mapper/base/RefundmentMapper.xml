@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.RefundmentMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Refundment" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="otherrece" property="otherrece" jdbcType="VARCHAR" />
+    <result column="receivables" property="receivables" jdbcType="VARCHAR" />
+    <result column="paydate" property="paydate" jdbcType="TIMESTAMP" />
+    <result column="otherrefundtype" property="otherrefundtype" jdbcType="VARCHAR" />
+    <result column="refundtype" property="refundtype" jdbcType="VARCHAR" />
+    <result column="removeamount" property="removeamount" jdbcType="DECIMAL" />
+    <result column="interestrepayment" property="interestrepayment" jdbcType="DECIMAL" />
+    <result column="channelsinglebond" property="channelsinglebond" jdbcType="DECIMAL" />
+    <result column="otheramounts" property="otheramounts" jdbcType="DECIMAL" />
+    <result column="cleardate" property="cleardate" jdbcType="TIMESTAMP" />
+    <result column="prepaidinterest" property="prepaidinterest" jdbcType="DECIMAL" />
+    <result column="chanquotationrate" property="chanquotationrate" jdbcType="DECIMAL" />
+    <result column="comrealrate" property="comrealrate" jdbcType="DECIMAL" />
+    <result column="monthrate" property="monthrate" jdbcType="DECIMAL" />
+    <result column="borrowterm" property="borrowterm" jdbcType="VARCHAR" />
+    <result column="backchanamount" property="backchanamount" jdbcType="DECIMAL" />
+    <result column="realbackamount" property="realbackamount" jdbcType="DECIMAL" />
+    <result column="backaccountbnk" property="backaccountbnk" jdbcType="VARCHAR" />
+    <result column="backaccountname" property="backaccountname" jdbcType="VARCHAR" />
+    <result column="refundaccount" property="refundaccount" jdbcType="VARCHAR" />
+    <result column="refundamount" property="refundamount" jdbcType="DECIMAL" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chargesbefore" property="chargesbefore" jdbcType="DECIMAL" />
+    <result column="custprepaidinterest" property="custprepaidinterest" jdbcType="DECIMAL" />
+    <result column="actualdays" property="actualdays" jdbcType="VARCHAR" />
+    <result column="interestreceivable" property="interestreceivable" jdbcType="DECIMAL" />
+    <result column="havechandeposit" property="havechandeposit" jdbcType="CHAR" />
+    <result column="payamount" property="payamount" jdbcType="DECIMAL" />
+    <result column="backamount" property="backamount" jdbcType="DECIMAL" />
+    <result column="outloandate" property="outloandate" jdbcType="TIMESTAMP" />
+    <result column="backloandate" property="backloandate" jdbcType="TIMESTAMP" />
+    <result column="borrowrate" property="borrowrate" jdbcType="DECIMAL" />
+    <result column="pretakeday" property="pretakeday" jdbcType="VARCHAR" />
+    <result column="shouldbackamount" property="shouldbackamount" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, otherrece, receivables, paydate, otherrefundtype, refundtype, removeamount, 
+    interestrepayment, channelsinglebond, otheramounts, cleardate, prepaidinterest, chanquotationrate, 
+    comrealrate, monthrate, borrowterm, backchanamount, realbackamount, backaccountbnk, 
+    backaccountname, refundaccount, refundamount, chgdt, chgtl, chargesbefore, custprepaidinterest, 
+    actualdays, interestreceivable, havechandeposit, payamount, backamount, outloandate, 
+    backloandate, borrowrate, pretakeday, shouldbackamount, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.RefundmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from refundment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from refundment
+    where workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from refundment
+    where workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.RefundmentExample" >
+    delete from refundment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Refundment" >
+    insert into refundment (workid, otherrece, receivables, 
+      paydate, otherrefundtype, refundtype, 
+      removeamount, interestrepayment, channelsinglebond, 
+      otheramounts, cleardate, prepaidinterest, 
+      chanquotationrate, comrealrate, monthrate, 
+      borrowterm, backchanamount, realbackamount, 
+      backaccountbnk, backaccountname, refundaccount, 
+      refundamount, chgdt, chgtl, 
+      chargesbefore, custprepaidinterest, actualdays, 
+      interestreceivable, havechandeposit, payamount, 
+      backamount, outloandate, backloandate, 
+      borrowrate, pretakeday, shouldbackamount, 
+      remark)
+    values (#{workid,jdbcType=VARCHAR}, #{otherrece,jdbcType=VARCHAR}, #{receivables,jdbcType=VARCHAR}, 
+      #{paydate,jdbcType=TIMESTAMP}, #{otherrefundtype,jdbcType=VARCHAR}, #{refundtype,jdbcType=VARCHAR}, 
+      #{removeamount,jdbcType=DECIMAL}, #{interestrepayment,jdbcType=DECIMAL}, #{channelsinglebond,jdbcType=DECIMAL}, 
+      #{otheramounts,jdbcType=DECIMAL}, #{cleardate,jdbcType=TIMESTAMP}, #{prepaidinterest,jdbcType=DECIMAL}, 
+      #{chanquotationrate,jdbcType=DECIMAL}, #{comrealrate,jdbcType=DECIMAL}, #{monthrate,jdbcType=DECIMAL}, 
+      #{borrowterm,jdbcType=VARCHAR}, #{backchanamount,jdbcType=DECIMAL}, #{realbackamount,jdbcType=DECIMAL}, 
+      #{backaccountbnk,jdbcType=VARCHAR}, #{backaccountname,jdbcType=VARCHAR}, #{refundaccount,jdbcType=VARCHAR}, 
+      #{refundamount,jdbcType=DECIMAL}, #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}, 
+      #{chargesbefore,jdbcType=DECIMAL}, #{custprepaidinterest,jdbcType=DECIMAL}, #{actualdays,jdbcType=VARCHAR}, 
+      #{interestreceivable,jdbcType=DECIMAL}, #{havechandeposit,jdbcType=CHAR}, #{payamount,jdbcType=DECIMAL}, 
+      #{backamount,jdbcType=DECIMAL}, #{outloandate,jdbcType=TIMESTAMP}, #{backloandate,jdbcType=TIMESTAMP}, 
+      #{borrowrate,jdbcType=DECIMAL}, #{pretakeday,jdbcType=VARCHAR}, #{shouldbackamount,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Refundment" >
+    insert into refundment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="otherrece != null" >
+        otherrece,
+      </if>
+      <if test="receivables != null" >
+        receivables,
+      </if>
+      <if test="paydate != null" >
+        paydate,
+      </if>
+      <if test="otherrefundtype != null" >
+        otherrefundtype,
+      </if>
+      <if test="refundtype != null" >
+        refundtype,
+      </if>
+      <if test="removeamount != null" >
+        removeamount,
+      </if>
+      <if test="interestrepayment != null" >
+        interestrepayment,
+      </if>
+      <if test="channelsinglebond != null" >
+        channelsinglebond,
+      </if>
+      <if test="otheramounts != null" >
+        otheramounts,
+      </if>
+      <if test="cleardate != null" >
+        cleardate,
+      </if>
+      <if test="prepaidinterest != null" >
+        prepaidinterest,
+      </if>
+      <if test="chanquotationrate != null" >
+        chanquotationrate,
+      </if>
+      <if test="comrealrate != null" >
+        comrealrate,
+      </if>
+      <if test="monthrate != null" >
+        monthrate,
+      </if>
+      <if test="borrowterm != null" >
+        borrowterm,
+      </if>
+      <if test="backchanamount != null" >
+        backchanamount,
+      </if>
+      <if test="realbackamount != null" >
+        realbackamount,
+      </if>
+      <if test="backaccountbnk != null" >
+        backaccountbnk,
+      </if>
+      <if test="backaccountname != null" >
+        backaccountname,
+      </if>
+      <if test="refundaccount != null" >
+        refundaccount,
+      </if>
+      <if test="refundamount != null" >
+        refundamount,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chargesbefore != null" >
+        chargesbefore,
+      </if>
+      <if test="custprepaidinterest != null" >
+        custprepaidinterest,
+      </if>
+      <if test="actualdays != null" >
+        actualdays,
+      </if>
+      <if test="interestreceivable != null" >
+        interestreceivable,
+      </if>
+      <if test="havechandeposit != null" >
+        havechandeposit,
+      </if>
+      <if test="payamount != null" >
+        payamount,
+      </if>
+      <if test="backamount != null" >
+        backamount,
+      </if>
+      <if test="outloandate != null" >
+        outloandate,
+      </if>
+      <if test="backloandate != null" >
+        backloandate,
+      </if>
+      <if test="borrowrate != null" >
+        borrowrate,
+      </if>
+      <if test="pretakeday != null" >
+        pretakeday,
+      </if>
+      <if test="shouldbackamount != null" >
+        shouldbackamount,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="otherrece != null" >
+        #{otherrece,jdbcType=VARCHAR},
+      </if>
+      <if test="receivables != null" >
+        #{receivables,jdbcType=VARCHAR},
+      </if>
+      <if test="paydate != null" >
+        #{paydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="otherrefundtype != null" >
+        #{otherrefundtype,jdbcType=VARCHAR},
+      </if>
+      <if test="refundtype != null" >
+        #{refundtype,jdbcType=VARCHAR},
+      </if>
+      <if test="removeamount != null" >
+        #{removeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="interestrepayment != null" >
+        #{interestrepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="channelsinglebond != null" >
+        #{channelsinglebond,jdbcType=DECIMAL},
+      </if>
+      <if test="otheramounts != null" >
+        #{otheramounts,jdbcType=DECIMAL},
+      </if>
+      <if test="cleardate != null" >
+        #{cleardate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prepaidinterest != null" >
+        #{prepaidinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="chanquotationrate != null" >
+        #{chanquotationrate,jdbcType=DECIMAL},
+      </if>
+      <if test="comrealrate != null" >
+        #{comrealrate,jdbcType=DECIMAL},
+      </if>
+      <if test="monthrate != null" >
+        #{monthrate,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowterm != null" >
+        #{borrowterm,jdbcType=VARCHAR},
+      </if>
+      <if test="backchanamount != null" >
+        #{backchanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="realbackamount != null" >
+        #{realbackamount,jdbcType=DECIMAL},
+      </if>
+      <if test="backaccountbnk != null" >
+        #{backaccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="backaccountname != null" >
+        #{backaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="refundaccount != null" >
+        #{refundaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundamount != null" >
+        #{refundamount,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chargesbefore != null" >
+        #{chargesbefore,jdbcType=DECIMAL},
+      </if>
+      <if test="custprepaidinterest != null" >
+        #{custprepaidinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="actualdays != null" >
+        #{actualdays,jdbcType=VARCHAR},
+      </if>
+      <if test="interestreceivable != null" >
+        #{interestreceivable,jdbcType=DECIMAL},
+      </if>
+      <if test="havechandeposit != null" >
+        #{havechandeposit,jdbcType=CHAR},
+      </if>
+      <if test="payamount != null" >
+        #{payamount,jdbcType=DECIMAL},
+      </if>
+      <if test="backamount != null" >
+        #{backamount,jdbcType=DECIMAL},
+      </if>
+      <if test="outloandate != null" >
+        #{outloandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="backloandate != null" >
+        #{backloandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="borrowrate != null" >
+        #{borrowrate,jdbcType=DECIMAL},
+      </if>
+      <if test="pretakeday != null" >
+        #{pretakeday,jdbcType=VARCHAR},
+      </if>
+      <if test="shouldbackamount != null" >
+        #{shouldbackamount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.RefundmentExample" resultType="java.lang.Integer" >
+    select count(*) from refundment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update refundment
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherrece != null" >
+        otherrece = #{record.otherrece,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivables != null" >
+        receivables = #{record.receivables,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paydate != null" >
+        paydate = #{record.paydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.otherrefundtype != null" >
+        otherrefundtype = #{record.otherrefundtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundtype != null" >
+        refundtype = #{record.refundtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.removeamount != null" >
+        removeamount = #{record.removeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interestrepayment != null" >
+        interestrepayment = #{record.interestrepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="record.channelsinglebond != null" >
+        channelsinglebond = #{record.channelsinglebond,jdbcType=DECIMAL},
+      </if>
+      <if test="record.otheramounts != null" >
+        otheramounts = #{record.otheramounts,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cleardate != null" >
+        cleardate = #{record.cleardate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prepaidinterest != null" >
+        prepaidinterest = #{record.prepaidinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chanquotationrate != null" >
+        chanquotationrate = #{record.chanquotationrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.comrealrate != null" >
+        comrealrate = #{record.comrealrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.monthrate != null" >
+        monthrate = #{record.monthrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.borrowterm != null" >
+        borrowterm = #{record.borrowterm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backchanamount != null" >
+        backchanamount = #{record.backchanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realbackamount != null" >
+        realbackamount = #{record.realbackamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.backaccountbnk != null" >
+        backaccountbnk = #{record.backaccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backaccountname != null" >
+        backaccountname = #{record.backaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundaccount != null" >
+        refundaccount = #{record.refundaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundamount != null" >
+        refundamount = #{record.refundamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chargesbefore != null" >
+        chargesbefore = #{record.chargesbefore,jdbcType=DECIMAL},
+      </if>
+      <if test="record.custprepaidinterest != null" >
+        custprepaidinterest = #{record.custprepaidinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.actualdays != null" >
+        actualdays = #{record.actualdays,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interestreceivable != null" >
+        interestreceivable = #{record.interestreceivable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.havechandeposit != null" >
+        havechandeposit = #{record.havechandeposit,jdbcType=CHAR},
+      </if>
+      <if test="record.payamount != null" >
+        payamount = #{record.payamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.backamount != null" >
+        backamount = #{record.backamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.outloandate != null" >
+        outloandate = #{record.outloandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.backloandate != null" >
+        backloandate = #{record.backloandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.borrowrate != null" >
+        borrowrate = #{record.borrowrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pretakeday != null" >
+        pretakeday = #{record.pretakeday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shouldbackamount != null" >
+        shouldbackamount = #{record.shouldbackamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update refundment
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      otherrece = #{record.otherrece,jdbcType=VARCHAR},
+      receivables = #{record.receivables,jdbcType=VARCHAR},
+      paydate = #{record.paydate,jdbcType=TIMESTAMP},
+      otherrefundtype = #{record.otherrefundtype,jdbcType=VARCHAR},
+      refundtype = #{record.refundtype,jdbcType=VARCHAR},
+      removeamount = #{record.removeamount,jdbcType=DECIMAL},
+      interestrepayment = #{record.interestrepayment,jdbcType=DECIMAL},
+      channelsinglebond = #{record.channelsinglebond,jdbcType=DECIMAL},
+      otheramounts = #{record.otheramounts,jdbcType=DECIMAL},
+      cleardate = #{record.cleardate,jdbcType=TIMESTAMP},
+      prepaidinterest = #{record.prepaidinterest,jdbcType=DECIMAL},
+      chanquotationrate = #{record.chanquotationrate,jdbcType=DECIMAL},
+      comrealrate = #{record.comrealrate,jdbcType=DECIMAL},
+      monthrate = #{record.monthrate,jdbcType=DECIMAL},
+      borrowterm = #{record.borrowterm,jdbcType=VARCHAR},
+      backchanamount = #{record.backchanamount,jdbcType=DECIMAL},
+      realbackamount = #{record.realbackamount,jdbcType=DECIMAL},
+      backaccountbnk = #{record.backaccountbnk,jdbcType=VARCHAR},
+      backaccountname = #{record.backaccountname,jdbcType=VARCHAR},
+      refundaccount = #{record.refundaccount,jdbcType=VARCHAR},
+      refundamount = #{record.refundamount,jdbcType=DECIMAL},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chargesbefore = #{record.chargesbefore,jdbcType=DECIMAL},
+      custprepaidinterest = #{record.custprepaidinterest,jdbcType=DECIMAL},
+      actualdays = #{record.actualdays,jdbcType=VARCHAR},
+      interestreceivable = #{record.interestreceivable,jdbcType=DECIMAL},
+      havechandeposit = #{record.havechandeposit,jdbcType=CHAR},
+      payamount = #{record.payamount,jdbcType=DECIMAL},
+      backamount = #{record.backamount,jdbcType=DECIMAL},
+      outloandate = #{record.outloandate,jdbcType=TIMESTAMP},
+      backloandate = #{record.backloandate,jdbcType=TIMESTAMP},
+      borrowrate = #{record.borrowrate,jdbcType=DECIMAL},
+      pretakeday = #{record.pretakeday,jdbcType=VARCHAR},
+      shouldbackamount = #{record.shouldbackamount,jdbcType=DECIMAL},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Refundment" >
+    update refundment
+    <set >
+      <if test="otherrece != null" >
+        otherrece = #{otherrece,jdbcType=VARCHAR},
+      </if>
+      <if test="receivables != null" >
+        receivables = #{receivables,jdbcType=VARCHAR},
+      </if>
+      <if test="paydate != null" >
+        paydate = #{paydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="otherrefundtype != null" >
+        otherrefundtype = #{otherrefundtype,jdbcType=VARCHAR},
+      </if>
+      <if test="refundtype != null" >
+        refundtype = #{refundtype,jdbcType=VARCHAR},
+      </if>
+      <if test="removeamount != null" >
+        removeamount = #{removeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="interestrepayment != null" >
+        interestrepayment = #{interestrepayment,jdbcType=DECIMAL},
+      </if>
+      <if test="channelsinglebond != null" >
+        channelsinglebond = #{channelsinglebond,jdbcType=DECIMAL},
+      </if>
+      <if test="otheramounts != null" >
+        otheramounts = #{otheramounts,jdbcType=DECIMAL},
+      </if>
+      <if test="cleardate != null" >
+        cleardate = #{cleardate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prepaidinterest != null" >
+        prepaidinterest = #{prepaidinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="chanquotationrate != null" >
+        chanquotationrate = #{chanquotationrate,jdbcType=DECIMAL},
+      </if>
+      <if test="comrealrate != null" >
+        comrealrate = #{comrealrate,jdbcType=DECIMAL},
+      </if>
+      <if test="monthrate != null" >
+        monthrate = #{monthrate,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowterm != null" >
+        borrowterm = #{borrowterm,jdbcType=VARCHAR},
+      </if>
+      <if test="backchanamount != null" >
+        backchanamount = #{backchanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="realbackamount != null" >
+        realbackamount = #{realbackamount,jdbcType=DECIMAL},
+      </if>
+      <if test="backaccountbnk != null" >
+        backaccountbnk = #{backaccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="backaccountname != null" >
+        backaccountname = #{backaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="refundaccount != null" >
+        refundaccount = #{refundaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundamount != null" >
+        refundamount = #{refundamount,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chargesbefore != null" >
+        chargesbefore = #{chargesbefore,jdbcType=DECIMAL},
+      </if>
+      <if test="custprepaidinterest != null" >
+        custprepaidinterest = #{custprepaidinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="actualdays != null" >
+        actualdays = #{actualdays,jdbcType=VARCHAR},
+      </if>
+      <if test="interestreceivable != null" >
+        interestreceivable = #{interestreceivable,jdbcType=DECIMAL},
+      </if>
+      <if test="havechandeposit != null" >
+        havechandeposit = #{havechandeposit,jdbcType=CHAR},
+      </if>
+      <if test="payamount != null" >
+        payamount = #{payamount,jdbcType=DECIMAL},
+      </if>
+      <if test="backamount != null" >
+        backamount = #{backamount,jdbcType=DECIMAL},
+      </if>
+      <if test="outloandate != null" >
+        outloandate = #{outloandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="backloandate != null" >
+        backloandate = #{backloandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="borrowrate != null" >
+        borrowrate = #{borrowrate,jdbcType=DECIMAL},
+      </if>
+      <if test="pretakeday != null" >
+        pretakeday = #{pretakeday,jdbcType=VARCHAR},
+      </if>
+      <if test="shouldbackamount != null" >
+        shouldbackamount = #{shouldbackamount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Refundment" >
+    update refundment
+    set otherrece = #{otherrece,jdbcType=VARCHAR},
+      receivables = #{receivables,jdbcType=VARCHAR},
+      paydate = #{paydate,jdbcType=TIMESTAMP},
+      otherrefundtype = #{otherrefundtype,jdbcType=VARCHAR},
+      refundtype = #{refundtype,jdbcType=VARCHAR},
+      removeamount = #{removeamount,jdbcType=DECIMAL},
+      interestrepayment = #{interestrepayment,jdbcType=DECIMAL},
+      channelsinglebond = #{channelsinglebond,jdbcType=DECIMAL},
+      otheramounts = #{otheramounts,jdbcType=DECIMAL},
+      cleardate = #{cleardate,jdbcType=TIMESTAMP},
+      prepaidinterest = #{prepaidinterest,jdbcType=DECIMAL},
+      chanquotationrate = #{chanquotationrate,jdbcType=DECIMAL},
+      comrealrate = #{comrealrate,jdbcType=DECIMAL},
+      monthrate = #{monthrate,jdbcType=DECIMAL},
+      borrowterm = #{borrowterm,jdbcType=VARCHAR},
+      backchanamount = #{backchanamount,jdbcType=DECIMAL},
+      realbackamount = #{realbackamount,jdbcType=DECIMAL},
+      backaccountbnk = #{backaccountbnk,jdbcType=VARCHAR},
+      backaccountname = #{backaccountname,jdbcType=VARCHAR},
+      refundaccount = #{refundaccount,jdbcType=VARCHAR},
+      refundamount = #{refundamount,jdbcType=DECIMAL},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chargesbefore = #{chargesbefore,jdbcType=DECIMAL},
+      custprepaidinterest = #{custprepaidinterest,jdbcType=DECIMAL},
+      actualdays = #{actualdays,jdbcType=VARCHAR},
+      interestreceivable = #{interestreceivable,jdbcType=DECIMAL},
+      havechandeposit = #{havechandeposit,jdbcType=CHAR},
+      payamount = #{payamount,jdbcType=DECIMAL},
+      backamount = #{backamount,jdbcType=DECIMAL},
+      outloandate = #{outloandate,jdbcType=TIMESTAMP},
+      backloandate = #{backloandate,jdbcType=TIMESTAMP},
+      borrowrate = #{borrowrate,jdbcType=DECIMAL},
+      pretakeday = #{pretakeday,jdbcType=VARCHAR},
+      shouldbackamount = #{shouldbackamount,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

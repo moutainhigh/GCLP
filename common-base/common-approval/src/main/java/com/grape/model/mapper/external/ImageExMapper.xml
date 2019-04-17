@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.ImageExMapper" >
+	<select id="selectByWorkid" parameterType="map" resultType="com.grape.controller.bean.ImageBean1">
+		select * from (select * from image where workid=#{workid}) i
+		left outer join (select filetype,filename from procnodefile where priductno=#{productno} GROUP BY filetype,filename) temp on i.imagetype=temp.filetype 
+		where i.imagename is not null and i.imagename!=''
+		order by CONVERT(temp.filetype,SIGNED) asc
+	</select>
+	<select id="selectByWorkidAndNodeid" parameterType="map" resultType="com.grape.controller.bean.ImageBean1">
+		select * from (select filetype,filename from procnodefile where priductno=#{productno} GROUP BY filetype,filename) temp
+		left outer join (select * from image where workid=#{workid} and nodeid=#{nodeid}) i on i.imagetype=temp.filetype 
+		where imageid is not null
+		order by CONVERT(temp.filetype,SIGNED) asc
+	</select>
+	<select id="selectByWorkidAndNodeid1" parameterType="map" resultType="com.grape.controller.bean.ImageBean1">
+		select * from image  
+		where imageid is not null and workid=#{workid} and imagetype in ('A001','A002','A003','A004','A005','A006','A007','A008','A009','A010','A011','A012','A013')
+		and savetype=#{id} and nodeid like CONCAT('%',#{productno},'%')
+		order by imagetype asc
+	</select>
+
+	<select id="selectChanapprove" parameterType="map" resultType="com.grape.controller.bean.ImageBean1">
+			SELECT DISTINCT
+			image.*,procnodefile.*
+		FROM
+			image
+		LEFT OUTER JOIN procnodefile on image.imagetype = procnodefile.filetype
+		WHERE
+			imageid IS NOT NULL
+		AND image.workid = #{workid}
+		AND image.nodeid=procnodefile.nodeid
+		and procnodefile.priductno=#{productno}
+		AND image.nodeid IN (
+			SELECT
+				nodeid
+			FROM
+				productnode
+			WHERE
+				nodename IN (
+					'渠道进件',
+					'资金方一级审批',
+					'完善资料'
+				)
+		)
+		ORDER BY
+			imagetype ASC
+	</select>
+</mapper>

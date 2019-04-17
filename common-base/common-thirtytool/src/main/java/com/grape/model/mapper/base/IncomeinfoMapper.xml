@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.IncomeinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Incomeinfo" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <id column="cerdid" property="cerdid" jdbcType="VARCHAR" />
+    <result column="halfyearreceipt" property="halfyearreceipt" jdbcType="DECIMAL" />
+    <result column="halfyaerincome" property="halfyaerincome" jdbcType="DECIMAL" />
+    <result column="rentincome" property="rentincome" jdbcType="DECIMAL" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="incomestatement" property="incomestatement" jdbcType="VARCHAR" />
+    <result column="netmargin" property="netmargin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, cerdid, halfyearreceipt, halfyaerincome, rentincome, chgtl, chgdt, incomestatement, 
+    netmargin
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.IncomeinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from incomeinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from incomeinfo
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from incomeinfo
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.IncomeinfoExample" >
+    delete from incomeinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Incomeinfo" >
+    insert into incomeinfo (workid, cerdid, halfyearreceipt, 
+      halfyaerincome, rentincome, chgtl, 
+      chgdt, incomestatement, netmargin
+      )
+    values (#{workid,jdbcType=VARCHAR}, #{cerdid,jdbcType=VARCHAR}, #{halfyearreceipt,jdbcType=DECIMAL}, 
+      #{halfyaerincome,jdbcType=DECIMAL}, #{rentincome,jdbcType=DECIMAL}, #{chgtl,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=TIMESTAMP}, #{incomestatement,jdbcType=VARCHAR}, #{netmargin,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Incomeinfo" >
+    insert into incomeinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="cerdid != null" >
+        cerdid,
+      </if>
+      <if test="halfyearreceipt != null" >
+        halfyearreceipt,
+      </if>
+      <if test="halfyaerincome != null" >
+        halfyaerincome,
+      </if>
+      <if test="rentincome != null" >
+        rentincome,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="incomestatement != null" >
+        incomestatement,
+      </if>
+      <if test="netmargin != null" >
+        netmargin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdid != null" >
+        #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="halfyearreceipt != null" >
+        #{halfyearreceipt,jdbcType=DECIMAL},
+      </if>
+      <if test="halfyaerincome != null" >
+        #{halfyaerincome,jdbcType=DECIMAL},
+      </if>
+      <if test="rentincome != null" >
+        #{rentincome,jdbcType=DECIMAL},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incomestatement != null" >
+        #{incomestatement,jdbcType=VARCHAR},
+      </if>
+      <if test="netmargin != null" >
+        #{netmargin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.IncomeinfoExample" resultType="java.lang.Integer" >
+    select count(*) from incomeinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update incomeinfo
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerdid != null" >
+        cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.halfyearreceipt != null" >
+        halfyearreceipt = #{record.halfyearreceipt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.halfyaerincome != null" >
+        halfyaerincome = #{record.halfyaerincome,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rentincome != null" >
+        rentincome = #{record.rentincome,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.incomestatement != null" >
+        incomestatement = #{record.incomestatement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netmargin != null" >
+        netmargin = #{record.netmargin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update incomeinfo
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      halfyearreceipt = #{record.halfyearreceipt,jdbcType=DECIMAL},
+      halfyaerincome = #{record.halfyaerincome,jdbcType=DECIMAL},
+      rentincome = #{record.rentincome,jdbcType=DECIMAL},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      incomestatement = #{record.incomestatement,jdbcType=VARCHAR},
+      netmargin = #{record.netmargin,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Incomeinfo" >
+    update incomeinfo
+    <set >
+      <if test="halfyearreceipt != null" >
+        halfyearreceipt = #{halfyearreceipt,jdbcType=DECIMAL},
+      </if>
+      <if test="halfyaerincome != null" >
+        halfyaerincome = #{halfyaerincome,jdbcType=DECIMAL},
+      </if>
+      <if test="rentincome != null" >
+        rentincome = #{rentincome,jdbcType=DECIMAL},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incomestatement != null" >
+        incomestatement = #{incomestatement,jdbcType=VARCHAR},
+      </if>
+      <if test="netmargin != null" >
+        netmargin = #{netmargin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Incomeinfo" >
+    update incomeinfo
+    set halfyearreceipt = #{halfyearreceipt,jdbcType=DECIMAL},
+      halfyaerincome = #{halfyaerincome,jdbcType=DECIMAL},
+      rentincome = #{rentincome,jdbcType=DECIMAL},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      incomestatement = #{incomestatement,jdbcType=VARCHAR},
+      netmargin = #{netmargin,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </update>
+</mapper>

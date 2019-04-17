@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.AccountquotaMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Accountquota" >
+    <id column="linenumber" property="linenumber" jdbcType="VARCHAR" />
+    <result column="linenumbersenior" property="linenumbersenior" jdbcType="VARCHAR" />
+    <result column="totalcreditline" property="totalcreditline" jdbcType="DECIMAL" />
+    <result column="mortgageamount" property="mortgageamount" jdbcType="DECIMAL" />
+    <result column="foreclosurefloorlines" property="foreclosurefloorlines" jdbcType="DECIMAL" />
+    <result column="remainingamount" property="remainingamount" jdbcType="DECIMAL" />
+    <result column="mortgageratio" property="mortgageratio" jdbcType="DECIMAL" />
+    <result column="foreclosurefloorratio" property="foreclosurefloorratio" jdbcType="DECIMAL" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    linenumber, linenumbersenior, totalcreditline, mortgageamount, foreclosurefloorlines, 
+    remainingamount, mortgageratio, foreclosurefloorratio, chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.AccountquotaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from accountquota
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from accountquota
+    where linenumber = #{linenumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from accountquota
+    where linenumber = #{linenumber,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.AccountquotaExample" >
+    delete from accountquota
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Accountquota" >
+    insert into accountquota (linenumber, linenumbersenior, totalcreditline, 
+      mortgageamount, foreclosurefloorlines, 
+      remainingamount, mortgageratio, foreclosurefloorratio, 
+      chgdt, chgtl)
+    values (#{linenumber,jdbcType=VARCHAR}, #{linenumbersenior,jdbcType=VARCHAR}, #{totalcreditline,jdbcType=DECIMAL}, 
+      #{mortgageamount,jdbcType=DECIMAL}, #{foreclosurefloorlines,jdbcType=DECIMAL}, 
+      #{remainingamount,jdbcType=DECIMAL}, #{mortgageratio,jdbcType=DECIMAL}, #{foreclosurefloorratio,jdbcType=DECIMAL}, 
+      #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Accountquota" >
+    insert into accountquota
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="linenumber != null" >
+        linenumber,
+      </if>
+      <if test="linenumbersenior != null" >
+        linenumbersenior,
+      </if>
+      <if test="totalcreditline != null" >
+        totalcreditline,
+      </if>
+      <if test="mortgageamount != null" >
+        mortgageamount,
+      </if>
+      <if test="foreclosurefloorlines != null" >
+        foreclosurefloorlines,
+      </if>
+      <if test="remainingamount != null" >
+        remainingamount,
+      </if>
+      <if test="mortgageratio != null" >
+        mortgageratio,
+      </if>
+      <if test="foreclosurefloorratio != null" >
+        foreclosurefloorratio,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="linenumber != null" >
+        #{linenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="linenumbersenior != null" >
+        #{linenumbersenior,jdbcType=VARCHAR},
+      </if>
+      <if test="totalcreditline != null" >
+        #{totalcreditline,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgageamount != null" >
+        #{mortgageamount,jdbcType=DECIMAL},
+      </if>
+      <if test="foreclosurefloorlines != null" >
+        #{foreclosurefloorlines,jdbcType=DECIMAL},
+      </if>
+      <if test="remainingamount != null" >
+        #{remainingamount,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgageratio != null" >
+        #{mortgageratio,jdbcType=DECIMAL},
+      </if>
+      <if test="foreclosurefloorratio != null" >
+        #{foreclosurefloorratio,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.AccountquotaExample" resultType="java.lang.Integer" >
+    select count(*) from accountquota
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update accountquota
+    <set >
+      <if test="record.linenumber != null" >
+        linenumber = #{record.linenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linenumbersenior != null" >
+        linenumbersenior = #{record.linenumbersenior,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalcreditline != null" >
+        totalcreditline = #{record.totalcreditline,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mortgageamount != null" >
+        mortgageamount = #{record.mortgageamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.foreclosurefloorlines != null" >
+        foreclosurefloorlines = #{record.foreclosurefloorlines,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remainingamount != null" >
+        remainingamount = #{record.remainingamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mortgageratio != null" >
+        mortgageratio = #{record.mortgageratio,jdbcType=DECIMAL},
+      </if>
+      <if test="record.foreclosurefloorratio != null" >
+        foreclosurefloorratio = #{record.foreclosurefloorratio,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update accountquota
+    set linenumber = #{record.linenumber,jdbcType=VARCHAR},
+      linenumbersenior = #{record.linenumbersenior,jdbcType=VARCHAR},
+      totalcreditline = #{record.totalcreditline,jdbcType=DECIMAL},
+      mortgageamount = #{record.mortgageamount,jdbcType=DECIMAL},
+      foreclosurefloorlines = #{record.foreclosurefloorlines,jdbcType=DECIMAL},
+      remainingamount = #{record.remainingamount,jdbcType=DECIMAL},
+      mortgageratio = #{record.mortgageratio,jdbcType=DECIMAL},
+      foreclosurefloorratio = #{record.foreclosurefloorratio,jdbcType=DECIMAL},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Accountquota" >
+    update accountquota
+    <set >
+      <if test="linenumbersenior != null" >
+        linenumbersenior = #{linenumbersenior,jdbcType=VARCHAR},
+      </if>
+      <if test="totalcreditline != null" >
+        totalcreditline = #{totalcreditline,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgageamount != null" >
+        mortgageamount = #{mortgageamount,jdbcType=DECIMAL},
+      </if>
+      <if test="foreclosurefloorlines != null" >
+        foreclosurefloorlines = #{foreclosurefloorlines,jdbcType=DECIMAL},
+      </if>
+      <if test="remainingamount != null" >
+        remainingamount = #{remainingamount,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgageratio != null" >
+        mortgageratio = #{mortgageratio,jdbcType=DECIMAL},
+      </if>
+      <if test="foreclosurefloorratio != null" >
+        foreclosurefloorratio = #{foreclosurefloorratio,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where linenumber = #{linenumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Accountquota" >
+    update accountquota
+    set linenumbersenior = #{linenumbersenior,jdbcType=VARCHAR},
+      totalcreditline = #{totalcreditline,jdbcType=DECIMAL},
+      mortgageamount = #{mortgageamount,jdbcType=DECIMAL},
+      foreclosurefloorlines = #{foreclosurefloorlines,jdbcType=DECIMAL},
+      remainingamount = #{remainingamount,jdbcType=DECIMAL},
+      mortgageratio = #{mortgageratio,jdbcType=DECIMAL},
+      foreclosurefloorratio = #{foreclosurefloorratio,jdbcType=DECIMAL},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where linenumber = #{linenumber,jdbcType=VARCHAR}
+  </update>
+</mapper>

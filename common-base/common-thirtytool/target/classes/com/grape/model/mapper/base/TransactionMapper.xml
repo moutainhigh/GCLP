@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.TransactionMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Transaction" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="accountno" property="accountno" jdbcType="VARCHAR" />
+    <result column="balancetype" property="balancetype" jdbcType="VARCHAR" />
+    <result column="transname" property="transname" jdbcType="VARCHAR" />
+    <result column="transaccount" property="transaccount" jdbcType="VARCHAR" />
+    <result column="transway" property="transway" jdbcType="VARCHAR" />
+    <result column="transamount" property="transamount" jdbcType="DECIMAL" />
+    <result column="transtime" property="transtime" jdbcType="TIMESTAMP" />
+    <result column="tradingnote" property="tradingnote" jdbcType="VARCHAR" />
+    <result column="accountamount" property="accountamount" jdbcType="DECIMAL" />
+    <result column="dealman" property="dealman" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, accountno, balancetype, transname, transaccount, transway, transamount, transtime, 
+    tradingnote, accountamount, dealman
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.TransactionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from transaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from transaction
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from transaction
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.TransactionExample" >
+    delete from transaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Transaction" >
+    insert into transaction (id, accountno, balancetype, 
+      transname, transaccount, transway, 
+      transamount, transtime, tradingnote, 
+      accountamount, dealman)
+    values (#{id,jdbcType=VARCHAR}, #{accountno,jdbcType=VARCHAR}, #{balancetype,jdbcType=VARCHAR}, 
+      #{transname,jdbcType=VARCHAR}, #{transaccount,jdbcType=VARCHAR}, #{transway,jdbcType=VARCHAR}, 
+      #{transamount,jdbcType=DECIMAL}, #{transtime,jdbcType=TIMESTAMP}, #{tradingnote,jdbcType=VARCHAR}, 
+      #{accountamount,jdbcType=DECIMAL}, #{dealman,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Transaction" >
+    insert into transaction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accountno != null" >
+        accountno,
+      </if>
+      <if test="balancetype != null" >
+        balancetype,
+      </if>
+      <if test="transname != null" >
+        transname,
+      </if>
+      <if test="transaccount != null" >
+        transaccount,
+      </if>
+      <if test="transway != null" >
+        transway,
+      </if>
+      <if test="transamount != null" >
+        transamount,
+      </if>
+      <if test="transtime != null" >
+        transtime,
+      </if>
+      <if test="tradingnote != null" >
+        tradingnote,
+      </if>
+      <if test="accountamount != null" >
+        accountamount,
+      </if>
+      <if test="dealman != null" >
+        dealman,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="accountno != null" >
+        #{accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="balancetype != null" >
+        #{balancetype,jdbcType=VARCHAR},
+      </if>
+      <if test="transname != null" >
+        #{transname,jdbcType=VARCHAR},
+      </if>
+      <if test="transaccount != null" >
+        #{transaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="transway != null" >
+        #{transway,jdbcType=VARCHAR},
+      </if>
+      <if test="transamount != null" >
+        #{transamount,jdbcType=DECIMAL},
+      </if>
+      <if test="transtime != null" >
+        #{transtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradingnote != null" >
+        #{tradingnote,jdbcType=VARCHAR},
+      </if>
+      <if test="accountamount != null" >
+        #{accountamount,jdbcType=DECIMAL},
+      </if>
+      <if test="dealman != null" >
+        #{dealman,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.TransactionExample" resultType="java.lang.Integer" >
+    select count(*) from transaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update transaction
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountno != null" >
+        accountno = #{record.accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balancetype != null" >
+        balancetype = #{record.balancetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transname != null" >
+        transname = #{record.transname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transaccount != null" >
+        transaccount = #{record.transaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transway != null" >
+        transway = #{record.transway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transamount != null" >
+        transamount = #{record.transamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.transtime != null" >
+        transtime = #{record.transtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tradingnote != null" >
+        tradingnote = #{record.tradingnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountamount != null" >
+        accountamount = #{record.accountamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dealman != null" >
+        dealman = #{record.dealman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update transaction
+    set id = #{record.id,jdbcType=VARCHAR},
+      accountno = #{record.accountno,jdbcType=VARCHAR},
+      balancetype = #{record.balancetype,jdbcType=VARCHAR},
+      transname = #{record.transname,jdbcType=VARCHAR},
+      transaccount = #{record.transaccount,jdbcType=VARCHAR},
+      transway = #{record.transway,jdbcType=VARCHAR},
+      transamount = #{record.transamount,jdbcType=DECIMAL},
+      transtime = #{record.transtime,jdbcType=TIMESTAMP},
+      tradingnote = #{record.tradingnote,jdbcType=VARCHAR},
+      accountamount = #{record.accountamount,jdbcType=DECIMAL},
+      dealman = #{record.dealman,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Transaction" >
+    update transaction
+    <set >
+      <if test="accountno != null" >
+        accountno = #{accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="balancetype != null" >
+        balancetype = #{balancetype,jdbcType=VARCHAR},
+      </if>
+      <if test="transname != null" >
+        transname = #{transname,jdbcType=VARCHAR},
+      </if>
+      <if test="transaccount != null" >
+        transaccount = #{transaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="transway != null" >
+        transway = #{transway,jdbcType=VARCHAR},
+      </if>
+      <if test="transamount != null" >
+        transamount = #{transamount,jdbcType=DECIMAL},
+      </if>
+      <if test="transtime != null" >
+        transtime = #{transtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradingnote != null" >
+        tradingnote = #{tradingnote,jdbcType=VARCHAR},
+      </if>
+      <if test="accountamount != null" >
+        accountamount = #{accountamount,jdbcType=DECIMAL},
+      </if>
+      <if test="dealman != null" >
+        dealman = #{dealman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Transaction" >
+    update transaction
+    set accountno = #{accountno,jdbcType=VARCHAR},
+      balancetype = #{balancetype,jdbcType=VARCHAR},
+      transname = #{transname,jdbcType=VARCHAR},
+      transaccount = #{transaccount,jdbcType=VARCHAR},
+      transway = #{transway,jdbcType=VARCHAR},
+      transamount = #{transamount,jdbcType=DECIMAL},
+      transtime = #{transtime,jdbcType=TIMESTAMP},
+      tradingnote = #{tradingnote,jdbcType=VARCHAR},
+      accountamount = #{accountamount,jdbcType=DECIMAL},
+      dealman = #{dealman,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

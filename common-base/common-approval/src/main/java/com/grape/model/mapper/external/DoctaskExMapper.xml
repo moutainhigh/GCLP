@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.DoctaskExMapper" >
+	<select id="selectAllLoaninfo" parameterType="map" resultType="com.grape.controller.request.AllLoaninfo">
+select doc.workid,doc.productno,org.organizationname,doc.userid,doc.level,doc.contractno,doc.contractno,doc.applydate,
+		area.areaname,
+		except.expectapplyamount,except.expectapplyrate,except.expectapplyyear,except.repaymethod,except.monthamount,except.extotaluseamount , except.extotaluseterm ,
+		other.usageofloan,other.usageloanplan,other.repaysource,other.repayplan,
+		bnk.accountname,bnk.account,bnk.bnk,bnk.repayaccountname,bnk.repayaccount,bnk.repayaccountbnk ,
+		pro.producttype,pro.productname,
+		per.workername,
+		repay.repaymethod as repaymethod1,repay.batchorg,repay.sumofamount,repay.interestrate,repay.loanlimittime,repay.useofloan,repay.totaluseamount,repay.totaluseterm,
+		pos.firstloandate as firstloandate, pos.settledate as settledate, pos.maturitydate as maturitydate , pos.nextrepaydate as nextrepaydate , pos.loanbalance as loanbalance,
+		case when house.sum = 0 then 0 else CAST((repay.sumofamount / house.sum) as decimal(17,6)) end cvs
+		from doctask doc
+		left outer join organization org on org.organizationno=doc.channelno
+		left outer join product pro on pro.productno=doc.productno
+		left outer join person per on per.workerid=doc.userid
+		left outer join area area on area.areaid=doc.areaid
+		left outer join exceptloaninfo except on except.workid=doc.workid
+		left outer join otherapplyinfo other on other.workid=doc.workid
+		left outer join bnkaccount bnk on bnk.workid=doc.workid
+		left outer join postloaninfo pos on pos.workid=doc.workid
+		left outer join repaytoinfo repay on repay.workid=doc.workid and repay.id=(select max(id) from repaytoinfo where workid=#{workid})
+		left join (select houseassess.workid,SUM(houseassess.assess_control_total) sum from houseassess GROUP BY houseassess.workid)
+		house on house.workid=repay.workid AND repay.id=(select max(id) from repaytoinfo where workid=#{workid})
+		where doc.workid=#{workid}
+	</select>
+	
+	<select id="selectHouseassess" resultType="com.grape.model.db.Houseassess">
+	select assesstotal from houseassess where assessid = "XITONG" and workid=#{workid}
+	</select>
+	
+	<select id="selectProducttype" resultType="com.grape.model.db.Product">
+	select pro.producttype from doctask doc left outer join product pro on pro.productno=doc.productno 
+	where doc.workid=#{workid}
+	</select>
+	
+	<!-- <select id="selectFinalrepaytoinfo" resultType="com.grape.model.db.Repaytoinfo">
+	select * from repaytoinfo where workid=#{workid} and isfinilyflg='1'
+	</select> -->
+	
+	<select id="selectProductByWorkid">
+	select repaydate from repayplan 
+	LEFT OUTER JOIN postloaninfo on repayplan.workid = postloaninfo.workid
+ 	ORDER BY repaydate desc
+ 	where repayplan.workid=#{workid}
+	</select>
+	
+	<select id="selectrepaymethodAndratetype" resultType="com.grape.model.db.Product">
+	select * from product where productno =
+	(SELECT
+			CASE WHEN (select product.producttype from product where product.productno in (select doctask.productno from doctask where workid = #{workid}))= "5"
+					THEN
+					(select product.productno from product where product.productno=
+	(select productno from doctask where doctask.workid = (select applyforex.workid from applyforex where applyforex.newworkid=#{workid})))
+			ELSE
+					(select product.productno from product where product.productno in (select doctask.productno from doctask where workid = #{workid}))
+					END trueproductno
+
+	FROM doctask where doctask.workid=#{workid})
+	</select>
+	
+	<select id="selectIncomeinfo" resultType="com.grape.controller.bean.Monthtotal" parameterType="map">
+		select sum(amount) as incomeamount,left(incomedate,7) as incomedate from bnkincomeinfo
+		where workid=#{workid} GROUP BY left(incomedate,7) order by incomedate desc
+
+	</select>
+	
+	<select id="selectAssessnotation" resultType="java.lang.String" parameterType="map">
+		select assetnote from chanapprovalform
+	    where id=(select MAX(id) as id from(
+	    select * from chanapprovalform where workid=#{workid} and suggestmortgagerate is not null and suggestmortgagerate!='') temp);
+	</select>
+	
+	<select id="selectIncomeNotation" resultType="com.grape.model.db.Chanapprovalform" parameterType="map">
+		select * from chanapprovalform
+	    where id=(select MAX(id) as id from(
+	    select * from chanapprovalform where workid=#{workid} and suggestmortgagerate is not null and suggestmortgagerate!='') temp);
+	</select>
+	
+	<select id="selectAssessnotation2" resultType="java.lang.String" parameterType="map">
+		select assetinfonote1 from chanapprovalform
+	    where id=(select MAX(id) as id from(
+	    select * from chanapprovalform where workid=#{workid} and suggestmortgagerate is not null and suggestmortgagerate!='') temp);
+	</select>
+	<select id="selectWorkhisByWorkid" resultType="com.grape.model.db.Workhistory" parameterType="map">
+		 SELECT a.* FROM workhistory a INNER JOIN (SELECT node,MAX(id) as max_id FROM workhistory 
+		 GROUP BY node DESC) b ON a.node=b.node AND a.id=b.max_id where stage=#{stage} and workid=#{workid};
+	</select>
+</mapper>

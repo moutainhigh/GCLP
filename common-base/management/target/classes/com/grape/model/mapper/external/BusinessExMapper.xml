@@ -1,0 +1,300 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.BusinessExMapper">
+    <select id="getDeclarationBean" resultType="com.grape.controller.reponse.bean.DeclarationBean" parameterType="map">
+        select count(1) num,SUM(CASE WHEN exceptloaninfo.expectapplyamount = 0 then 0 else
+        exceptloaninfo.expectapplyamount end ) sum
+        from doctask doctask LEFT JOIN exceptloaninfo exceptloaninfo on exceptloaninfo.workid=doctask.workid where 1=1
+        <if test=" areaid !=null and areaid !='' ">
+            and doctask.areaid = #{areaid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and doctask.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" channelno !=null and channelno !='' ">
+            and doctask.channelno = #{channelno , jdbcType=VARCHAR}
+        </if>
+        <if test=" fundno !=null and fundno !='' ">
+            and doctask.fundno = #{fundno , jdbcType=VARCHAR}
+        </if>
+        <if test=" aisleno !=null and aisleno !='' ">
+            and doctask.aisleno = #{aisleno , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+
+    <select id="getReplyBean" resultType="com.grape.controller.reponse.bean.ReplyBean" parameterType="map">
+        select count(1) num,SUM(CASE WHEN repaytoinfo.sumofamount = 0 then 0 else repaytoinfo.sumofamount end ) sum
+        from doctask doctask
+        LEFT JOIN workitem workitem on workitem.workid=doctask.workid
+        LEFT JOIN repaytoinfo repaytoinfo on repaytoinfo.workid=doctask.workid
+        where workitem.fork='0' and workitem.branch='0' and repaytoinfo.isfinilyflg='1' and
+        (workitem.stage='5' or workitem.stage='6' or workitem.stage='7' or workitem.stage='8' or workitem.stage='E9')
+        <if test=" areaid !=null and areaid !='' ">
+            and doctask.areaid = #{areaid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and doctask.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" channelno !=null and channelno !='' ">
+            and doctask.channelno = #{channelno , jdbcType=VARCHAR}
+        </if>
+        <if test=" fundno !=null and fundno !='' ">
+            and doctask.fundno = #{fundno , jdbcType=VARCHAR}
+        </if>
+        <if test=" aisleno !=null and aisleno !='' ">
+            and doctask.aisleno = #{aisleno , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+
+    <select id="getRefusedBean" resultType="com.grape.controller.reponse.bean.RefusedBean" parameterType="map">
+        select count(1) num,SUM(CASE WHEN exceptloaninfo.expectapplyamount = 0 then 0 else
+        exceptloaninfo.expectapplyamount end ) sum
+        from doctask doctask
+        LEFT JOIN workitem workitem on workitem.workid=doctask.workid
+        LEFT JOIN exceptloaninfo exceptloaninfo on exceptloaninfo.workid=doctask.workid
+        where workitem.fork='0' and workitem.branch='0' and workitem.stage='E7'
+        <if test=" areaid !=null and areaid !='' ">
+            and doctask.areaid = #{areaid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and doctask.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" channelno !=null and channelno !='' ">
+            and doctask.channelno = #{channelno , jdbcType=VARCHAR}
+        </if>
+        <if test=" fundno !=null and fundno !='' ">
+            and doctask.fundno = #{fundno , jdbcType=VARCHAR}
+        </if>
+        <if test=" aisleno !=null and aisleno !='' ">
+            and doctask.aisleno = #{aisleno , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+
+    <select id="getRefundBean" resultType="com.grape.controller.reponse.bean.RefundBean" parameterType="map">
+        select count(1) num,SUM(CASE WHEN exceptloaninfo.expectapplyamount = 0 then 0 else
+        exceptloaninfo.expectapplyamount end ) sum
+        from doctask doctask
+        LEFT JOIN workitem workitem on workitem.workid=doctask.workid
+        LEFT JOIN exceptloaninfo exceptloaninfo on exceptloaninfo.workid=doctask.workid
+        where workitem.fork='0' and workitem.branch='0' and workitem.stage='E8'
+        <if test=" areaid !=null and areaid !='' ">
+            and doctask.areaid = #{areaid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and doctask.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" channelno !=null and channelno !='' ">
+            and doctask.channelno = #{channelno , jdbcType=VARCHAR}
+        </if>
+        <if test=" fundno !=null and fundno !='' ">
+            and doctask.fundno = #{fundno , jdbcType=VARCHAR}
+        </if>
+        <if test=" aisleno !=null and aisleno !='' ">
+            and doctask.aisleno = #{aisleno , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+
+    <select id="getLendingBean" resultType="com.grape.controller.reponse.bean.LendingBean" parameterType="map">
+        select count(1) num,SUM(CASE WHEN postloaninfo.alreadymoney = 0 then 0 else postloaninfo.alreadymoney end ) sum
+        from doctask doctask
+        LEFT JOIN workitem workitem on workitem.workid=doctask.workid
+        LEFT JOIN postloaninfo postloaninfo on postloaninfo.workid=doctask.workid
+        where workitem.fork='0' and workitem.branch='0' and
+        (workitem.stage='7' or workitem.stage='8' or workitem.stage='E9')
+        <if test=" areaid !=null and areaid !='' ">
+            and doctask.areaid = #{areaid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and doctask.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" channelno !=null and channelno !='' ">
+            and doctask.channelno = #{channelno , jdbcType=VARCHAR}
+        </if>
+        <if test=" fundno !=null and fundno !='' ">
+            and doctask.fundno = #{fundno , jdbcType=VARCHAR}
+        </if>
+        <if test=" aisleno !=null and aisleno !='' ">
+            and doctask.aisleno = #{aisleno , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+
+    <select id="mortgageamount" resultType="Integer" parameterType="map">
+        select count(1) num from doctask doctask
+        LEFT JOIN workitem workitem on workitem.workid=doctask.workid
+        where workitem.fork='0' and workitem.branch='0' and
+        (workitem.stage='6' or workitem.stage='7' or workitem.stage='8' or workitem.stage='E9')
+        <if test=" areaid !=null and areaid !='' ">
+            and doctask.areaid = #{areaid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and doctask.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" channelno !=null and channelno !='' ">
+            and doctask.channelno = #{channelno , jdbcType=VARCHAR}
+        </if>
+        <if test=" fundno !=null and fundno !='' ">
+            and doctask.fundno = #{fundno , jdbcType=VARCHAR}
+        </if>
+        <if test=" aisleno !=null and aisleno !='' ">
+            and doctask.aisleno = #{aisleno , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+
+    <select id="notmortgageamount" resultType="Integer" parameterType="map">
+        select count(1) num from doctask doctask
+        LEFT JOIN workitem workitem on workitem.workid=doctask.workid
+        where workitem.fork='0' and workitem.branch='0' and workitem.stage='5'
+        <if test=" areaid !=null and areaid !='' ">
+            and doctask.areaid = #{areaid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and doctask.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" channelno !=null and channelno !='' ">
+            and doctask.channelno = #{channelno , jdbcType=VARCHAR}
+        </if>
+        <if test=" fundno !=null and fundno !='' ">
+            and doctask.fundno = #{fundno , jdbcType=VARCHAR}
+        </if>
+        <if test=" aisleno !=null and aisleno !='' ">
+            and doctask.aisleno = #{aisleno , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+
+    <select id="getWaitingBean" resultType="com.grape.controller.reponse.bean.WaitingBean" parameterType="map">
+        select count(1) num,SUM(CASE WHEN postloaninfo.remainamount = 0 then 0 else postloaninfo.remainamount end ) sum
+        from doctask doctask
+        LEFT JOIN workitem workitem on workitem.workid=doctask.workid
+        LEFT JOIN postloaninfo postloaninfo on postloaninfo.workid=doctask.workid
+        where workitem.fork='0' and workitem.branch='0' and workitem.stage='6'
+        <if test=" areaid !=null and areaid !='' ">
+            and doctask.areaid = #{areaid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and doctask.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" channelno !=null and channelno !='' ">
+            and doctask.channelno = #{channelno , jdbcType=VARCHAR}
+        </if>
+        <if test=" fundno !=null and fundno !='' ">
+            and doctask.fundno = #{fundno , jdbcType=VARCHAR}
+        </if>
+        <if test=" aisleno !=null and aisleno !='' ">
+            and doctask.aisleno = #{aisleno , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+
+    <select id="getforensics" resultType="Integer" parameterType="map">
+        select count(1) from
+        (select doctask.workid from doctask doctask
+        LEFT JOIN image image on image.workid=doctask.workid
+        where image.imagetype = '95'
+        <if test=" areaid !=null and areaid !='' ">
+            and doctask.areaid = #{areaid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and doctask.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" channelno !=null and channelno !='' ">
+            and doctask.channelno = #{channelno , jdbcType=VARCHAR}
+        </if>
+        <if test=" fundno !=null and fundno !='' ">
+            and doctask.fundno = #{fundno , jdbcType=VARCHAR}
+        </if>
+        <if test=" aisleno !=null and aisleno !='' ">
+            and doctask.aisleno = #{aisleno , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        GROUP BY doctask.workid) temp1
+    </select>
+
+
+    <select id="getnotforensics" resultType="Integer" parameterType="map">
+        select count(1) from
+        (select doctask.workid from doctask doctask
+        LEFT JOIN image image on image.workid=doctask.workid
+        where image.imagetype != '95'
+        <if test=" areaid !=null and areaid !='' ">
+            and doctask.areaid = #{areaid , jdbcType=VARCHAR}
+        </if>
+        <if test=" productno !=null and productno !='' ">
+            and doctask.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" channelno !=null and channelno !='' ">
+            and doctask.channelno = #{channelno , jdbcType=VARCHAR}
+        </if>
+        <if test=" fundno !=null and fundno !='' ">
+            and doctask.fundno = #{fundno , jdbcType=VARCHAR}
+        </if>
+        <if test=" aisleno !=null and aisleno !='' ">
+            and doctask.aisleno = #{aisleno , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and doctask.applydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and doctask.applydate &lt;= #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        GROUP BY doctask.workid) temp1
+    </select>
+</mapper>

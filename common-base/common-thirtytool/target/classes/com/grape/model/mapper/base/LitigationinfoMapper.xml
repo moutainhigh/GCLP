@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.LitigationinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Litigationinfo" >
+    <id column="cerdid" property="cerdid" jdbcType="VARCHAR" />
+    <id column="querytype" property="querytype" jdbcType="VARCHAR" />
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="isborrlitigation" property="isborrlitigation" jdbcType="CHAR" />
+    <result column="iscomlitigation" property="iscomlitigation" jdbcType="CHAR" />
+    <result column="litigationstate" property="litigationstate" jdbcType="VARCHAR" />
+    <result column="targetamount" property="targetamount" jdbcType="DECIMAL" />
+    <result column="litigationtype" property="litigationtype" jdbcType="VARCHAR" />
+    <result column="isdishonest" property="isdishonest" jdbcType="CHAR" />
+    <result column="litigationexplain" property="litigationexplain" jdbcType="VARCHAR" />
+    <result column="imagename" property="imagename" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cerdid, querytype, workid, isborrlitigation, iscomlitigation, litigationstate, targetamount, 
+    litigationtype, isdishonest, litigationexplain, imagename, chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.LitigationinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from litigationinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from litigationinfo
+    where cerdid = #{cerdid,jdbcType=VARCHAR}
+      and querytype = #{querytype,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from litigationinfo
+    where cerdid = #{cerdid,jdbcType=VARCHAR}
+      and querytype = #{querytype,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.LitigationinfoExample" >
+    delete from litigationinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Litigationinfo" >
+    insert into litigationinfo (cerdid, querytype, workid, 
+      isborrlitigation, iscomlitigation, litigationstate, 
+      targetamount, litigationtype, isdishonest, 
+      litigationexplain, imagename, chgdt, 
+      chgtl)
+    values (#{cerdid,jdbcType=VARCHAR}, #{querytype,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, 
+      #{isborrlitigation,jdbcType=CHAR}, #{iscomlitigation,jdbcType=CHAR}, #{litigationstate,jdbcType=VARCHAR}, 
+      #{targetamount,jdbcType=DECIMAL}, #{litigationtype,jdbcType=VARCHAR}, #{isdishonest,jdbcType=CHAR}, 
+      #{litigationexplain,jdbcType=VARCHAR}, #{imagename,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{chgtl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Litigationinfo" >
+    insert into litigationinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cerdid != null" >
+        cerdid,
+      </if>
+      <if test="querytype != null" >
+        querytype,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="isborrlitigation != null" >
+        isborrlitigation,
+      </if>
+      <if test="iscomlitigation != null" >
+        iscomlitigation,
+      </if>
+      <if test="litigationstate != null" >
+        litigationstate,
+      </if>
+      <if test="targetamount != null" >
+        targetamount,
+      </if>
+      <if test="litigationtype != null" >
+        litigationtype,
+      </if>
+      <if test="isdishonest != null" >
+        isdishonest,
+      </if>
+      <if test="litigationexplain != null" >
+        litigationexplain,
+      </if>
+      <if test="imagename != null" >
+        imagename,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cerdid != null" >
+        #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="querytype != null" >
+        #{querytype,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="isborrlitigation != null" >
+        #{isborrlitigation,jdbcType=CHAR},
+      </if>
+      <if test="iscomlitigation != null" >
+        #{iscomlitigation,jdbcType=CHAR},
+      </if>
+      <if test="litigationstate != null" >
+        #{litigationstate,jdbcType=VARCHAR},
+      </if>
+      <if test="targetamount != null" >
+        #{targetamount,jdbcType=DECIMAL},
+      </if>
+      <if test="litigationtype != null" >
+        #{litigationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="isdishonest != null" >
+        #{isdishonest,jdbcType=CHAR},
+      </if>
+      <if test="litigationexplain != null" >
+        #{litigationexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="imagename != null" >
+        #{imagename,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.LitigationinfoExample" resultType="java.lang.Integer" >
+    select count(*) from litigationinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update litigationinfo
+    <set >
+      <if test="record.cerdid != null" >
+        cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.querytype != null" >
+        querytype = #{record.querytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isborrlitigation != null" >
+        isborrlitigation = #{record.isborrlitigation,jdbcType=CHAR},
+      </if>
+      <if test="record.iscomlitigation != null" >
+        iscomlitigation = #{record.iscomlitigation,jdbcType=CHAR},
+      </if>
+      <if test="record.litigationstate != null" >
+        litigationstate = #{record.litigationstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetamount != null" >
+        targetamount = #{record.targetamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.litigationtype != null" >
+        litigationtype = #{record.litigationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdishonest != null" >
+        isdishonest = #{record.isdishonest,jdbcType=CHAR},
+      </if>
+      <if test="record.litigationexplain != null" >
+        litigationexplain = #{record.litigationexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imagename != null" >
+        imagename = #{record.imagename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update litigationinfo
+    set cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      querytype = #{record.querytype,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      isborrlitigation = #{record.isborrlitigation,jdbcType=CHAR},
+      iscomlitigation = #{record.iscomlitigation,jdbcType=CHAR},
+      litigationstate = #{record.litigationstate,jdbcType=VARCHAR},
+      targetamount = #{record.targetamount,jdbcType=DECIMAL},
+      litigationtype = #{record.litigationtype,jdbcType=VARCHAR},
+      isdishonest = #{record.isdishonest,jdbcType=CHAR},
+      litigationexplain = #{record.litigationexplain,jdbcType=VARCHAR},
+      imagename = #{record.imagename,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Litigationinfo" >
+    update litigationinfo
+    <set >
+      <if test="isborrlitigation != null" >
+        isborrlitigation = #{isborrlitigation,jdbcType=CHAR},
+      </if>
+      <if test="iscomlitigation != null" >
+        iscomlitigation = #{iscomlitigation,jdbcType=CHAR},
+      </if>
+      <if test="litigationstate != null" >
+        litigationstate = #{litigationstate,jdbcType=VARCHAR},
+      </if>
+      <if test="targetamount != null" >
+        targetamount = #{targetamount,jdbcType=DECIMAL},
+      </if>
+      <if test="litigationtype != null" >
+        litigationtype = #{litigationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="isdishonest != null" >
+        isdishonest = #{isdishonest,jdbcType=CHAR},
+      </if>
+      <if test="litigationexplain != null" >
+        litigationexplain = #{litigationexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="imagename != null" >
+        imagename = #{imagename,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cerdid = #{cerdid,jdbcType=VARCHAR}
+      and querytype = #{querytype,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Litigationinfo" >
+    update litigationinfo
+    set isborrlitigation = #{isborrlitigation,jdbcType=CHAR},
+      iscomlitigation = #{iscomlitigation,jdbcType=CHAR},
+      litigationstate = #{litigationstate,jdbcType=VARCHAR},
+      targetamount = #{targetamount,jdbcType=DECIMAL},
+      litigationtype = #{litigationtype,jdbcType=VARCHAR},
+      isdishonest = #{isdishonest,jdbcType=CHAR},
+      litigationexplain = #{litigationexplain,jdbcType=VARCHAR},
+      imagename = #{imagename,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where cerdid = #{cerdid,jdbcType=VARCHAR}
+      and querytype = #{querytype,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

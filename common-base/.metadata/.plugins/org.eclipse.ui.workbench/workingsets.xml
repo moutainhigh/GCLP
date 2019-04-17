@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1552880812362_1" label="common-base" name="common-base">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/common-auth" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/common-thirtytool" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/common-approval" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/frame-home" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/management" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/common-cloud-zuul" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/common-cloud-eureka" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/workflow" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/commen-company" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1552880754826_0" label="Window Working Set" name="Aggregate for window 1552880754826"/>
+</workingSetManager>

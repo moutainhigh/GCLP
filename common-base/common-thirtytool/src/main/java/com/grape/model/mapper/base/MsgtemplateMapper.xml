@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.MsgtemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Msgtemplate" >
+    <id column="templateno" property="templateno" jdbcType="VARCHAR" />
+    <result column="templatecontent" property="templatecontent" jdbcType="VARCHAR" />
+    <result column="templatename" property="templatename" jdbcType="VARCHAR" />
+    <result column="noticetype" property="noticetype" jdbcType="VARCHAR" />
+    <result column="templatetype" property="templatetype" jdbcType="VARCHAR" />
+    <result column="removeflg" property="removeflg" jdbcType="CHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    templateno, templatecontent, templatename, noticetype, templatetype, removeflg, chgtl, 
+    chgdt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.MsgtemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from msgtemplate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from msgtemplate
+    where templateno = #{templateno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from msgtemplate
+    where templateno = #{templateno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.MsgtemplateExample" >
+    delete from msgtemplate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Msgtemplate" >
+    insert into msgtemplate (templateno, templatecontent, templatename, 
+      noticetype, templatetype, removeflg, 
+      chgtl, chgdt)
+    values (#{templateno,jdbcType=VARCHAR}, #{templatecontent,jdbcType=VARCHAR}, #{templatename,jdbcType=VARCHAR}, 
+      #{noticetype,jdbcType=VARCHAR}, #{templatetype,jdbcType=VARCHAR}, #{removeflg,jdbcType=CHAR}, 
+      #{chgtl,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Msgtemplate" >
+    insert into msgtemplate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateno != null" >
+        templateno,
+      </if>
+      <if test="templatecontent != null" >
+        templatecontent,
+      </if>
+      <if test="templatename != null" >
+        templatename,
+      </if>
+      <if test="noticetype != null" >
+        noticetype,
+      </if>
+      <if test="templatetype != null" >
+        templatetype,
+      </if>
+      <if test="removeflg != null" >
+        removeflg,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateno != null" >
+        #{templateno,jdbcType=VARCHAR},
+      </if>
+      <if test="templatecontent != null" >
+        #{templatecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="templatename != null" >
+        #{templatename,jdbcType=VARCHAR},
+      </if>
+      <if test="noticetype != null" >
+        #{noticetype,jdbcType=VARCHAR},
+      </if>
+      <if test="templatetype != null" >
+        #{templatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="removeflg != null" >
+        #{removeflg,jdbcType=CHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.MsgtemplateExample" resultType="java.lang.Integer" >
+    select count(*) from msgtemplate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update msgtemplate
+    <set >
+      <if test="record.templateno != null" >
+        templateno = #{record.templateno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templatecontent != null" >
+        templatecontent = #{record.templatecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templatename != null" >
+        templatename = #{record.templatename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noticetype != null" >
+        noticetype = #{record.noticetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templatetype != null" >
+        templatetype = #{record.templatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.removeflg != null" >
+        removeflg = #{record.removeflg,jdbcType=CHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update msgtemplate
+    set templateno = #{record.templateno,jdbcType=VARCHAR},
+      templatecontent = #{record.templatecontent,jdbcType=VARCHAR},
+      templatename = #{record.templatename,jdbcType=VARCHAR},
+      noticetype = #{record.noticetype,jdbcType=VARCHAR},
+      templatetype = #{record.templatetype,jdbcType=VARCHAR},
+      removeflg = #{record.removeflg,jdbcType=CHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Msgtemplate" >
+    update msgtemplate
+    <set >
+      <if test="templatecontent != null" >
+        templatecontent = #{templatecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="templatename != null" >
+        templatename = #{templatename,jdbcType=VARCHAR},
+      </if>
+      <if test="noticetype != null" >
+        noticetype = #{noticetype,jdbcType=VARCHAR},
+      </if>
+      <if test="templatetype != null" >
+        templatetype = #{templatetype,jdbcType=VARCHAR},
+      </if>
+      <if test="removeflg != null" >
+        removeflg = #{removeflg,jdbcType=CHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where templateno = #{templateno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Msgtemplate" >
+    update msgtemplate
+    set templatecontent = #{templatecontent,jdbcType=VARCHAR},
+      templatename = #{templatename,jdbcType=VARCHAR},
+      noticetype = #{noticetype,jdbcType=VARCHAR},
+      templatetype = #{templatetype,jdbcType=VARCHAR},
+      removeflg = #{removeflg,jdbcType=CHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP}
+    where templateno = #{templateno,jdbcType=VARCHAR}
+  </update>
+</mapper>

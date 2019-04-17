@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Account" >
+    <id column="accountno" property="accountno" jdbcType="VARCHAR" />
+    <result column="linenumber" property="linenumber" jdbcType="VARCHAR" />
+    <result column="accountname" property="accountname" jdbcType="VARCHAR" />
+    <result column="accountbakno" property="accountbakno" jdbcType="VARCHAR" />
+    <result column="accountorg" property="accountorg" jdbcType="VARCHAR" />
+    <result column="accounttype" property="accounttype" jdbcType="VARCHAR" />
+    <result column="accountremian" property="accountremian" jdbcType="DECIMAL" />
+    <result column="freezeamount" property="freezeamount" jdbcType="DECIMAL" />
+    <result column="marginbalance" property="marginbalance" jdbcType="DECIMAL" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    accountno, linenumber, accountname, accountbakno, accountorg, accounttype, accountremian, 
+    freezeamount, marginbalance, chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.AccountExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where accountno = #{accountno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from account
+    where accountno = #{accountno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.AccountExample" >
+    delete from account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Account" >
+    insert into account (accountno, linenumber, accountname, 
+      accountbakno, accountorg, accounttype, 
+      accountremian, freezeamount, marginbalance, 
+      chgdt, chgtl)
+    values (#{accountno,jdbcType=VARCHAR}, #{linenumber,jdbcType=VARCHAR}, #{accountname,jdbcType=VARCHAR}, 
+      #{accountbakno,jdbcType=VARCHAR}, #{accountorg,jdbcType=VARCHAR}, #{accounttype,jdbcType=VARCHAR}, 
+      #{accountremian,jdbcType=DECIMAL}, #{freezeamount,jdbcType=DECIMAL}, #{marginbalance,jdbcType=DECIMAL}, 
+      #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Account" >
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountno != null" >
+        accountno,
+      </if>
+      <if test="linenumber != null" >
+        linenumber,
+      </if>
+      <if test="accountname != null" >
+        accountname,
+      </if>
+      <if test="accountbakno != null" >
+        accountbakno,
+      </if>
+      <if test="accountorg != null" >
+        accountorg,
+      </if>
+      <if test="accounttype != null" >
+        accounttype,
+      </if>
+      <if test="accountremian != null" >
+        accountremian,
+      </if>
+      <if test="freezeamount != null" >
+        freezeamount,
+      </if>
+      <if test="marginbalance != null" >
+        marginbalance,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountno != null" >
+        #{accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="linenumber != null" >
+        #{linenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null" >
+        #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountbakno != null" >
+        #{accountbakno,jdbcType=VARCHAR},
+      </if>
+      <if test="accountorg != null" >
+        #{accountorg,jdbcType=VARCHAR},
+      </if>
+      <if test="accounttype != null" >
+        #{accounttype,jdbcType=VARCHAR},
+      </if>
+      <if test="accountremian != null" >
+        #{accountremian,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeamount != null" >
+        #{freezeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="marginbalance != null" >
+        #{marginbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.AccountExample" resultType="java.lang.Integer" >
+    select count(*) from account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update account
+    <set >
+      <if test="record.accountno != null" >
+        accountno = #{record.accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linenumber != null" >
+        linenumber = #{record.linenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountname != null" >
+        accountname = #{record.accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountbakno != null" >
+        accountbakno = #{record.accountbakno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountorg != null" >
+        accountorg = #{record.accountorg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accounttype != null" >
+        accounttype = #{record.accounttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountremian != null" >
+        accountremian = #{record.accountremian,jdbcType=DECIMAL},
+      </if>
+      <if test="record.freezeamount != null" >
+        freezeamount = #{record.freezeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.marginbalance != null" >
+        marginbalance = #{record.marginbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update account
+    set accountno = #{record.accountno,jdbcType=VARCHAR},
+      linenumber = #{record.linenumber,jdbcType=VARCHAR},
+      accountname = #{record.accountname,jdbcType=VARCHAR},
+      accountbakno = #{record.accountbakno,jdbcType=VARCHAR},
+      accountorg = #{record.accountorg,jdbcType=VARCHAR},
+      accounttype = #{record.accounttype,jdbcType=VARCHAR},
+      accountremian = #{record.accountremian,jdbcType=DECIMAL},
+      freezeamount = #{record.freezeamount,jdbcType=DECIMAL},
+      marginbalance = #{record.marginbalance,jdbcType=DECIMAL},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Account" >
+    update account
+    <set >
+      <if test="linenumber != null" >
+        linenumber = #{linenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null" >
+        accountname = #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountbakno != null" >
+        accountbakno = #{accountbakno,jdbcType=VARCHAR},
+      </if>
+      <if test="accountorg != null" >
+        accountorg = #{accountorg,jdbcType=VARCHAR},
+      </if>
+      <if test="accounttype != null" >
+        accounttype = #{accounttype,jdbcType=VARCHAR},
+      </if>
+      <if test="accountremian != null" >
+        accountremian = #{accountremian,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeamount != null" >
+        freezeamount = #{freezeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="marginbalance != null" >
+        marginbalance = #{marginbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where accountno = #{accountno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Account" >
+    update account
+    set linenumber = #{linenumber,jdbcType=VARCHAR},
+      accountname = #{accountname,jdbcType=VARCHAR},
+      accountbakno = #{accountbakno,jdbcType=VARCHAR},
+      accountorg = #{accountorg,jdbcType=VARCHAR},
+      accounttype = #{accounttype,jdbcType=VARCHAR},
+      accountremian = #{accountremian,jdbcType=DECIMAL},
+      freezeamount = #{freezeamount,jdbcType=DECIMAL},
+      marginbalance = #{marginbalance,jdbcType=DECIMAL},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where accountno = #{accountno,jdbcType=VARCHAR}
+  </update>
+</mapper>

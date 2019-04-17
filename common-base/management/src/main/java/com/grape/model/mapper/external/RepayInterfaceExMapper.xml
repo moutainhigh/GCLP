@@ -1,0 +1,135 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.RepayInterfaceExMapper">
+    <select id="getoverduemoney" resultType="java.util.Map" parameterType="java.util.Map">
+        select sum(overduecorpus) overduecorpusSum,sum(overdueaccrual) overdueaccrualSum,
+        sum(defaultinterest) defaultinterestSum,sum(delayingpayment) delayingpaymentSum
+        from overdue where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and workid = #{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <delete id="deleteRepayplan" parameterType="java.util.Map">
+        <if test="workid != null and workid !=''">
+
+        </if>
+        DELETE FROM repayplan WHERE 1=1
+        <if test=" workid !=null and workid !='' ">
+            and workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" refundissue !=null and refundissue !='' ">
+            and repayterm &gt; #{refundissue , jdbcType=VARCHAR}
+        </if>
+    </delete>
+
+    <select id="getoverdueinfo" resultType="com.grape.model.db.Overdue" parameterType="java.util.Map">
+            select * from overdue where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" refundissue !=null and refundissue !='' ">
+            and overdueterm = #{refundissue , jdbcType=VARCHAR}
+            </if>
+    </select>
+
+
+    <select id="getOverdue" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT
+        SUM(overdue.overduecorpus) overduecorpus,
+        SUM(overdue.overdueaccrual) overdueaccrual,
+        SUM(overdue.defaultinterest) defaultinterest,
+        SUM(overdue.delayingpayment) delayingpayment
+        from overdue
+        <if test=" workid !=null and workid !='' ">
+            where workid = #{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getRepayinfo" resultType="java.util.Map" parameterType="java.util.Map">
+        select SUM(repayinfo.repayamount) repayamount from repayinfo
+        <if test=" workid !=null and workid !='' ">
+            where workid = #{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getRepayplan" resultType="java.util.Map" parameterType="java.util.Map">
+        select SUM(repayplan.repayamount) repayamount from repayplan
+        <if test=" workid !=null and workid !='' ">
+            where workid = #{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="getDoctaskInfo" resultType="java.util.Map" parameterType="java.util.Map">
+        SELECT product.producttype,account.linenumber
+        from doctask doctask
+        LEFT JOIN product product on doctask.productno=product.productno
+        LEFT JOIN account account on account.accountbakno=doctask.channelno and account.accountorg=doctask.terrcaeno and
+        account.accounttype='01'
+        <if test=" workid !=null and workid !='' ">
+            where doctask.workid=#{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getAccountInfo" resultType="com.grape.model.db.Account" parameterType="String">
+        select * from account where 1=1
+        <if test=" value !=null and value !='' ">
+            and linenumber=#{value}
+        </if>
+    </select>
+
+    <select id="getAccountquotaInfo" resultType="com.grape.model.db.Accountquota" parameterType="String">
+        select * from accountquota where 1=1
+        <if test=" value !=null and value !='' ">
+            and linenumbersenior=#{value}
+        </if>
+    </select>
+
+    <update id="updateStatusByWorkIdAndRepayterm" parameterType="java.util.Map">
+        <if test="workid != null and workid !=''">
+            update repayplan set status=1 where 1=1
+            <if test=" workid !=null and workid !='' ">
+                and workid = #{workid , jdbcType=VARCHAR}
+            </if>
+            <if test=" refundissue !=null and refundissue !='' ">
+                and repayterm = #{refundissue , jdbcType=VARCHAR}
+            </if>
+        </if>
+    </update>
+
+    <select id="selectByWorkIdAndRepayterm" resultType="java.util.Map" parameterType="java.util.Map">
+    
+            select IFNULL(SUM(repaycapital), 0.0) as repaycapital,IFNULL(SUM(repayaccrual), 0.0) as repayaccrual from repayplan where 1=1
+
+            <if test=" workid !=null and workid !='' ">
+                and workid = #{workid , jdbcType=VARCHAR}
+            </if>
+
+            <if test=" refundissue !=null and refundissue !='' ">
+                and repayterm = #{refundissue , jdbcType=VARCHAR}
+            </if>
+
+    </select>
+
+    <select id="selectSumByWorkIdAndRepayterm" resultType="java.util.Map" parameterType="java.util.Map">
+
+            select IFNULL(SUM(refundmoney), 0.0) as refundmoney, IFNULL(SUM(refundinterest), 0.0) as refundinterest from repayinfo where 1=1
+
+            <if test=" workid !=null and workid !='' ">
+                 and workid = #{workid , jdbcType=VARCHAR}
+            </if>
+
+            <if test=" refundissue !=null and refundissue !='' ">
+                and refundissue = #{refundissue , jdbcType=VARCHAR}
+            </if>
+    </select>
+
+    <select id="selectOverdueByWorkIdAndOverdueterm" resultType="java.util.Map" parameterType="java.util.Map">
+        select overduecorpus,overdueaccrual,defaultinterest,delayingpayment from overdue where
+         workid = #{workid , jdbcType=VARCHAR}    and overdueterm = #{refundissue , jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectMinAndMaxByWorkId" resultType="java.util.Map" parameterType="java.util.Map">
+    SELECT MIN(repayterm) AS minRepayterm,MAX(repayterm) AS maxRepayterm  FROM repayplan where workid = #{workid , jdbcType=VARCHAR}    and status=0
+    </select>
+</mapper>

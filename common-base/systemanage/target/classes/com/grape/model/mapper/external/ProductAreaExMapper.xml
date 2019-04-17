@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.ProductAreaExMapper" >
+	<select id="selectProductAreaInfo" parameterType="map" resultType="com.grape.controller.response.bean.ProductAreaBean">
+		select area.*,pro.* from productarea area
+		left outer join product pro on pro.productno=area.productno
+		where 1=1
+		<if test="productname!=null and productname!=''">
+			and pro.productname=#{productname}
+		</if>
+		<if test="productno!=null and productno!=''">
+			and area.productno=#{productno}
+		</if>
+		<if test="producttype!=null and producttype!=''">
+			and pro.producttype=#{producttype}
+		</if>
+		<if test="area!=null and area!=''">
+			and area.areaid=#{area}
+		</if>
+		limit #{pagenum},#{pagesize}
+	</select>
+	
+	<select id="selectProductAreaInfoCount" parameterType="map" resultType="Integer">
+		select count(*) from productarea area
+		left outer join product pro on pro.productno=area.productno
+		where 1=1
+		<if test="productname!=null and productname!=''">
+			and pro.productname=#{productname}
+		</if>
+		<if test="productno!=null and productno!=''">
+			and area.productno=#{productno}
+		</if>
+		<if test="producttype!=null and producttype!=''">
+			and pro.producttype=#{producttype}
+		</if>
+		<if test="area!=null and area!=''">
+			and area.areaid=#{area}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.ProductnodeExMapper" >
+    <select id="selectByNodeInfo" parameterType="map" resultType="com.grape.model.db.Productnode">
+    select * from productnode where productno=#{productno}
+        <if test=" nodeid != null and nodeid != '' ">
+            and nodeid like concat(concat('%',#{nodeid}),'%')
+        </if>
+        <if test=" nadename != null and nadename != '' ">
+            and nodename like concat(concat('%',#{nodename}),'%')
+        </if>
+        <if test=" type != null and type != '' ">
+            and type = #{type}
+        </if>
+        limit #{pagenum},#{pagesize}
+    </select>
+    
+    <select id="selectByNodeInfoCount" parameterType="map" resultType="Integer">
+    select count(*) from productnode where productno=#{productno}
+        <if test=" nodeid != null and nodeid != '' ">
+            and nodeid like concat(concat('%',#{nodeid}),'%')
+        </if>
+        <if test=" nadename != null and nadename != '' ">
+            and nodename LIKE concat(concat('%',#{nodename}),'%')
+        </if>
+        <if test=" type != null and type != '' ">
+            and type = #{type}
+        </if>
+    </select>
+    
+    <select id="selectAccessRule" parameterType="map" resultType="com.grape.model.db.Accessrule">
+    	select * from accessrule where 1=1
+    	<if test="productno!=null and productno !=''">
+    		and productno=#{productno}
+    	</if>
+    	<if test="ruletype!=null and rulestype!=''">
+    		and rulestype=#{ruletype}
+    	</if>
+    	<if test="rulename!=null and rulename!=''">
+    		and rulename like concat(concat('%',#{rulename}),'%')
+    	</if>
+    	limit #{pagenum},#{pagesize}
+    </select>
+    
+    <select id="selectAccessRuleCount" parameterType="map" resultType="Integer">
+    	select count(*) from accessrule where 1=1
+    	<if test="productno!=null and productno !=''">
+    		and productno=#{productno}
+    	</if>
+    	<if test="ruletype!=null and rulestype!=''">
+    		and rulestype=#{ruletype}
+    	</if>
+    	<if test="rulename!=null and rulename!=''">
+    		and rulename like concat(concat('%',#{rulename}),'%')
+    	</if>
+    </select>
+    
+    <select id="selectProductInfo" resultType="com.grape.model.db.Product" parameterType="map">
+    	select * from product where 1=1
+    	<if test="productno!=null and productno!=''">
+    		and productno=#{productno}
+    	</if>
+    	<if test="productname!=null and productname!=''">
+    		and productname=#{productname}
+    	</if>
+    	<if test="producttype!=null and producttype!=''">
+    		and producttype=#{producttype}
+    	</if>
+    	limit #{pagenum},#{pagesize}
+    </select>
+</mapper>

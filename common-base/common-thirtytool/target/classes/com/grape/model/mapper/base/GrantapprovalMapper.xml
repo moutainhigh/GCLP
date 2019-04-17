@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.GrantapprovalMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Grantapproval" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="loanconfirmflg" property="loanconfirmflg" jdbcType="CHAR" />
+    <result column="contractsignflg" property="contractsignflg" jdbcType="CHAR" />
+    <result column="declaresignflg" property="declaresignflg" jdbcType="CHAR" />
+    <result column="mortgagestate" property="mortgagestate" jdbcType="VARCHAR" />
+    <result column="approvelcarryoutflg" property="approvelcarryoutflg" jdbcType="CHAR" />
+    <result column="suggestloanflg" property="suggestloanflg" jdbcType="CHAR" />
+    <result column="realestatecollectflg" property="realestatecollectflg" jdbcType="CHAR" />
+    <result column="resultcollectflg" property="resultcollectflg" jdbcType="CHAR" />
+    <result column="referenceflg" property="referenceflg" jdbcType="CHAR" />
+    <result column="sharepledgeflg" property="sharepledgeflg" jdbcType="CHAR" />
+    <result column="bailcollectflg" property="bailcollectflg" jdbcType="CHAR" />
+    <result column="preloanapplyflg" property="preloanapplyflg" jdbcType="CHAR" />
+    <result column="repayplanflg" property="repayplanflg" jdbcType="CHAR" />
+    <result column="feeamount" property="feeamount" jdbcType="DECIMAL" />
+    <result column="loanapproveltype" property="loanapproveltype" jdbcType="VARCHAR" />
+    <result column="approver" property="approver" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.grape.model.db.Grantapproval" extends="BaseResultMap" >
+    <result column="loanapprovelview" property="loanapprovelview" jdbcType="LONGVARCHAR" />
+    <result column="approvelopinion" property="approvelopinion" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, loanconfirmflg, contractsignflg, declaresignflg, mortgagestate, approvelcarryoutflg, 
+    suggestloanflg, realestatecollectflg, resultcollectflg, referenceflg, sharepledgeflg, 
+    bailcollectflg, preloanapplyflg, repayplanflg, feeamount, loanapproveltype, approver
+  </sql>
+  <sql id="Blob_Column_List" >
+    loanapprovelview, approvelopinion
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.grape.model.db.GrantapprovalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from grantapproval
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.GrantapprovalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from grantapproval
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from grantapproval
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from grantapproval
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.GrantapprovalExample" >
+    delete from grantapproval
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Grantapproval" >
+    insert into grantapproval (id, workid, loanconfirmflg, 
+      contractsignflg, declaresignflg, mortgagestate, 
+      approvelcarryoutflg, suggestloanflg, realestatecollectflg, 
+      resultcollectflg, referenceflg, sharepledgeflg, 
+      bailcollectflg, preloanapplyflg, repayplanflg, 
+      feeamount, loanapproveltype, approver, 
+      loanapprovelview, approvelopinion
+      )
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{loanconfirmflg,jdbcType=CHAR}, 
+      #{contractsignflg,jdbcType=CHAR}, #{declaresignflg,jdbcType=CHAR}, #{mortgagestate,jdbcType=VARCHAR}, 
+      #{approvelcarryoutflg,jdbcType=CHAR}, #{suggestloanflg,jdbcType=CHAR}, #{realestatecollectflg,jdbcType=CHAR}, 
+      #{resultcollectflg,jdbcType=CHAR}, #{referenceflg,jdbcType=CHAR}, #{sharepledgeflg,jdbcType=CHAR}, 
+      #{bailcollectflg,jdbcType=CHAR}, #{preloanapplyflg,jdbcType=CHAR}, #{repayplanflg,jdbcType=CHAR}, 
+      #{feeamount,jdbcType=DECIMAL}, #{loanapproveltype,jdbcType=VARCHAR}, #{approver,jdbcType=VARCHAR}, 
+      #{loanapprovelview,jdbcType=LONGVARCHAR}, #{approvelopinion,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Grantapproval" >
+    insert into grantapproval
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="loanconfirmflg != null" >
+        loanconfirmflg,
+      </if>
+      <if test="contractsignflg != null" >
+        contractsignflg,
+      </if>
+      <if test="declaresignflg != null" >
+        declaresignflg,
+      </if>
+      <if test="mortgagestate != null" >
+        mortgagestate,
+      </if>
+      <if test="approvelcarryoutflg != null" >
+        approvelcarryoutflg,
+      </if>
+      <if test="suggestloanflg != null" >
+        suggestloanflg,
+      </if>
+      <if test="realestatecollectflg != null" >
+        realestatecollectflg,
+      </if>
+      <if test="resultcollectflg != null" >
+        resultcollectflg,
+      </if>
+      <if test="referenceflg != null" >
+        referenceflg,
+      </if>
+      <if test="sharepledgeflg != null" >
+        sharepledgeflg,
+      </if>
+      <if test="bailcollectflg != null" >
+        bailcollectflg,
+      </if>
+      <if test="preloanapplyflg != null" >
+        preloanapplyflg,
+      </if>
+      <if test="repayplanflg != null" >
+        repayplanflg,
+      </if>
+      <if test="feeamount != null" >
+        feeamount,
+      </if>
+      <if test="loanapproveltype != null" >
+        loanapproveltype,
+      </if>
+      <if test="approver != null" >
+        approver,
+      </if>
+      <if test="loanapprovelview != null" >
+        loanapprovelview,
+      </if>
+      <if test="approvelopinion != null" >
+        approvelopinion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="loanconfirmflg != null" >
+        #{loanconfirmflg,jdbcType=CHAR},
+      </if>
+      <if test="contractsignflg != null" >
+        #{contractsignflg,jdbcType=CHAR},
+      </if>
+      <if test="declaresignflg != null" >
+        #{declaresignflg,jdbcType=CHAR},
+      </if>
+      <if test="mortgagestate != null" >
+        #{mortgagestate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvelcarryoutflg != null" >
+        #{approvelcarryoutflg,jdbcType=CHAR},
+      </if>
+      <if test="suggestloanflg != null" >
+        #{suggestloanflg,jdbcType=CHAR},
+      </if>
+      <if test="realestatecollectflg != null" >
+        #{realestatecollectflg,jdbcType=CHAR},
+      </if>
+      <if test="resultcollectflg != null" >
+        #{resultcollectflg,jdbcType=CHAR},
+      </if>
+      <if test="referenceflg != null" >
+        #{referenceflg,jdbcType=CHAR},
+      </if>
+      <if test="sharepledgeflg != null" >
+        #{sharepledgeflg,jdbcType=CHAR},
+      </if>
+      <if test="bailcollectflg != null" >
+        #{bailcollectflg,jdbcType=CHAR},
+      </if>
+      <if test="preloanapplyflg != null" >
+        #{preloanapplyflg,jdbcType=CHAR},
+      </if>
+      <if test="repayplanflg != null" >
+        #{repayplanflg,jdbcType=CHAR},
+      </if>
+      <if test="feeamount != null" >
+        #{feeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="loanapproveltype != null" >
+        #{loanapproveltype,jdbcType=VARCHAR},
+      </if>
+      <if test="approver != null" >
+        #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="loanapprovelview != null" >
+        #{loanapprovelview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="approvelopinion != null" >
+        #{approvelopinion,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.GrantapprovalExample" resultType="java.lang.Integer" >
+    select count(*) from grantapproval
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update grantapproval
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanconfirmflg != null" >
+        loanconfirmflg = #{record.loanconfirmflg,jdbcType=CHAR},
+      </if>
+      <if test="record.contractsignflg != null" >
+        contractsignflg = #{record.contractsignflg,jdbcType=CHAR},
+      </if>
+      <if test="record.declaresignflg != null" >
+        declaresignflg = #{record.declaresignflg,jdbcType=CHAR},
+      </if>
+      <if test="record.mortgagestate != null" >
+        mortgagestate = #{record.mortgagestate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvelcarryoutflg != null" >
+        approvelcarryoutflg = #{record.approvelcarryoutflg,jdbcType=CHAR},
+      </if>
+      <if test="record.suggestloanflg != null" >
+        suggestloanflg = #{record.suggestloanflg,jdbcType=CHAR},
+      </if>
+      <if test="record.realestatecollectflg != null" >
+        realestatecollectflg = #{record.realestatecollectflg,jdbcType=CHAR},
+      </if>
+      <if test="record.resultcollectflg != null" >
+        resultcollectflg = #{record.resultcollectflg,jdbcType=CHAR},
+      </if>
+      <if test="record.referenceflg != null" >
+        referenceflg = #{record.referenceflg,jdbcType=CHAR},
+      </if>
+      <if test="record.sharepledgeflg != null" >
+        sharepledgeflg = #{record.sharepledgeflg,jdbcType=CHAR},
+      </if>
+      <if test="record.bailcollectflg != null" >
+        bailcollectflg = #{record.bailcollectflg,jdbcType=CHAR},
+      </if>
+      <if test="record.preloanapplyflg != null" >
+        preloanapplyflg = #{record.preloanapplyflg,jdbcType=CHAR},
+      </if>
+      <if test="record.repayplanflg != null" >
+        repayplanflg = #{record.repayplanflg,jdbcType=CHAR},
+      </if>
+      <if test="record.feeamount != null" >
+        feeamount = #{record.feeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loanapproveltype != null" >
+        loanapproveltype = #{record.loanapproveltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approver != null" >
+        approver = #{record.approver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanapprovelview != null" >
+        loanapprovelview = #{record.loanapprovelview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.approvelopinion != null" >
+        approvelopinion = #{record.approvelopinion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update grantapproval
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      loanconfirmflg = #{record.loanconfirmflg,jdbcType=CHAR},
+      contractsignflg = #{record.contractsignflg,jdbcType=CHAR},
+      declaresignflg = #{record.declaresignflg,jdbcType=CHAR},
+      mortgagestate = #{record.mortgagestate,jdbcType=VARCHAR},
+      approvelcarryoutflg = #{record.approvelcarryoutflg,jdbcType=CHAR},
+      suggestloanflg = #{record.suggestloanflg,jdbcType=CHAR},
+      realestatecollectflg = #{record.realestatecollectflg,jdbcType=CHAR},
+      resultcollectflg = #{record.resultcollectflg,jdbcType=CHAR},
+      referenceflg = #{record.referenceflg,jdbcType=CHAR},
+      sharepledgeflg = #{record.sharepledgeflg,jdbcType=CHAR},
+      bailcollectflg = #{record.bailcollectflg,jdbcType=CHAR},
+      preloanapplyflg = #{record.preloanapplyflg,jdbcType=CHAR},
+      repayplanflg = #{record.repayplanflg,jdbcType=CHAR},
+      feeamount = #{record.feeamount,jdbcType=DECIMAL},
+      loanapproveltype = #{record.loanapproveltype,jdbcType=VARCHAR},
+      approver = #{record.approver,jdbcType=VARCHAR},
+      loanapprovelview = #{record.loanapprovelview,jdbcType=LONGVARCHAR},
+      approvelopinion = #{record.approvelopinion,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update grantapproval
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      loanconfirmflg = #{record.loanconfirmflg,jdbcType=CHAR},
+      contractsignflg = #{record.contractsignflg,jdbcType=CHAR},
+      declaresignflg = #{record.declaresignflg,jdbcType=CHAR},
+      mortgagestate = #{record.mortgagestate,jdbcType=VARCHAR},
+      approvelcarryoutflg = #{record.approvelcarryoutflg,jdbcType=CHAR},
+      suggestloanflg = #{record.suggestloanflg,jdbcType=CHAR},
+      realestatecollectflg = #{record.realestatecollectflg,jdbcType=CHAR},
+      resultcollectflg = #{record.resultcollectflg,jdbcType=CHAR},
+      referenceflg = #{record.referenceflg,jdbcType=CHAR},
+      sharepledgeflg = #{record.sharepledgeflg,jdbcType=CHAR},
+      bailcollectflg = #{record.bailcollectflg,jdbcType=CHAR},
+      preloanapplyflg = #{record.preloanapplyflg,jdbcType=CHAR},
+      repayplanflg = #{record.repayplanflg,jdbcType=CHAR},
+      feeamount = #{record.feeamount,jdbcType=DECIMAL},
+      loanapproveltype = #{record.loanapproveltype,jdbcType=VARCHAR},
+      approver = #{record.approver,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Grantapproval" >
+    update grantapproval
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="loanconfirmflg != null" >
+        loanconfirmflg = #{loanconfirmflg,jdbcType=CHAR},
+      </if>
+      <if test="contractsignflg != null" >
+        contractsignflg = #{contractsignflg,jdbcType=CHAR},
+      </if>
+      <if test="declaresignflg != null" >
+        declaresignflg = #{declaresignflg,jdbcType=CHAR},
+      </if>
+      <if test="mortgagestate != null" >
+        mortgagestate = #{mortgagestate,jdbcType=VARCHAR},
+      </if>
+      <if test="approvelcarryoutflg != null" >
+        approvelcarryoutflg = #{approvelcarryoutflg,jdbcType=CHAR},
+      </if>
+      <if test="suggestloanflg != null" >
+        suggestloanflg = #{suggestloanflg,jdbcType=CHAR},
+      </if>
+      <if test="realestatecollectflg != null" >
+        realestatecollectflg = #{realestatecollectflg,jdbcType=CHAR},
+      </if>
+      <if test="resultcollectflg != null" >
+        resultcollectflg = #{resultcollectflg,jdbcType=CHAR},
+      </if>
+      <if test="referenceflg != null" >
+        referenceflg = #{referenceflg,jdbcType=CHAR},
+      </if>
+      <if test="sharepledgeflg != null" >
+        sharepledgeflg = #{sharepledgeflg,jdbcType=CHAR},
+      </if>
+      <if test="bailcollectflg != null" >
+        bailcollectflg = #{bailcollectflg,jdbcType=CHAR},
+      </if>
+      <if test="preloanapplyflg != null" >
+        preloanapplyflg = #{preloanapplyflg,jdbcType=CHAR},
+      </if>
+      <if test="repayplanflg != null" >
+        repayplanflg = #{repayplanflg,jdbcType=CHAR},
+      </if>
+      <if test="feeamount != null" >
+        feeamount = #{feeamount,jdbcType=DECIMAL},
+      </if>
+      <if test="loanapproveltype != null" >
+        loanapproveltype = #{loanapproveltype,jdbcType=VARCHAR},
+      </if>
+      <if test="approver != null" >
+        approver = #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="loanapprovelview != null" >
+        loanapprovelview = #{loanapprovelview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="approvelopinion != null" >
+        approvelopinion = #{approvelopinion,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.grape.model.db.Grantapproval" >
+    update grantapproval
+    set workid = #{workid,jdbcType=VARCHAR},
+      loanconfirmflg = #{loanconfirmflg,jdbcType=CHAR},
+      contractsignflg = #{contractsignflg,jdbcType=CHAR},
+      declaresignflg = #{declaresignflg,jdbcType=CHAR},
+      mortgagestate = #{mortgagestate,jdbcType=VARCHAR},
+      approvelcarryoutflg = #{approvelcarryoutflg,jdbcType=CHAR},
+      suggestloanflg = #{suggestloanflg,jdbcType=CHAR},
+      realestatecollectflg = #{realestatecollectflg,jdbcType=CHAR},
+      resultcollectflg = #{resultcollectflg,jdbcType=CHAR},
+      referenceflg = #{referenceflg,jdbcType=CHAR},
+      sharepledgeflg = #{sharepledgeflg,jdbcType=CHAR},
+      bailcollectflg = #{bailcollectflg,jdbcType=CHAR},
+      preloanapplyflg = #{preloanapplyflg,jdbcType=CHAR},
+      repayplanflg = #{repayplanflg,jdbcType=CHAR},
+      feeamount = #{feeamount,jdbcType=DECIMAL},
+      loanapproveltype = #{loanapproveltype,jdbcType=VARCHAR},
+      approver = #{approver,jdbcType=VARCHAR},
+      loanapprovelview = #{loanapprovelview,jdbcType=LONGVARCHAR},
+      approvelopinion = #{approvelopinion,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Grantapproval" >
+    update grantapproval
+    set workid = #{workid,jdbcType=VARCHAR},
+      loanconfirmflg = #{loanconfirmflg,jdbcType=CHAR},
+      contractsignflg = #{contractsignflg,jdbcType=CHAR},
+      declaresignflg = #{declaresignflg,jdbcType=CHAR},
+      mortgagestate = #{mortgagestate,jdbcType=VARCHAR},
+      approvelcarryoutflg = #{approvelcarryoutflg,jdbcType=CHAR},
+      suggestloanflg = #{suggestloanflg,jdbcType=CHAR},
+      realestatecollectflg = #{realestatecollectflg,jdbcType=CHAR},
+      resultcollectflg = #{resultcollectflg,jdbcType=CHAR},
+      referenceflg = #{referenceflg,jdbcType=CHAR},
+      sharepledgeflg = #{sharepledgeflg,jdbcType=CHAR},
+      bailcollectflg = #{bailcollectflg,jdbcType=CHAR},
+      preloanapplyflg = #{preloanapplyflg,jdbcType=CHAR},
+      repayplanflg = #{repayplanflg,jdbcType=CHAR},
+      feeamount = #{feeamount,jdbcType=DECIMAL},
+      loanapproveltype = #{loanapproveltype,jdbcType=VARCHAR},
+      approver = #{approver,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

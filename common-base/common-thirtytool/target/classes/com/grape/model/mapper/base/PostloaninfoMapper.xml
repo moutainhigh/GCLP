@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.PostloaninfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Postloaninfo" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="approvedmoney" property="approvedmoney" jdbcType="DECIMAL" />
+    <result column="alreadymoney" property="alreadymoney" jdbcType="DECIMAL" />
+    <result column="remainamount" property="remainamount" jdbcType="DECIMAL" />
+    <result column="firstloandate" property="firstloandate" jdbcType="TIMESTAMP" />
+    <result column="settledate" property="settledate" jdbcType="TIMESTAMP" />
+    <result column="maturitydate" property="maturitydate" jdbcType="TIMESTAMP" />
+    <result column="loantimelimit" property="loantimelimit" jdbcType="VARCHAR" />
+    <result column="repaymethod" property="repaymethod" jdbcType="VARCHAR" />
+    <result column="interestrate" property="interestrate" jdbcType="DECIMAL" />
+    <result column="interestratetype" property="interestratetype" jdbcType="VARCHAR" />
+    <result column="realinterestrate" property="realinterestrate" jdbcType="DECIMAL" />
+    <result column="realinterestratetype" property="realinterestratetype" jdbcType="VARCHAR" />
+    <result column="loanbalance" property="loanbalance" jdbcType="DECIMAL" />
+    <result column="accountstate" property="accountstate" jdbcType="VARCHAR" />
+    <result column="overdueflg" property="overdueflg" jdbcType="CHAR" />
+    <result column="overdueterm" property="overdueterm" jdbcType="VARCHAR" />
+    <result column="overduecorpus" property="overduecorpus" jdbcType="DECIMAL" />
+    <result column="overdueaccrual" property="overdueaccrual" jdbcType="DECIMAL" />
+    <result column="defaultinterest" property="defaultinterest" jdbcType="DECIMAL" />
+    <result column="overduedate" property="overduedate" jdbcType="TIMESTAMP" />
+    <result column="nextrepaydate" property="nextrepaydate" jdbcType="TIMESTAMP" />
+    <result column="nextrefundmoney" property="nextrefundmoney" jdbcType="DECIMAL" />
+    <result column="nextrefundissue" property="nextrefundissue" jdbcType="INTEGER" />
+    <result column="overduenum" property="overduenum" jdbcType="INTEGER" />
+    <result column="addoverduedaynum" property="addoverduedaynum" jdbcType="INTEGER" />
+    <result column="addoverduetimenum" property="addoverduetimenum" jdbcType="INTEGER" />
+    <result column="repaydateofmonth" property="repaydateofmonth" jdbcType="CHAR" />
+    <result column="ishaveread" property="ishaveread" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, approvedmoney, alreadymoney, remainamount, firstloandate, settledate, maturitydate, 
+    loantimelimit, repaymethod, interestrate, interestratetype, realinterestrate, realinterestratetype, 
+    loanbalance, accountstate, overdueflg, overdueterm, overduecorpus, overdueaccrual, 
+    defaultinterest, overduedate, nextrepaydate, nextrefundmoney, nextrefundissue, overduenum, 
+    addoverduedaynum, addoverduetimenum, repaydateofmonth, ishaveread
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.PostloaninfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from postloaninfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from postloaninfo
+    where workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from postloaninfo
+    where workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.PostloaninfoExample" >
+    delete from postloaninfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Postloaninfo" >
+    insert into postloaninfo (workid, approvedmoney, alreadymoney, 
+      remainamount, firstloandate, settledate, 
+      maturitydate, loantimelimit, repaymethod, 
+      interestrate, interestratetype, realinterestrate, 
+      realinterestratetype, loanbalance, accountstate, 
+      overdueflg, overdueterm, overduecorpus, 
+      overdueaccrual, defaultinterest, overduedate, 
+      nextrepaydate, nextrefundmoney, nextrefundissue, 
+      overduenum, addoverduedaynum, addoverduetimenum, 
+      repaydateofmonth, ishaveread)
+    values (#{workid,jdbcType=VARCHAR}, #{approvedmoney,jdbcType=DECIMAL}, #{alreadymoney,jdbcType=DECIMAL}, 
+      #{remainamount,jdbcType=DECIMAL}, #{firstloandate,jdbcType=TIMESTAMP}, #{settledate,jdbcType=TIMESTAMP}, 
+      #{maturitydate,jdbcType=TIMESTAMP}, #{loantimelimit,jdbcType=VARCHAR}, #{repaymethod,jdbcType=VARCHAR}, 
+      #{interestrate,jdbcType=DECIMAL}, #{interestratetype,jdbcType=VARCHAR}, #{realinterestrate,jdbcType=DECIMAL}, 
+      #{realinterestratetype,jdbcType=VARCHAR}, #{loanbalance,jdbcType=DECIMAL}, #{accountstate,jdbcType=VARCHAR}, 
+      #{overdueflg,jdbcType=CHAR}, #{overdueterm,jdbcType=VARCHAR}, #{overduecorpus,jdbcType=DECIMAL}, 
+      #{overdueaccrual,jdbcType=DECIMAL}, #{defaultinterest,jdbcType=DECIMAL}, #{overduedate,jdbcType=TIMESTAMP}, 
+      #{nextrepaydate,jdbcType=TIMESTAMP}, #{nextrefundmoney,jdbcType=DECIMAL}, #{nextrefundissue,jdbcType=INTEGER}, 
+      #{overduenum,jdbcType=INTEGER}, #{addoverduedaynum,jdbcType=INTEGER}, #{addoverduetimenum,jdbcType=INTEGER}, 
+      #{repaydateofmonth,jdbcType=CHAR}, #{ishaveread,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Postloaninfo" >
+    insert into postloaninfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="approvedmoney != null" >
+        approvedmoney,
+      </if>
+      <if test="alreadymoney != null" >
+        alreadymoney,
+      </if>
+      <if test="remainamount != null" >
+        remainamount,
+      </if>
+      <if test="firstloandate != null" >
+        firstloandate,
+      </if>
+      <if test="settledate != null" >
+        settledate,
+      </if>
+      <if test="maturitydate != null" >
+        maturitydate,
+      </if>
+      <if test="loantimelimit != null" >
+        loantimelimit,
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod,
+      </if>
+      <if test="interestrate != null" >
+        interestrate,
+      </if>
+      <if test="interestratetype != null" >
+        interestratetype,
+      </if>
+      <if test="realinterestrate != null" >
+        realinterestrate,
+      </if>
+      <if test="realinterestratetype != null" >
+        realinterestratetype,
+      </if>
+      <if test="loanbalance != null" >
+        loanbalance,
+      </if>
+      <if test="accountstate != null" >
+        accountstate,
+      </if>
+      <if test="overdueflg != null" >
+        overdueflg,
+      </if>
+      <if test="overdueterm != null" >
+        overdueterm,
+      </if>
+      <if test="overduecorpus != null" >
+        overduecorpus,
+      </if>
+      <if test="overdueaccrual != null" >
+        overdueaccrual,
+      </if>
+      <if test="defaultinterest != null" >
+        defaultinterest,
+      </if>
+      <if test="overduedate != null" >
+        overduedate,
+      </if>
+      <if test="nextrepaydate != null" >
+        nextrepaydate,
+      </if>
+      <if test="nextrefundmoney != null" >
+        nextrefundmoney,
+      </if>
+      <if test="nextrefundissue != null" >
+        nextrefundissue,
+      </if>
+      <if test="overduenum != null" >
+        overduenum,
+      </if>
+      <if test="addoverduedaynum != null" >
+        addoverduedaynum,
+      </if>
+      <if test="addoverduetimenum != null" >
+        addoverduetimenum,
+      </if>
+      <if test="repaydateofmonth != null" >
+        repaydateofmonth,
+      </if>
+      <if test="ishaveread != null" >
+        ishaveread,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="approvedmoney != null" >
+        #{approvedmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="alreadymoney != null" >
+        #{alreadymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="remainamount != null" >
+        #{remainamount,jdbcType=DECIMAL},
+      </if>
+      <if test="firstloandate != null" >
+        #{firstloandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settledate != null" >
+        #{settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maturitydate != null" >
+        #{maturitydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loantimelimit != null" >
+        #{loantimelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymethod != null" >
+        #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="interestrate != null" >
+        #{interestrate,jdbcType=DECIMAL},
+      </if>
+      <if test="interestratetype != null" >
+        #{interestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="realinterestrate != null" >
+        #{realinterestrate,jdbcType=DECIMAL},
+      </if>
+      <if test="realinterestratetype != null" >
+        #{realinterestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="loanbalance != null" >
+        #{loanbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="accountstate != null" >
+        #{accountstate,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueflg != null" >
+        #{overdueflg,jdbcType=CHAR},
+      </if>
+      <if test="overdueterm != null" >
+        #{overdueterm,jdbcType=VARCHAR},
+      </if>
+      <if test="overduecorpus != null" >
+        #{overduecorpus,jdbcType=DECIMAL},
+      </if>
+      <if test="overdueaccrual != null" >
+        #{overdueaccrual,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultinterest != null" >
+        #{defaultinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="overduedate != null" >
+        #{overduedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextrepaydate != null" >
+        #{nextrepaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextrefundmoney != null" >
+        #{nextrefundmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="nextrefundissue != null" >
+        #{nextrefundissue,jdbcType=INTEGER},
+      </if>
+      <if test="overduenum != null" >
+        #{overduenum,jdbcType=INTEGER},
+      </if>
+      <if test="addoverduedaynum != null" >
+        #{addoverduedaynum,jdbcType=INTEGER},
+      </if>
+      <if test="addoverduetimenum != null" >
+        #{addoverduetimenum,jdbcType=INTEGER},
+      </if>
+      <if test="repaydateofmonth != null" >
+        #{repaydateofmonth,jdbcType=CHAR},
+      </if>
+      <if test="ishaveread != null" >
+        #{ishaveread,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.PostloaninfoExample" resultType="java.lang.Integer" >
+    select count(*) from postloaninfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update postloaninfo
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvedmoney != null" >
+        approvedmoney = #{record.approvedmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.alreadymoney != null" >
+        alreadymoney = #{record.alreadymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remainamount != null" >
+        remainamount = #{record.remainamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.firstloandate != null" >
+        firstloandate = #{record.firstloandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.settledate != null" >
+        settledate = #{record.settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.maturitydate != null" >
+        maturitydate = #{record.maturitydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loantimelimit != null" >
+        loantimelimit = #{record.loantimelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repaymethod != null" >
+        repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interestrate != null" >
+        interestrate = #{record.interestrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interestratetype != null" >
+        interestratetype = #{record.interestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realinterestrate != null" >
+        realinterestrate = #{record.realinterestrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realinterestratetype != null" >
+        realinterestratetype = #{record.realinterestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanbalance != null" >
+        loanbalance = #{record.loanbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.accountstate != null" >
+        accountstate = #{record.accountstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueflg != null" >
+        overdueflg = #{record.overdueflg,jdbcType=CHAR},
+      </if>
+      <if test="record.overdueterm != null" >
+        overdueterm = #{record.overdueterm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overduecorpus != null" >
+        overduecorpus = #{record.overduecorpus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.overdueaccrual != null" >
+        overdueaccrual = #{record.overdueaccrual,jdbcType=DECIMAL},
+      </if>
+      <if test="record.defaultinterest != null" >
+        defaultinterest = #{record.defaultinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.overduedate != null" >
+        overduedate = #{record.overduedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nextrepaydate != null" >
+        nextrepaydate = #{record.nextrepaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nextrefundmoney != null" >
+        nextrefundmoney = #{record.nextrefundmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nextrefundissue != null" >
+        nextrefundissue = #{record.nextrefundissue,jdbcType=INTEGER},
+      </if>
+      <if test="record.overduenum != null" >
+        overduenum = #{record.overduenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.addoverduedaynum != null" >
+        addoverduedaynum = #{record.addoverduedaynum,jdbcType=INTEGER},
+      </if>
+      <if test="record.addoverduetimenum != null" >
+        addoverduetimenum = #{record.addoverduetimenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.repaydateofmonth != null" >
+        repaydateofmonth = #{record.repaydateofmonth,jdbcType=CHAR},
+      </if>
+      <if test="record.ishaveread != null" >
+        ishaveread = #{record.ishaveread,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update postloaninfo
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      approvedmoney = #{record.approvedmoney,jdbcType=DECIMAL},
+      alreadymoney = #{record.alreadymoney,jdbcType=DECIMAL},
+      remainamount = #{record.remainamount,jdbcType=DECIMAL},
+      firstloandate = #{record.firstloandate,jdbcType=TIMESTAMP},
+      settledate = #{record.settledate,jdbcType=TIMESTAMP},
+      maturitydate = #{record.maturitydate,jdbcType=TIMESTAMP},
+      loantimelimit = #{record.loantimelimit,jdbcType=VARCHAR},
+      repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      interestrate = #{record.interestrate,jdbcType=DECIMAL},
+      interestratetype = #{record.interestratetype,jdbcType=VARCHAR},
+      realinterestrate = #{record.realinterestrate,jdbcType=DECIMAL},
+      realinterestratetype = #{record.realinterestratetype,jdbcType=VARCHAR},
+      loanbalance = #{record.loanbalance,jdbcType=DECIMAL},
+      accountstate = #{record.accountstate,jdbcType=VARCHAR},
+      overdueflg = #{record.overdueflg,jdbcType=CHAR},
+      overdueterm = #{record.overdueterm,jdbcType=VARCHAR},
+      overduecorpus = #{record.overduecorpus,jdbcType=DECIMAL},
+      overdueaccrual = #{record.overdueaccrual,jdbcType=DECIMAL},
+      defaultinterest = #{record.defaultinterest,jdbcType=DECIMAL},
+      overduedate = #{record.overduedate,jdbcType=TIMESTAMP},
+      nextrepaydate = #{record.nextrepaydate,jdbcType=TIMESTAMP},
+      nextrefundmoney = #{record.nextrefundmoney,jdbcType=DECIMAL},
+      nextrefundissue = #{record.nextrefundissue,jdbcType=INTEGER},
+      overduenum = #{record.overduenum,jdbcType=INTEGER},
+      addoverduedaynum = #{record.addoverduedaynum,jdbcType=INTEGER},
+      addoverduetimenum = #{record.addoverduetimenum,jdbcType=INTEGER},
+      repaydateofmonth = #{record.repaydateofmonth,jdbcType=CHAR},
+      ishaveread = #{record.ishaveread,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Postloaninfo" >
+    update postloaninfo
+    <set >
+      <if test="approvedmoney != null" >
+        approvedmoney = #{approvedmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="alreadymoney != null" >
+        alreadymoney = #{alreadymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="remainamount != null" >
+        remainamount = #{remainamount,jdbcType=DECIMAL},
+      </if>
+      <if test="firstloandate != null" >
+        firstloandate = #{firstloandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="settledate != null" >
+        settledate = #{settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maturitydate != null" >
+        maturitydate = #{maturitydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loantimelimit != null" >
+        loantimelimit = #{loantimelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="interestrate != null" >
+        interestrate = #{interestrate,jdbcType=DECIMAL},
+      </if>
+      <if test="interestratetype != null" >
+        interestratetype = #{interestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="realinterestrate != null" >
+        realinterestrate = #{realinterestrate,jdbcType=DECIMAL},
+      </if>
+      <if test="realinterestratetype != null" >
+        realinterestratetype = #{realinterestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="loanbalance != null" >
+        loanbalance = #{loanbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="accountstate != null" >
+        accountstate = #{accountstate,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueflg != null" >
+        overdueflg = #{overdueflg,jdbcType=CHAR},
+      </if>
+      <if test="overdueterm != null" >
+        overdueterm = #{overdueterm,jdbcType=VARCHAR},
+      </if>
+      <if test="overduecorpus != null" >
+        overduecorpus = #{overduecorpus,jdbcType=DECIMAL},
+      </if>
+      <if test="overdueaccrual != null" >
+        overdueaccrual = #{overdueaccrual,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultinterest != null" >
+        defaultinterest = #{defaultinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="overduedate != null" >
+        overduedate = #{overduedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextrepaydate != null" >
+        nextrepaydate = #{nextrepaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nextrefundmoney != null" >
+        nextrefundmoney = #{nextrefundmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="nextrefundissue != null" >
+        nextrefundissue = #{nextrefundissue,jdbcType=INTEGER},
+      </if>
+      <if test="overduenum != null" >
+        overduenum = #{overduenum,jdbcType=INTEGER},
+      </if>
+      <if test="addoverduedaynum != null" >
+        addoverduedaynum = #{addoverduedaynum,jdbcType=INTEGER},
+      </if>
+      <if test="addoverduetimenum != null" >
+        addoverduetimenum = #{addoverduetimenum,jdbcType=INTEGER},
+      </if>
+      <if test="repaydateofmonth != null" >
+        repaydateofmonth = #{repaydateofmonth,jdbcType=CHAR},
+      </if>
+      <if test="ishaveread != null" >
+        ishaveread = #{ishaveread,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Postloaninfo" >
+    update postloaninfo
+    set approvedmoney = #{approvedmoney,jdbcType=DECIMAL},
+      alreadymoney = #{alreadymoney,jdbcType=DECIMAL},
+      remainamount = #{remainamount,jdbcType=DECIMAL},
+      firstloandate = #{firstloandate,jdbcType=TIMESTAMP},
+      settledate = #{settledate,jdbcType=TIMESTAMP},
+      maturitydate = #{maturitydate,jdbcType=TIMESTAMP},
+      loantimelimit = #{loantimelimit,jdbcType=VARCHAR},
+      repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      interestrate = #{interestrate,jdbcType=DECIMAL},
+      interestratetype = #{interestratetype,jdbcType=VARCHAR},
+      realinterestrate = #{realinterestrate,jdbcType=DECIMAL},
+      realinterestratetype = #{realinterestratetype,jdbcType=VARCHAR},
+      loanbalance = #{loanbalance,jdbcType=DECIMAL},
+      accountstate = #{accountstate,jdbcType=VARCHAR},
+      overdueflg = #{overdueflg,jdbcType=CHAR},
+      overdueterm = #{overdueterm,jdbcType=VARCHAR},
+      overduecorpus = #{overduecorpus,jdbcType=DECIMAL},
+      overdueaccrual = #{overdueaccrual,jdbcType=DECIMAL},
+      defaultinterest = #{defaultinterest,jdbcType=DECIMAL},
+      overduedate = #{overduedate,jdbcType=TIMESTAMP},
+      nextrepaydate = #{nextrepaydate,jdbcType=TIMESTAMP},
+      nextrefundmoney = #{nextrefundmoney,jdbcType=DECIMAL},
+      nextrefundissue = #{nextrefundissue,jdbcType=INTEGER},
+      overduenum = #{overduenum,jdbcType=INTEGER},
+      addoverduedaynum = #{addoverduedaynum,jdbcType=INTEGER},
+      addoverduetimenum = #{addoverduetimenum,jdbcType=INTEGER},
+      repaydateofmonth = #{repaydateofmonth,jdbcType=CHAR},
+      ishaveread = #{ishaveread,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

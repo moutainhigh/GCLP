@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.AreaquotaMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Areaquota" >
+    <id column="accountno" property="accountno" jdbcType="VARCHAR" />
+    <id column="areaid" property="areaid" jdbcType="VARCHAR" />
+    <result column="totalquota" property="totalquota" jdbcType="DOUBLE" />
+    <result column="usedquota" property="usedquota" jdbcType="DOUBLE" />
+    <result column="remainingquota" property="remainingquota" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    accountno, areaid, totalquota, usedquota, remainingquota
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.AreaquotaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from areaquota
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from areaquota
+    where accountno = #{accountno,jdbcType=VARCHAR}
+      and areaid = #{areaid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from areaquota
+    where accountno = #{accountno,jdbcType=VARCHAR}
+      and areaid = #{areaid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.AreaquotaExample" >
+    delete from areaquota
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Areaquota" >
+    insert into areaquota (accountno, areaid, totalquota, 
+      usedquota, remainingquota)
+    values (#{accountno,jdbcType=VARCHAR}, #{areaid,jdbcType=VARCHAR}, #{totalquota,jdbcType=DOUBLE}, 
+      #{usedquota,jdbcType=DOUBLE}, #{remainingquota,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Areaquota" >
+    insert into areaquota
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountno != null" >
+        accountno,
+      </if>
+      <if test="areaid != null" >
+        areaid,
+      </if>
+      <if test="totalquota != null" >
+        totalquota,
+      </if>
+      <if test="usedquota != null" >
+        usedquota,
+      </if>
+      <if test="remainingquota != null" >
+        remainingquota,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountno != null" >
+        #{accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalquota != null" >
+        #{totalquota,jdbcType=DOUBLE},
+      </if>
+      <if test="usedquota != null" >
+        #{usedquota,jdbcType=DOUBLE},
+      </if>
+      <if test="remainingquota != null" >
+        #{remainingquota,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.AreaquotaExample" resultType="java.lang.Integer" >
+    select count(*) from areaquota
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update areaquota
+    <set >
+      <if test="record.accountno != null" >
+        accountno = #{record.accountno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaid != null" >
+        areaid = #{record.areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalquota != null" >
+        totalquota = #{record.totalquota,jdbcType=DOUBLE},
+      </if>
+      <if test="record.usedquota != null" >
+        usedquota = #{record.usedquota,jdbcType=DOUBLE},
+      </if>
+      <if test="record.remainingquota != null" >
+        remainingquota = #{record.remainingquota,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update areaquota
+    set accountno = #{record.accountno,jdbcType=VARCHAR},
+      areaid = #{record.areaid,jdbcType=VARCHAR},
+      totalquota = #{record.totalquota,jdbcType=DOUBLE},
+      usedquota = #{record.usedquota,jdbcType=DOUBLE},
+      remainingquota = #{record.remainingquota,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Areaquota" >
+    update areaquota
+    <set >
+      <if test="totalquota != null" >
+        totalquota = #{totalquota,jdbcType=DOUBLE},
+      </if>
+      <if test="usedquota != null" >
+        usedquota = #{usedquota,jdbcType=DOUBLE},
+      </if>
+      <if test="remainingquota != null" >
+        remainingquota = #{remainingquota,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where accountno = #{accountno,jdbcType=VARCHAR}
+      and areaid = #{areaid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Areaquota" >
+    update areaquota
+    set totalquota = #{totalquota,jdbcType=DOUBLE},
+      usedquota = #{usedquota,jdbcType=DOUBLE},
+      remainingquota = #{remainingquota,jdbcType=DOUBLE}
+    where accountno = #{accountno,jdbcType=VARCHAR}
+      and areaid = #{areaid,jdbcType=VARCHAR}
+  </update>
+</mapper>

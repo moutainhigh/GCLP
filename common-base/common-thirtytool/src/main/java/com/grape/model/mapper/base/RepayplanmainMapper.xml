@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.RepayplanmainMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Repayplanmain" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="custname" property="custname" jdbcType="VARCHAR" />
+    <result column="totalcreditline" property="totalcreditline" jdbcType="DECIMAL" />
+    <result column="generalcreditperiod" property="generalcreditperiod" jdbcType="INTEGER" />
+    <result column="loanprincipal" property="loanprincipal" jdbcType="DECIMAL" />
+    <result column="borrowinginto" property="borrowinginto" jdbcType="VARCHAR" />
+    <result column="loanperiods" property="loanperiods" jdbcType="INTEGER" />
+    <result column="borrowingrates" property="borrowingrates" jdbcType="DECIMAL" />
+    <result column="reimbursementbank" property="reimbursementbank" jdbcType="VARCHAR" />
+    <result column="repaymentname" property="repaymentname" jdbcType="VARCHAR" />
+    <result column="repaymentaccount" property="repaymentaccount" jdbcType="VARCHAR" />
+    <result column="reimbursementmeans" property="reimbursementmeans" jdbcType="VARCHAR" />
+    <result column="reimbursementnote" property="reimbursementnote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, custname, totalcreditline, generalcreditperiod, loanprincipal, borrowinginto, 
+    loanperiods, borrowingrates, reimbursementbank, repaymentname, repaymentaccount, 
+    reimbursementmeans, reimbursementnote
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.RepayplanmainExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from repayplanmain
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from repayplanmain
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from repayplanmain
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.RepayplanmainExample" >
+    delete from repayplanmain
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Repayplanmain" >
+    insert into repayplanmain (id, workid, custname, 
+      totalcreditline, generalcreditperiod, loanprincipal, 
+      borrowinginto, loanperiods, borrowingrates, 
+      reimbursementbank, repaymentname, repaymentaccount, 
+      reimbursementmeans, reimbursementnote)
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{custname,jdbcType=VARCHAR}, 
+      #{totalcreditline,jdbcType=DECIMAL}, #{generalcreditperiod,jdbcType=INTEGER}, #{loanprincipal,jdbcType=DECIMAL}, 
+      #{borrowinginto,jdbcType=VARCHAR}, #{loanperiods,jdbcType=INTEGER}, #{borrowingrates,jdbcType=DECIMAL}, 
+      #{reimbursementbank,jdbcType=VARCHAR}, #{repaymentname,jdbcType=VARCHAR}, #{repaymentaccount,jdbcType=VARCHAR}, 
+      #{reimbursementmeans,jdbcType=VARCHAR}, #{reimbursementnote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Repayplanmain" >
+    insert into repayplanmain
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="custname != null" >
+        custname,
+      </if>
+      <if test="totalcreditline != null" >
+        totalcreditline,
+      </if>
+      <if test="generalcreditperiod != null" >
+        generalcreditperiod,
+      </if>
+      <if test="loanprincipal != null" >
+        loanprincipal,
+      </if>
+      <if test="borrowinginto != null" >
+        borrowinginto,
+      </if>
+      <if test="loanperiods != null" >
+        loanperiods,
+      </if>
+      <if test="borrowingrates != null" >
+        borrowingrates,
+      </if>
+      <if test="reimbursementbank != null" >
+        reimbursementbank,
+      </if>
+      <if test="repaymentname != null" >
+        repaymentname,
+      </if>
+      <if test="repaymentaccount != null" >
+        repaymentaccount,
+      </if>
+      <if test="reimbursementmeans != null" >
+        reimbursementmeans,
+      </if>
+      <if test="reimbursementnote != null" >
+        reimbursementnote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="totalcreditline != null" >
+        #{totalcreditline,jdbcType=DECIMAL},
+      </if>
+      <if test="generalcreditperiod != null" >
+        #{generalcreditperiod,jdbcType=INTEGER},
+      </if>
+      <if test="loanprincipal != null" >
+        #{loanprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowinginto != null" >
+        #{borrowinginto,jdbcType=VARCHAR},
+      </if>
+      <if test="loanperiods != null" >
+        #{loanperiods,jdbcType=INTEGER},
+      </if>
+      <if test="borrowingrates != null" >
+        #{borrowingrates,jdbcType=DECIMAL},
+      </if>
+      <if test="reimbursementbank != null" >
+        #{reimbursementbank,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentname != null" >
+        #{repaymentname,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentaccount != null" >
+        #{repaymentaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="reimbursementmeans != null" >
+        #{reimbursementmeans,jdbcType=VARCHAR},
+      </if>
+      <if test="reimbursementnote != null" >
+        #{reimbursementnote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.RepayplanmainExample" resultType="java.lang.Integer" >
+    select count(*) from repayplanmain
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update repayplanmain
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custname != null" >
+        custname = #{record.custname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalcreditline != null" >
+        totalcreditline = #{record.totalcreditline,jdbcType=DECIMAL},
+      </if>
+      <if test="record.generalcreditperiod != null" >
+        generalcreditperiod = #{record.generalcreditperiod,jdbcType=INTEGER},
+      </if>
+      <if test="record.loanprincipal != null" >
+        loanprincipal = #{record.loanprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.borrowinginto != null" >
+        borrowinginto = #{record.borrowinginto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanperiods != null" >
+        loanperiods = #{record.loanperiods,jdbcType=INTEGER},
+      </if>
+      <if test="record.borrowingrates != null" >
+        borrowingrates = #{record.borrowingrates,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reimbursementbank != null" >
+        reimbursementbank = #{record.reimbursementbank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repaymentname != null" >
+        repaymentname = #{record.repaymentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repaymentaccount != null" >
+        repaymentaccount = #{record.repaymentaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reimbursementmeans != null" >
+        reimbursementmeans = #{record.reimbursementmeans,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reimbursementnote != null" >
+        reimbursementnote = #{record.reimbursementnote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update repayplanmain
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      custname = #{record.custname,jdbcType=VARCHAR},
+      totalcreditline = #{record.totalcreditline,jdbcType=DECIMAL},
+      generalcreditperiod = #{record.generalcreditperiod,jdbcType=INTEGER},
+      loanprincipal = #{record.loanprincipal,jdbcType=DECIMAL},
+      borrowinginto = #{record.borrowinginto,jdbcType=VARCHAR},
+      loanperiods = #{record.loanperiods,jdbcType=INTEGER},
+      borrowingrates = #{record.borrowingrates,jdbcType=DECIMAL},
+      reimbursementbank = #{record.reimbursementbank,jdbcType=VARCHAR},
+      repaymentname = #{record.repaymentname,jdbcType=VARCHAR},
+      repaymentaccount = #{record.repaymentaccount,jdbcType=VARCHAR},
+      reimbursementmeans = #{record.reimbursementmeans,jdbcType=VARCHAR},
+      reimbursementnote = #{record.reimbursementnote,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Repayplanmain" >
+    update repayplanmain
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        custname = #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="totalcreditline != null" >
+        totalcreditline = #{totalcreditline,jdbcType=DECIMAL},
+      </if>
+      <if test="generalcreditperiod != null" >
+        generalcreditperiod = #{generalcreditperiod,jdbcType=INTEGER},
+      </if>
+      <if test="loanprincipal != null" >
+        loanprincipal = #{loanprincipal,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowinginto != null" >
+        borrowinginto = #{borrowinginto,jdbcType=VARCHAR},
+      </if>
+      <if test="loanperiods != null" >
+        loanperiods = #{loanperiods,jdbcType=INTEGER},
+      </if>
+      <if test="borrowingrates != null" >
+        borrowingrates = #{borrowingrates,jdbcType=DECIMAL},
+      </if>
+      <if test="reimbursementbank != null" >
+        reimbursementbank = #{reimbursementbank,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentname != null" >
+        repaymentname = #{repaymentname,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymentaccount != null" >
+        repaymentaccount = #{repaymentaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="reimbursementmeans != null" >
+        reimbursementmeans = #{reimbursementmeans,jdbcType=VARCHAR},
+      </if>
+      <if test="reimbursementnote != null" >
+        reimbursementnote = #{reimbursementnote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Repayplanmain" >
+    update repayplanmain
+    set workid = #{workid,jdbcType=VARCHAR},
+      custname = #{custname,jdbcType=VARCHAR},
+      totalcreditline = #{totalcreditline,jdbcType=DECIMAL},
+      generalcreditperiod = #{generalcreditperiod,jdbcType=INTEGER},
+      loanprincipal = #{loanprincipal,jdbcType=DECIMAL},
+      borrowinginto = #{borrowinginto,jdbcType=VARCHAR},
+      loanperiods = #{loanperiods,jdbcType=INTEGER},
+      borrowingrates = #{borrowingrates,jdbcType=DECIMAL},
+      reimbursementbank = #{reimbursementbank,jdbcType=VARCHAR},
+      repaymentname = #{repaymentname,jdbcType=VARCHAR},
+      repaymentaccount = #{repaymentaccount,jdbcType=VARCHAR},
+      reimbursementmeans = #{reimbursementmeans,jdbcType=VARCHAR},
+      reimbursementnote = #{reimbursementnote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

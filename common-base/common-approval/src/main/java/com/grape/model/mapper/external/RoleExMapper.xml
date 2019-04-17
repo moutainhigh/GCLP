@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.RoleExMapper" >
+	<select id="selectRole" parameterType="map" resultType="com.grape.controller.request.RoleBean">	
+		SELECT DISTINCT ps.workername as workername ,'' as rolename ,temp1.amt as total , temp1.userid as workerid from (select temp.userid,count(temp.userid) amt from (select ua.userid from noderole nr 
+		left outer join userrole ur on nr.roleid=ur.roleid
+		left outer join userapprove ua on ua.userid=ur.workerid
+		where ua.arerid=#{arerid}
+		and ua.channelno=#{channelno}
+		and ua.productno=#{productno}
+		and nr.nodeid=#{nodeid}
+		and ua.amtlow &lt; #{expectapplyamount}
+		and ua.amthigh > #{expectapplyamount}
+		group by ua.userid) temp left outer join workitem on temp.userid=workitem.authuserid
+		group by temp.userid
+		) temp1
+		LEFT OUTER JOIN person as ps on ps.workerid = temp1.userid	
+	</select>
+
+	<select id="selectCount" parameterType="map" resultType="Integer">
+		select count(1)
+        from (workitem w , doctask d, userapprove p ,person per,area area,organization organization,
+        (select p.productno,p.productname,c.coddes from product p,codetable c where p.producttype=c.codflg and
+        c.codtyp='PRODUCTTYPE') pc,
+        (select * from custinfo where custinfo.custtype like '%1%') custinfo,productnode productnode)
+        left join exceptloaninfo e on e.workid=d.workid
+        where w.workid=d.workid and d.channelno=p.channelno and d.areaid=p.arerid and p.productno=d.productno
+        and organization.organizationno=d.channelno and d.areaid=area.areaid and pc.productno=d.productno
+        and custinfo.workid=d.workid and productnode.nodeid=w.node and productnode.type='task'
+        and p.userid=per.workerid and p.userid=#{userid , jdbcType=VARCHAR}
+				and (w.authuserid=#{userid , jdbcType=VARCHAR} or (w.authuserid is null and exists (
+      select 1 from userrole u,noderole n
+      where u.roleid=n.roleid and u.workerid=p.userid and n.productno=d.productno and n.nodeid=w.node and
+            u.workerid=#{userid , jdbcType=VARCHAR})
+            and (d.userid=#{userid , jdbcType=VARCHAR} or (p.amtlow &lt;= e.expectapplyamount
+            and p.amthigh &gt; e.expectapplyamount ))))
+	</select>
+
+	<select id="selectRoleEx" parameterType="map" resultType="com.grape.controller.request.RoleBean">	
+		SELECT DISTINCT ps.workername as workername ,'' as rolename ,'' as total , temp1.userid as workerid from
+	(
+		select ua.userid
+		from
+		noderole nr
+		left outer join userrole ur on nr.roleid=ur.roleid
+		left outer join userapprove ua on ua.userid=ur.workerid
+		where
+		ua.arerid=#{arerid}
+		and ua.channelno=#{channelno}
+		and ua.productno=#{productno}
+		and nr.nodeid=#{nodeid}
+		and ua.amtlow &lt; #{expectapplyamount}
+		and ua.amthigh > #{expectapplyamount}
+		group by ua.userid
+	) temp1 LEFT JOIN person as ps on ps.workerid = temp1.userid
+
+	</select>
+	
+	<select id="selectRoleFortotal" parameterType="map" resultType="java.lang.String">
+	SELECT
+		COUNT(*) AS total
+	FROM
+		workitem
+	WHERE
+		node IN (
+			SELECT
+				nodeid AS node
+			FROM
+				noderole
+			WHERE
+				roleid IN (
+					SELECT
+						roleid
+					FROM
+						noderole
+					WHERE
+						nodeid =  #{nodeid}
+				)
+		)and authuserid is null
+	</select>
+	
+	<select id="authorization" parameterType="map" resultType="com.grape.controller.request.RoleBean">	
+			SELECT
+			person.workername AS workername,
+			'' AS rolename,
+			COUNT(person.workerid) total,
+			person.workerid
+		FROM
+			userrole ur
+		LEFT JOIN person ON ur.workerid = person.workerid
+		LEFT OUTER JOIN userapprove ua ON ua.userid = ur.workerid
+		WHERE
+			roleid IN (
+				SELECT
+					roleid
+				FROM
+					noderole
+				WHERE
+					nodeid = #{nodeid}
+				AND ua.arerid = #{arerid}
+				AND ua.channelno = #{channelno}
+				AND ua.productno = #{productno}
+			)
+		AND person.workerid != #{userid}
+		AND person.department IN (
+			SELECT
+				department
+			FROM
+				person
+			WHERE
+				workerid = #{userid}
+		)
+		AND person.organizationid IN (
+			SELECT
+				organizationid
+			FROM
+				person
+			WHERE
+				workerid = #{userid}
+		)
+		GROUP BY
+			ur.workerid
+	</select>
+	
+	<select id="forward" parameterType="map" resultType="com.grape.controller.request.RoleBean">			
+		SELECT
+			person.workername AS workername,
+			'' AS rolename,
+			COUNT(person.workerid) total,
+			person.workerid
+		FROM
+			userrole ur
+		LEFT JOIN person ON ur.workerid = person.workerid
+		LEFT OUTER JOIN userapprove ua ON ua.userid = ur.workerid
+		WHERE
+			roleid IN (
+				SELECT
+					roleid
+				FROM
+					noderole
+				WHERE
+					nodeid = #{nodeid}
+				AND ua.arerid = #{arerid}
+				AND ua.channelno = #{channelno}
+				AND ua.productno = #{productno}
+			)
+		AND person.workerid != #{userid}
+		AND person.department IN (
+			SELECT
+				department
+			FROM
+				person
+			WHERE
+				workerid = #{userid}
+		)
+		AND person.organizationid IN (
+			SELECT
+				organizationid
+			FROM
+				person
+			WHERE
+				workerid = #{userid}
+		)
+		GROUP BY
+			ur.workerid
+	</select>
+	
+	<select id="sendback" parameterType="map" resultType="com.grape.controller.request.RoleBean">
+		SELECT
+		nodename,
+		nodeid
+		FROM
+		productnode
+		WHERE
+		stage IN (
+		SELECT
+		productnode.stage
+		FROM
+		productnode
+		LEFT OUTER JOIN workitem ON (
+		workitem.node = productnode.nodeid)
+		WHERE
+		workitem.workid = #{workid}
+		AND productnode.nodeid = #{nodeid}
+		GROUP BY
+		node
+		)
+		and productnode.productno = #{productno}
+		and CASE when LENGTH(productnode.nodeid) = 8 then CONCAT(CONVERT(SUBSTR(productnode.nodeid,LENGTH(productnode.nodeid)-1,2),SIGNED),0) else CONVERT(SUBSTR(productnode.nodeid,LENGTH(productnode.nodeid)-2,3),SIGNED) END
+		&lt;  CASE when LENGTH(#{nodeid}) = 8 then CONCAT(CONVERT(SUBSTR(#{nodeid},LENGTH(#{nodeid})-1,2),SIGNED),0) else CONVERT(SUBSTR(#{nodeid},LENGTH(#{nodeid})-2,3),SIGNED) END
+		and productnode.type = 'task'
+	</select>
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.ProductexMapper" >
+	<select id="selectProductex" parameterType="map" resultType="com.grape.controller.bean.ProductexBean">
+	SELECT
+		doc.workid,
+		org.organizationname,
+		doc.contractno,
+		doc.level,
+		area.areaname,
+		cod.coddes AS producttype,
+		pro.productname,
+		per.workername,
+		chanapprovalform.productremark
+	FROM
+		doctask doc
+	LEFT OUTER JOIN organization org ON org.organizationno = doc.channelno
+	LEFT OUTER JOIN product pro ON pro.productno = doc.productno
+	LEFT OUTER JOIN person per ON per.workerid = doc.userid
+	LEFT OUTER JOIN area area ON area.areaid = doc.areaid
+	LEFT OUTER JOIN codetable cod ON cod.codflg = pro.producttype AND codtyp = 'PRODUCTTYPE'
+	LEFT OUTER JOIN chanapprovalform ON chanapprovalform.workid = doc.workid and productremark is not null
+		WHERE
+		doc.workid = #{workid}
+ORDER BY
+		chanapprovalform.id DESC
+	LIMIT 1
+	</select>
+	
+	<select id="selectChanappro" parameterType="map" resultType="com.grape.model.db.Chanapprovalform">
+	SELECT
+		*
+	FROM
+		chanapprovalform 
+		WHERE
+		chanapprovalform.workid = #{workid} and baseinfonote is not null
+ORDER BY
+		chanapprovalform.id DESC
+	LIMIT 1
+	</select>
+	
+	<select id="selectChanByWorkid" resultType="com.grape.controller.response.bean.ChanapprovalBean">
+		SELECT
+			suggestuseamount,
+			temp.suggestapplyamount,
+			mortgagerate,
+			totalmortgage,
+			mortgagefeerate,
+			temp.suggestapplyrate,
+			suggestrepayway,
+			otheridea,
+			suggestapplyterm
+		FROM
+			chanapprovalform
+		LEFT OUTER JOIN (
+			SELECT
+				suggestapplyamount,
+				suggestuseterm,
+				suggestapplyrate,
+				workid
+			FROM
+				chanapprovalform
+			WHERE
+				workid = #{workid}
+			ORDER BY
+				id DESC
+			LIMIT 1
+		) temp ON temp.workid = chanapprovalform.workid
+		WHERE
+			chanapprovalform.workid = #{workid}
+		AND chanapprovalform.suggestmortgagerate IS NOT NULL
+		AND chanapprovalform.suggestmortgagerate != ''
+		ORDER BY
+			id DESC
+		LIMIT 1
+	</select>
+	
+	
+	<select id="selectmortbycre" resultType="com.grape.controller.response.bean.MortAndCustBean">
+		SELECT
+		custname,
+		martgagename
+	FROM
+		(
+			SELECT
+				custname
+			FROM
+				custinfo
+			WHERE
+				cerdid = #{cerdid}
+			AND workid = #{workid}
+		) temp1,
+		(
+			SELECT
+				martgagename
+			FROM
+				mortgage
+			WHERE
+				workid = #{workid}
+			AND propertyowner like CONCAT('%',#{cerdid},'%')
+		) temp2
+		LIMIT 1
+	</select>
+</mapper>

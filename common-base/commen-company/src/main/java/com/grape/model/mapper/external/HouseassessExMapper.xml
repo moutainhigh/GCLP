@@ -1,0 +1,39 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.HouseassessExMapper">
+    <select id="findHouseassessListByParam" resultType="com.grape.controller.reponse.bean.ChannelAssessinfo" parameterType="map">
+       select * from houseassess h
+       where 1=1
+        <if test="workid!=null and workid!=''">
+           and h.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+     
+        <if test="mortgageno!=null and mortgageno!=''">
+           and h.mortgageno=#{mortgageno, jdbcType = VARCHAR}
+        </if>
+        
+        order by h.chgdt
+    </select>
+    
+    <select id="findHouseassessListByParam2" resultType="map" parameterType="map">
+       select h.assesstotal as totalprice,h.chgdt,m.similarword as mortgagename,m.mortgageno from houseassess h
+       left outer join mortgagematch m on h.mortgageno = m.mortgageno
+       
+       where 1=1
+        <if test="workid!=null and workid!=''">
+           and h.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        <if test="assesstype!=null and assesstype!=''">
+           and h.assesstype=#{assesstype, jdbcType = VARCHAR}
+        </if>
+        <if test="assessid!=null and assessid!=''">
+           and h.assessid=#{assessid, jdbcType = VARCHAR}
+        </if>
+        and m.matchflag = 'Y'
+        
+        order by h.chgdt
+    </select>
+	
+	
+    
+    
+</mapper> 

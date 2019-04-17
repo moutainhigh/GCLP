@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ProctransMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Proctrans" >
+    <id column="transid" property="transid" jdbcType="VARCHAR" />
+    <result column="buttonid" property="buttonid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tonode" property="tonode" jdbcType="VARCHAR" />
+    <result column="condexpress" property="condexpress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    transid, buttonid, name, tonode, condexpress
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ProctransExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from proctrans
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from proctrans
+    where transid = #{transid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from proctrans
+    where transid = #{transid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ProctransExample" >
+    delete from proctrans
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Proctrans" >
+    insert into proctrans (transid, buttonid, name, 
+      tonode, condexpress)
+    values (#{transid,jdbcType=VARCHAR}, #{buttonid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{tonode,jdbcType=VARCHAR}, #{condexpress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Proctrans" >
+    insert into proctrans
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="transid != null" >
+        transid,
+      </if>
+      <if test="buttonid != null" >
+        buttonid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tonode != null" >
+        tonode,
+      </if>
+      <if test="condexpress != null" >
+        condexpress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="transid != null" >
+        #{transid,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonid != null" >
+        #{buttonid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tonode != null" >
+        #{tonode,jdbcType=VARCHAR},
+      </if>
+      <if test="condexpress != null" >
+        #{condexpress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ProctransExample" resultType="java.lang.Integer" >
+    select count(*) from proctrans
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update proctrans
+    <set >
+      <if test="record.transid != null" >
+        transid = #{record.transid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttonid != null" >
+        buttonid = #{record.buttonid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tonode != null" >
+        tonode = #{record.tonode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.condexpress != null" >
+        condexpress = #{record.condexpress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update proctrans
+    set transid = #{record.transid,jdbcType=VARCHAR},
+      buttonid = #{record.buttonid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      tonode = #{record.tonode,jdbcType=VARCHAR},
+      condexpress = #{record.condexpress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Proctrans" >
+    update proctrans
+    <set >
+      <if test="buttonid != null" >
+        buttonid = #{buttonid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tonode != null" >
+        tonode = #{tonode,jdbcType=VARCHAR},
+      </if>
+      <if test="condexpress != null" >
+        condexpress = #{condexpress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where transid = #{transid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Proctrans" >
+    update proctrans
+    set buttonid = #{buttonid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      tonode = #{tonode,jdbcType=VARCHAR},
+      condexpress = #{condexpress,jdbcType=VARCHAR}
+    where transid = #{transid,jdbcType=VARCHAR}
+  </update>
+</mapper>

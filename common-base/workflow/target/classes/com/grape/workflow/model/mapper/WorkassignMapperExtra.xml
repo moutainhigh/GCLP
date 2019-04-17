@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.workflow.model.mapper.WorkassignMapperExtra">
+
+	<select id="findWorkassignGenerateList" parameterType="map"
+		resultType="map">
+		select *
+		from person p
+		where p.bnkno = #{orgno,jdbcType=VARCHAR}
+		and p.roleid = #{roleid,jdbcType=VARCHAR}
+		and not exists (
+		select * from workassign a
+		where a.workid = #{workid,jdbcType=VARCHAR} and a.userid=p.workerid)
+	</select>
+
+	<select id="findWorkassignBest" parameterType="map" resultType="map">
+		select p.workerid, count(w.userid) cnt from person p
+		left outer join workassign w on p.workerid = w.userid
+		where p.bnkno = #{orgno,jdbcType=VARCHAR} and p.roleid =
+		#{roleid,jdbcType=VARCHAR}
+		and not exists (select * from workassign a where a.workid =
+		#{workid,jdbcType=VARCHAR} and a.userid = p.workerid)
+		group by p.workerid
+	</select>
+
+
+	<select id="findWorkassignBestExceptUserid" parameterType="map"
+		resultType="map">
+		select p.workerid, count(w.userid) cnt from person p
+		left outer join workassign w on p.workerid = w.userid
+		where p.bnkno = #{orgno,jdbcType=VARCHAR} and p.roleid =
+		#{roleid,jdbcType=VARCHAR}
+		and not exists (select * from workassign a where a.workid =
+		#{workid,jdbcType=VARCHAR} and a.userid = p.workerid)
+		and (p.workerid != #{exceptUserid,jdbcType=VARCHAR} or p.workerid is
+		null)
+		group by p.tlrid
+	</select>
+
+	<select id="checkAccess" parameterType="map" resultType="String">
+		select userid from WORKASSIGN w where w.workid = #{workid,jdbcType=VARCHAR}
+		and w.lane = #{lane,jdbcType=VARCHAR}
+		and
+		w.USERID=#{userid,jdbcType=VARCHAR}
+		or (userid='ALL'
+		and (ROLEID='ALL' or exists (select 1 from person p where
+		FIND_IN_SET(p.roleid,w.ROLEID) and
+		p.WORKERID=#{userid,jdbcType=VARCHAR})))
+		limit 0,1
+	</select>
+</mapper>

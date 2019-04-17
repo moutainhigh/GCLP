@@ -1,0 +1,100 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.ProductExMapper">
+	
+    <select id="findProductInfoByParam" resultType="com.grape.controller.reponse.bean.ProductInfo" parameterType="map">
+        select p.productno,p.productname,p.description from product p
+        where 
+            1=1 
+         
+         <if test="producttype!=null and producttype!=''">
+           and p.producttype=#{producttype, jdbcType = VARCHAR}
+        </if>
+        
+        order by p.productno
+    </select>
+    
+    <select id="findProductInfoByParam2" resultType="com.grape.controller.reponse.bean.ProductInfo" parameterType="map">
+        select p.productno,p.productname,p.description from product p
+        left outer join productarea pa on p.productno = pa.productno
+        left outer join area a on pa.areaid= a.areaid
+        left outer join chanproduct cp on cp.productno = p.productno
+        and cp.areano = a.areaid
+        left outer join person per on per.organizationid = cp.organizationno 
+        where 
+            1=1 
+         
+         <if test="producttype!=null and producttype!=''">
+           and p.producttype=#{producttype, jdbcType = VARCHAR}
+        </if>
+         <if test="workerid!=null and workerid!=''">
+           and per.workerid=#{workerid, jdbcType = VARCHAR}
+        </if>
+        <if test="city!=null and city!=''">
+           and a.gbcode=#{city, jdbcType = VARCHAR}
+        </if>
+        order by p.productno
+    </select>
+	
+	<select id="ProductUse" resultType="com.grape.controller.reponse.bean.ProductInfo" parameterType="map">
+        select p.productno,p.productname,p.description from product p
+        left outer join productarea pa on p.productno = pa.productno
+        left outer join area a on pa.areaid= a.areaid
+        left outer join chanproduct cp on cp.productno = p.productno
+        and cp.areano = a.areaid
+        left outer join person per on per.organizationid = cp.organizationno 
+        where 
+            1=1
+        and (per.level !="9" OR per.level IS NUll)
+         <if test="productno!=null and productno!=''">
+           and p.productno=#{productno, jdbcType = VARCHAR}
+        </if>
+         <if test="workerid!=null and workerid!=''">
+           and per.workerid=#{workerid, jdbcType = VARCHAR}
+        </if>
+        <if test="citycode!=null and citycode!=''">
+           and a.gbcode=#{citycode, jdbcType = VARCHAR}
+        </if>
+        order by p.productno
+    </select>
+	
+	<select id="countProductAll" resultType="Integer" >
+        select count(1) from product p
+        left outer join productarea pa on p.productno = pa.productno
+        left outer join area a on pa.areaid= a.areaid
+        left outer join chanproduct cp on cp.productno = p.productno
+        left outer join person per on per.organizationid = cp.organizationno 
+        where 
+            1=1 
+         
+       
+         <if test="workerid!=null and workerid!=''">
+           and per.workerid=#{workerid, jdbcType = VARCHAR}
+        </if>
+        <if test="city!=null and city!=''">
+           and a.gbcode=#{city, jdbcType = VARCHAR}
+        </if>
+        
+    </select>
+    
+    <select id="countProductList" resultType="Integer" parameterType="map">
+       	select count(1) from product p
+        
+        left outer join productarea pa on p.productno = pa.productno
+        left outer join area a on pa.areaid= a.areaid
+        left outer join chanproduct cp on cp.productno = p.productno
+        left outer join person per on per.organizationid = cp.organizationno 
+        where 
+            1=1 
+         
+         <if test="producttype!=null and producttype!=''">
+           and p.producttype=#{producttype, jdbcType = VARCHAR}
+        </if>
+         <if test="workerid!=null and workerid!=''">
+           and per.workerid=#{workerid, jdbcType = VARCHAR}
+        </if>
+        <if test="city!=null and city!=''">
+           and a.gbcode=#{city, jdbcType = VARCHAR}
+        </if>
+        
+    </select>
+</mapper> 

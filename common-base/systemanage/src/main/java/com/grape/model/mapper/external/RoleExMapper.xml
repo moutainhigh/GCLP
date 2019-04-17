@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.RoleExMapper" >
+    <select id="selectAllPerson" parameterType="map" resultType="map">
+        SELECT * from person where organizationid = #{organizationid}
+        <if test="username!=null">
+            and workername like "%" #{username} "%"
+        </if>
+    </select>
+
+    <select id="selectByRoleid" parameterType="map" resultType="com.grape.controller.response.bean.RolePersonBean1">
+        SELECT DISTINCT
+            person.workername workername,
+            temp.rolename rolename
+        FROM
+            userrole
+        LEFT OUTER JOIN (
+            SELECT
+                roleid,
+                rolename
+            FROM
+                role
+        ) temp ON userrole.roleid = temp.roleid
+        LEFT OUTER JOIN person ON person.workerid = userrole.workerid
+        WHERE
+            temp.roleid = #{roleid}
+    </select>
+</mapper>

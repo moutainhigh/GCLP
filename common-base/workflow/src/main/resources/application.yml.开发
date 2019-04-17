@@ -1,0 +1,63 @@
+server:
+  port: 8010
+spring:
+  application:
+    name: workflow
+  datasource:
+    url: jdbc:log4jdbc:mysql://192.168.1.4:3306/dyitp?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC&autoReconnect=true
+    username: root
+    password: Pa55w()rd
+    driver-class-name: net.sf.log4jdbc.DriverSpy
+  jpa:
+    hibernate:
+       ddl-auto: update
+logging:
+  level:
+    jdbc: error
+    jdbc.sqltiming: info
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+  config: classpath:log4j2.xml
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      clientId: clientId
+      clientSecret: secret
+    resource:
+      userInfoUri: http://localhost:8080/auth/user/info
+      prefer-token-info: false
+
+https:
+  port: 8443
+  ssl:
+    key-store: server.keystore
+    key-store-password: secret
+    key-password: password    
+
+prod:
+  configpath: config
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.36:8011/eureka/
+
+mybatis.type-aliases-package: com.grape.model.db
+ 
+mybatis.mapper-locations: classpath*:/com/grape/model/mapper/base/*.xml,classpath*:com/grape/model/mapper/external/*.xml
+
+zuul:
+    host:
+        connect-timeout-millis: 10000
+        socket-timeout-millis: 60000
+
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 60000

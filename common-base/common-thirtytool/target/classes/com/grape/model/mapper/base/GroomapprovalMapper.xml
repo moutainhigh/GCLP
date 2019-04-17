@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.GroomapprovalMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Groomapproval" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="logid" property="logid" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="nodeid" property="nodeid" jdbcType="VARCHAR" />
+    <result column="debtbackflg" property="debtbackflg" jdbcType="CHAR" />
+    <result column="debtbacknote" property="debtbacknote" jdbcType="VARCHAR" />
+    <result column="groombackflg" property="groombackflg" jdbcType="CHAR" />
+    <result column="groombacknote" property="groombacknote" jdbcType="VARCHAR" />
+    <result column="chanpromisenote" property="chanpromisenote" jdbcType="VARCHAR" />
+    <result column="chanpromiseflg" property="chanpromiseflg" jdbcType="CHAR" />
+    <result column="preoutloanbackflg" property="preoutloanbackflg" jdbcType="CHAR" />
+    <result column="preoutloanbacknote" property="preoutloanbacknote" jdbcType="VARCHAR" />
+    <result column="notation" property="notation" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, logid, workid, userid, nodeid, debtbackflg, debtbacknote, groombackflg, groombacknote, 
+    chanpromisenote, chanpromiseflg, preoutloanbackflg, preoutloanbacknote, notation, 
+    chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.GroomapprovalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from groomapproval
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from groomapproval
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from groomapproval
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.GroomapprovalExample" >
+    delete from groomapproval
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Groomapproval" >
+    insert into groomapproval (id, logid, workid, 
+      userid, nodeid, debtbackflg, 
+      debtbacknote, groombackflg, groombacknote, 
+      chanpromisenote, chanpromiseflg, preoutloanbackflg, 
+      preoutloanbacknote, notation, chgdt, 
+      chgtl)
+    values (#{id,jdbcType=VARCHAR}, #{logid,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, #{debtbackflg,jdbcType=CHAR}, 
+      #{debtbacknote,jdbcType=VARCHAR}, #{groombackflg,jdbcType=CHAR}, #{groombacknote,jdbcType=VARCHAR}, 
+      #{chanpromisenote,jdbcType=VARCHAR}, #{chanpromiseflg,jdbcType=CHAR}, #{preoutloanbackflg,jdbcType=CHAR}, 
+      #{preoutloanbacknote,jdbcType=VARCHAR}, #{notation,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{chgtl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Groomapproval" >
+    insert into groomapproval
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="logid != null" >
+        logid,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="nodeid != null" >
+        nodeid,
+      </if>
+      <if test="debtbackflg != null" >
+        debtbackflg,
+      </if>
+      <if test="debtbacknote != null" >
+        debtbacknote,
+      </if>
+      <if test="groombackflg != null" >
+        groombackflg,
+      </if>
+      <if test="groombacknote != null" >
+        groombacknote,
+      </if>
+      <if test="chanpromisenote != null" >
+        chanpromisenote,
+      </if>
+      <if test="chanpromiseflg != null" >
+        chanpromiseflg,
+      </if>
+      <if test="preoutloanbackflg != null" >
+        preoutloanbackflg,
+      </if>
+      <if test="preoutloanbacknote != null" >
+        preoutloanbacknote,
+      </if>
+      <if test="notation != null" >
+        notation,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="logid != null" >
+        #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="debtbackflg != null" >
+        #{debtbackflg,jdbcType=CHAR},
+      </if>
+      <if test="debtbacknote != null" >
+        #{debtbacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="groombackflg != null" >
+        #{groombackflg,jdbcType=CHAR},
+      </if>
+      <if test="groombacknote != null" >
+        #{groombacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="chanpromisenote != null" >
+        #{chanpromisenote,jdbcType=VARCHAR},
+      </if>
+      <if test="chanpromiseflg != null" >
+        #{chanpromiseflg,jdbcType=CHAR},
+      </if>
+      <if test="preoutloanbackflg != null" >
+        #{preoutloanbackflg,jdbcType=CHAR},
+      </if>
+      <if test="preoutloanbacknote != null" >
+        #{preoutloanbacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="notation != null" >
+        #{notation,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.GroomapprovalExample" resultType="java.lang.Integer" >
+    select count(*) from groomapproval
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update groomapproval
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logid != null" >
+        logid = #{record.logid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nodeid != null" >
+        nodeid = #{record.nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.debtbackflg != null" >
+        debtbackflg = #{record.debtbackflg,jdbcType=CHAR},
+      </if>
+      <if test="record.debtbacknote != null" >
+        debtbacknote = #{record.debtbacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groombackflg != null" >
+        groombackflg = #{record.groombackflg,jdbcType=CHAR},
+      </if>
+      <if test="record.groombacknote != null" >
+        groombacknote = #{record.groombacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chanpromisenote != null" >
+        chanpromisenote = #{record.chanpromisenote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chanpromiseflg != null" >
+        chanpromiseflg = #{record.chanpromiseflg,jdbcType=CHAR},
+      </if>
+      <if test="record.preoutloanbackflg != null" >
+        preoutloanbackflg = #{record.preoutloanbackflg,jdbcType=CHAR},
+      </if>
+      <if test="record.preoutloanbacknote != null" >
+        preoutloanbacknote = #{record.preoutloanbacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notation != null" >
+        notation = #{record.notation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update groomapproval
+    set id = #{record.id,jdbcType=VARCHAR},
+      logid = #{record.logid,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      nodeid = #{record.nodeid,jdbcType=VARCHAR},
+      debtbackflg = #{record.debtbackflg,jdbcType=CHAR},
+      debtbacknote = #{record.debtbacknote,jdbcType=VARCHAR},
+      groombackflg = #{record.groombackflg,jdbcType=CHAR},
+      groombacknote = #{record.groombacknote,jdbcType=VARCHAR},
+      chanpromisenote = #{record.chanpromisenote,jdbcType=VARCHAR},
+      chanpromiseflg = #{record.chanpromiseflg,jdbcType=CHAR},
+      preoutloanbackflg = #{record.preoutloanbackflg,jdbcType=CHAR},
+      preoutloanbacknote = #{record.preoutloanbacknote,jdbcType=VARCHAR},
+      notation = #{record.notation,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Groomapproval" >
+    update groomapproval
+    <set >
+      <if test="logid != null" >
+        logid = #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        nodeid = #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="debtbackflg != null" >
+        debtbackflg = #{debtbackflg,jdbcType=CHAR},
+      </if>
+      <if test="debtbacknote != null" >
+        debtbacknote = #{debtbacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="groombackflg != null" >
+        groombackflg = #{groombackflg,jdbcType=CHAR},
+      </if>
+      <if test="groombacknote != null" >
+        groombacknote = #{groombacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="chanpromisenote != null" >
+        chanpromisenote = #{chanpromisenote,jdbcType=VARCHAR},
+      </if>
+      <if test="chanpromiseflg != null" >
+        chanpromiseflg = #{chanpromiseflg,jdbcType=CHAR},
+      </if>
+      <if test="preoutloanbackflg != null" >
+        preoutloanbackflg = #{preoutloanbackflg,jdbcType=CHAR},
+      </if>
+      <if test="preoutloanbacknote != null" >
+        preoutloanbacknote = #{preoutloanbacknote,jdbcType=VARCHAR},
+      </if>
+      <if test="notation != null" >
+        notation = #{notation,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Groomapproval" >
+    update groomapproval
+    set logid = #{logid,jdbcType=VARCHAR},
+      workid = #{workid,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      nodeid = #{nodeid,jdbcType=VARCHAR},
+      debtbackflg = #{debtbackflg,jdbcType=CHAR},
+      debtbacknote = #{debtbacknote,jdbcType=VARCHAR},
+      groombackflg = #{groombackflg,jdbcType=CHAR},
+      groombacknote = #{groombacknote,jdbcType=VARCHAR},
+      chanpromisenote = #{chanpromisenote,jdbcType=VARCHAR},
+      chanpromiseflg = #{chanpromiseflg,jdbcType=CHAR},
+      preoutloanbackflg = #{preoutloanbackflg,jdbcType=CHAR},
+      preoutloanbacknote = #{preoutloanbacknote,jdbcType=VARCHAR},
+      notation = #{notation,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

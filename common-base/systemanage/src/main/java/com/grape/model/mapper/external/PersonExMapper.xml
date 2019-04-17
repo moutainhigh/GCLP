@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.PersonExMapper" >
+    <select id="selectByTerm" parameterType="com.grape.model.db.Person" resultType="com.grape.model.db.Person">
+	    select * from person
+		    <where>
+		        <if test=" workerid != null and workerid != '' ">
+		            and workerid = #{workerid}
+		        </if>
+		        <if test=" workername != null and workername != '' ">
+		            and workername = #{workername}
+		        </if>
+		        <if test=" cerdid != null and cerdid != '' ">
+		            and cerdid = #{cerdid}
+		        </if>
+		        <if test=" password != null and password != '' ">
+		            and password = #{password}
+		        </if>
+		        <if test=" department != null and department != '' ">
+		            and department = #{department}
+		        </if>
+		        <if test=" state != null and state != '' ">
+		            and state = #{state}
+		        </if>
+		        <if test=" organizationid != null and organizationid != '' ">
+		            and organizationid = #{organizationid}
+		        </if>
+		        <if test=" telnumber != null and telnumber != '' ">
+		            and telnumber = #{telnumber}
+		        </if>
+		        <if test=" mobilephone != null and mobilephone != '' ">
+		            and mobilephone = #{mobilephone}
+		        </if>
+		        <if test=" email != null and email != '' ">
+		            and email = #{email}
+		        </if>
+		        <if test=" city != null and city != '' ">
+		            and city = #{city}
+		        </if>
+		        <if test=" supervisor != null and supervisor != '' ">
+		            and supervisor = #{supervisor}
+		        </if>
+		        <if test=" level != null and level != '' ">
+		            and level = #{level}
+		        </if>
+		        <if test=" waihuemail != null and waihuemail != '' ">
+		            and waihuemail = #{waihuemail}
+		        </if>
+	    	</where>
+    </select>
+</mapper>

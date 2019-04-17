@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.OrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Organization" >
+    <id column="organizationno" property="organizationno" jdbcType="VARCHAR" />
+    <result column="organizationname" property="organizationname" jdbcType="VARCHAR" />
+    <result column="orgbelongsto" property="orgbelongsto" jdbcType="VARCHAR" />
+    <result column="linkman" property="linkman" jdbcType="VARCHAR" />
+    <result column="telnumber" property="telnumber" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="organizationcode" property="organizationcode" jdbcType="CHAR" />
+    <result column="orgleavel" property="orgleavel" jdbcType="CHAR" />
+    <result column="orgofch" property="orgofch" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.grape.model.db.Organization" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    organizationno, organizationname, orgbelongsto, linkman, telnumber, address, organizationcode, 
+    orgleavel, orgofch, chgdt, chgtl
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.grape.model.db.OrganizationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.OrganizationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from organization
+    where organizationno = #{organizationno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization
+    where organizationno = #{organizationno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.OrganizationExample" >
+    delete from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Organization" >
+    insert into organization (organizationno, organizationname, 
+      orgbelongsto, linkman, telnumber, 
+      address, organizationcode, orgleavel, 
+      orgofch, chgdt, chgtl, 
+      description)
+    values (#{organizationno,jdbcType=VARCHAR}, #{organizationname,jdbcType=VARCHAR}, 
+      #{orgbelongsto,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, #{telnumber,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{organizationcode,jdbcType=CHAR}, #{orgleavel,jdbcType=CHAR}, 
+      #{orgofch,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}, 
+      #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Organization" >
+    insert into organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="organizationno != null" >
+        organizationno,
+      </if>
+      <if test="organizationname != null" >
+        organizationname,
+      </if>
+      <if test="orgbelongsto != null" >
+        orgbelongsto,
+      </if>
+      <if test="linkman != null" >
+        linkman,
+      </if>
+      <if test="telnumber != null" >
+        telnumber,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="organizationcode != null" >
+        organizationcode,
+      </if>
+      <if test="orgleavel != null" >
+        orgleavel,
+      </if>
+      <if test="orgofch != null" >
+        orgofch,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="organizationno != null" >
+        #{organizationno,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationname != null" >
+        #{organizationname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgbelongsto != null" >
+        #{orgbelongsto,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="telnumber != null" >
+        #{telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null" >
+        #{organizationcode,jdbcType=CHAR},
+      </if>
+      <if test="orgleavel != null" >
+        #{orgleavel,jdbcType=CHAR},
+      </if>
+      <if test="orgofch != null" >
+        #{orgofch,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.OrganizationExample" resultType="java.lang.Integer" >
+    select count(*) from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization
+    <set >
+      <if test="record.organizationno != null" >
+        organizationno = #{record.organizationno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationname != null" >
+        organizationname = #{record.organizationname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgbelongsto != null" >
+        orgbelongsto = #{record.orgbelongsto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkman != null" >
+        linkman = #{record.linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telnumber != null" >
+        telnumber = #{record.telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationcode != null" >
+        organizationcode = #{record.organizationcode,jdbcType=CHAR},
+      </if>
+      <if test="record.orgleavel != null" >
+        orgleavel = #{record.orgleavel,jdbcType=CHAR},
+      </if>
+      <if test="record.orgofch != null" >
+        orgofch = #{record.orgofch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update organization
+    set organizationno = #{record.organizationno,jdbcType=VARCHAR},
+      organizationname = #{record.organizationname,jdbcType=VARCHAR},
+      orgbelongsto = #{record.orgbelongsto,jdbcType=VARCHAR},
+      linkman = #{record.linkman,jdbcType=VARCHAR},
+      telnumber = #{record.telnumber,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      organizationcode = #{record.organizationcode,jdbcType=CHAR},
+      orgleavel = #{record.orgleavel,jdbcType=CHAR},
+      orgofch = #{record.orgofch,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization
+    set organizationno = #{record.organizationno,jdbcType=VARCHAR},
+      organizationname = #{record.organizationname,jdbcType=VARCHAR},
+      orgbelongsto = #{record.orgbelongsto,jdbcType=VARCHAR},
+      linkman = #{record.linkman,jdbcType=VARCHAR},
+      telnumber = #{record.telnumber,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      organizationcode = #{record.organizationcode,jdbcType=CHAR},
+      orgleavel = #{record.orgleavel,jdbcType=CHAR},
+      orgofch = #{record.orgofch,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Organization" >
+    update organization
+    <set >
+      <if test="organizationname != null" >
+        organizationname = #{organizationname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgbelongsto != null" >
+        orgbelongsto = #{orgbelongsto,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="telnumber != null" >
+        telnumber = #{telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null" >
+        organizationcode = #{organizationcode,jdbcType=CHAR},
+      </if>
+      <if test="orgleavel != null" >
+        orgleavel = #{orgleavel,jdbcType=CHAR},
+      </if>
+      <if test="orgofch != null" >
+        orgofch = #{orgofch,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where organizationno = #{organizationno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.grape.model.db.Organization" >
+    update organization
+    set organizationname = #{organizationname,jdbcType=VARCHAR},
+      orgbelongsto = #{orgbelongsto,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      telnumber = #{telnumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      organizationcode = #{organizationcode,jdbcType=CHAR},
+      orgleavel = #{orgleavel,jdbcType=CHAR},
+      orgofch = #{orgofch,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where organizationno = #{organizationno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Organization" >
+    update organization
+    set organizationname = #{organizationname,jdbcType=VARCHAR},
+      orgbelongsto = #{orgbelongsto,jdbcType=VARCHAR},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      telnumber = #{telnumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      organizationcode = #{organizationcode,jdbcType=CHAR},
+      orgleavel = #{orgleavel,jdbcType=CHAR},
+      orgofch = #{orgofch,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where organizationno = #{organizationno,jdbcType=VARCHAR}
+  </update>
+</mapper>

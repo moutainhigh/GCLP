@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Product" >
+    <id column="productno" property="productno" jdbcType="VARCHAR" />
+    <result column="productname" property="productname" jdbcType="VARCHAR" />
+    <result column="producttype" property="producttype" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="minloanamount" property="minloanamount" jdbcType="DECIMAL" />
+    <result column="maxloanamount" property="maxloanamount" jdbcType="DECIMAL" />
+    <result column="ratetype" property="ratetype" jdbcType="VARCHAR" />
+    <result column="minrateofyear" property="minrateofyear" jdbcType="DECIMAL" />
+    <result column="maxrateofyear" property="maxrateofyear" jdbcType="DECIMAL" />
+    <result column="fundcomno" property="fundcomno" jdbcType="VARCHAR" />
+    <result column="aislecomno" property="aislecomno" jdbcType="VARCHAR" />
+    <result column="subsidycomno" property="subsidycomno" jdbcType="VARCHAR" />
+    <result column="docmanagecomno" property="docmanagecomno" jdbcType="VARCHAR" />
+    <result column="receivedoccomno" property="receivedoccomno" jdbcType="VARCHAR" />
+    <result column="outloandoccomno" property="outloandoccomno" jdbcType="VARCHAR" />
+    <result column="buttmode" property="buttmode" jdbcType="VARCHAR" />
+    <result column="duediligenceflg" property="duediligenceflg" jdbcType="CHAR" />
+    <result column="mortgagetype" property="mortgagetype" jdbcType="VARCHAR" />
+    <result column="takeeffectflg" property="takeeffectflg" jdbcType="CHAR" />
+    <result column="permitchandueflg" property="permitchandueflg" jdbcType="CHAR" />
+    <result column="permitfunddueflg" property="permitfunddueflg" jdbcType="CHAR" />
+    <result column="permitplaformdueflg" property="permitplaformdueflg" jdbcType="CHAR" />
+    <result column="duesystemflg" property="duesystemflg" jdbcType="CHAR" />
+    <result column="issysriskapprovel" property="issysriskapprovel" jdbcType="CHAR" />
+    <result column="issysgrantapprovel" property="issysgrantapprovel" jdbcType="CHAR" />
+    <result column="permitplaformmortflg" property="permitplaformmortflg" jdbcType="CHAR" />
+    <result column="permitchanmortflg" property="permitchanmortflg" jdbcType="CHAR" />
+    <result column="permitfundmortflg" property="permitfundmortflg" jdbcType="CHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="checkfrequency" property="checkfrequency" jdbcType="VARCHAR" />
+    <result column="companydiligenceflg" property="companydiligenceflg" jdbcType="CHAR" />
+    <result column="repaymethod" property="repaymethod" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.grape.model.db.Product" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    productno, productname, producttype, description, minloanamount, maxloanamount, ratetype, 
+    minrateofyear, maxrateofyear, fundcomno, aislecomno, subsidycomno, docmanagecomno, 
+    receivedoccomno, outloandoccomno, buttmode, duediligenceflg, mortgagetype, takeeffectflg, 
+    permitchandueflg, permitfunddueflg, permitplaformdueflg, duesystemflg, issysriskapprovel, 
+    issysgrantapprovel, permitplaformmortflg, permitchanmortflg, permitfundmortflg, chgtl, 
+    chgdt, checkfrequency, companydiligenceflg, repaymethod, state
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.grape.model.db.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    where productno = #{productno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from product
+    where productno = #{productno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ProductExample" >
+    delete from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Product" >
+    insert into product (productno, productname, producttype, 
+      description, minloanamount, maxloanamount, 
+      ratetype, minrateofyear, maxrateofyear, 
+      fundcomno, aislecomno, subsidycomno, 
+      docmanagecomno, receivedoccomno, outloandoccomno, 
+      buttmode, duediligenceflg, mortgagetype, 
+      takeeffectflg, permitchandueflg, permitfunddueflg, 
+      permitplaformdueflg, duesystemflg, issysriskapprovel, 
+      issysgrantapprovel, permitplaformmortflg, permitchanmortflg, 
+      permitfundmortflg, chgtl, chgdt, 
+      checkfrequency, companydiligenceflg, repaymethod, 
+      state, content)
+    values (#{productno,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, #{producttype,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{minloanamount,jdbcType=DECIMAL}, #{maxloanamount,jdbcType=DECIMAL}, 
+      #{ratetype,jdbcType=VARCHAR}, #{minrateofyear,jdbcType=DECIMAL}, #{maxrateofyear,jdbcType=DECIMAL}, 
+      #{fundcomno,jdbcType=VARCHAR}, #{aislecomno,jdbcType=VARCHAR}, #{subsidycomno,jdbcType=VARCHAR}, 
+      #{docmanagecomno,jdbcType=VARCHAR}, #{receivedoccomno,jdbcType=VARCHAR}, #{outloandoccomno,jdbcType=VARCHAR}, 
+      #{buttmode,jdbcType=VARCHAR}, #{duediligenceflg,jdbcType=CHAR}, #{mortgagetype,jdbcType=VARCHAR}, 
+      #{takeeffectflg,jdbcType=CHAR}, #{permitchandueflg,jdbcType=CHAR}, #{permitfunddueflg,jdbcType=CHAR}, 
+      #{permitplaformdueflg,jdbcType=CHAR}, #{duesystemflg,jdbcType=CHAR}, #{issysriskapprovel,jdbcType=CHAR}, 
+      #{issysgrantapprovel,jdbcType=CHAR}, #{permitplaformmortflg,jdbcType=CHAR}, #{permitchanmortflg,jdbcType=CHAR}, 
+      #{permitfundmortflg,jdbcType=CHAR}, #{chgtl,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{checkfrequency,jdbcType=VARCHAR}, #{companydiligenceflg,jdbcType=CHAR}, #{repaymethod,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productno != null" >
+        productno,
+      </if>
+      <if test="productname != null" >
+        productname,
+      </if>
+      <if test="producttype != null" >
+        producttype,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="minloanamount != null" >
+        minloanamount,
+      </if>
+      <if test="maxloanamount != null" >
+        maxloanamount,
+      </if>
+      <if test="ratetype != null" >
+        ratetype,
+      </if>
+      <if test="minrateofyear != null" >
+        minrateofyear,
+      </if>
+      <if test="maxrateofyear != null" >
+        maxrateofyear,
+      </if>
+      <if test="fundcomno != null" >
+        fundcomno,
+      </if>
+      <if test="aislecomno != null" >
+        aislecomno,
+      </if>
+      <if test="subsidycomno != null" >
+        subsidycomno,
+      </if>
+      <if test="docmanagecomno != null" >
+        docmanagecomno,
+      </if>
+      <if test="receivedoccomno != null" >
+        receivedoccomno,
+      </if>
+      <if test="outloandoccomno != null" >
+        outloandoccomno,
+      </if>
+      <if test="buttmode != null" >
+        buttmode,
+      </if>
+      <if test="duediligenceflg != null" >
+        duediligenceflg,
+      </if>
+      <if test="mortgagetype != null" >
+        mortgagetype,
+      </if>
+      <if test="takeeffectflg != null" >
+        takeeffectflg,
+      </if>
+      <if test="permitchandueflg != null" >
+        permitchandueflg,
+      </if>
+      <if test="permitfunddueflg != null" >
+        permitfunddueflg,
+      </if>
+      <if test="permitplaformdueflg != null" >
+        permitplaformdueflg,
+      </if>
+      <if test="duesystemflg != null" >
+        duesystemflg,
+      </if>
+      <if test="issysriskapprovel != null" >
+        issysriskapprovel,
+      </if>
+      <if test="issysgrantapprovel != null" >
+        issysgrantapprovel,
+      </if>
+      <if test="permitplaformmortflg != null" >
+        permitplaformmortflg,
+      </if>
+      <if test="permitchanmortflg != null" >
+        permitchanmortflg,
+      </if>
+      <if test="permitfundmortflg != null" >
+        permitfundmortflg,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="checkfrequency != null" >
+        checkfrequency,
+      </if>
+      <if test="companydiligenceflg != null" >
+        companydiligenceflg,
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productno != null" >
+        #{productno,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null" >
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null" >
+        #{producttype,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="minloanamount != null" >
+        #{minloanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxloanamount != null" >
+        #{maxloanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="ratetype != null" >
+        #{ratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="minrateofyear != null" >
+        #{minrateofyear,jdbcType=DECIMAL},
+      </if>
+      <if test="maxrateofyear != null" >
+        #{maxrateofyear,jdbcType=DECIMAL},
+      </if>
+      <if test="fundcomno != null" >
+        #{fundcomno,jdbcType=VARCHAR},
+      </if>
+      <if test="aislecomno != null" >
+        #{aislecomno,jdbcType=VARCHAR},
+      </if>
+      <if test="subsidycomno != null" >
+        #{subsidycomno,jdbcType=VARCHAR},
+      </if>
+      <if test="docmanagecomno != null" >
+        #{docmanagecomno,jdbcType=VARCHAR},
+      </if>
+      <if test="receivedoccomno != null" >
+        #{receivedoccomno,jdbcType=VARCHAR},
+      </if>
+      <if test="outloandoccomno != null" >
+        #{outloandoccomno,jdbcType=VARCHAR},
+      </if>
+      <if test="buttmode != null" >
+        #{buttmode,jdbcType=VARCHAR},
+      </if>
+      <if test="duediligenceflg != null" >
+        #{duediligenceflg,jdbcType=CHAR},
+      </if>
+      <if test="mortgagetype != null" >
+        #{mortgagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="takeeffectflg != null" >
+        #{takeeffectflg,jdbcType=CHAR},
+      </if>
+      <if test="permitchandueflg != null" >
+        #{permitchandueflg,jdbcType=CHAR},
+      </if>
+      <if test="permitfunddueflg != null" >
+        #{permitfunddueflg,jdbcType=CHAR},
+      </if>
+      <if test="permitplaformdueflg != null" >
+        #{permitplaformdueflg,jdbcType=CHAR},
+      </if>
+      <if test="duesystemflg != null" >
+        #{duesystemflg,jdbcType=CHAR},
+      </if>
+      <if test="issysriskapprovel != null" >
+        #{issysriskapprovel,jdbcType=CHAR},
+      </if>
+      <if test="issysgrantapprovel != null" >
+        #{issysgrantapprovel,jdbcType=CHAR},
+      </if>
+      <if test="permitplaformmortflg != null" >
+        #{permitplaformmortflg,jdbcType=CHAR},
+      </if>
+      <if test="permitchanmortflg != null" >
+        #{permitchanmortflg,jdbcType=CHAR},
+      </if>
+      <if test="permitfundmortflg != null" >
+        #{permitfundmortflg,jdbcType=CHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkfrequency != null" >
+        #{checkfrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="companydiligenceflg != null" >
+        #{companydiligenceflg,jdbcType=CHAR},
+      </if>
+      <if test="repaymethod != null" >
+        #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ProductExample" resultType="java.lang.Integer" >
+    select count(*) from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update product
+    <set >
+      <if test="record.productno != null" >
+        productno = #{record.productno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productname != null" >
+        productname = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producttype != null" >
+        producttype = #{record.producttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minloanamount != null" >
+        minloanamount = #{record.minloanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxloanamount != null" >
+        maxloanamount = #{record.maxloanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ratetype != null" >
+        ratetype = #{record.ratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minrateofyear != null" >
+        minrateofyear = #{record.minrateofyear,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxrateofyear != null" >
+        maxrateofyear = #{record.maxrateofyear,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fundcomno != null" >
+        fundcomno = #{record.fundcomno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aislecomno != null" >
+        aislecomno = #{record.aislecomno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subsidycomno != null" >
+        subsidycomno = #{record.subsidycomno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.docmanagecomno != null" >
+        docmanagecomno = #{record.docmanagecomno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivedoccomno != null" >
+        receivedoccomno = #{record.receivedoccomno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outloandoccomno != null" >
+        outloandoccomno = #{record.outloandoccomno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buttmode != null" >
+        buttmode = #{record.buttmode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.duediligenceflg != null" >
+        duediligenceflg = #{record.duediligenceflg,jdbcType=CHAR},
+      </if>
+      <if test="record.mortgagetype != null" >
+        mortgagetype = #{record.mortgagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.takeeffectflg != null" >
+        takeeffectflg = #{record.takeeffectflg,jdbcType=CHAR},
+      </if>
+      <if test="record.permitchandueflg != null" >
+        permitchandueflg = #{record.permitchandueflg,jdbcType=CHAR},
+      </if>
+      <if test="record.permitfunddueflg != null" >
+        permitfunddueflg = #{record.permitfunddueflg,jdbcType=CHAR},
+      </if>
+      <if test="record.permitplaformdueflg != null" >
+        permitplaformdueflg = #{record.permitplaformdueflg,jdbcType=CHAR},
+      </if>
+      <if test="record.duesystemflg != null" >
+        duesystemflg = #{record.duesystemflg,jdbcType=CHAR},
+      </if>
+      <if test="record.issysriskapprovel != null" >
+        issysriskapprovel = #{record.issysriskapprovel,jdbcType=CHAR},
+      </if>
+      <if test="record.issysgrantapprovel != null" >
+        issysgrantapprovel = #{record.issysgrantapprovel,jdbcType=CHAR},
+      </if>
+      <if test="record.permitplaformmortflg != null" >
+        permitplaformmortflg = #{record.permitplaformmortflg,jdbcType=CHAR},
+      </if>
+      <if test="record.permitchanmortflg != null" >
+        permitchanmortflg = #{record.permitchanmortflg,jdbcType=CHAR},
+      </if>
+      <if test="record.permitfundmortflg != null" >
+        permitfundmortflg = #{record.permitfundmortflg,jdbcType=CHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkfrequency != null" >
+        checkfrequency = #{record.checkfrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companydiligenceflg != null" >
+        companydiligenceflg = #{record.companydiligenceflg,jdbcType=CHAR},
+      </if>
+      <if test="record.repaymethod != null" >
+        repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update product
+    set productno = #{record.productno,jdbcType=VARCHAR},
+      productname = #{record.productname,jdbcType=VARCHAR},
+      producttype = #{record.producttype,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      minloanamount = #{record.minloanamount,jdbcType=DECIMAL},
+      maxloanamount = #{record.maxloanamount,jdbcType=DECIMAL},
+      ratetype = #{record.ratetype,jdbcType=VARCHAR},
+      minrateofyear = #{record.minrateofyear,jdbcType=DECIMAL},
+      maxrateofyear = #{record.maxrateofyear,jdbcType=DECIMAL},
+      fundcomno = #{record.fundcomno,jdbcType=VARCHAR},
+      aislecomno = #{record.aislecomno,jdbcType=VARCHAR},
+      subsidycomno = #{record.subsidycomno,jdbcType=VARCHAR},
+      docmanagecomno = #{record.docmanagecomno,jdbcType=VARCHAR},
+      receivedoccomno = #{record.receivedoccomno,jdbcType=VARCHAR},
+      outloandoccomno = #{record.outloandoccomno,jdbcType=VARCHAR},
+      buttmode = #{record.buttmode,jdbcType=VARCHAR},
+      duediligenceflg = #{record.duediligenceflg,jdbcType=CHAR},
+      mortgagetype = #{record.mortgagetype,jdbcType=VARCHAR},
+      takeeffectflg = #{record.takeeffectflg,jdbcType=CHAR},
+      permitchandueflg = #{record.permitchandueflg,jdbcType=CHAR},
+      permitfunddueflg = #{record.permitfunddueflg,jdbcType=CHAR},
+      permitplaformdueflg = #{record.permitplaformdueflg,jdbcType=CHAR},
+      duesystemflg = #{record.duesystemflg,jdbcType=CHAR},
+      issysriskapprovel = #{record.issysriskapprovel,jdbcType=CHAR},
+      issysgrantapprovel = #{record.issysgrantapprovel,jdbcType=CHAR},
+      permitplaformmortflg = #{record.permitplaformmortflg,jdbcType=CHAR},
+      permitchanmortflg = #{record.permitchanmortflg,jdbcType=CHAR},
+      permitfundmortflg = #{record.permitfundmortflg,jdbcType=CHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      checkfrequency = #{record.checkfrequency,jdbcType=VARCHAR},
+      companydiligenceflg = #{record.companydiligenceflg,jdbcType=CHAR},
+      repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update product
+    set productno = #{record.productno,jdbcType=VARCHAR},
+      productname = #{record.productname,jdbcType=VARCHAR},
+      producttype = #{record.producttype,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      minloanamount = #{record.minloanamount,jdbcType=DECIMAL},
+      maxloanamount = #{record.maxloanamount,jdbcType=DECIMAL},
+      ratetype = #{record.ratetype,jdbcType=VARCHAR},
+      minrateofyear = #{record.minrateofyear,jdbcType=DECIMAL},
+      maxrateofyear = #{record.maxrateofyear,jdbcType=DECIMAL},
+      fundcomno = #{record.fundcomno,jdbcType=VARCHAR},
+      aislecomno = #{record.aislecomno,jdbcType=VARCHAR},
+      subsidycomno = #{record.subsidycomno,jdbcType=VARCHAR},
+      docmanagecomno = #{record.docmanagecomno,jdbcType=VARCHAR},
+      receivedoccomno = #{record.receivedoccomno,jdbcType=VARCHAR},
+      outloandoccomno = #{record.outloandoccomno,jdbcType=VARCHAR},
+      buttmode = #{record.buttmode,jdbcType=VARCHAR},
+      duediligenceflg = #{record.duediligenceflg,jdbcType=CHAR},
+      mortgagetype = #{record.mortgagetype,jdbcType=VARCHAR},
+      takeeffectflg = #{record.takeeffectflg,jdbcType=CHAR},
+      permitchandueflg = #{record.permitchandueflg,jdbcType=CHAR},
+      permitfunddueflg = #{record.permitfunddueflg,jdbcType=CHAR},
+      permitplaformdueflg = #{record.permitplaformdueflg,jdbcType=CHAR},
+      duesystemflg = #{record.duesystemflg,jdbcType=CHAR},
+      issysriskapprovel = #{record.issysriskapprovel,jdbcType=CHAR},
+      issysgrantapprovel = #{record.issysgrantapprovel,jdbcType=CHAR},
+      permitplaformmortflg = #{record.permitplaformmortflg,jdbcType=CHAR},
+      permitchanmortflg = #{record.permitchanmortflg,jdbcType=CHAR},
+      permitfundmortflg = #{record.permitfundmortflg,jdbcType=CHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      checkfrequency = #{record.checkfrequency,jdbcType=VARCHAR},
+      companydiligenceflg = #{record.companydiligenceflg,jdbcType=CHAR},
+      repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Product" >
+    update product
+    <set >
+      <if test="productname != null" >
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="producttype != null" >
+        producttype = #{producttype,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="minloanamount != null" >
+        minloanamount = #{minloanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxloanamount != null" >
+        maxloanamount = #{maxloanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="ratetype != null" >
+        ratetype = #{ratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="minrateofyear != null" >
+        minrateofyear = #{minrateofyear,jdbcType=DECIMAL},
+      </if>
+      <if test="maxrateofyear != null" >
+        maxrateofyear = #{maxrateofyear,jdbcType=DECIMAL},
+      </if>
+      <if test="fundcomno != null" >
+        fundcomno = #{fundcomno,jdbcType=VARCHAR},
+      </if>
+      <if test="aislecomno != null" >
+        aislecomno = #{aislecomno,jdbcType=VARCHAR},
+      </if>
+      <if test="subsidycomno != null" >
+        subsidycomno = #{subsidycomno,jdbcType=VARCHAR},
+      </if>
+      <if test="docmanagecomno != null" >
+        docmanagecomno = #{docmanagecomno,jdbcType=VARCHAR},
+      </if>
+      <if test="receivedoccomno != null" >
+        receivedoccomno = #{receivedoccomno,jdbcType=VARCHAR},
+      </if>
+      <if test="outloandoccomno != null" >
+        outloandoccomno = #{outloandoccomno,jdbcType=VARCHAR},
+      </if>
+      <if test="buttmode != null" >
+        buttmode = #{buttmode,jdbcType=VARCHAR},
+      </if>
+      <if test="duediligenceflg != null" >
+        duediligenceflg = #{duediligenceflg,jdbcType=CHAR},
+      </if>
+      <if test="mortgagetype != null" >
+        mortgagetype = #{mortgagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="takeeffectflg != null" >
+        takeeffectflg = #{takeeffectflg,jdbcType=CHAR},
+      </if>
+      <if test="permitchandueflg != null" >
+        permitchandueflg = #{permitchandueflg,jdbcType=CHAR},
+      </if>
+      <if test="permitfunddueflg != null" >
+        permitfunddueflg = #{permitfunddueflg,jdbcType=CHAR},
+      </if>
+      <if test="permitplaformdueflg != null" >
+        permitplaformdueflg = #{permitplaformdueflg,jdbcType=CHAR},
+      </if>
+      <if test="duesystemflg != null" >
+        duesystemflg = #{duesystemflg,jdbcType=CHAR},
+      </if>
+      <if test="issysriskapprovel != null" >
+        issysriskapprovel = #{issysriskapprovel,jdbcType=CHAR},
+      </if>
+      <if test="issysgrantapprovel != null" >
+        issysgrantapprovel = #{issysgrantapprovel,jdbcType=CHAR},
+      </if>
+      <if test="permitplaformmortflg != null" >
+        permitplaformmortflg = #{permitplaformmortflg,jdbcType=CHAR},
+      </if>
+      <if test="permitchanmortflg != null" >
+        permitchanmortflg = #{permitchanmortflg,jdbcType=CHAR},
+      </if>
+      <if test="permitfundmortflg != null" >
+        permitfundmortflg = #{permitfundmortflg,jdbcType=CHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkfrequency != null" >
+        checkfrequency = #{checkfrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="companydiligenceflg != null" >
+        companydiligenceflg = #{companydiligenceflg,jdbcType=CHAR},
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where productno = #{productno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.grape.model.db.Product" >
+    update product
+    set productname = #{productname,jdbcType=VARCHAR},
+      producttype = #{producttype,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      minloanamount = #{minloanamount,jdbcType=DECIMAL},
+      maxloanamount = #{maxloanamount,jdbcType=DECIMAL},
+      ratetype = #{ratetype,jdbcType=VARCHAR},
+      minrateofyear = #{minrateofyear,jdbcType=DECIMAL},
+      maxrateofyear = #{maxrateofyear,jdbcType=DECIMAL},
+      fundcomno = #{fundcomno,jdbcType=VARCHAR},
+      aislecomno = #{aislecomno,jdbcType=VARCHAR},
+      subsidycomno = #{subsidycomno,jdbcType=VARCHAR},
+      docmanagecomno = #{docmanagecomno,jdbcType=VARCHAR},
+      receivedoccomno = #{receivedoccomno,jdbcType=VARCHAR},
+      outloandoccomno = #{outloandoccomno,jdbcType=VARCHAR},
+      buttmode = #{buttmode,jdbcType=VARCHAR},
+      duediligenceflg = #{duediligenceflg,jdbcType=CHAR},
+      mortgagetype = #{mortgagetype,jdbcType=VARCHAR},
+      takeeffectflg = #{takeeffectflg,jdbcType=CHAR},
+      permitchandueflg = #{permitchandueflg,jdbcType=CHAR},
+      permitfunddueflg = #{permitfunddueflg,jdbcType=CHAR},
+      permitplaformdueflg = #{permitplaformdueflg,jdbcType=CHAR},
+      duesystemflg = #{duesystemflg,jdbcType=CHAR},
+      issysriskapprovel = #{issysriskapprovel,jdbcType=CHAR},
+      issysgrantapprovel = #{issysgrantapprovel,jdbcType=CHAR},
+      permitplaformmortflg = #{permitplaformmortflg,jdbcType=CHAR},
+      permitchanmortflg = #{permitchanmortflg,jdbcType=CHAR},
+      permitfundmortflg = #{permitfundmortflg,jdbcType=CHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      checkfrequency = #{checkfrequency,jdbcType=VARCHAR},
+      companydiligenceflg = #{companydiligenceflg,jdbcType=CHAR},
+      repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where productno = #{productno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Product" >
+    update product
+    set productname = #{productname,jdbcType=VARCHAR},
+      producttype = #{producttype,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      minloanamount = #{minloanamount,jdbcType=DECIMAL},
+      maxloanamount = #{maxloanamount,jdbcType=DECIMAL},
+      ratetype = #{ratetype,jdbcType=VARCHAR},
+      minrateofyear = #{minrateofyear,jdbcType=DECIMAL},
+      maxrateofyear = #{maxrateofyear,jdbcType=DECIMAL},
+      fundcomno = #{fundcomno,jdbcType=VARCHAR},
+      aislecomno = #{aislecomno,jdbcType=VARCHAR},
+      subsidycomno = #{subsidycomno,jdbcType=VARCHAR},
+      docmanagecomno = #{docmanagecomno,jdbcType=VARCHAR},
+      receivedoccomno = #{receivedoccomno,jdbcType=VARCHAR},
+      outloandoccomno = #{outloandoccomno,jdbcType=VARCHAR},
+      buttmode = #{buttmode,jdbcType=VARCHAR},
+      duediligenceflg = #{duediligenceflg,jdbcType=CHAR},
+      mortgagetype = #{mortgagetype,jdbcType=VARCHAR},
+      takeeffectflg = #{takeeffectflg,jdbcType=CHAR},
+      permitchandueflg = #{permitchandueflg,jdbcType=CHAR},
+      permitfunddueflg = #{permitfunddueflg,jdbcType=CHAR},
+      permitplaformdueflg = #{permitplaformdueflg,jdbcType=CHAR},
+      duesystemflg = #{duesystemflg,jdbcType=CHAR},
+      issysriskapprovel = #{issysriskapprovel,jdbcType=CHAR},
+      issysgrantapprovel = #{issysgrantapprovel,jdbcType=CHAR},
+      permitplaformmortflg = #{permitplaformmortflg,jdbcType=CHAR},
+      permitchanmortflg = #{permitchanmortflg,jdbcType=CHAR},
+      permitfundmortflg = #{permitfundmortflg,jdbcType=CHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      checkfrequency = #{checkfrequency,jdbcType=VARCHAR},
+      companydiligenceflg = #{companydiligenceflg,jdbcType=CHAR},
+      repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where productno = #{productno,jdbcType=VARCHAR}
+  </update>
+</mapper>

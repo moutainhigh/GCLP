@@ -1,0 +1,14 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.PaymentapplyinfoExMapper">
+    
+     <select id="findPaymentByDate" resultType="int" parameterType="map">
+        select count(*) from paymentapplyinfo pay
+        where pay.chgdt between #{startDate} and #{endDate}
+    </select>
+    
+    <select id="selectOrgByUserid" resultType="java.lang.String" parameterType="map">
+        select org.orgbelongsto as orgno from person per
+        left outer join organization org on org.organizationno=per.organizationid
+        where per.workerid=#{userid}
+    </select>
+</mapper> 

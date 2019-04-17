@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.CreditrecodeMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Creditrecode" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <id column="cerdid" property="cerdid" jdbcType="VARCHAR" />
+    <result column="creditreportdate" property="creditreportdate" jdbcType="TIMESTAMP" />
+    <result column="isblackofloancredit" property="isblackofloancredit" jdbcType="CHAR" />
+    <result column="isblackofcreditcard2" property="isblackofcreditcard2" jdbcType="CHAR" />
+    <result column="isblackofcreditcard" property="isblackofcreditcard" jdbcType="CHAR" />
+    <result column="isblackofloancredit2" property="isblackofloancredit2" jdbcType="CHAR" />
+    <result column="iswarnofcredit2" property="iswarnofcredit2" jdbcType="CHAR" />
+    <result column="iswarnofcredit" property="iswarnofcredit" jdbcType="CHAR" />
+    <result column="isoverdue2" property="isoverdue2" jdbcType="CHAR" />
+    <result column="isoverdue" property="isoverdue" jdbcType="CHAR" />
+    <result column="isrecentoverdue2" property="isrecentoverdue2" jdbcType="CHAR" />
+    <result column="isrecentoverdue" property="isrecentoverdue" jdbcType="CHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="overdueclearflg2" property="overdueclearflg2" jdbcType="CHAR" />
+    <result column="overdueclearflg" property="overdueclearflg" jdbcType="CHAR" />
+    <result column="overduecount2" property="overduecount2" jdbcType="VARCHAR" />
+    <result column="overduecount" property="overduecount" jdbcType="VARCHAR" />
+    <result column="overdueday2" property="overdueday2" jdbcType="VARCHAR" />
+    <result column="overdueday" property="overdueday" jdbcType="VARCHAR" />
+    <result column="overdueamount2" property="overdueamount2" jdbcType="DECIMAL" />
+    <result column="overdueamount" property="overdueamount" jdbcType="DECIMAL" />
+    <result column="maxoverduecount2" property="maxoverduecount2" jdbcType="VARCHAR" />
+    <result column="maxoverduecount" property="maxoverduecount" jdbcType="VARCHAR" />
+    <result column="totaloverduecount2" property="totaloverduecount2" jdbcType="VARCHAR" />
+    <result column="maxoverdueday" property="maxoverdueday" jdbcType="VARCHAR" />
+    <result column="maxoverdueday2" property="maxoverdueday2" jdbcType="VARCHAR" />
+    <result column="totaloverduecount" property="totaloverduecount" jdbcType="VARCHAR" />
+    <result column="isoverdueforpay" property="isoverdueforpay" jdbcType="VARCHAR" />
+    <result column="isoverdueforpay2" property="isoverdueforpay2" jdbcType="VARCHAR" />
+    <result column="isguarantee" property="isguarantee" jdbcType="VARCHAR" />
+    <result column="overdueperiod" property="overdueperiod" jdbcType="VARCHAR" />
+    <result column="overdueperiod2" property="overdueperiod2" jdbcType="VARCHAR" />
+    <result column="isclearedup" property="isclearedup" jdbcType="VARCHAR" />
+    <result column="fiveguarantee" property="fiveguarantee" jdbcType="VARCHAR" />
+    <result column="frequencyofenquiry" property="frequencyofenquiry" jdbcType="VARCHAR" />
+    <result column="inquire" property="inquire" jdbcType="VARCHAR" />
+    <result column="loanapproval" property="loanapproval" jdbcType="VARCHAR" />
+    <result column="creditapproval" property="creditapproval" jdbcType="VARCHAR" />
+    <result column="postloanmana" property="postloanmana" jdbcType="VARCHAR" />
+    <result column="gqexamination" property="gqexamination" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, cerdid, creditreportdate, isblackofloancredit, isblackofcreditcard2, isblackofcreditcard, 
+    isblackofloancredit2, iswarnofcredit2, iswarnofcredit, isoverdue2, isoverdue, isrecentoverdue2, 
+    isrecentoverdue, chgtl, chgdt, overdueclearflg2, overdueclearflg, overduecount2, 
+    overduecount, overdueday2, overdueday, overdueamount2, overdueamount, maxoverduecount2, 
+    maxoverduecount, totaloverduecount2, maxoverdueday, maxoverdueday2, totaloverduecount, 
+    isoverdueforpay, isoverdueforpay2, isguarantee, overdueperiod, overdueperiod2, isclearedup, 
+    fiveguarantee, frequencyofenquiry, inquire, loanapproval, creditapproval, postloanmana, 
+    gqexamination
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.CreditrecodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from creditrecode
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from creditrecode
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from creditrecode
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.CreditrecodeExample" >
+    delete from creditrecode
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Creditrecode" >
+    insert into creditrecode (workid, cerdid, creditreportdate, 
+      isblackofloancredit, isblackofcreditcard2, isblackofcreditcard, 
+      isblackofloancredit2, iswarnofcredit2, iswarnofcredit, 
+      isoverdue2, isoverdue, isrecentoverdue2, 
+      isrecentoverdue, chgtl, chgdt, 
+      overdueclearflg2, overdueclearflg, overduecount2, 
+      overduecount, overdueday2, overdueday, 
+      overdueamount2, overdueamount, maxoverduecount2, 
+      maxoverduecount, totaloverduecount2, maxoverdueday, 
+      maxoverdueday2, totaloverduecount, isoverdueforpay, 
+      isoverdueforpay2, isguarantee, overdueperiod, 
+      overdueperiod2, isclearedup, fiveguarantee, 
+      frequencyofenquiry, inquire, loanapproval, 
+      creditapproval, postloanmana, gqexamination
+      )
+    values (#{workid,jdbcType=VARCHAR}, #{cerdid,jdbcType=VARCHAR}, #{creditreportdate,jdbcType=TIMESTAMP}, 
+      #{isblackofloancredit,jdbcType=CHAR}, #{isblackofcreditcard2,jdbcType=CHAR}, #{isblackofcreditcard,jdbcType=CHAR}, 
+      #{isblackofloancredit2,jdbcType=CHAR}, #{iswarnofcredit2,jdbcType=CHAR}, #{iswarnofcredit,jdbcType=CHAR}, 
+      #{isoverdue2,jdbcType=CHAR}, #{isoverdue,jdbcType=CHAR}, #{isrecentoverdue2,jdbcType=CHAR}, 
+      #{isrecentoverdue,jdbcType=CHAR}, #{chgtl,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{overdueclearflg2,jdbcType=CHAR}, #{overdueclearflg,jdbcType=CHAR}, #{overduecount2,jdbcType=VARCHAR}, 
+      #{overduecount,jdbcType=VARCHAR}, #{overdueday2,jdbcType=VARCHAR}, #{overdueday,jdbcType=VARCHAR}, 
+      #{overdueamount2,jdbcType=DECIMAL}, #{overdueamount,jdbcType=DECIMAL}, #{maxoverduecount2,jdbcType=VARCHAR}, 
+      #{maxoverduecount,jdbcType=VARCHAR}, #{totaloverduecount2,jdbcType=VARCHAR}, #{maxoverdueday,jdbcType=VARCHAR}, 
+      #{maxoverdueday2,jdbcType=VARCHAR}, #{totaloverduecount,jdbcType=VARCHAR}, #{isoverdueforpay,jdbcType=VARCHAR}, 
+      #{isoverdueforpay2,jdbcType=VARCHAR}, #{isguarantee,jdbcType=VARCHAR}, #{overdueperiod,jdbcType=VARCHAR}, 
+      #{overdueperiod2,jdbcType=VARCHAR}, #{isclearedup,jdbcType=VARCHAR}, #{fiveguarantee,jdbcType=VARCHAR}, 
+      #{frequencyofenquiry,jdbcType=VARCHAR}, #{inquire,jdbcType=VARCHAR}, #{loanapproval,jdbcType=VARCHAR}, 
+      #{creditapproval,jdbcType=VARCHAR}, #{postloanmana,jdbcType=VARCHAR}, #{gqexamination,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Creditrecode" >
+    insert into creditrecode
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="cerdid != null" >
+        cerdid,
+      </if>
+      <if test="creditreportdate != null" >
+        creditreportdate,
+      </if>
+      <if test="isblackofloancredit != null" >
+        isblackofloancredit,
+      </if>
+      <if test="isblackofcreditcard2 != null" >
+        isblackofcreditcard2,
+      </if>
+      <if test="isblackofcreditcard != null" >
+        isblackofcreditcard,
+      </if>
+      <if test="isblackofloancredit2 != null" >
+        isblackofloancredit2,
+      </if>
+      <if test="iswarnofcredit2 != null" >
+        iswarnofcredit2,
+      </if>
+      <if test="iswarnofcredit != null" >
+        iswarnofcredit,
+      </if>
+      <if test="isoverdue2 != null" >
+        isoverdue2,
+      </if>
+      <if test="isoverdue != null" >
+        isoverdue,
+      </if>
+      <if test="isrecentoverdue2 != null" >
+        isrecentoverdue2,
+      </if>
+      <if test="isrecentoverdue != null" >
+        isrecentoverdue,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="overdueclearflg2 != null" >
+        overdueclearflg2,
+      </if>
+      <if test="overdueclearflg != null" >
+        overdueclearflg,
+      </if>
+      <if test="overduecount2 != null" >
+        overduecount2,
+      </if>
+      <if test="overduecount != null" >
+        overduecount,
+      </if>
+      <if test="overdueday2 != null" >
+        overdueday2,
+      </if>
+      <if test="overdueday != null" >
+        overdueday,
+      </if>
+      <if test="overdueamount2 != null" >
+        overdueamount2,
+      </if>
+      <if test="overdueamount != null" >
+        overdueamount,
+      </if>
+      <if test="maxoverduecount2 != null" >
+        maxoverduecount2,
+      </if>
+      <if test="maxoverduecount != null" >
+        maxoverduecount,
+      </if>
+      <if test="totaloverduecount2 != null" >
+        totaloverduecount2,
+      </if>
+      <if test="maxoverdueday != null" >
+        maxoverdueday,
+      </if>
+      <if test="maxoverdueday2 != null" >
+        maxoverdueday2,
+      </if>
+      <if test="totaloverduecount != null" >
+        totaloverduecount,
+      </if>
+      <if test="isoverdueforpay != null" >
+        isoverdueforpay,
+      </if>
+      <if test="isoverdueforpay2 != null" >
+        isoverdueforpay2,
+      </if>
+      <if test="isguarantee != null" >
+        isguarantee,
+      </if>
+      <if test="overdueperiod != null" >
+        overdueperiod,
+      </if>
+      <if test="overdueperiod2 != null" >
+        overdueperiod2,
+      </if>
+      <if test="isclearedup != null" >
+        isclearedup,
+      </if>
+      <if test="fiveguarantee != null" >
+        fiveguarantee,
+      </if>
+      <if test="frequencyofenquiry != null" >
+        frequencyofenquiry,
+      </if>
+      <if test="inquire != null" >
+        inquire,
+      </if>
+      <if test="loanapproval != null" >
+        loanapproval,
+      </if>
+      <if test="creditapproval != null" >
+        creditapproval,
+      </if>
+      <if test="postloanmana != null" >
+        postloanmana,
+      </if>
+      <if test="gqexamination != null" >
+        gqexamination,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdid != null" >
+        #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="creditreportdate != null" >
+        #{creditreportdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isblackofloancredit != null" >
+        #{isblackofloancredit,jdbcType=CHAR},
+      </if>
+      <if test="isblackofcreditcard2 != null" >
+        #{isblackofcreditcard2,jdbcType=CHAR},
+      </if>
+      <if test="isblackofcreditcard != null" >
+        #{isblackofcreditcard,jdbcType=CHAR},
+      </if>
+      <if test="isblackofloancredit2 != null" >
+        #{isblackofloancredit2,jdbcType=CHAR},
+      </if>
+      <if test="iswarnofcredit2 != null" >
+        #{iswarnofcredit2,jdbcType=CHAR},
+      </if>
+      <if test="iswarnofcredit != null" >
+        #{iswarnofcredit,jdbcType=CHAR},
+      </if>
+      <if test="isoverdue2 != null" >
+        #{isoverdue2,jdbcType=CHAR},
+      </if>
+      <if test="isoverdue != null" >
+        #{isoverdue,jdbcType=CHAR},
+      </if>
+      <if test="isrecentoverdue2 != null" >
+        #{isrecentoverdue2,jdbcType=CHAR},
+      </if>
+      <if test="isrecentoverdue != null" >
+        #{isrecentoverdue,jdbcType=CHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overdueclearflg2 != null" >
+        #{overdueclearflg2,jdbcType=CHAR},
+      </if>
+      <if test="overdueclearflg != null" >
+        #{overdueclearflg,jdbcType=CHAR},
+      </if>
+      <if test="overduecount2 != null" >
+        #{overduecount2,jdbcType=VARCHAR},
+      </if>
+      <if test="overduecount != null" >
+        #{overduecount,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueday2 != null" >
+        #{overdueday2,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueday != null" >
+        #{overdueday,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueamount2 != null" >
+        #{overdueamount2,jdbcType=DECIMAL},
+      </if>
+      <if test="overdueamount != null" >
+        #{overdueamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxoverduecount2 != null" >
+        #{maxoverduecount2,jdbcType=VARCHAR},
+      </if>
+      <if test="maxoverduecount != null" >
+        #{maxoverduecount,jdbcType=VARCHAR},
+      </if>
+      <if test="totaloverduecount2 != null" >
+        #{totaloverduecount2,jdbcType=VARCHAR},
+      </if>
+      <if test="maxoverdueday != null" >
+        #{maxoverdueday,jdbcType=VARCHAR},
+      </if>
+      <if test="maxoverdueday2 != null" >
+        #{maxoverdueday2,jdbcType=VARCHAR},
+      </if>
+      <if test="totaloverduecount != null" >
+        #{totaloverduecount,jdbcType=VARCHAR},
+      </if>
+      <if test="isoverdueforpay != null" >
+        #{isoverdueforpay,jdbcType=VARCHAR},
+      </if>
+      <if test="isoverdueforpay2 != null" >
+        #{isoverdueforpay2,jdbcType=VARCHAR},
+      </if>
+      <if test="isguarantee != null" >
+        #{isguarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueperiod != null" >
+        #{overdueperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueperiod2 != null" >
+        #{overdueperiod2,jdbcType=VARCHAR},
+      </if>
+      <if test="isclearedup != null" >
+        #{isclearedup,jdbcType=VARCHAR},
+      </if>
+      <if test="fiveguarantee != null" >
+        #{fiveguarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="frequencyofenquiry != null" >
+        #{frequencyofenquiry,jdbcType=VARCHAR},
+      </if>
+      <if test="inquire != null" >
+        #{inquire,jdbcType=VARCHAR},
+      </if>
+      <if test="loanapproval != null" >
+        #{loanapproval,jdbcType=VARCHAR},
+      </if>
+      <if test="creditapproval != null" >
+        #{creditapproval,jdbcType=VARCHAR},
+      </if>
+      <if test="postloanmana != null" >
+        #{postloanmana,jdbcType=VARCHAR},
+      </if>
+      <if test="gqexamination != null" >
+        #{gqexamination,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.CreditrecodeExample" resultType="java.lang.Integer" >
+    select count(*) from creditrecode
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update creditrecode
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerdid != null" >
+        cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditreportdate != null" >
+        creditreportdate = #{record.creditreportdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isblackofloancredit != null" >
+        isblackofloancredit = #{record.isblackofloancredit,jdbcType=CHAR},
+      </if>
+      <if test="record.isblackofcreditcard2 != null" >
+        isblackofcreditcard2 = #{record.isblackofcreditcard2,jdbcType=CHAR},
+      </if>
+      <if test="record.isblackofcreditcard != null" >
+        isblackofcreditcard = #{record.isblackofcreditcard,jdbcType=CHAR},
+      </if>
+      <if test="record.isblackofloancredit2 != null" >
+        isblackofloancredit2 = #{record.isblackofloancredit2,jdbcType=CHAR},
+      </if>
+      <if test="record.iswarnofcredit2 != null" >
+        iswarnofcredit2 = #{record.iswarnofcredit2,jdbcType=CHAR},
+      </if>
+      <if test="record.iswarnofcredit != null" >
+        iswarnofcredit = #{record.iswarnofcredit,jdbcType=CHAR},
+      </if>
+      <if test="record.isoverdue2 != null" >
+        isoverdue2 = #{record.isoverdue2,jdbcType=CHAR},
+      </if>
+      <if test="record.isoverdue != null" >
+        isoverdue = #{record.isoverdue,jdbcType=CHAR},
+      </if>
+      <if test="record.isrecentoverdue2 != null" >
+        isrecentoverdue2 = #{record.isrecentoverdue2,jdbcType=CHAR},
+      </if>
+      <if test="record.isrecentoverdue != null" >
+        isrecentoverdue = #{record.isrecentoverdue,jdbcType=CHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.overdueclearflg2 != null" >
+        overdueclearflg2 = #{record.overdueclearflg2,jdbcType=CHAR},
+      </if>
+      <if test="record.overdueclearflg != null" >
+        overdueclearflg = #{record.overdueclearflg,jdbcType=CHAR},
+      </if>
+      <if test="record.overduecount2 != null" >
+        overduecount2 = #{record.overduecount2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overduecount != null" >
+        overduecount = #{record.overduecount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueday2 != null" >
+        overdueday2 = #{record.overdueday2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueday != null" >
+        overdueday = #{record.overdueday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueamount2 != null" >
+        overdueamount2 = #{record.overdueamount2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.overdueamount != null" >
+        overdueamount = #{record.overdueamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxoverduecount2 != null" >
+        maxoverduecount2 = #{record.maxoverduecount2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxoverduecount != null" >
+        maxoverduecount = #{record.maxoverduecount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totaloverduecount2 != null" >
+        totaloverduecount2 = #{record.totaloverduecount2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxoverdueday != null" >
+        maxoverdueday = #{record.maxoverdueday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxoverdueday2 != null" >
+        maxoverdueday2 = #{record.maxoverdueday2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totaloverduecount != null" >
+        totaloverduecount = #{record.totaloverduecount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isoverdueforpay != null" >
+        isoverdueforpay = #{record.isoverdueforpay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isoverdueforpay2 != null" >
+        isoverdueforpay2 = #{record.isoverdueforpay2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isguarantee != null" >
+        isguarantee = #{record.isguarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueperiod != null" >
+        overdueperiod = #{record.overdueperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueperiod2 != null" >
+        overdueperiod2 = #{record.overdueperiod2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isclearedup != null" >
+        isclearedup = #{record.isclearedup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fiveguarantee != null" >
+        fiveguarantee = #{record.fiveguarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frequencyofenquiry != null" >
+        frequencyofenquiry = #{record.frequencyofenquiry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inquire != null" >
+        inquire = #{record.inquire,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanapproval != null" >
+        loanapproval = #{record.loanapproval,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditapproval != null" >
+        creditapproval = #{record.creditapproval,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postloanmana != null" >
+        postloanmana = #{record.postloanmana,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gqexamination != null" >
+        gqexamination = #{record.gqexamination,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update creditrecode
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      creditreportdate = #{record.creditreportdate,jdbcType=TIMESTAMP},
+      isblackofloancredit = #{record.isblackofloancredit,jdbcType=CHAR},
+      isblackofcreditcard2 = #{record.isblackofcreditcard2,jdbcType=CHAR},
+      isblackofcreditcard = #{record.isblackofcreditcard,jdbcType=CHAR},
+      isblackofloancredit2 = #{record.isblackofloancredit2,jdbcType=CHAR},
+      iswarnofcredit2 = #{record.iswarnofcredit2,jdbcType=CHAR},
+      iswarnofcredit = #{record.iswarnofcredit,jdbcType=CHAR},
+      isoverdue2 = #{record.isoverdue2,jdbcType=CHAR},
+      isoverdue = #{record.isoverdue,jdbcType=CHAR},
+      isrecentoverdue2 = #{record.isrecentoverdue2,jdbcType=CHAR},
+      isrecentoverdue = #{record.isrecentoverdue,jdbcType=CHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      overdueclearflg2 = #{record.overdueclearflg2,jdbcType=CHAR},
+      overdueclearflg = #{record.overdueclearflg,jdbcType=CHAR},
+      overduecount2 = #{record.overduecount2,jdbcType=VARCHAR},
+      overduecount = #{record.overduecount,jdbcType=VARCHAR},
+      overdueday2 = #{record.overdueday2,jdbcType=VARCHAR},
+      overdueday = #{record.overdueday,jdbcType=VARCHAR},
+      overdueamount2 = #{record.overdueamount2,jdbcType=DECIMAL},
+      overdueamount = #{record.overdueamount,jdbcType=DECIMAL},
+      maxoverduecount2 = #{record.maxoverduecount2,jdbcType=VARCHAR},
+      maxoverduecount = #{record.maxoverduecount,jdbcType=VARCHAR},
+      totaloverduecount2 = #{record.totaloverduecount2,jdbcType=VARCHAR},
+      maxoverdueday = #{record.maxoverdueday,jdbcType=VARCHAR},
+      maxoverdueday2 = #{record.maxoverdueday2,jdbcType=VARCHAR},
+      totaloverduecount = #{record.totaloverduecount,jdbcType=VARCHAR},
+      isoverdueforpay = #{record.isoverdueforpay,jdbcType=VARCHAR},
+      isoverdueforpay2 = #{record.isoverdueforpay2,jdbcType=VARCHAR},
+      isguarantee = #{record.isguarantee,jdbcType=VARCHAR},
+      overdueperiod = #{record.overdueperiod,jdbcType=VARCHAR},
+      overdueperiod2 = #{record.overdueperiod2,jdbcType=VARCHAR},
+      isclearedup = #{record.isclearedup,jdbcType=VARCHAR},
+      fiveguarantee = #{record.fiveguarantee,jdbcType=VARCHAR},
+      frequencyofenquiry = #{record.frequencyofenquiry,jdbcType=VARCHAR},
+      inquire = #{record.inquire,jdbcType=VARCHAR},
+      loanapproval = #{record.loanapproval,jdbcType=VARCHAR},
+      creditapproval = #{record.creditapproval,jdbcType=VARCHAR},
+      postloanmana = #{record.postloanmana,jdbcType=VARCHAR},
+      gqexamination = #{record.gqexamination,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Creditrecode" >
+    update creditrecode
+    <set >
+      <if test="creditreportdate != null" >
+        creditreportdate = #{creditreportdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isblackofloancredit != null" >
+        isblackofloancredit = #{isblackofloancredit,jdbcType=CHAR},
+      </if>
+      <if test="isblackofcreditcard2 != null" >
+        isblackofcreditcard2 = #{isblackofcreditcard2,jdbcType=CHAR},
+      </if>
+      <if test="isblackofcreditcard != null" >
+        isblackofcreditcard = #{isblackofcreditcard,jdbcType=CHAR},
+      </if>
+      <if test="isblackofloancredit2 != null" >
+        isblackofloancredit2 = #{isblackofloancredit2,jdbcType=CHAR},
+      </if>
+      <if test="iswarnofcredit2 != null" >
+        iswarnofcredit2 = #{iswarnofcredit2,jdbcType=CHAR},
+      </if>
+      <if test="iswarnofcredit != null" >
+        iswarnofcredit = #{iswarnofcredit,jdbcType=CHAR},
+      </if>
+      <if test="isoverdue2 != null" >
+        isoverdue2 = #{isoverdue2,jdbcType=CHAR},
+      </if>
+      <if test="isoverdue != null" >
+        isoverdue = #{isoverdue,jdbcType=CHAR},
+      </if>
+      <if test="isrecentoverdue2 != null" >
+        isrecentoverdue2 = #{isrecentoverdue2,jdbcType=CHAR},
+      </if>
+      <if test="isrecentoverdue != null" >
+        isrecentoverdue = #{isrecentoverdue,jdbcType=CHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overdueclearflg2 != null" >
+        overdueclearflg2 = #{overdueclearflg2,jdbcType=CHAR},
+      </if>
+      <if test="overdueclearflg != null" >
+        overdueclearflg = #{overdueclearflg,jdbcType=CHAR},
+      </if>
+      <if test="overduecount2 != null" >
+        overduecount2 = #{overduecount2,jdbcType=VARCHAR},
+      </if>
+      <if test="overduecount != null" >
+        overduecount = #{overduecount,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueday2 != null" >
+        overdueday2 = #{overdueday2,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueday != null" >
+        overdueday = #{overdueday,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueamount2 != null" >
+        overdueamount2 = #{overdueamount2,jdbcType=DECIMAL},
+      </if>
+      <if test="overdueamount != null" >
+        overdueamount = #{overdueamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxoverduecount2 != null" >
+        maxoverduecount2 = #{maxoverduecount2,jdbcType=VARCHAR},
+      </if>
+      <if test="maxoverduecount != null" >
+        maxoverduecount = #{maxoverduecount,jdbcType=VARCHAR},
+      </if>
+      <if test="totaloverduecount2 != null" >
+        totaloverduecount2 = #{totaloverduecount2,jdbcType=VARCHAR},
+      </if>
+      <if test="maxoverdueday != null" >
+        maxoverdueday = #{maxoverdueday,jdbcType=VARCHAR},
+      </if>
+      <if test="maxoverdueday2 != null" >
+        maxoverdueday2 = #{maxoverdueday2,jdbcType=VARCHAR},
+      </if>
+      <if test="totaloverduecount != null" >
+        totaloverduecount = #{totaloverduecount,jdbcType=VARCHAR},
+      </if>
+      <if test="isoverdueforpay != null" >
+        isoverdueforpay = #{isoverdueforpay,jdbcType=VARCHAR},
+      </if>
+      <if test="isoverdueforpay2 != null" >
+        isoverdueforpay2 = #{isoverdueforpay2,jdbcType=VARCHAR},
+      </if>
+      <if test="isguarantee != null" >
+        isguarantee = #{isguarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueperiod != null" >
+        overdueperiod = #{overdueperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueperiod2 != null" >
+        overdueperiod2 = #{overdueperiod2,jdbcType=VARCHAR},
+      </if>
+      <if test="isclearedup != null" >
+        isclearedup = #{isclearedup,jdbcType=VARCHAR},
+      </if>
+      <if test="fiveguarantee != null" >
+        fiveguarantee = #{fiveguarantee,jdbcType=VARCHAR},
+      </if>
+      <if test="frequencyofenquiry != null" >
+        frequencyofenquiry = #{frequencyofenquiry,jdbcType=VARCHAR},
+      </if>
+      <if test="inquire != null" >
+        inquire = #{inquire,jdbcType=VARCHAR},
+      </if>
+      <if test="loanapproval != null" >
+        loanapproval = #{loanapproval,jdbcType=VARCHAR},
+      </if>
+      <if test="creditapproval != null" >
+        creditapproval = #{creditapproval,jdbcType=VARCHAR},
+      </if>
+      <if test="postloanmana != null" >
+        postloanmana = #{postloanmana,jdbcType=VARCHAR},
+      </if>
+      <if test="gqexamination != null" >
+        gqexamination = #{gqexamination,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Creditrecode" >
+    update creditrecode
+    set creditreportdate = #{creditreportdate,jdbcType=TIMESTAMP},
+      isblackofloancredit = #{isblackofloancredit,jdbcType=CHAR},
+      isblackofcreditcard2 = #{isblackofcreditcard2,jdbcType=CHAR},
+      isblackofcreditcard = #{isblackofcreditcard,jdbcType=CHAR},
+      isblackofloancredit2 = #{isblackofloancredit2,jdbcType=CHAR},
+      iswarnofcredit2 = #{iswarnofcredit2,jdbcType=CHAR},
+      iswarnofcredit = #{iswarnofcredit,jdbcType=CHAR},
+      isoverdue2 = #{isoverdue2,jdbcType=CHAR},
+      isoverdue = #{isoverdue,jdbcType=CHAR},
+      isrecentoverdue2 = #{isrecentoverdue2,jdbcType=CHAR},
+      isrecentoverdue = #{isrecentoverdue,jdbcType=CHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      overdueclearflg2 = #{overdueclearflg2,jdbcType=CHAR},
+      overdueclearflg = #{overdueclearflg,jdbcType=CHAR},
+      overduecount2 = #{overduecount2,jdbcType=VARCHAR},
+      overduecount = #{overduecount,jdbcType=VARCHAR},
+      overdueday2 = #{overdueday2,jdbcType=VARCHAR},
+      overdueday = #{overdueday,jdbcType=VARCHAR},
+      overdueamount2 = #{overdueamount2,jdbcType=DECIMAL},
+      overdueamount = #{overdueamount,jdbcType=DECIMAL},
+      maxoverduecount2 = #{maxoverduecount2,jdbcType=VARCHAR},
+      maxoverduecount = #{maxoverduecount,jdbcType=VARCHAR},
+      totaloverduecount2 = #{totaloverduecount2,jdbcType=VARCHAR},
+      maxoverdueday = #{maxoverdueday,jdbcType=VARCHAR},
+      maxoverdueday2 = #{maxoverdueday2,jdbcType=VARCHAR},
+      totaloverduecount = #{totaloverduecount,jdbcType=VARCHAR},
+      isoverdueforpay = #{isoverdueforpay,jdbcType=VARCHAR},
+      isoverdueforpay2 = #{isoverdueforpay2,jdbcType=VARCHAR},
+      isguarantee = #{isguarantee,jdbcType=VARCHAR},
+      overdueperiod = #{overdueperiod,jdbcType=VARCHAR},
+      overdueperiod2 = #{overdueperiod2,jdbcType=VARCHAR},
+      isclearedup = #{isclearedup,jdbcType=VARCHAR},
+      fiveguarantee = #{fiveguarantee,jdbcType=VARCHAR},
+      frequencyofenquiry = #{frequencyofenquiry,jdbcType=VARCHAR},
+      inquire = #{inquire,jdbcType=VARCHAR},
+      loanapproval = #{loanapproval,jdbcType=VARCHAR},
+      creditapproval = #{creditapproval,jdbcType=VARCHAR},
+      postloanmana = #{postloanmana,jdbcType=VARCHAR},
+      gqexamination = #{gqexamination,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </update>
+</mapper>

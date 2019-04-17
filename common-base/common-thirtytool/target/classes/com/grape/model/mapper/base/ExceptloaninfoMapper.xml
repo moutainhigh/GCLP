@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ExceptloaninfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Exceptloaninfo" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="expectapplyamount" property="expectapplyamount" jdbcType="DECIMAL" />
+    <result column="expectapplyrate" property="expectapplyrate" jdbcType="DECIMAL" />
+    <result column="interestratetype" property="interestratetype" jdbcType="VARCHAR" />
+    <result column="expectapplyyear" property="expectapplyyear" jdbcType="VARCHAR" />
+    <result column="repaymethod" property="repaymethod" jdbcType="VARCHAR" />
+    <result column="monthamount" property="monthamount" jdbcType="DECIMAL" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="extotaluseamount" property="extotaluseamount" jdbcType="DECIMAL" />
+    <result column="extotaluseterm" property="extotaluseterm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, expectapplyamount, expectapplyrate, interestratetype, expectapplyyear, repaymethod, 
+    monthamount, chgtl, chgdt, extotaluseamount, extotaluseterm
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ExceptloaninfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from exceptloaninfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from exceptloaninfo
+    where workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from exceptloaninfo
+    where workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ExceptloaninfoExample" >
+    delete from exceptloaninfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Exceptloaninfo" >
+    insert into exceptloaninfo (workid, expectapplyamount, expectapplyrate, 
+      interestratetype, expectapplyyear, repaymethod, 
+      monthamount, chgtl, chgdt, 
+      extotaluseamount, extotaluseterm)
+    values (#{workid,jdbcType=VARCHAR}, #{expectapplyamount,jdbcType=DECIMAL}, #{expectapplyrate,jdbcType=DECIMAL}, 
+      #{interestratetype,jdbcType=VARCHAR}, #{expectapplyyear,jdbcType=VARCHAR}, #{repaymethod,jdbcType=VARCHAR}, 
+      #{monthamount,jdbcType=DECIMAL}, #{chgtl,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{extotaluseamount,jdbcType=DECIMAL}, #{extotaluseterm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Exceptloaninfo" >
+    insert into exceptloaninfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="expectapplyamount != null" >
+        expectapplyamount,
+      </if>
+      <if test="expectapplyrate != null" >
+        expectapplyrate,
+      </if>
+      <if test="interestratetype != null" >
+        interestratetype,
+      </if>
+      <if test="expectapplyyear != null" >
+        expectapplyyear,
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod,
+      </if>
+      <if test="monthamount != null" >
+        monthamount,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="extotaluseamount != null" >
+        extotaluseamount,
+      </if>
+      <if test="extotaluseterm != null" >
+        extotaluseterm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="expectapplyamount != null" >
+        #{expectapplyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="expectapplyrate != null" >
+        #{expectapplyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="interestratetype != null" >
+        #{interestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="expectapplyyear != null" >
+        #{expectapplyyear,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymethod != null" >
+        #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="monthamount != null" >
+        #{monthamount,jdbcType=DECIMAL},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extotaluseamount != null" >
+        #{extotaluseamount,jdbcType=DECIMAL},
+      </if>
+      <if test="extotaluseterm != null" >
+        #{extotaluseterm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ExceptloaninfoExample" resultType="java.lang.Integer" >
+    select count(*) from exceptloaninfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update exceptloaninfo
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expectapplyamount != null" >
+        expectapplyamount = #{record.expectapplyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expectapplyrate != null" >
+        expectapplyrate = #{record.expectapplyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interestratetype != null" >
+        interestratetype = #{record.interestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expectapplyyear != null" >
+        expectapplyyear = #{record.expectapplyyear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repaymethod != null" >
+        repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthamount != null" >
+        monthamount = #{record.monthamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.extotaluseamount != null" >
+        extotaluseamount = #{record.extotaluseamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.extotaluseterm != null" >
+        extotaluseterm = #{record.extotaluseterm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update exceptloaninfo
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      expectapplyamount = #{record.expectapplyamount,jdbcType=DECIMAL},
+      expectapplyrate = #{record.expectapplyrate,jdbcType=DECIMAL},
+      interestratetype = #{record.interestratetype,jdbcType=VARCHAR},
+      expectapplyyear = #{record.expectapplyyear,jdbcType=VARCHAR},
+      repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      monthamount = #{record.monthamount,jdbcType=DECIMAL},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      extotaluseamount = #{record.extotaluseamount,jdbcType=DECIMAL},
+      extotaluseterm = #{record.extotaluseterm,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Exceptloaninfo" >
+    update exceptloaninfo
+    <set >
+      <if test="expectapplyamount != null" >
+        expectapplyamount = #{expectapplyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="expectapplyrate != null" >
+        expectapplyrate = #{expectapplyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="interestratetype != null" >
+        interestratetype = #{interestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="expectapplyyear != null" >
+        expectapplyyear = #{expectapplyyear,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="monthamount != null" >
+        monthamount = #{monthamount,jdbcType=DECIMAL},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extotaluseamount != null" >
+        extotaluseamount = #{extotaluseamount,jdbcType=DECIMAL},
+      </if>
+      <if test="extotaluseterm != null" >
+        extotaluseterm = #{extotaluseterm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Exceptloaninfo" >
+    update exceptloaninfo
+    set expectapplyamount = #{expectapplyamount,jdbcType=DECIMAL},
+      expectapplyrate = #{expectapplyrate,jdbcType=DECIMAL},
+      interestratetype = #{interestratetype,jdbcType=VARCHAR},
+      expectapplyyear = #{expectapplyyear,jdbcType=VARCHAR},
+      repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      monthamount = #{monthamount,jdbcType=DECIMAL},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      extotaluseamount = #{extotaluseamount,jdbcType=DECIMAL},
+      extotaluseterm = #{extotaluseterm,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

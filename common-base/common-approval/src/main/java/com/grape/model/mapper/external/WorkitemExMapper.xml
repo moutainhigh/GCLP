@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.WorkitemExMapper" >
+	<select id="selectDate" resultType="com.grape.model.db.Workitem">
+		select * from workitem where node = #{nodeid} and (state='1' or state='2')
+	</select>
+	<select id="selectWorkitemByNodename" resultType="com.grape.model.db.Workitem">
+		select workitem.* from workitem 
+		left outrer join productnode pro on pro.nodeid=workitem.node
+		where pro.nodename='面签直播质检' and workitem.workid=#{workid}
+	</select>
+</mapper>

@@ -1,0 +1,17 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.XitaicodeExMapper">
+			
+	<select id="findListByMap" resultType="com.grape.model.db.Xitaicode" parameterType="map">
+        select x.* from xitaicode x 
+        where x.citycode is null
+    </select>
+
+	<select id="updatecitycode" resultType="com.grape.model.db.Xitaicode" parameterType="map">
+        update xitaicode left outer join city on xitaicode.cityname like CONCAT(CONCAT('%', #{cityname}), '%')  
+        set xitaicode.citycode=city.citycode 
+        where xitaicode.citycode is null
+    </select>
+	
+    
+    
+</mapper> 

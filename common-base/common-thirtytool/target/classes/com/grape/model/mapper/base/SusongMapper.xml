@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.SusongMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Susong" >
+    <id column="keyid" property="keyid" jdbcType="VARCHAR" />
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="typet" property="typet" jdbcType="VARCHAR" />
+    <result column="typetname" property="typetname" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="sslong" property="sslong" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="personid" property="personid" jdbcType="VARCHAR" />
+    <result column="casenum" property="casenum" jdbcType="VARCHAR" />
+    <result column="court" property="court" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="zblong" property="zblong" jdbcType="VARCHAR" />
+    <result column="wlmoney" property="wlmoney" jdbcType="VARCHAR" />
+    <result column="apply" property="apply" jdbcType="VARCHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    keyid, workid, typet, typetname, title, sslong, name, personid, casenum, court, money, 
+    content, state, remark, zblong, wlmoney, apply, chgtl, chgdt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.SusongExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from susong
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from susong
+    where keyid = #{keyid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from susong
+    where keyid = #{keyid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.SusongExample" >
+    delete from susong
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Susong" >
+    insert into susong (keyid, workid, typet, 
+      typetname, title, sslong, 
+      name, personid, casenum, 
+      court, money, content, 
+      state, remark, zblong, 
+      wlmoney, apply, chgtl, 
+      chgdt)
+    values (#{keyid,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{typet,jdbcType=VARCHAR}, 
+      #{typetname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{sslong,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{personid,jdbcType=VARCHAR}, #{casenum,jdbcType=VARCHAR}, 
+      #{court,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{zblong,jdbcType=VARCHAR}, 
+      #{wlmoney,jdbcType=VARCHAR}, #{apply,jdbcType=VARCHAR}, #{chgtl,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Susong" >
+    insert into susong
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="keyid != null" >
+        keyid,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="typet != null" >
+        typet,
+      </if>
+      <if test="typetname != null" >
+        typetname,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="sslong != null" >
+        sslong,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="personid != null" >
+        personid,
+      </if>
+      <if test="casenum != null" >
+        casenum,
+      </if>
+      <if test="court != null" >
+        court,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="zblong != null" >
+        zblong,
+      </if>
+      <if test="wlmoney != null" >
+        wlmoney,
+      </if>
+      <if test="apply != null" >
+        apply,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="keyid != null" >
+        #{keyid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="typet != null" >
+        #{typet,jdbcType=VARCHAR},
+      </if>
+      <if test="typetname != null" >
+        #{typetname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sslong != null" >
+        #{sslong,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="personid != null" >
+        #{personid,jdbcType=VARCHAR},
+      </if>
+      <if test="casenum != null" >
+        #{casenum,jdbcType=VARCHAR},
+      </if>
+      <if test="court != null" >
+        #{court,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="zblong != null" >
+        #{zblong,jdbcType=VARCHAR},
+      </if>
+      <if test="wlmoney != null" >
+        #{wlmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="apply != null" >
+        #{apply,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.SusongExample" resultType="java.lang.Integer" >
+    select count(*) from susong
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update susong
+    <set >
+      <if test="record.keyid != null" >
+        keyid = #{record.keyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typet != null" >
+        typet = #{record.typet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typetname != null" >
+        typetname = #{record.typetname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sslong != null" >
+        sslong = #{record.sslong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personid != null" >
+        personid = #{record.personid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.casenum != null" >
+        casenum = #{record.casenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.court != null" >
+        court = #{record.court,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zblong != null" >
+        zblong = #{record.zblong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wlmoney != null" >
+        wlmoney = #{record.wlmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apply != null" >
+        apply = #{record.apply,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update susong
+    set keyid = #{record.keyid,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      typet = #{record.typet,jdbcType=VARCHAR},
+      typetname = #{record.typetname,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      sslong = #{record.sslong,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      personid = #{record.personid,jdbcType=VARCHAR},
+      casenum = #{record.casenum,jdbcType=VARCHAR},
+      court = #{record.court,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      zblong = #{record.zblong,jdbcType=VARCHAR},
+      wlmoney = #{record.wlmoney,jdbcType=VARCHAR},
+      apply = #{record.apply,jdbcType=VARCHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Susong" >
+    update susong
+    <set >
+      <if test="typet != null" >
+        typet = #{typet,jdbcType=VARCHAR},
+      </if>
+      <if test="typetname != null" >
+        typetname = #{typetname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sslong != null" >
+        sslong = #{sslong,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="personid != null" >
+        personid = #{personid,jdbcType=VARCHAR},
+      </if>
+      <if test="casenum != null" >
+        casenum = #{casenum,jdbcType=VARCHAR},
+      </if>
+      <if test="court != null" >
+        court = #{court,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="zblong != null" >
+        zblong = #{zblong,jdbcType=VARCHAR},
+      </if>
+      <if test="wlmoney != null" >
+        wlmoney = #{wlmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="apply != null" >
+        apply = #{apply,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where keyid = #{keyid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Susong" >
+    update susong
+    set typet = #{typet,jdbcType=VARCHAR},
+      typetname = #{typetname,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      sslong = #{sslong,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      personid = #{personid,jdbcType=VARCHAR},
+      casenum = #{casenum,jdbcType=VARCHAR},
+      court = #{court,jdbcType=VARCHAR},
+      money = #{money,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      zblong = #{zblong,jdbcType=VARCHAR},
+      wlmoney = #{wlmoney,jdbcType=VARCHAR},
+      apply = #{apply,jdbcType=VARCHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP}
+    where keyid = #{keyid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

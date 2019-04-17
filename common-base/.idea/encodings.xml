@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/commen-company" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-approval" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-auth" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-cloud-eureka" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-cloud-zuul" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common-thirtytool" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/frame-home" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/management" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/workflow" charset="UTF-8" />
+  </component>
+</project>

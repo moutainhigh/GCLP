@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/commen-company/commen-company.iml" filepath="$PROJECT_DIR$/commen-company/commen-company.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-approval/common-approval.iml" filepath="$PROJECT_DIR$/common-approval/common-approval.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-auth/common-auth.iml" filepath="$PROJECT_DIR$/common-auth/common-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/common-base.iml" filepath="$PROJECT_DIR$/.idea/common-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-cloud-zuul/common-cloud-zuul.iml" filepath="$PROJECT_DIR$/common-cloud-zuul/common-cloud-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-cloud-eureka/common-spring-eureka.iml" filepath="$PROJECT_DIR$/common-cloud-eureka/common-spring-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-thirtytool/common-thirtytool.iml" filepath="$PROJECT_DIR$/common-thirtytool/common-thirtytool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frame-home/frame-home.iml" filepath="$PROJECT_DIR$/frame-home/frame-home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/management/management.iml" filepath="$PROJECT_DIR$/management/management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/workflow/workflow.iml" filepath="$PROJECT_DIR$/workflow/workflow.iml" />
+    </modules>
+  </component>
+</project>

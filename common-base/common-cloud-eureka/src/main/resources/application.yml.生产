@@ -1,0 +1,26 @@
+server:
+  port: 8011
+  #ssl:
+     #client-auth: want
+     #key-store: classpath:keystore.jks
+     #key-store-password: 123456
+     #keyStoreType: JKS
+     #key-alias: certificatekey
+eureka:
+  nonSecurePortEnabled: false
+  securePortEnabled: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  serviceUrl:
+      defaultZone: http://172.18.168.240:8011/eureka/
+  server:
+     enableSelfPreservation: false
+
+logging:
+  level:
+    jdbc: ERROR
+    jdbc.sqltiming: INFO
+    org.springframework.security: INFO
+    org.springframework.web: INFO
+  config: classpath:log4j2.xml

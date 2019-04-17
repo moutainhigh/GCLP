@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.NodepageMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Nodepage" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="productno" property="productno" jdbcType="CHAR" />
+    <result column="nodeid" property="nodeid" jdbcType="CHAR" />
+    <result column="pageid" property="pageid" jdbcType="CHAR" />
+    <result column="editflg" property="editflg" jdbcType="CHAR" />
+    <result column="viewflg" property="viewflg" jdbcType="CHAR" />
+    <result column="pagebutton" property="pagebutton" jdbcType="VARCHAR" />
+    <result column="basepageflg" property="basepageflg" jdbcType="CHAR" />
+    <result column="approvalpageflg" property="approvalpageflg" jdbcType="CHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="CHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, productno, nodeid, pageid, editflg, viewflg, pagebutton, basepageflg, approvalpageflg, 
+    chgtl, chgdt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.NodepageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from nodepage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from nodepage
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from nodepage
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.NodepageExample" >
+    delete from nodepage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Nodepage" >
+    insert into nodepage (id, productno, nodeid, 
+      pageid, editflg, viewflg, pagebutton, 
+      basepageflg, approvalpageflg, chgtl, 
+      chgdt)
+    values (#{id,jdbcType=CHAR}, #{productno,jdbcType=CHAR}, #{nodeid,jdbcType=CHAR}, 
+      #{pageid,jdbcType=CHAR}, #{editflg,jdbcType=CHAR}, #{viewflg,jdbcType=CHAR}, #{pagebutton,jdbcType=VARCHAR}, 
+      #{basepageflg,jdbcType=CHAR}, #{approvalpageflg,jdbcType=CHAR}, #{chgtl,jdbcType=CHAR}, 
+      #{chgdt,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Nodepage" >
+    insert into nodepage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productno != null" >
+        productno,
+      </if>
+      <if test="nodeid != null" >
+        nodeid,
+      </if>
+      <if test="pageid != null" >
+        pageid,
+      </if>
+      <if test="editflg != null" >
+        editflg,
+      </if>
+      <if test="viewflg != null" >
+        viewflg,
+      </if>
+      <if test="pagebutton != null" >
+        pagebutton,
+      </if>
+      <if test="basepageflg != null" >
+        basepageflg,
+      </if>
+      <if test="approvalpageflg != null" >
+        approvalpageflg,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="productno != null" >
+        #{productno,jdbcType=CHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=CHAR},
+      </if>
+      <if test="pageid != null" >
+        #{pageid,jdbcType=CHAR},
+      </if>
+      <if test="editflg != null" >
+        #{editflg,jdbcType=CHAR},
+      </if>
+      <if test="viewflg != null" >
+        #{viewflg,jdbcType=CHAR},
+      </if>
+      <if test="pagebutton != null" >
+        #{pagebutton,jdbcType=VARCHAR},
+      </if>
+      <if test="basepageflg != null" >
+        #{basepageflg,jdbcType=CHAR},
+      </if>
+      <if test="approvalpageflg != null" >
+        #{approvalpageflg,jdbcType=CHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=CHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.NodepageExample" resultType="java.lang.Integer" >
+    select count(*) from nodepage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update nodepage
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.productno != null" >
+        productno = #{record.productno,jdbcType=CHAR},
+      </if>
+      <if test="record.nodeid != null" >
+        nodeid = #{record.nodeid,jdbcType=CHAR},
+      </if>
+      <if test="record.pageid != null" >
+        pageid = #{record.pageid,jdbcType=CHAR},
+      </if>
+      <if test="record.editflg != null" >
+        editflg = #{record.editflg,jdbcType=CHAR},
+      </if>
+      <if test="record.viewflg != null" >
+        viewflg = #{record.viewflg,jdbcType=CHAR},
+      </if>
+      <if test="record.pagebutton != null" >
+        pagebutton = #{record.pagebutton,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basepageflg != null" >
+        basepageflg = #{record.basepageflg,jdbcType=CHAR},
+      </if>
+      <if test="record.approvalpageflg != null" >
+        approvalpageflg = #{record.approvalpageflg,jdbcType=CHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=CHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update nodepage
+    set id = #{record.id,jdbcType=CHAR},
+      productno = #{record.productno,jdbcType=CHAR},
+      nodeid = #{record.nodeid,jdbcType=CHAR},
+      pageid = #{record.pageid,jdbcType=CHAR},
+      editflg = #{record.editflg,jdbcType=CHAR},
+      viewflg = #{record.viewflg,jdbcType=CHAR},
+      pagebutton = #{record.pagebutton,jdbcType=VARCHAR},
+      basepageflg = #{record.basepageflg,jdbcType=CHAR},
+      approvalpageflg = #{record.approvalpageflg,jdbcType=CHAR},
+      chgtl = #{record.chgtl,jdbcType=CHAR},
+      chgdt = #{record.chgdt,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Nodepage" >
+    update nodepage
+    <set >
+      <if test="productno != null" >
+        productno = #{productno,jdbcType=CHAR},
+      </if>
+      <if test="nodeid != null" >
+        nodeid = #{nodeid,jdbcType=CHAR},
+      </if>
+      <if test="pageid != null" >
+        pageid = #{pageid,jdbcType=CHAR},
+      </if>
+      <if test="editflg != null" >
+        editflg = #{editflg,jdbcType=CHAR},
+      </if>
+      <if test="viewflg != null" >
+        viewflg = #{viewflg,jdbcType=CHAR},
+      </if>
+      <if test="pagebutton != null" >
+        pagebutton = #{pagebutton,jdbcType=VARCHAR},
+      </if>
+      <if test="basepageflg != null" >
+        basepageflg = #{basepageflg,jdbcType=CHAR},
+      </if>
+      <if test="approvalpageflg != null" >
+        approvalpageflg = #{approvalpageflg,jdbcType=CHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=CHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Nodepage" >
+    update nodepage
+    set productno = #{productno,jdbcType=CHAR},
+      nodeid = #{nodeid,jdbcType=CHAR},
+      pageid = #{pageid,jdbcType=CHAR},
+      editflg = #{editflg,jdbcType=CHAR},
+      viewflg = #{viewflg,jdbcType=CHAR},
+      pagebutton = #{pagebutton,jdbcType=VARCHAR},
+      basepageflg = #{basepageflg,jdbcType=CHAR},
+      approvalpageflg = #{approvalpageflg,jdbcType=CHAR},
+      chgtl = #{chgtl,jdbcType=CHAR},
+      chgdt = #{chgdt,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

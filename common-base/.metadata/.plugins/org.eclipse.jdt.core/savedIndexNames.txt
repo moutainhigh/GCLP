@@ -1,0 +1,1 @@
+INDEX VERSION 1.127+D:\GCLP\codes\common-base\.metadata\.plugins\org.eclipse.jdt.core

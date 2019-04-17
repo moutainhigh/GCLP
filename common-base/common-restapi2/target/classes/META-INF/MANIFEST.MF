@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: common-restapi2
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: XXXX
+Implementation-Vendor-Id: com.grape
+Build-Jdk: 1.8.0_144
+Implementation-URL: http://projects.spring.io/spring-boot/common-base/
+ common-restapi2/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

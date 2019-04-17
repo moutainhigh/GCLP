@@ -1,0 +1,41 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.LogQueryExMapper" >
+    <select id="logQueryList" resultType="com.grape.controller.reponse.bean.LogQueryListBean" parameterType="map">
+        select log.chgdt,codetable.coddes,log.descriptions,log.ref_logid,p.workername AS checktl from log
+        LEFT JOIN codetable codetable on codetable.codflg=log.type and codetable.codtyp='LOGTYPE'
+        LEFT JOIN person p ON log.checktl=p.workerid
+        where 1=1
+        <if test=" checktl !=null and checktl !='' ">
+            and p.workername LIKE CONCAT(CONCAT('%', #{checktl, jdbcType=VARCHAR}), '%')
+        </if>
+        <if test=" type !=null and type !='' ">
+            and log.type = #{type , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and log.chgdt &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and log.chgdt &lt; #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        ORDER BY log.chgdt desc limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="logQueryCount" resultType="Integer" parameterType="map">
+        select count(1) from log
+        LEFT JOIN codetable codetable on codetable.codflg=log.type and codetable.codtyp='LOGTYPE'
+        LEFT JOIN person p ON log.checktl=p.workerid
+        where 1=1
+        <if test=" checktl !=null and checktl !='' ">
+            and p.workername LIKE CONCAT(CONCAT('%', #{checktl, jdbcType=VARCHAR}), '%')
+        </if>
+        <if test=" type !=null and type !='' ">
+            and log.type = #{type , jdbcType=VARCHAR}
+        </if>
+        <if test=" startDate !=null ">
+            and log.chgdt &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+            and log.chgdt &lt; #{endDate , jdbcType=TIMESTAMP}
+        </if>
+    </select>
+</mapper>

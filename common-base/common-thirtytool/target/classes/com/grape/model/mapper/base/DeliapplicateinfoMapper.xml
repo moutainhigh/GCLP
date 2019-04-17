@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.DeliapplicateinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Deliapplicateinfo" >
+    <id column="cerdid" property="cerdid" jdbcType="VARCHAR" />
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="borrower" property="borrower" jdbcType="VARCHAR" />
+    <result column="isserioussick" property="isserioussick" jdbcType="CHAR" />
+    <result column="sicknotes" property="sicknotes" jdbcType="VARCHAR" />
+    <result column="isbadhabbit" property="isbadhabbit" jdbcType="CHAR" />
+    <result column="badhabbitnotes" property="badhabbitnotes" jdbcType="VARCHAR" />
+    <result column="iscriminalrecord" property="iscriminalrecord" jdbcType="CHAR" />
+    <result column="criminalnotes" property="criminalnotes" jdbcType="VARCHAR" />
+    <result column="isdivorce" property="isdivorce" jdbcType="CHAR" />
+    <result column="divorcenotes" property="divorcenotes" jdbcType="VARCHAR" />
+    <result column="isunmarried" property="isunmarried" jdbcType="CHAR" />
+    <result column="isunmarriednotes" property="isunmarriednotes" jdbcType="VARCHAR" />
+    <result column="isshammarriage" property="isshammarriage" jdbcType="CHAR" />
+    <result column="isshammarriagenotes" property="isshammarriagenotes" jdbcType="VARCHAR" />
+    <result column="isdubiousmarriage" property="isdubiousmarriage" jdbcType="CHAR" />
+    <result column="isdubiousmarriagenotes" property="isdubiousmarriagenotes" jdbcType="VARCHAR" />
+    <result column="reasonofoverdue" property="reasonofoverdue" jdbcType="VARCHAR" />
+    <result column="badinforeason" property="badinforeason" jdbcType="VARCHAR" />
+    <result column="badinfocreditreason" property="badinfocreditreason" jdbcType="VARCHAR" />
+    <result column="reasonofcreditoverdue" property="reasonofcreditoverdue" jdbcType="VARCHAR" />
+    <result column="isunableprovennotes" property="isunableprovennotes" jdbcType="VARCHAR" />
+    <result column="isunableproven" property="isunableproven" jdbcType="CHAR" />
+    <result column="isfalsecasenotes" property="isfalsecasenotes" jdbcType="VARCHAR" />
+    <result column="isfalsecase" property="isfalsecase" jdbcType="CHAR" />
+    <result column="isunfulfilleddebtnotes" property="isunfulfilleddebtnotes" jdbcType="VARCHAR" />
+    <result column="isunfulfilleddebt" property="isunfulfilleddebt" jdbcType="CHAR" />
+    <result column="isenforcedlitigationnotes" property="isenforcedlitigationnotes" jdbcType="VARCHAR" />
+    <result column="isenforcedlitigation" property="isenforcedlitigation" jdbcType="CHAR" />
+    <result column="iiscomcreditigationnote" property="iiscomcreditigationnote" jdbcType="VARCHAR" />
+    <result column="iiscomcreditigation" property="iiscomcreditigation" jdbcType="CHAR" />
+    <result column="iskeepoutjobnotes" property="iskeepoutjobnotes" jdbcType="VARCHAR" />
+    <result column="iskeepoutjob" property="iskeepoutjob" jdbcType="CHAR" />
+    <result column="isprudentindustrynotes" property="isprudentindustrynotes" jdbcType="VARCHAR" />
+    <result column="isprudentindustry" property="isprudentindustry" jdbcType="CHAR" />
+    <result column="ishignriskbehaviornotes" property="ishignriskbehaviornotes" jdbcType="VARCHAR" />
+    <result column="ishignriskbehavior" property="ishignriskbehavior" jdbcType="CHAR" />
+    <result column="specialnotes" property="specialnotes" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cerdid, workid, borrower, isserioussick, sicknotes, isbadhabbit, badhabbitnotes, 
+    iscriminalrecord, criminalnotes, isdivorce, divorcenotes, isunmarried, isunmarriednotes, 
+    isshammarriage, isshammarriagenotes, isdubiousmarriage, isdubiousmarriagenotes, reasonofoverdue, 
+    badinforeason, badinfocreditreason, reasonofcreditoverdue, isunableprovennotes, isunableproven, 
+    isfalsecasenotes, isfalsecase, isunfulfilleddebtnotes, isunfulfilleddebt, isenforcedlitigationnotes, 
+    isenforcedlitigation, iiscomcreditigationnote, iiscomcreditigation, iskeepoutjobnotes, 
+    iskeepoutjob, isprudentindustrynotes, isprudentindustry, ishignriskbehaviornotes, 
+    ishignriskbehavior, specialnotes, chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.DeliapplicateinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deliapplicateinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from deliapplicateinfo
+    where cerdid = #{cerdid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from deliapplicateinfo
+    where cerdid = #{cerdid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.DeliapplicateinfoExample" >
+    delete from deliapplicateinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Deliapplicateinfo" >
+    insert into deliapplicateinfo (cerdid, workid, borrower, 
+      isserioussick, sicknotes, isbadhabbit, 
+      badhabbitnotes, iscriminalrecord, criminalnotes, 
+      isdivorce, divorcenotes, isunmarried, 
+      isunmarriednotes, isshammarriage, isshammarriagenotes, 
+      isdubiousmarriage, isdubiousmarriagenotes, 
+      reasonofoverdue, badinforeason, badinfocreditreason, 
+      reasonofcreditoverdue, isunableprovennotes, 
+      isunableproven, isfalsecasenotes, isfalsecase, 
+      isunfulfilleddebtnotes, isunfulfilleddebt, 
+      isenforcedlitigationnotes, isenforcedlitigation, 
+      iiscomcreditigationnote, iiscomcreditigation, 
+      iskeepoutjobnotes, iskeepoutjob, isprudentindustrynotes, 
+      isprudentindustry, ishignriskbehaviornotes, 
+      ishignriskbehavior, specialnotes, chgdt, 
+      chgtl)
+    values (#{cerdid,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{borrower,jdbcType=VARCHAR}, 
+      #{isserioussick,jdbcType=CHAR}, #{sicknotes,jdbcType=VARCHAR}, #{isbadhabbit,jdbcType=CHAR}, 
+      #{badhabbitnotes,jdbcType=VARCHAR}, #{iscriminalrecord,jdbcType=CHAR}, #{criminalnotes,jdbcType=VARCHAR}, 
+      #{isdivorce,jdbcType=CHAR}, #{divorcenotes,jdbcType=VARCHAR}, #{isunmarried,jdbcType=CHAR}, 
+      #{isunmarriednotes,jdbcType=VARCHAR}, #{isshammarriage,jdbcType=CHAR}, #{isshammarriagenotes,jdbcType=VARCHAR}, 
+      #{isdubiousmarriage,jdbcType=CHAR}, #{isdubiousmarriagenotes,jdbcType=VARCHAR}, 
+      #{reasonofoverdue,jdbcType=VARCHAR}, #{badinforeason,jdbcType=VARCHAR}, #{badinfocreditreason,jdbcType=VARCHAR}, 
+      #{reasonofcreditoverdue,jdbcType=VARCHAR}, #{isunableprovennotes,jdbcType=VARCHAR}, 
+      #{isunableproven,jdbcType=CHAR}, #{isfalsecasenotes,jdbcType=VARCHAR}, #{isfalsecase,jdbcType=CHAR}, 
+      #{isunfulfilleddebtnotes,jdbcType=VARCHAR}, #{isunfulfilleddebt,jdbcType=CHAR}, 
+      #{isenforcedlitigationnotes,jdbcType=VARCHAR}, #{isenforcedlitigation,jdbcType=CHAR}, 
+      #{iiscomcreditigationnote,jdbcType=VARCHAR}, #{iiscomcreditigation,jdbcType=CHAR}, 
+      #{iskeepoutjobnotes,jdbcType=VARCHAR}, #{iskeepoutjob,jdbcType=CHAR}, #{isprudentindustrynotes,jdbcType=VARCHAR}, 
+      #{isprudentindustry,jdbcType=CHAR}, #{ishignriskbehaviornotes,jdbcType=VARCHAR}, 
+      #{ishignriskbehavior,jdbcType=CHAR}, #{specialnotes,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{chgtl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Deliapplicateinfo" >
+    insert into deliapplicateinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cerdid != null" >
+        cerdid,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="borrower != null" >
+        borrower,
+      </if>
+      <if test="isserioussick != null" >
+        isserioussick,
+      </if>
+      <if test="sicknotes != null" >
+        sicknotes,
+      </if>
+      <if test="isbadhabbit != null" >
+        isbadhabbit,
+      </if>
+      <if test="badhabbitnotes != null" >
+        badhabbitnotes,
+      </if>
+      <if test="iscriminalrecord != null" >
+        iscriminalrecord,
+      </if>
+      <if test="criminalnotes != null" >
+        criminalnotes,
+      </if>
+      <if test="isdivorce != null" >
+        isdivorce,
+      </if>
+      <if test="divorcenotes != null" >
+        divorcenotes,
+      </if>
+      <if test="isunmarried != null" >
+        isunmarried,
+      </if>
+      <if test="isunmarriednotes != null" >
+        isunmarriednotes,
+      </if>
+      <if test="isshammarriage != null" >
+        isshammarriage,
+      </if>
+      <if test="isshammarriagenotes != null" >
+        isshammarriagenotes,
+      </if>
+      <if test="isdubiousmarriage != null" >
+        isdubiousmarriage,
+      </if>
+      <if test="isdubiousmarriagenotes != null" >
+        isdubiousmarriagenotes,
+      </if>
+      <if test="reasonofoverdue != null" >
+        reasonofoverdue,
+      </if>
+      <if test="badinforeason != null" >
+        badinforeason,
+      </if>
+      <if test="badinfocreditreason != null" >
+        badinfocreditreason,
+      </if>
+      <if test="reasonofcreditoverdue != null" >
+        reasonofcreditoverdue,
+      </if>
+      <if test="isunableprovennotes != null" >
+        isunableprovennotes,
+      </if>
+      <if test="isunableproven != null" >
+        isunableproven,
+      </if>
+      <if test="isfalsecasenotes != null" >
+        isfalsecasenotes,
+      </if>
+      <if test="isfalsecase != null" >
+        isfalsecase,
+      </if>
+      <if test="isunfulfilleddebtnotes != null" >
+        isunfulfilleddebtnotes,
+      </if>
+      <if test="isunfulfilleddebt != null" >
+        isunfulfilleddebt,
+      </if>
+      <if test="isenforcedlitigationnotes != null" >
+        isenforcedlitigationnotes,
+      </if>
+      <if test="isenforcedlitigation != null" >
+        isenforcedlitigation,
+      </if>
+      <if test="iiscomcreditigationnote != null" >
+        iiscomcreditigationnote,
+      </if>
+      <if test="iiscomcreditigation != null" >
+        iiscomcreditigation,
+      </if>
+      <if test="iskeepoutjobnotes != null" >
+        iskeepoutjobnotes,
+      </if>
+      <if test="iskeepoutjob != null" >
+        iskeepoutjob,
+      </if>
+      <if test="isprudentindustrynotes != null" >
+        isprudentindustrynotes,
+      </if>
+      <if test="isprudentindustry != null" >
+        isprudentindustry,
+      </if>
+      <if test="ishignriskbehaviornotes != null" >
+        ishignriskbehaviornotes,
+      </if>
+      <if test="ishignriskbehavior != null" >
+        ishignriskbehavior,
+      </if>
+      <if test="specialnotes != null" >
+        specialnotes,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cerdid != null" >
+        #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="borrower != null" >
+        #{borrower,jdbcType=VARCHAR},
+      </if>
+      <if test="isserioussick != null" >
+        #{isserioussick,jdbcType=CHAR},
+      </if>
+      <if test="sicknotes != null" >
+        #{sicknotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isbadhabbit != null" >
+        #{isbadhabbit,jdbcType=CHAR},
+      </if>
+      <if test="badhabbitnotes != null" >
+        #{badhabbitnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="iscriminalrecord != null" >
+        #{iscriminalrecord,jdbcType=CHAR},
+      </if>
+      <if test="criminalnotes != null" >
+        #{criminalnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isdivorce != null" >
+        #{isdivorce,jdbcType=CHAR},
+      </if>
+      <if test="divorcenotes != null" >
+        #{divorcenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isunmarried != null" >
+        #{isunmarried,jdbcType=CHAR},
+      </if>
+      <if test="isunmarriednotes != null" >
+        #{isunmarriednotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isshammarriage != null" >
+        #{isshammarriage,jdbcType=CHAR},
+      </if>
+      <if test="isshammarriagenotes != null" >
+        #{isshammarriagenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isdubiousmarriage != null" >
+        #{isdubiousmarriage,jdbcType=CHAR},
+      </if>
+      <if test="isdubiousmarriagenotes != null" >
+        #{isdubiousmarriagenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonofoverdue != null" >
+        #{reasonofoverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="badinforeason != null" >
+        #{badinforeason,jdbcType=VARCHAR},
+      </if>
+      <if test="badinfocreditreason != null" >
+        #{badinfocreditreason,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonofcreditoverdue != null" >
+        #{reasonofcreditoverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="isunableprovennotes != null" >
+        #{isunableprovennotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isunableproven != null" >
+        #{isunableproven,jdbcType=CHAR},
+      </if>
+      <if test="isfalsecasenotes != null" >
+        #{isfalsecasenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isfalsecase != null" >
+        #{isfalsecase,jdbcType=CHAR},
+      </if>
+      <if test="isunfulfilleddebtnotes != null" >
+        #{isunfulfilleddebtnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isunfulfilleddebt != null" >
+        #{isunfulfilleddebt,jdbcType=CHAR},
+      </if>
+      <if test="isenforcedlitigationnotes != null" >
+        #{isenforcedlitigationnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isenforcedlitigation != null" >
+        #{isenforcedlitigation,jdbcType=CHAR},
+      </if>
+      <if test="iiscomcreditigationnote != null" >
+        #{iiscomcreditigationnote,jdbcType=VARCHAR},
+      </if>
+      <if test="iiscomcreditigation != null" >
+        #{iiscomcreditigation,jdbcType=CHAR},
+      </if>
+      <if test="iskeepoutjobnotes != null" >
+        #{iskeepoutjobnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="iskeepoutjob != null" >
+        #{iskeepoutjob,jdbcType=CHAR},
+      </if>
+      <if test="isprudentindustrynotes != null" >
+        #{isprudentindustrynotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isprudentindustry != null" >
+        #{isprudentindustry,jdbcType=CHAR},
+      </if>
+      <if test="ishignriskbehaviornotes != null" >
+        #{ishignriskbehaviornotes,jdbcType=VARCHAR},
+      </if>
+      <if test="ishignriskbehavior != null" >
+        #{ishignriskbehavior,jdbcType=CHAR},
+      </if>
+      <if test="specialnotes != null" >
+        #{specialnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.DeliapplicateinfoExample" resultType="java.lang.Integer" >
+    select count(*) from deliapplicateinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update deliapplicateinfo
+    <set >
+      <if test="record.cerdid != null" >
+        cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrower != null" >
+        borrower = #{record.borrower,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isserioussick != null" >
+        isserioussick = #{record.isserioussick,jdbcType=CHAR},
+      </if>
+      <if test="record.sicknotes != null" >
+        sicknotes = #{record.sicknotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isbadhabbit != null" >
+        isbadhabbit = #{record.isbadhabbit,jdbcType=CHAR},
+      </if>
+      <if test="record.badhabbitnotes != null" >
+        badhabbitnotes = #{record.badhabbitnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iscriminalrecord != null" >
+        iscriminalrecord = #{record.iscriminalrecord,jdbcType=CHAR},
+      </if>
+      <if test="record.criminalnotes != null" >
+        criminalnotes = #{record.criminalnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdivorce != null" >
+        isdivorce = #{record.isdivorce,jdbcType=CHAR},
+      </if>
+      <if test="record.divorcenotes != null" >
+        divorcenotes = #{record.divorcenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isunmarried != null" >
+        isunmarried = #{record.isunmarried,jdbcType=CHAR},
+      </if>
+      <if test="record.isunmarriednotes != null" >
+        isunmarriednotes = #{record.isunmarriednotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isshammarriage != null" >
+        isshammarriage = #{record.isshammarriage,jdbcType=CHAR},
+      </if>
+      <if test="record.isshammarriagenotes != null" >
+        isshammarriagenotes = #{record.isshammarriagenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isdubiousmarriage != null" >
+        isdubiousmarriage = #{record.isdubiousmarriage,jdbcType=CHAR},
+      </if>
+      <if test="record.isdubiousmarriagenotes != null" >
+        isdubiousmarriagenotes = #{record.isdubiousmarriagenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reasonofoverdue != null" >
+        reasonofoverdue = #{record.reasonofoverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.badinforeason != null" >
+        badinforeason = #{record.badinforeason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.badinfocreditreason != null" >
+        badinfocreditreason = #{record.badinfocreditreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reasonofcreditoverdue != null" >
+        reasonofcreditoverdue = #{record.reasonofcreditoverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isunableprovennotes != null" >
+        isunableprovennotes = #{record.isunableprovennotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isunableproven != null" >
+        isunableproven = #{record.isunableproven,jdbcType=CHAR},
+      </if>
+      <if test="record.isfalsecasenotes != null" >
+        isfalsecasenotes = #{record.isfalsecasenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfalsecase != null" >
+        isfalsecase = #{record.isfalsecase,jdbcType=CHAR},
+      </if>
+      <if test="record.isunfulfilleddebtnotes != null" >
+        isunfulfilleddebtnotes = #{record.isunfulfilleddebtnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isunfulfilleddebt != null" >
+        isunfulfilleddebt = #{record.isunfulfilleddebt,jdbcType=CHAR},
+      </if>
+      <if test="record.isenforcedlitigationnotes != null" >
+        isenforcedlitigationnotes = #{record.isenforcedlitigationnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isenforcedlitigation != null" >
+        isenforcedlitigation = #{record.isenforcedlitigation,jdbcType=CHAR},
+      </if>
+      <if test="record.iiscomcreditigationnote != null" >
+        iiscomcreditigationnote = #{record.iiscomcreditigationnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iiscomcreditigation != null" >
+        iiscomcreditigation = #{record.iiscomcreditigation,jdbcType=CHAR},
+      </if>
+      <if test="record.iskeepoutjobnotes != null" >
+        iskeepoutjobnotes = #{record.iskeepoutjobnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iskeepoutjob != null" >
+        iskeepoutjob = #{record.iskeepoutjob,jdbcType=CHAR},
+      </if>
+      <if test="record.isprudentindustrynotes != null" >
+        isprudentindustrynotes = #{record.isprudentindustrynotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isprudentindustry != null" >
+        isprudentindustry = #{record.isprudentindustry,jdbcType=CHAR},
+      </if>
+      <if test="record.ishignriskbehaviornotes != null" >
+        ishignriskbehaviornotes = #{record.ishignriskbehaviornotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ishignriskbehavior != null" >
+        ishignriskbehavior = #{record.ishignriskbehavior,jdbcType=CHAR},
+      </if>
+      <if test="record.specialnotes != null" >
+        specialnotes = #{record.specialnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update deliapplicateinfo
+    set cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      borrower = #{record.borrower,jdbcType=VARCHAR},
+      isserioussick = #{record.isserioussick,jdbcType=CHAR},
+      sicknotes = #{record.sicknotes,jdbcType=VARCHAR},
+      isbadhabbit = #{record.isbadhabbit,jdbcType=CHAR},
+      badhabbitnotes = #{record.badhabbitnotes,jdbcType=VARCHAR},
+      iscriminalrecord = #{record.iscriminalrecord,jdbcType=CHAR},
+      criminalnotes = #{record.criminalnotes,jdbcType=VARCHAR},
+      isdivorce = #{record.isdivorce,jdbcType=CHAR},
+      divorcenotes = #{record.divorcenotes,jdbcType=VARCHAR},
+      isunmarried = #{record.isunmarried,jdbcType=CHAR},
+      isunmarriednotes = #{record.isunmarriednotes,jdbcType=VARCHAR},
+      isshammarriage = #{record.isshammarriage,jdbcType=CHAR},
+      isshammarriagenotes = #{record.isshammarriagenotes,jdbcType=VARCHAR},
+      isdubiousmarriage = #{record.isdubiousmarriage,jdbcType=CHAR},
+      isdubiousmarriagenotes = #{record.isdubiousmarriagenotes,jdbcType=VARCHAR},
+      reasonofoverdue = #{record.reasonofoverdue,jdbcType=VARCHAR},
+      badinforeason = #{record.badinforeason,jdbcType=VARCHAR},
+      badinfocreditreason = #{record.badinfocreditreason,jdbcType=VARCHAR},
+      reasonofcreditoverdue = #{record.reasonofcreditoverdue,jdbcType=VARCHAR},
+      isunableprovennotes = #{record.isunableprovennotes,jdbcType=VARCHAR},
+      isunableproven = #{record.isunableproven,jdbcType=CHAR},
+      isfalsecasenotes = #{record.isfalsecasenotes,jdbcType=VARCHAR},
+      isfalsecase = #{record.isfalsecase,jdbcType=CHAR},
+      isunfulfilleddebtnotes = #{record.isunfulfilleddebtnotes,jdbcType=VARCHAR},
+      isunfulfilleddebt = #{record.isunfulfilleddebt,jdbcType=CHAR},
+      isenforcedlitigationnotes = #{record.isenforcedlitigationnotes,jdbcType=VARCHAR},
+      isenforcedlitigation = #{record.isenforcedlitigation,jdbcType=CHAR},
+      iiscomcreditigationnote = #{record.iiscomcreditigationnote,jdbcType=VARCHAR},
+      iiscomcreditigation = #{record.iiscomcreditigation,jdbcType=CHAR},
+      iskeepoutjobnotes = #{record.iskeepoutjobnotes,jdbcType=VARCHAR},
+      iskeepoutjob = #{record.iskeepoutjob,jdbcType=CHAR},
+      isprudentindustrynotes = #{record.isprudentindustrynotes,jdbcType=VARCHAR},
+      isprudentindustry = #{record.isprudentindustry,jdbcType=CHAR},
+      ishignriskbehaviornotes = #{record.ishignriskbehaviornotes,jdbcType=VARCHAR},
+      ishignriskbehavior = #{record.ishignriskbehavior,jdbcType=CHAR},
+      specialnotes = #{record.specialnotes,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Deliapplicateinfo" >
+    update deliapplicateinfo
+    <set >
+      <if test="borrower != null" >
+        borrower = #{borrower,jdbcType=VARCHAR},
+      </if>
+      <if test="isserioussick != null" >
+        isserioussick = #{isserioussick,jdbcType=CHAR},
+      </if>
+      <if test="sicknotes != null" >
+        sicknotes = #{sicknotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isbadhabbit != null" >
+        isbadhabbit = #{isbadhabbit,jdbcType=CHAR},
+      </if>
+      <if test="badhabbitnotes != null" >
+        badhabbitnotes = #{badhabbitnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="iscriminalrecord != null" >
+        iscriminalrecord = #{iscriminalrecord,jdbcType=CHAR},
+      </if>
+      <if test="criminalnotes != null" >
+        criminalnotes = #{criminalnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isdivorce != null" >
+        isdivorce = #{isdivorce,jdbcType=CHAR},
+      </if>
+      <if test="divorcenotes != null" >
+        divorcenotes = #{divorcenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isunmarried != null" >
+        isunmarried = #{isunmarried,jdbcType=CHAR},
+      </if>
+      <if test="isunmarriednotes != null" >
+        isunmarriednotes = #{isunmarriednotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isshammarriage != null" >
+        isshammarriage = #{isshammarriage,jdbcType=CHAR},
+      </if>
+      <if test="isshammarriagenotes != null" >
+        isshammarriagenotes = #{isshammarriagenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isdubiousmarriage != null" >
+        isdubiousmarriage = #{isdubiousmarriage,jdbcType=CHAR},
+      </if>
+      <if test="isdubiousmarriagenotes != null" >
+        isdubiousmarriagenotes = #{isdubiousmarriagenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonofoverdue != null" >
+        reasonofoverdue = #{reasonofoverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="badinforeason != null" >
+        badinforeason = #{badinforeason,jdbcType=VARCHAR},
+      </if>
+      <if test="badinfocreditreason != null" >
+        badinfocreditreason = #{badinfocreditreason,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonofcreditoverdue != null" >
+        reasonofcreditoverdue = #{reasonofcreditoverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="isunableprovennotes != null" >
+        isunableprovennotes = #{isunableprovennotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isunableproven != null" >
+        isunableproven = #{isunableproven,jdbcType=CHAR},
+      </if>
+      <if test="isfalsecasenotes != null" >
+        isfalsecasenotes = #{isfalsecasenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isfalsecase != null" >
+        isfalsecase = #{isfalsecase,jdbcType=CHAR},
+      </if>
+      <if test="isunfulfilleddebtnotes != null" >
+        isunfulfilleddebtnotes = #{isunfulfilleddebtnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isunfulfilleddebt != null" >
+        isunfulfilleddebt = #{isunfulfilleddebt,jdbcType=CHAR},
+      </if>
+      <if test="isenforcedlitigationnotes != null" >
+        isenforcedlitigationnotes = #{isenforcedlitigationnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isenforcedlitigation != null" >
+        isenforcedlitigation = #{isenforcedlitigation,jdbcType=CHAR},
+      </if>
+      <if test="iiscomcreditigationnote != null" >
+        iiscomcreditigationnote = #{iiscomcreditigationnote,jdbcType=VARCHAR},
+      </if>
+      <if test="iiscomcreditigation != null" >
+        iiscomcreditigation = #{iiscomcreditigation,jdbcType=CHAR},
+      </if>
+      <if test="iskeepoutjobnotes != null" >
+        iskeepoutjobnotes = #{iskeepoutjobnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="iskeepoutjob != null" >
+        iskeepoutjob = #{iskeepoutjob,jdbcType=CHAR},
+      </if>
+      <if test="isprudentindustrynotes != null" >
+        isprudentindustrynotes = #{isprudentindustrynotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isprudentindustry != null" >
+        isprudentindustry = #{isprudentindustry,jdbcType=CHAR},
+      </if>
+      <if test="ishignriskbehaviornotes != null" >
+        ishignriskbehaviornotes = #{ishignriskbehaviornotes,jdbcType=VARCHAR},
+      </if>
+      <if test="ishignriskbehavior != null" >
+        ishignriskbehavior = #{ishignriskbehavior,jdbcType=CHAR},
+      </if>
+      <if test="specialnotes != null" >
+        specialnotes = #{specialnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cerdid = #{cerdid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Deliapplicateinfo" >
+    update deliapplicateinfo
+    set borrower = #{borrower,jdbcType=VARCHAR},
+      isserioussick = #{isserioussick,jdbcType=CHAR},
+      sicknotes = #{sicknotes,jdbcType=VARCHAR},
+      isbadhabbit = #{isbadhabbit,jdbcType=CHAR},
+      badhabbitnotes = #{badhabbitnotes,jdbcType=VARCHAR},
+      iscriminalrecord = #{iscriminalrecord,jdbcType=CHAR},
+      criminalnotes = #{criminalnotes,jdbcType=VARCHAR},
+      isdivorce = #{isdivorce,jdbcType=CHAR},
+      divorcenotes = #{divorcenotes,jdbcType=VARCHAR},
+      isunmarried = #{isunmarried,jdbcType=CHAR},
+      isunmarriednotes = #{isunmarriednotes,jdbcType=VARCHAR},
+      isshammarriage = #{isshammarriage,jdbcType=CHAR},
+      isshammarriagenotes = #{isshammarriagenotes,jdbcType=VARCHAR},
+      isdubiousmarriage = #{isdubiousmarriage,jdbcType=CHAR},
+      isdubiousmarriagenotes = #{isdubiousmarriagenotes,jdbcType=VARCHAR},
+      reasonofoverdue = #{reasonofoverdue,jdbcType=VARCHAR},
+      badinforeason = #{badinforeason,jdbcType=VARCHAR},
+      badinfocreditreason = #{badinfocreditreason,jdbcType=VARCHAR},
+      reasonofcreditoverdue = #{reasonofcreditoverdue,jdbcType=VARCHAR},
+      isunableprovennotes = #{isunableprovennotes,jdbcType=VARCHAR},
+      isunableproven = #{isunableproven,jdbcType=CHAR},
+      isfalsecasenotes = #{isfalsecasenotes,jdbcType=VARCHAR},
+      isfalsecase = #{isfalsecase,jdbcType=CHAR},
+      isunfulfilleddebtnotes = #{isunfulfilleddebtnotes,jdbcType=VARCHAR},
+      isunfulfilleddebt = #{isunfulfilleddebt,jdbcType=CHAR},
+      isenforcedlitigationnotes = #{isenforcedlitigationnotes,jdbcType=VARCHAR},
+      isenforcedlitigation = #{isenforcedlitigation,jdbcType=CHAR},
+      iiscomcreditigationnote = #{iiscomcreditigationnote,jdbcType=VARCHAR},
+      iiscomcreditigation = #{iiscomcreditigation,jdbcType=CHAR},
+      iskeepoutjobnotes = #{iskeepoutjobnotes,jdbcType=VARCHAR},
+      iskeepoutjob = #{iskeepoutjob,jdbcType=CHAR},
+      isprudentindustrynotes = #{isprudentindustrynotes,jdbcType=VARCHAR},
+      isprudentindustry = #{isprudentindustry,jdbcType=CHAR},
+      ishignriskbehaviornotes = #{ishignriskbehaviornotes,jdbcType=VARCHAR},
+      ishignriskbehavior = #{ishignriskbehavior,jdbcType=CHAR},
+      specialnotes = #{specialnotes,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where cerdid = #{cerdid,jdbcType=VARCHAR}
+      and workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

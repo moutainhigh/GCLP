@@ -1,0 +1,65 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.BoxvalueExMapper">
+    <select id="getUserOfOrg" resultType="map" parameterType="map">
+        select person.workerid,person.supervisor,person.`level` plevel,department.departmentno,
+        department.`level` dlevel,organization.organizationno,organization.orgbelongsto
+        from person person
+        left join department department on person.department=department.departmentno
+        left join organization organization on person.organizationid=organization.organizationno where 1=1
+        <if test=" workerid !=null and workerid !='' ">
+            and person.workerid = #{workerid , jdbcType=VARCHAR}
+        </if>
+        <if test=" mobilephone !=null and mobilephone !='' ">
+            or person.mobilephone = #{mobilephone , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getProduct" resultType="com.grape.model.db.Product">
+    	select productno,productname from product
+    </select>
+
+    <select id="getPRD" resultType="com.grape.model.db.Product">
+    	select productno,productname from product where producttype='1'
+    </select>
+
+    <select id="getSLD" resultType="com.grape.model.db.Product">
+    	select productno,productname from product where producttype='2'
+    </select>
+
+    <select id="getZQ" resultType="com.grape.model.db.Product">
+    	select productno,productname from product where producttype='5'
+    </select>
+
+    <select id="getProductnode" resultType="com.grape.model.db.Productnode" parameterType="map">
+        select distinct nodename from productnode where (type='task' or (type='end' and stage='E9'))
+        and nodename not like '%平台%'
+        <if test="productno != null and productno != ''">
+            and productno = #{productno , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getLog" resultType="com.grape.model.db.Codetable">
+       select codflg,coddes from codetable where codtyp='LOGTYPE'
+    </select>
+
+    <select id="getArea" resultType="com.grape.model.db.Area">
+       select areaid,areaname from area where areaid=gbcode
+    </select>
+
+    <select id="getChannelside" resultType="com.grape.model.db.Organization">
+       select organizationno,organizationname from organization where orgbelongsto='01'
+    </select>
+
+    <select id="getFundside" resultType="com.grape.model.db.Organization">
+       select organizationno,organizationname from organization where orgbelongsto='02'
+    </select>
+
+    <select id="getAisleside" resultType="com.grape.model.db.Organization">
+       select organizationno,organizationname from organization where orgbelongsto='03'
+    </select>
+
+    <select id="getTerrcaeno" resultType="com.grape.model.db.Organization">
+       select organizationno,organizationname from organization where orgbelongsto='04'
+    </select>
+
+</mapper> 

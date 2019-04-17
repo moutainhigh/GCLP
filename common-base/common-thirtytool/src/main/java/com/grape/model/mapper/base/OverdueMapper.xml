@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.OverdueMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Overdue" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="overdueterm" property="overdueterm" jdbcType="VARCHAR" />
+    <result column="overduecorpus" property="overduecorpus" jdbcType="DECIMAL" />
+    <result column="overdueaccrual" property="overdueaccrual" jdbcType="DECIMAL" />
+    <result column="defaultinterest" property="defaultinterest" jdbcType="DECIMAL" />
+    <result column="delayingpayment" property="delayingpayment" jdbcType="DECIMAL" />
+    <result column="latetime" property="latetime" jdbcType="TIMESTAMP" />
+    <result column="overduedays" property="overduedays" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, overdueterm, overduecorpus, overdueaccrual, defaultinterest, delayingpayment, 
+    latetime, overduedays
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.OverdueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from overdue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from overdue
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from overdue
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.OverdueExample" >
+    delete from overdue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Overdue" >
+    insert into overdue (id, workid, overdueterm, 
+      overduecorpus, overdueaccrual, defaultinterest, 
+      delayingpayment, latetime, overduedays
+      )
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{overdueterm,jdbcType=VARCHAR}, 
+      #{overduecorpus,jdbcType=DECIMAL}, #{overdueaccrual,jdbcType=DECIMAL}, #{defaultinterest,jdbcType=DECIMAL}, 
+      #{delayingpayment,jdbcType=DECIMAL}, #{latetime,jdbcType=TIMESTAMP}, #{overduedays,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Overdue" >
+    insert into overdue
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="overdueterm != null" >
+        overdueterm,
+      </if>
+      <if test="overduecorpus != null" >
+        overduecorpus,
+      </if>
+      <if test="overdueaccrual != null" >
+        overdueaccrual,
+      </if>
+      <if test="defaultinterest != null" >
+        defaultinterest,
+      </if>
+      <if test="delayingpayment != null" >
+        delayingpayment,
+      </if>
+      <if test="latetime != null" >
+        latetime,
+      </if>
+      <if test="overduedays != null" >
+        overduedays,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueterm != null" >
+        #{overdueterm,jdbcType=VARCHAR},
+      </if>
+      <if test="overduecorpus != null" >
+        #{overduecorpus,jdbcType=DECIMAL},
+      </if>
+      <if test="overdueaccrual != null" >
+        #{overdueaccrual,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultinterest != null" >
+        #{defaultinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="delayingpayment != null" >
+        #{delayingpayment,jdbcType=DECIMAL},
+      </if>
+      <if test="latetime != null" >
+        #{latetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overduedays != null" >
+        #{overduedays,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.OverdueExample" resultType="java.lang.Integer" >
+    select count(*) from overdue
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update overdue
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overdueterm != null" >
+        overdueterm = #{record.overdueterm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overduecorpus != null" >
+        overduecorpus = #{record.overduecorpus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.overdueaccrual != null" >
+        overdueaccrual = #{record.overdueaccrual,jdbcType=DECIMAL},
+      </if>
+      <if test="record.defaultinterest != null" >
+        defaultinterest = #{record.defaultinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.delayingpayment != null" >
+        delayingpayment = #{record.delayingpayment,jdbcType=DECIMAL},
+      </if>
+      <if test="record.latetime != null" >
+        latetime = #{record.latetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.overduedays != null" >
+        overduedays = #{record.overduedays,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update overdue
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      overdueterm = #{record.overdueterm,jdbcType=VARCHAR},
+      overduecorpus = #{record.overduecorpus,jdbcType=DECIMAL},
+      overdueaccrual = #{record.overdueaccrual,jdbcType=DECIMAL},
+      defaultinterest = #{record.defaultinterest,jdbcType=DECIMAL},
+      delayingpayment = #{record.delayingpayment,jdbcType=DECIMAL},
+      latetime = #{record.latetime,jdbcType=TIMESTAMP},
+      overduedays = #{record.overduedays,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Overdue" >
+    update overdue
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueterm != null" >
+        overdueterm = #{overdueterm,jdbcType=VARCHAR},
+      </if>
+      <if test="overduecorpus != null" >
+        overduecorpus = #{overduecorpus,jdbcType=DECIMAL},
+      </if>
+      <if test="overdueaccrual != null" >
+        overdueaccrual = #{overdueaccrual,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultinterest != null" >
+        defaultinterest = #{defaultinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="delayingpayment != null" >
+        delayingpayment = #{delayingpayment,jdbcType=DECIMAL},
+      </if>
+      <if test="latetime != null" >
+        latetime = #{latetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="overduedays != null" >
+        overduedays = #{overduedays,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Overdue" >
+    update overdue
+    set workid = #{workid,jdbcType=VARCHAR},
+      overdueterm = #{overdueterm,jdbcType=VARCHAR},
+      overduecorpus = #{overduecorpus,jdbcType=DECIMAL},
+      overdueaccrual = #{overdueaccrual,jdbcType=DECIMAL},
+      defaultinterest = #{defaultinterest,jdbcType=DECIMAL},
+      delayingpayment = #{delayingpayment,jdbcType=DECIMAL},
+      latetime = #{latetime,jdbcType=TIMESTAMP},
+      overduedays = #{overduedays,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

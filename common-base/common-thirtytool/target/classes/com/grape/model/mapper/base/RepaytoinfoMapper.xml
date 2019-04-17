@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.RepaytoinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Repaytoinfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="repaymethod" property="repaymethod" jdbcType="VARCHAR" />
+    <result column="batchorg" property="batchorg" jdbcType="VARCHAR" />
+    <result column="sumofamount" property="sumofamount" jdbcType="DECIMAL" />
+    <result column="interestrate" property="interestrate" jdbcType="DECIMAL" />
+    <result column="interestratetype" property="interestratetype" jdbcType="VARCHAR" />
+    <result column="loanlimittime" property="loanlimittime" jdbcType="VARCHAR" />
+    <result column="isagreeexceptamount" property="isagreeexceptamount" jdbcType="CHAR" />
+    <result column="totaluseterm" property="totaluseterm" jdbcType="VARCHAR" />
+    <result column="totaluseamount" property="totaluseamount" jdbcType="DECIMAL" />
+    <result column="useofloan" property="useofloan" jdbcType="VARCHAR" />
+    <result column="isfinilyflg" property="isfinilyflg" jdbcType="CHAR" />
+    <result column="selectorg" property="selectorg" jdbcType="VARCHAR" />
+    <result column="chooseassure" property="chooseassure" jdbcType="CHAR" />
+    <result column="notation" property="notation" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, repaymethod, batchorg, sumofamount, interestrate, interestratetype, loanlimittime, 
+    isagreeexceptamount, totaluseterm, totaluseamount, useofloan, isfinilyflg, selectorg, 
+    chooseassure, notation, chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.RepaytoinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from repaytoinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from repaytoinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from repaytoinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.RepaytoinfoExample" >
+    delete from repaytoinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Repaytoinfo" >
+    insert into repaytoinfo (id, workid, repaymethod, 
+      batchorg, sumofamount, interestrate, 
+      interestratetype, loanlimittime, isagreeexceptamount, 
+      totaluseterm, totaluseamount, useofloan, 
+      isfinilyflg, selectorg, chooseassure, 
+      notation, chgdt, chgtl
+      )
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{repaymethod,jdbcType=VARCHAR}, 
+      #{batchorg,jdbcType=VARCHAR}, #{sumofamount,jdbcType=DECIMAL}, #{interestrate,jdbcType=DECIMAL}, 
+      #{interestratetype,jdbcType=VARCHAR}, #{loanlimittime,jdbcType=VARCHAR}, #{isagreeexceptamount,jdbcType=CHAR}, 
+      #{totaluseterm,jdbcType=VARCHAR}, #{totaluseamount,jdbcType=DECIMAL}, #{useofloan,jdbcType=VARCHAR}, 
+      #{isfinilyflg,jdbcType=CHAR}, #{selectorg,jdbcType=VARCHAR}, #{chooseassure,jdbcType=CHAR}, 
+      #{notation,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Repaytoinfo" >
+    insert into repaytoinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod,
+      </if>
+      <if test="batchorg != null" >
+        batchorg,
+      </if>
+      <if test="sumofamount != null" >
+        sumofamount,
+      </if>
+      <if test="interestrate != null" >
+        interestrate,
+      </if>
+      <if test="interestratetype != null" >
+        interestratetype,
+      </if>
+      <if test="loanlimittime != null" >
+        loanlimittime,
+      </if>
+      <if test="isagreeexceptamount != null" >
+        isagreeexceptamount,
+      </if>
+      <if test="totaluseterm != null" >
+        totaluseterm,
+      </if>
+      <if test="totaluseamount != null" >
+        totaluseamount,
+      </if>
+      <if test="useofloan != null" >
+        useofloan,
+      </if>
+      <if test="isfinilyflg != null" >
+        isfinilyflg,
+      </if>
+      <if test="selectorg != null" >
+        selectorg,
+      </if>
+      <if test="chooseassure != null" >
+        chooseassure,
+      </if>
+      <if test="notation != null" >
+        notation,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymethod != null" >
+        #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="batchorg != null" >
+        #{batchorg,jdbcType=VARCHAR},
+      </if>
+      <if test="sumofamount != null" >
+        #{sumofamount,jdbcType=DECIMAL},
+      </if>
+      <if test="interestrate != null" >
+        #{interestrate,jdbcType=DECIMAL},
+      </if>
+      <if test="interestratetype != null" >
+        #{interestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="loanlimittime != null" >
+        #{loanlimittime,jdbcType=VARCHAR},
+      </if>
+      <if test="isagreeexceptamount != null" >
+        #{isagreeexceptamount,jdbcType=CHAR},
+      </if>
+      <if test="totaluseterm != null" >
+        #{totaluseterm,jdbcType=VARCHAR},
+      </if>
+      <if test="totaluseamount != null" >
+        #{totaluseamount,jdbcType=DECIMAL},
+      </if>
+      <if test="useofloan != null" >
+        #{useofloan,jdbcType=VARCHAR},
+      </if>
+      <if test="isfinilyflg != null" >
+        #{isfinilyflg,jdbcType=CHAR},
+      </if>
+      <if test="selectorg != null" >
+        #{selectorg,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseassure != null" >
+        #{chooseassure,jdbcType=CHAR},
+      </if>
+      <if test="notation != null" >
+        #{notation,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.RepaytoinfoExample" resultType="java.lang.Integer" >
+    select count(*) from repaytoinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update repaytoinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repaymethod != null" >
+        repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchorg != null" >
+        batchorg = #{record.batchorg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sumofamount != null" >
+        sumofamount = #{record.sumofamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interestrate != null" >
+        interestrate = #{record.interestrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interestratetype != null" >
+        interestratetype = #{record.interestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanlimittime != null" >
+        loanlimittime = #{record.loanlimittime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isagreeexceptamount != null" >
+        isagreeexceptamount = #{record.isagreeexceptamount,jdbcType=CHAR},
+      </if>
+      <if test="record.totaluseterm != null" >
+        totaluseterm = #{record.totaluseterm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totaluseamount != null" >
+        totaluseamount = #{record.totaluseamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.useofloan != null" >
+        useofloan = #{record.useofloan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isfinilyflg != null" >
+        isfinilyflg = #{record.isfinilyflg,jdbcType=CHAR},
+      </if>
+      <if test="record.selectorg != null" >
+        selectorg = #{record.selectorg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseassure != null" >
+        chooseassure = #{record.chooseassure,jdbcType=CHAR},
+      </if>
+      <if test="record.notation != null" >
+        notation = #{record.notation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update repaytoinfo
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      batchorg = #{record.batchorg,jdbcType=VARCHAR},
+      sumofamount = #{record.sumofamount,jdbcType=DECIMAL},
+      interestrate = #{record.interestrate,jdbcType=DECIMAL},
+      interestratetype = #{record.interestratetype,jdbcType=VARCHAR},
+      loanlimittime = #{record.loanlimittime,jdbcType=VARCHAR},
+      isagreeexceptamount = #{record.isagreeexceptamount,jdbcType=CHAR},
+      totaluseterm = #{record.totaluseterm,jdbcType=VARCHAR},
+      totaluseamount = #{record.totaluseamount,jdbcType=DECIMAL},
+      useofloan = #{record.useofloan,jdbcType=VARCHAR},
+      isfinilyflg = #{record.isfinilyflg,jdbcType=CHAR},
+      selectorg = #{record.selectorg,jdbcType=VARCHAR},
+      chooseassure = #{record.chooseassure,jdbcType=CHAR},
+      notation = #{record.notation,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Repaytoinfo" >
+    update repaytoinfo
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="batchorg != null" >
+        batchorg = #{batchorg,jdbcType=VARCHAR},
+      </if>
+      <if test="sumofamount != null" >
+        sumofamount = #{sumofamount,jdbcType=DECIMAL},
+      </if>
+      <if test="interestrate != null" >
+        interestrate = #{interestrate,jdbcType=DECIMAL},
+      </if>
+      <if test="interestratetype != null" >
+        interestratetype = #{interestratetype,jdbcType=VARCHAR},
+      </if>
+      <if test="loanlimittime != null" >
+        loanlimittime = #{loanlimittime,jdbcType=VARCHAR},
+      </if>
+      <if test="isagreeexceptamount != null" >
+        isagreeexceptamount = #{isagreeexceptamount,jdbcType=CHAR},
+      </if>
+      <if test="totaluseterm != null" >
+        totaluseterm = #{totaluseterm,jdbcType=VARCHAR},
+      </if>
+      <if test="totaluseamount != null" >
+        totaluseamount = #{totaluseamount,jdbcType=DECIMAL},
+      </if>
+      <if test="useofloan != null" >
+        useofloan = #{useofloan,jdbcType=VARCHAR},
+      </if>
+      <if test="isfinilyflg != null" >
+        isfinilyflg = #{isfinilyflg,jdbcType=CHAR},
+      </if>
+      <if test="selectorg != null" >
+        selectorg = #{selectorg,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseassure != null" >
+        chooseassure = #{chooseassure,jdbcType=CHAR},
+      </if>
+      <if test="notation != null" >
+        notation = #{notation,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Repaytoinfo" >
+    update repaytoinfo
+    set workid = #{workid,jdbcType=VARCHAR},
+      repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      batchorg = #{batchorg,jdbcType=VARCHAR},
+      sumofamount = #{sumofamount,jdbcType=DECIMAL},
+      interestrate = #{interestrate,jdbcType=DECIMAL},
+      interestratetype = #{interestratetype,jdbcType=VARCHAR},
+      loanlimittime = #{loanlimittime,jdbcType=VARCHAR},
+      isagreeexceptamount = #{isagreeexceptamount,jdbcType=CHAR},
+      totaluseterm = #{totaluseterm,jdbcType=VARCHAR},
+      totaluseamount = #{totaluseamount,jdbcType=DECIMAL},
+      useofloan = #{useofloan,jdbcType=VARCHAR},
+      isfinilyflg = #{isfinilyflg,jdbcType=CHAR},
+      selectorg = #{selectorg,jdbcType=VARCHAR},
+      chooseassure = #{chooseassure,jdbcType=CHAR},
+      notation = #{notation,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

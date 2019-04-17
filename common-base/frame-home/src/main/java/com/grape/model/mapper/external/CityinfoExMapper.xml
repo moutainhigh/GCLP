@@ -1,0 +1,23 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.CityinfoExMapper">
+	
+    <select id="findCityinfoByCode" resultType="com.grape.controller.reponse.bean.Cityinfo" parameterType="map">
+        select a.gbcode as citycode,a.areaname as cityname from area a 
+        where 1=1
+        <if test="areacode!=null and areacode!=''">
+           and a.areacode=#{areacode, jdbcType = VARCHAR}
+        </if>
+        and a.gbcode = a.areaid
+        order by a.gbcode 
+    </select>
+	
+	<select id="findCityinfoAll" resultType="com.grape.controller.reponse.bean.CityAllinfo" parameterType="map">
+        select a.gbcode as citycode,a.areaname as cityname,c.coddes as areaname from area a 
+		left outer join codetable c on c.codflg = a.areacode
+		where 1=1
+		and a.areacode != ''
+        
+      	order by a.gbcode 
+    </select>
+	
+</mapper> 

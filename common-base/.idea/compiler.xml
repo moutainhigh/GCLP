@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="commen-company" />
+        <module name="common-approval" />
+        <module name="common-auth" />
+        <module name="common-cloud-zuul" />
+        <module name="common-spring-eureka" />
+        <module name="common-thirtytool" />
+        <module name="frame-home" />
+        <module name="management" />
+        <module name="workflow" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="commen-company" target="1.8" />
+      <module name="common-approval" target="1.8" />
+      <module name="common-auth" target="1.8" />
+      <module name="common-base" target="1.8" />
+      <module name="common-cloud-zuul" target="1.8" />
+      <module name="common-spring-eureka" target="1.8" />
+      <module name="common-thirtytool" target="1.8" />
+      <module name="frame-home" target="1.8" />
+      <module name="management" target="1.8" />
+      <module name="workflow" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.workflow.model.mapper.OrganizationMapperExtra">
+	<resultMap id="BaseResultMap" type="com.grape.model.db.Organization">
+		<id column="BNKNO" property="bnkno" jdbcType="VARCHAR" />
+		<result column="BNKNM" property="bnknm" jdbcType="VARCHAR" />
+		<result column="OLDBNKNO" property="oldbnkno" jdbcType="VARCHAR" />
+		<result column="BUSTP" property="bustp" jdbcType="VARCHAR" />
+		<result column="HIAUT" property="hiaut" jdbcType="VARCHAR" />
+		<result column="WKTIM" property="wktim" jdbcType="VARCHAR" />
+		<result column="OUTIM" property="outim" jdbcType="VARCHAR" />
+		<result column="TELCD" property="telcd" jdbcType="VARCHAR" />
+		<result column="FAX" property="fax" jdbcType="VARCHAR" />
+		<result column="PEOPL" property="peopl" jdbcType="VARCHAR" />
+		<result column="PHONE" property="phone" jdbcType="VARCHAR" />
+		<result column="PHONE2" property="phone2" jdbcType="VARCHAR" />
+		<result column="MANGE" property="mange" jdbcType="VARCHAR" />
+		<result column="ADZIP" property="adzip" jdbcType="VARCHAR" />
+		<result column="ADDRS" property="addrs" jdbcType="VARCHAR" />
+		<result column="SHORTNM" property="shortnm" jdbcType="VARCHAR" />
+		<result column="SHORTNM2" property="shortnm2" jdbcType="VARCHAR" />
+		<result column="ORGCODE" property="orgcode" jdbcType="VARCHAR" />
+		<result column="REMOVEFLG" property="removeflg" jdbcType="CHAR" />
+		<result column="CHGTL" property="chgtl" jdbcType="VARCHAR" />
+		<result column="CHGDT" property="chgdt" jdbcType="VARCHAR" />
+		<result column="CHGTM" property="chgtm" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="findSupOrgByBnkno" parameterType="map" resultMap="BaseResultMap">
+		select *
+		from organization organization
+		where
+		exists (select * from organization o where o.bnkno =
+		#{departId,jdbcType=VARCHAR} and o.hiaut = organization.bnkno)
+	</select>
+
+</mapper>

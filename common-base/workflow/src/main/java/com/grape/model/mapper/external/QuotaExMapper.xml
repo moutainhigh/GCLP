@@ -1,0 +1,45 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.QuotaExMapper">
+	
+	<select id="getDoctaskInfo" resultType="map" parameterType="map">
+		SELECT
+		repaytoinfo.sumofamount,
+		product.producttype,
+		account.linenumber
+		FROM
+		doctask doctask
+		LEFT JOIN repaytoinfo repaytoinfo ON doctask.workid = repaytoinfo.workid
+		AND repaytoinfo.id IN (
+		SELECT
+		MAX(id)
+		FROM
+		repaytoinfo
+		WHERE 1=1
+		<if test=" workid !=null and workid !='' ">
+			and repaytoinfo.workid=#{workid , jdbcType=VARCHAR}
+		</if>
+		)
+		LEFT JOIN product product ON doctask.productno = product.productno
+		LEFT JOIN account account ON account.accountbakno = doctask.channelno
+		AND account.accountorg = doctask.terrcaeno
+		AND account.accounttype = '01'
+		where 1=1
+		<if test=" workid !=null and workid !='' ">
+			and doctask.workid=#{workid , jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<select id="getAccountInfo" resultType="com.grape.model.db.Account" parameterType="String">
+		select * from account where 1=1
+		<if test=" value !=null and value !='' ">
+			and linenumber=#{value}
+		</if>
+	</select>
+	
+	<select id="getAccountquotaInfo" resultType="com.grape.model.db.Accountquota" parameterType="String">
+		select * from accountquota where 1=1
+		<if test=" value !=null and value !='' ">
+			and linenumbersenior=#{value}
+		</if>
+	</select>
+</mapper>

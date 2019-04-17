@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ChanapprovalformMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Chanapprovalform" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="logid" property="logid" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="suggestuseterm" property="suggestuseterm" jdbcType="VARCHAR" />
+    <result column="suggestuseamount" property="suggestuseamount" jdbcType="DECIMAL" />
+    <result column="facesignflg" property="facesignflg" jdbcType="CHAR" />
+    <result column="agreeexpectloanflg" property="agreeexpectloanflg" jdbcType="CHAR" />
+    <result column="suggestapplyrate" property="suggestapplyrate" jdbcType="DECIMAL" />
+    <result column="suggestleavel" property="suggestleavel" jdbcType="VARCHAR" />
+    <result column="suggestapplyamount" property="suggestapplyamount" jdbcType="DECIMAL" />
+    <result column="suggestapplyterm" property="suggestapplyterm" jdbcType="VARCHAR" />
+    <result column="suggestrepayway" property="suggestrepayway" jdbcType="VARCHAR" />
+    <result column="personchecknote" property="personchecknote" jdbcType="VARCHAR" />
+    <result column="lawchecknote" property="lawchecknote" jdbcType="VARCHAR" />
+    <result column="lawnote" property="lawnote" jdbcType="VARCHAR" />
+    <result column="incomenote" property="incomenote" jdbcType="VARCHAR" />
+    <result column="assetnote" property="assetnote" jdbcType="VARCHAR" />
+    <result column="debtnote" property="debtnote" jdbcType="VARCHAR" />
+    <result column="natation" property="natation" jdbcType="VARCHAR" />
+    <result column="nodeid" property="nodeid" jdbcType="VARCHAR" />
+    <result column="situationnote" property="situationnote" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="approvaldate" property="approvaldate" jdbcType="TIMESTAMP" />
+    <result column="mortgagerate" property="mortgagerate" jdbcType="DECIMAL" />
+    <result column="totalmortgage" property="totalmortgage" jdbcType="DECIMAL" />
+    <result column="mortgagefeerate" property="mortgagefeerate" jdbcType="DECIMAL" />
+    <result column="productremark" property="productremark" jdbcType="VARCHAR" />
+    <result column="otheridea" property="otheridea" jdbcType="VARCHAR" />
+    <result column="mortgagenote" property="mortgagenote" jdbcType="VARCHAR" />
+    <result column="baseinfonote" property="baseinfonote" jdbcType="VARCHAR" />
+    <result column="loannote" property="loannote" jdbcType="VARCHAR" />
+    <result column="creditinfonote" property="creditinfonote" jdbcType="VARCHAR" />
+    <result column="creditinvestnote" property="creditinvestnote" jdbcType="VARCHAR" />
+    <result column="revertnote" property="revertnote" jdbcType="VARCHAR" />
+    <result column="companyrepaynote" property="companyrepaynote" jdbcType="VARCHAR" />
+    <result column="baseinfonote1" property="baseinfonote1" jdbcType="VARCHAR" />
+    <result column="lownote1" property="lownote1" jdbcType="VARCHAR" />
+    <result column="loaninfonote1" property="loaninfonote1" jdbcType="VARCHAR" />
+    <result column="creditinfonote1" property="creditinfonote1" jdbcType="VARCHAR" />
+    <result column="creditinverstnote1" property="creditinverstnote1" jdbcType="VARCHAR" />
+    <result column="assetinfonote1" property="assetinfonote1" jdbcType="VARCHAR" />
+    <result column="debtinfonote1" property="debtinfonote1" jdbcType="VARCHAR" />
+    <result column="suggestmortgagerate" property="suggestmortgagerate" jdbcType="DECIMAL" />
+    <result column="mortgageratenote" property="mortgageratenote" jdbcType="VARCHAR" />
+    <result column="afterloandebtrate" property="afterloandebtrate" jdbcType="DECIMAL" />
+    <result column="afterloandebtratenote" property="afterloandebtratenote" jdbcType="VARCHAR" />
+    <result column="mortgagerateamount" property="mortgagerateamount" jdbcType="DECIMAL" />
+    <result column="debtrateamount" property="debtrateamount" jdbcType="DECIMAL" />
+    <result column="maxcreditamount" property="maxcreditamount" jdbcType="DECIMAL" />
+    <result column="realcreditamount" property="realcreditamount" jdbcType="DECIMAL" />
+    <result column="columnselect" property="columnselect" jdbcType="VARCHAR" />
+    <result column="tempflg" property="tempflg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, logid, workid, suggestuseterm, suggestuseamount, facesignflg, agreeexpectloanflg, 
+    suggestapplyrate, suggestleavel, suggestapplyamount, suggestapplyterm, suggestrepayway, 
+    personchecknote, lawchecknote, lawnote, incomenote, assetnote, debtnote, natation, 
+    nodeid, situationnote, userid, approvaldate, mortgagerate, totalmortgage, mortgagefeerate, 
+    productremark, otheridea, mortgagenote, baseinfonote, loannote, creditinfonote, creditinvestnote, 
+    revertnote, companyrepaynote, baseinfonote1, lownote1, loaninfonote1, creditinfonote1, 
+    creditinverstnote1, assetinfonote1, debtinfonote1, suggestmortgagerate, mortgageratenote, 
+    afterloandebtrate, afterloandebtratenote, mortgagerateamount, debtrateamount, maxcreditamount, 
+    realcreditamount, columnselect, tempflg
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ChanapprovalformExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from chanapprovalform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from chanapprovalform
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from chanapprovalform
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ChanapprovalformExample" >
+    delete from chanapprovalform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Chanapprovalform" >
+    insert into chanapprovalform (id, logid, workid, 
+      suggestuseterm, suggestuseamount, facesignflg, 
+      agreeexpectloanflg, suggestapplyrate, suggestleavel, 
+      suggestapplyamount, suggestapplyterm, suggestrepayway, 
+      personchecknote, lawchecknote, lawnote, 
+      incomenote, assetnote, debtnote, 
+      natation, nodeid, situationnote, 
+      userid, approvaldate, mortgagerate, 
+      totalmortgage, mortgagefeerate, productremark, 
+      otheridea, mortgagenote, baseinfonote, 
+      loannote, creditinfonote, creditinvestnote, 
+      revertnote, companyrepaynote, baseinfonote1, 
+      lownote1, loaninfonote1, creditinfonote1, 
+      creditinverstnote1, assetinfonote1, debtinfonote1, 
+      suggestmortgagerate, mortgageratenote, 
+      afterloandebtrate, afterloandebtratenote, 
+      mortgagerateamount, debtrateamount, maxcreditamount, 
+      realcreditamount, columnselect, tempflg
+      )
+    values (#{id,jdbcType=VARCHAR}, #{logid,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, 
+      #{suggestuseterm,jdbcType=VARCHAR}, #{suggestuseamount,jdbcType=DECIMAL}, #{facesignflg,jdbcType=CHAR}, 
+      #{agreeexpectloanflg,jdbcType=CHAR}, #{suggestapplyrate,jdbcType=DECIMAL}, #{suggestleavel,jdbcType=VARCHAR}, 
+      #{suggestapplyamount,jdbcType=DECIMAL}, #{suggestapplyterm,jdbcType=VARCHAR}, #{suggestrepayway,jdbcType=VARCHAR}, 
+      #{personchecknote,jdbcType=VARCHAR}, #{lawchecknote,jdbcType=VARCHAR}, #{lawnote,jdbcType=VARCHAR}, 
+      #{incomenote,jdbcType=VARCHAR}, #{assetnote,jdbcType=VARCHAR}, #{debtnote,jdbcType=VARCHAR}, 
+      #{natation,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, #{situationnote,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{approvaldate,jdbcType=TIMESTAMP}, #{mortgagerate,jdbcType=DECIMAL}, 
+      #{totalmortgage,jdbcType=DECIMAL}, #{mortgagefeerate,jdbcType=DECIMAL}, #{productremark,jdbcType=VARCHAR}, 
+      #{otheridea,jdbcType=VARCHAR}, #{mortgagenote,jdbcType=VARCHAR}, #{baseinfonote,jdbcType=VARCHAR}, 
+      #{loannote,jdbcType=VARCHAR}, #{creditinfonote,jdbcType=VARCHAR}, #{creditinvestnote,jdbcType=VARCHAR}, 
+      #{revertnote,jdbcType=VARCHAR}, #{companyrepaynote,jdbcType=VARCHAR}, #{baseinfonote1,jdbcType=VARCHAR}, 
+      #{lownote1,jdbcType=VARCHAR}, #{loaninfonote1,jdbcType=VARCHAR}, #{creditinfonote1,jdbcType=VARCHAR}, 
+      #{creditinverstnote1,jdbcType=VARCHAR}, #{assetinfonote1,jdbcType=VARCHAR}, #{debtinfonote1,jdbcType=VARCHAR}, 
+      #{suggestmortgagerate,jdbcType=DECIMAL}, #{mortgageratenote,jdbcType=VARCHAR}, 
+      #{afterloandebtrate,jdbcType=DECIMAL}, #{afterloandebtratenote,jdbcType=VARCHAR}, 
+      #{mortgagerateamount,jdbcType=DECIMAL}, #{debtrateamount,jdbcType=DECIMAL}, #{maxcreditamount,jdbcType=DECIMAL}, 
+      #{realcreditamount,jdbcType=DECIMAL}, #{columnselect,jdbcType=VARCHAR}, #{tempflg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Chanapprovalform" >
+    insert into chanapprovalform
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="logid != null" >
+        logid,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="suggestuseterm != null" >
+        suggestuseterm,
+      </if>
+      <if test="suggestuseamount != null" >
+        suggestuseamount,
+      </if>
+      <if test="facesignflg != null" >
+        facesignflg,
+      </if>
+      <if test="agreeexpectloanflg != null" >
+        agreeexpectloanflg,
+      </if>
+      <if test="suggestapplyrate != null" >
+        suggestapplyrate,
+      </if>
+      <if test="suggestleavel != null" >
+        suggestleavel,
+      </if>
+      <if test="suggestapplyamount != null" >
+        suggestapplyamount,
+      </if>
+      <if test="suggestapplyterm != null" >
+        suggestapplyterm,
+      </if>
+      <if test="suggestrepayway != null" >
+        suggestrepayway,
+      </if>
+      <if test="personchecknote != null" >
+        personchecknote,
+      </if>
+      <if test="lawchecknote != null" >
+        lawchecknote,
+      </if>
+      <if test="lawnote != null" >
+        lawnote,
+      </if>
+      <if test="incomenote != null" >
+        incomenote,
+      </if>
+      <if test="assetnote != null" >
+        assetnote,
+      </if>
+      <if test="debtnote != null" >
+        debtnote,
+      </if>
+      <if test="natation != null" >
+        natation,
+      </if>
+      <if test="nodeid != null" >
+        nodeid,
+      </if>
+      <if test="situationnote != null" >
+        situationnote,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="approvaldate != null" >
+        approvaldate,
+      </if>
+      <if test="mortgagerate != null" >
+        mortgagerate,
+      </if>
+      <if test="totalmortgage != null" >
+        totalmortgage,
+      </if>
+      <if test="mortgagefeerate != null" >
+        mortgagefeerate,
+      </if>
+      <if test="productremark != null" >
+        productremark,
+      </if>
+      <if test="otheridea != null" >
+        otheridea,
+      </if>
+      <if test="mortgagenote != null" >
+        mortgagenote,
+      </if>
+      <if test="baseinfonote != null" >
+        baseinfonote,
+      </if>
+      <if test="loannote != null" >
+        loannote,
+      </if>
+      <if test="creditinfonote != null" >
+        creditinfonote,
+      </if>
+      <if test="creditinvestnote != null" >
+        creditinvestnote,
+      </if>
+      <if test="revertnote != null" >
+        revertnote,
+      </if>
+      <if test="companyrepaynote != null" >
+        companyrepaynote,
+      </if>
+      <if test="baseinfonote1 != null" >
+        baseinfonote1,
+      </if>
+      <if test="lownote1 != null" >
+        lownote1,
+      </if>
+      <if test="loaninfonote1 != null" >
+        loaninfonote1,
+      </if>
+      <if test="creditinfonote1 != null" >
+        creditinfonote1,
+      </if>
+      <if test="creditinverstnote1 != null" >
+        creditinverstnote1,
+      </if>
+      <if test="assetinfonote1 != null" >
+        assetinfonote1,
+      </if>
+      <if test="debtinfonote1 != null" >
+        debtinfonote1,
+      </if>
+      <if test="suggestmortgagerate != null" >
+        suggestmortgagerate,
+      </if>
+      <if test="mortgageratenote != null" >
+        mortgageratenote,
+      </if>
+      <if test="afterloandebtrate != null" >
+        afterloandebtrate,
+      </if>
+      <if test="afterloandebtratenote != null" >
+        afterloandebtratenote,
+      </if>
+      <if test="mortgagerateamount != null" >
+        mortgagerateamount,
+      </if>
+      <if test="debtrateamount != null" >
+        debtrateamount,
+      </if>
+      <if test="maxcreditamount != null" >
+        maxcreditamount,
+      </if>
+      <if test="realcreditamount != null" >
+        realcreditamount,
+      </if>
+      <if test="columnselect != null" >
+        columnselect,
+      </if>
+      <if test="tempflg != null" >
+        tempflg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="logid != null" >
+        #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestuseterm != null" >
+        #{suggestuseterm,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestuseamount != null" >
+        #{suggestuseamount,jdbcType=DECIMAL},
+      </if>
+      <if test="facesignflg != null" >
+        #{facesignflg,jdbcType=CHAR},
+      </if>
+      <if test="agreeexpectloanflg != null" >
+        #{agreeexpectloanflg,jdbcType=CHAR},
+      </if>
+      <if test="suggestapplyrate != null" >
+        #{suggestapplyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="suggestleavel != null" >
+        #{suggestleavel,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestapplyamount != null" >
+        #{suggestapplyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="suggestapplyterm != null" >
+        #{suggestapplyterm,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestrepayway != null" >
+        #{suggestrepayway,jdbcType=VARCHAR},
+      </if>
+      <if test="personchecknote != null" >
+        #{personchecknote,jdbcType=VARCHAR},
+      </if>
+      <if test="lawchecknote != null" >
+        #{lawchecknote,jdbcType=VARCHAR},
+      </if>
+      <if test="lawnote != null" >
+        #{lawnote,jdbcType=VARCHAR},
+      </if>
+      <if test="incomenote != null" >
+        #{incomenote,jdbcType=VARCHAR},
+      </if>
+      <if test="assetnote != null" >
+        #{assetnote,jdbcType=VARCHAR},
+      </if>
+      <if test="debtnote != null" >
+        #{debtnote,jdbcType=VARCHAR},
+      </if>
+      <if test="natation != null" >
+        #{natation,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="situationnote != null" >
+        #{situationnote,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="approvaldate != null" >
+        #{approvaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mortgagerate != null" >
+        #{mortgagerate,jdbcType=DECIMAL},
+      </if>
+      <if test="totalmortgage != null" >
+        #{totalmortgage,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgagefeerate != null" >
+        #{mortgagefeerate,jdbcType=DECIMAL},
+      </if>
+      <if test="productremark != null" >
+        #{productremark,jdbcType=VARCHAR},
+      </if>
+      <if test="otheridea != null" >
+        #{otheridea,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagenote != null" >
+        #{mortgagenote,jdbcType=VARCHAR},
+      </if>
+      <if test="baseinfonote != null" >
+        #{baseinfonote,jdbcType=VARCHAR},
+      </if>
+      <if test="loannote != null" >
+        #{loannote,jdbcType=VARCHAR},
+      </if>
+      <if test="creditinfonote != null" >
+        #{creditinfonote,jdbcType=VARCHAR},
+      </if>
+      <if test="creditinvestnote != null" >
+        #{creditinvestnote,jdbcType=VARCHAR},
+      </if>
+      <if test="revertnote != null" >
+        #{revertnote,jdbcType=VARCHAR},
+      </if>
+      <if test="companyrepaynote != null" >
+        #{companyrepaynote,jdbcType=VARCHAR},
+      </if>
+      <if test="baseinfonote1 != null" >
+        #{baseinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="lownote1 != null" >
+        #{lownote1,jdbcType=VARCHAR},
+      </if>
+      <if test="loaninfonote1 != null" >
+        #{loaninfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="creditinfonote1 != null" >
+        #{creditinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="creditinverstnote1 != null" >
+        #{creditinverstnote1,jdbcType=VARCHAR},
+      </if>
+      <if test="assetinfonote1 != null" >
+        #{assetinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="debtinfonote1 != null" >
+        #{debtinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestmortgagerate != null" >
+        #{suggestmortgagerate,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgageratenote != null" >
+        #{mortgageratenote,jdbcType=VARCHAR},
+      </if>
+      <if test="afterloandebtrate != null" >
+        #{afterloandebtrate,jdbcType=DECIMAL},
+      </if>
+      <if test="afterloandebtratenote != null" >
+        #{afterloandebtratenote,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagerateamount != null" >
+        #{mortgagerateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="debtrateamount != null" >
+        #{debtrateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxcreditamount != null" >
+        #{maxcreditamount,jdbcType=DECIMAL},
+      </if>
+      <if test="realcreditamount != null" >
+        #{realcreditamount,jdbcType=DECIMAL},
+      </if>
+      <if test="columnselect != null" >
+        #{columnselect,jdbcType=VARCHAR},
+      </if>
+      <if test="tempflg != null" >
+        #{tempflg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ChanapprovalformExample" resultType="java.lang.Integer" >
+    select count(*) from chanapprovalform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update chanapprovalform
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logid != null" >
+        logid = #{record.logid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suggestuseterm != null" >
+        suggestuseterm = #{record.suggestuseterm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suggestuseamount != null" >
+        suggestuseamount = #{record.suggestuseamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.facesignflg != null" >
+        facesignflg = #{record.facesignflg,jdbcType=CHAR},
+      </if>
+      <if test="record.agreeexpectloanflg != null" >
+        agreeexpectloanflg = #{record.agreeexpectloanflg,jdbcType=CHAR},
+      </if>
+      <if test="record.suggestapplyrate != null" >
+        suggestapplyrate = #{record.suggestapplyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.suggestleavel != null" >
+        suggestleavel = #{record.suggestleavel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suggestapplyamount != null" >
+        suggestapplyamount = #{record.suggestapplyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.suggestapplyterm != null" >
+        suggestapplyterm = #{record.suggestapplyterm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suggestrepayway != null" >
+        suggestrepayway = #{record.suggestrepayway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personchecknote != null" >
+        personchecknote = #{record.personchecknote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lawchecknote != null" >
+        lawchecknote = #{record.lawchecknote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lawnote != null" >
+        lawnote = #{record.lawnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomenote != null" >
+        incomenote = #{record.incomenote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetnote != null" >
+        assetnote = #{record.assetnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.debtnote != null" >
+        debtnote = #{record.debtnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.natation != null" >
+        natation = #{record.natation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nodeid != null" >
+        nodeid = #{record.nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.situationnote != null" >
+        situationnote = #{record.situationnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvaldate != null" >
+        approvaldate = #{record.approvaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mortgagerate != null" >
+        mortgagerate = #{record.mortgagerate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalmortgage != null" >
+        totalmortgage = #{record.totalmortgage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mortgagefeerate != null" >
+        mortgagefeerate = #{record.mortgagefeerate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.productremark != null" >
+        productremark = #{record.productremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otheridea != null" >
+        otheridea = #{record.otheridea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagenote != null" >
+        mortgagenote = #{record.mortgagenote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baseinfonote != null" >
+        baseinfonote = #{record.baseinfonote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loannote != null" >
+        loannote = #{record.loannote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditinfonote != null" >
+        creditinfonote = #{record.creditinfonote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditinvestnote != null" >
+        creditinvestnote = #{record.creditinvestnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.revertnote != null" >
+        revertnote = #{record.revertnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyrepaynote != null" >
+        companyrepaynote = #{record.companyrepaynote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baseinfonote1 != null" >
+        baseinfonote1 = #{record.baseinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lownote1 != null" >
+        lownote1 = #{record.lownote1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loaninfonote1 != null" >
+        loaninfonote1 = #{record.loaninfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditinfonote1 != null" >
+        creditinfonote1 = #{record.creditinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditinverstnote1 != null" >
+        creditinverstnote1 = #{record.creditinverstnote1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetinfonote1 != null" >
+        assetinfonote1 = #{record.assetinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.debtinfonote1 != null" >
+        debtinfonote1 = #{record.debtinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suggestmortgagerate != null" >
+        suggestmortgagerate = #{record.suggestmortgagerate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mortgageratenote != null" >
+        mortgageratenote = #{record.mortgageratenote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.afterloandebtrate != null" >
+        afterloandebtrate = #{record.afterloandebtrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.afterloandebtratenote != null" >
+        afterloandebtratenote = #{record.afterloandebtratenote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagerateamount != null" >
+        mortgagerateamount = #{record.mortgagerateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.debtrateamount != null" >
+        debtrateamount = #{record.debtrateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.maxcreditamount != null" >
+        maxcreditamount = #{record.maxcreditamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realcreditamount != null" >
+        realcreditamount = #{record.realcreditamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.columnselect != null" >
+        columnselect = #{record.columnselect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tempflg != null" >
+        tempflg = #{record.tempflg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update chanapprovalform
+    set id = #{record.id,jdbcType=VARCHAR},
+      logid = #{record.logid,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      suggestuseterm = #{record.suggestuseterm,jdbcType=VARCHAR},
+      suggestuseamount = #{record.suggestuseamount,jdbcType=DECIMAL},
+      facesignflg = #{record.facesignflg,jdbcType=CHAR},
+      agreeexpectloanflg = #{record.agreeexpectloanflg,jdbcType=CHAR},
+      suggestapplyrate = #{record.suggestapplyrate,jdbcType=DECIMAL},
+      suggestleavel = #{record.suggestleavel,jdbcType=VARCHAR},
+      suggestapplyamount = #{record.suggestapplyamount,jdbcType=DECIMAL},
+      suggestapplyterm = #{record.suggestapplyterm,jdbcType=VARCHAR},
+      suggestrepayway = #{record.suggestrepayway,jdbcType=VARCHAR},
+      personchecknote = #{record.personchecknote,jdbcType=VARCHAR},
+      lawchecknote = #{record.lawchecknote,jdbcType=VARCHAR},
+      lawnote = #{record.lawnote,jdbcType=VARCHAR},
+      incomenote = #{record.incomenote,jdbcType=VARCHAR},
+      assetnote = #{record.assetnote,jdbcType=VARCHAR},
+      debtnote = #{record.debtnote,jdbcType=VARCHAR},
+      natation = #{record.natation,jdbcType=VARCHAR},
+      nodeid = #{record.nodeid,jdbcType=VARCHAR},
+      situationnote = #{record.situationnote,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      approvaldate = #{record.approvaldate,jdbcType=TIMESTAMP},
+      mortgagerate = #{record.mortgagerate,jdbcType=DECIMAL},
+      totalmortgage = #{record.totalmortgage,jdbcType=DECIMAL},
+      mortgagefeerate = #{record.mortgagefeerate,jdbcType=DECIMAL},
+      productremark = #{record.productremark,jdbcType=VARCHAR},
+      otheridea = #{record.otheridea,jdbcType=VARCHAR},
+      mortgagenote = #{record.mortgagenote,jdbcType=VARCHAR},
+      baseinfonote = #{record.baseinfonote,jdbcType=VARCHAR},
+      loannote = #{record.loannote,jdbcType=VARCHAR},
+      creditinfonote = #{record.creditinfonote,jdbcType=VARCHAR},
+      creditinvestnote = #{record.creditinvestnote,jdbcType=VARCHAR},
+      revertnote = #{record.revertnote,jdbcType=VARCHAR},
+      companyrepaynote = #{record.companyrepaynote,jdbcType=VARCHAR},
+      baseinfonote1 = #{record.baseinfonote1,jdbcType=VARCHAR},
+      lownote1 = #{record.lownote1,jdbcType=VARCHAR},
+      loaninfonote1 = #{record.loaninfonote1,jdbcType=VARCHAR},
+      creditinfonote1 = #{record.creditinfonote1,jdbcType=VARCHAR},
+      creditinverstnote1 = #{record.creditinverstnote1,jdbcType=VARCHAR},
+      assetinfonote1 = #{record.assetinfonote1,jdbcType=VARCHAR},
+      debtinfonote1 = #{record.debtinfonote1,jdbcType=VARCHAR},
+      suggestmortgagerate = #{record.suggestmortgagerate,jdbcType=DECIMAL},
+      mortgageratenote = #{record.mortgageratenote,jdbcType=VARCHAR},
+      afterloandebtrate = #{record.afterloandebtrate,jdbcType=DECIMAL},
+      afterloandebtratenote = #{record.afterloandebtratenote,jdbcType=VARCHAR},
+      mortgagerateamount = #{record.mortgagerateamount,jdbcType=DECIMAL},
+      debtrateamount = #{record.debtrateamount,jdbcType=DECIMAL},
+      maxcreditamount = #{record.maxcreditamount,jdbcType=DECIMAL},
+      realcreditamount = #{record.realcreditamount,jdbcType=DECIMAL},
+      columnselect = #{record.columnselect,jdbcType=VARCHAR},
+      tempflg = #{record.tempflg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Chanapprovalform" >
+    update chanapprovalform
+    <set >
+      <if test="logid != null" >
+        logid = #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestuseterm != null" >
+        suggestuseterm = #{suggestuseterm,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestuseamount != null" >
+        suggestuseamount = #{suggestuseamount,jdbcType=DECIMAL},
+      </if>
+      <if test="facesignflg != null" >
+        facesignflg = #{facesignflg,jdbcType=CHAR},
+      </if>
+      <if test="agreeexpectloanflg != null" >
+        agreeexpectloanflg = #{agreeexpectloanflg,jdbcType=CHAR},
+      </if>
+      <if test="suggestapplyrate != null" >
+        suggestapplyrate = #{suggestapplyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="suggestleavel != null" >
+        suggestleavel = #{suggestleavel,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestapplyamount != null" >
+        suggestapplyamount = #{suggestapplyamount,jdbcType=DECIMAL},
+      </if>
+      <if test="suggestapplyterm != null" >
+        suggestapplyterm = #{suggestapplyterm,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestrepayway != null" >
+        suggestrepayway = #{suggestrepayway,jdbcType=VARCHAR},
+      </if>
+      <if test="personchecknote != null" >
+        personchecknote = #{personchecknote,jdbcType=VARCHAR},
+      </if>
+      <if test="lawchecknote != null" >
+        lawchecknote = #{lawchecknote,jdbcType=VARCHAR},
+      </if>
+      <if test="lawnote != null" >
+        lawnote = #{lawnote,jdbcType=VARCHAR},
+      </if>
+      <if test="incomenote != null" >
+        incomenote = #{incomenote,jdbcType=VARCHAR},
+      </if>
+      <if test="assetnote != null" >
+        assetnote = #{assetnote,jdbcType=VARCHAR},
+      </if>
+      <if test="debtnote != null" >
+        debtnote = #{debtnote,jdbcType=VARCHAR},
+      </if>
+      <if test="natation != null" >
+        natation = #{natation,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        nodeid = #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="situationnote != null" >
+        situationnote = #{situationnote,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="approvaldate != null" >
+        approvaldate = #{approvaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mortgagerate != null" >
+        mortgagerate = #{mortgagerate,jdbcType=DECIMAL},
+      </if>
+      <if test="totalmortgage != null" >
+        totalmortgage = #{totalmortgage,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgagefeerate != null" >
+        mortgagefeerate = #{mortgagefeerate,jdbcType=DECIMAL},
+      </if>
+      <if test="productremark != null" >
+        productremark = #{productremark,jdbcType=VARCHAR},
+      </if>
+      <if test="otheridea != null" >
+        otheridea = #{otheridea,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagenote != null" >
+        mortgagenote = #{mortgagenote,jdbcType=VARCHAR},
+      </if>
+      <if test="baseinfonote != null" >
+        baseinfonote = #{baseinfonote,jdbcType=VARCHAR},
+      </if>
+      <if test="loannote != null" >
+        loannote = #{loannote,jdbcType=VARCHAR},
+      </if>
+      <if test="creditinfonote != null" >
+        creditinfonote = #{creditinfonote,jdbcType=VARCHAR},
+      </if>
+      <if test="creditinvestnote != null" >
+        creditinvestnote = #{creditinvestnote,jdbcType=VARCHAR},
+      </if>
+      <if test="revertnote != null" >
+        revertnote = #{revertnote,jdbcType=VARCHAR},
+      </if>
+      <if test="companyrepaynote != null" >
+        companyrepaynote = #{companyrepaynote,jdbcType=VARCHAR},
+      </if>
+      <if test="baseinfonote1 != null" >
+        baseinfonote1 = #{baseinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="lownote1 != null" >
+        lownote1 = #{lownote1,jdbcType=VARCHAR},
+      </if>
+      <if test="loaninfonote1 != null" >
+        loaninfonote1 = #{loaninfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="creditinfonote1 != null" >
+        creditinfonote1 = #{creditinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="creditinverstnote1 != null" >
+        creditinverstnote1 = #{creditinverstnote1,jdbcType=VARCHAR},
+      </if>
+      <if test="assetinfonote1 != null" >
+        assetinfonote1 = #{assetinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="debtinfonote1 != null" >
+        debtinfonote1 = #{debtinfonote1,jdbcType=VARCHAR},
+      </if>
+      <if test="suggestmortgagerate != null" >
+        suggestmortgagerate = #{suggestmortgagerate,jdbcType=DECIMAL},
+      </if>
+      <if test="mortgageratenote != null" >
+        mortgageratenote = #{mortgageratenote,jdbcType=VARCHAR},
+      </if>
+      <if test="afterloandebtrate != null" >
+        afterloandebtrate = #{afterloandebtrate,jdbcType=DECIMAL},
+      </if>
+      <if test="afterloandebtratenote != null" >
+        afterloandebtratenote = #{afterloandebtratenote,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagerateamount != null" >
+        mortgagerateamount = #{mortgagerateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="debtrateamount != null" >
+        debtrateamount = #{debtrateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxcreditamount != null" >
+        maxcreditamount = #{maxcreditamount,jdbcType=DECIMAL},
+      </if>
+      <if test="realcreditamount != null" >
+        realcreditamount = #{realcreditamount,jdbcType=DECIMAL},
+      </if>
+      <if test="columnselect != null" >
+        columnselect = #{columnselect,jdbcType=VARCHAR},
+      </if>
+      <if test="tempflg != null" >
+        tempflg = #{tempflg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Chanapprovalform" >
+    update chanapprovalform
+    set logid = #{logid,jdbcType=VARCHAR},
+      workid = #{workid,jdbcType=VARCHAR},
+      suggestuseterm = #{suggestuseterm,jdbcType=VARCHAR},
+      suggestuseamount = #{suggestuseamount,jdbcType=DECIMAL},
+      facesignflg = #{facesignflg,jdbcType=CHAR},
+      agreeexpectloanflg = #{agreeexpectloanflg,jdbcType=CHAR},
+      suggestapplyrate = #{suggestapplyrate,jdbcType=DECIMAL},
+      suggestleavel = #{suggestleavel,jdbcType=VARCHAR},
+      suggestapplyamount = #{suggestapplyamount,jdbcType=DECIMAL},
+      suggestapplyterm = #{suggestapplyterm,jdbcType=VARCHAR},
+      suggestrepayway = #{suggestrepayway,jdbcType=VARCHAR},
+      personchecknote = #{personchecknote,jdbcType=VARCHAR},
+      lawchecknote = #{lawchecknote,jdbcType=VARCHAR},
+      lawnote = #{lawnote,jdbcType=VARCHAR},
+      incomenote = #{incomenote,jdbcType=VARCHAR},
+      assetnote = #{assetnote,jdbcType=VARCHAR},
+      debtnote = #{debtnote,jdbcType=VARCHAR},
+      natation = #{natation,jdbcType=VARCHAR},
+      nodeid = #{nodeid,jdbcType=VARCHAR},
+      situationnote = #{situationnote,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      approvaldate = #{approvaldate,jdbcType=TIMESTAMP},
+      mortgagerate = #{mortgagerate,jdbcType=DECIMAL},
+      totalmortgage = #{totalmortgage,jdbcType=DECIMAL},
+      mortgagefeerate = #{mortgagefeerate,jdbcType=DECIMAL},
+      productremark = #{productremark,jdbcType=VARCHAR},
+      otheridea = #{otheridea,jdbcType=VARCHAR},
+      mortgagenote = #{mortgagenote,jdbcType=VARCHAR},
+      baseinfonote = #{baseinfonote,jdbcType=VARCHAR},
+      loannote = #{loannote,jdbcType=VARCHAR},
+      creditinfonote = #{creditinfonote,jdbcType=VARCHAR},
+      creditinvestnote = #{creditinvestnote,jdbcType=VARCHAR},
+      revertnote = #{revertnote,jdbcType=VARCHAR},
+      companyrepaynote = #{companyrepaynote,jdbcType=VARCHAR},
+      baseinfonote1 = #{baseinfonote1,jdbcType=VARCHAR},
+      lownote1 = #{lownote1,jdbcType=VARCHAR},
+      loaninfonote1 = #{loaninfonote1,jdbcType=VARCHAR},
+      creditinfonote1 = #{creditinfonote1,jdbcType=VARCHAR},
+      creditinverstnote1 = #{creditinverstnote1,jdbcType=VARCHAR},
+      assetinfonote1 = #{assetinfonote1,jdbcType=VARCHAR},
+      debtinfonote1 = #{debtinfonote1,jdbcType=VARCHAR},
+      suggestmortgagerate = #{suggestmortgagerate,jdbcType=DECIMAL},
+      mortgageratenote = #{mortgageratenote,jdbcType=VARCHAR},
+      afterloandebtrate = #{afterloandebtrate,jdbcType=DECIMAL},
+      afterloandebtratenote = #{afterloandebtratenote,jdbcType=VARCHAR},
+      mortgagerateamount = #{mortgagerateamount,jdbcType=DECIMAL},
+      debtrateamount = #{debtrateamount,jdbcType=DECIMAL},
+      maxcreditamount = #{maxcreditamount,jdbcType=DECIMAL},
+      realcreditamount = #{realcreditamount,jdbcType=DECIMAL},
+      columnselect = #{columnselect,jdbcType=VARCHAR},
+      tempflg = #{tempflg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

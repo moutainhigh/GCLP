@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.MortgagematchMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Mortgagematch" >
+    <id column="mortgageno" property="mortgageno" jdbcType="VARCHAR" />
+    <id column="matchno" property="matchno" jdbcType="VARCHAR" />
+    <result column="similarword" property="similarword" jdbcType="VARCHAR" />
+    <result column="houseaddress" property="houseaddress" jdbcType="VARCHAR" />
+    <result column="matchflag" property="matchflag" jdbcType="VARCHAR" />
+    <result column="communityid" property="communityid" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="cdgtl" property="cdgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mortgageno, matchno, similarword, houseaddress, matchflag, communityid, chgdt, cdgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.MortgagematchExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mortgagematch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from mortgagematch
+    where mortgageno = #{mortgageno,jdbcType=VARCHAR}
+      and matchno = #{matchno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from mortgagematch
+    where mortgageno = #{mortgageno,jdbcType=VARCHAR}
+      and matchno = #{matchno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.MortgagematchExample" >
+    delete from mortgagematch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Mortgagematch" >
+    insert into mortgagematch (mortgageno, matchno, similarword, 
+      houseaddress, matchflag, communityid, 
+      chgdt, cdgtl)
+    values (#{mortgageno,jdbcType=VARCHAR}, #{matchno,jdbcType=VARCHAR}, #{similarword,jdbcType=VARCHAR}, 
+      #{houseaddress,jdbcType=VARCHAR}, #{matchflag,jdbcType=VARCHAR}, #{communityid,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=TIMESTAMP}, #{cdgtl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Mortgagematch" >
+    insert into mortgagematch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mortgageno != null" >
+        mortgageno,
+      </if>
+      <if test="matchno != null" >
+        matchno,
+      </if>
+      <if test="similarword != null" >
+        similarword,
+      </if>
+      <if test="houseaddress != null" >
+        houseaddress,
+      </if>
+      <if test="matchflag != null" >
+        matchflag,
+      </if>
+      <if test="communityid != null" >
+        communityid,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="cdgtl != null" >
+        cdgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mortgageno != null" >
+        #{mortgageno,jdbcType=VARCHAR},
+      </if>
+      <if test="matchno != null" >
+        #{matchno,jdbcType=VARCHAR},
+      </if>
+      <if test="similarword != null" >
+        #{similarword,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddress != null" >
+        #{houseaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="matchflag != null" >
+        #{matchflag,jdbcType=VARCHAR},
+      </if>
+      <if test="communityid != null" >
+        #{communityid,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cdgtl != null" >
+        #{cdgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.MortgagematchExample" resultType="java.lang.Integer" >
+    select count(*) from mortgagematch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mortgagematch
+    <set >
+      <if test="record.mortgageno != null" >
+        mortgageno = #{record.mortgageno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchno != null" >
+        matchno = #{record.matchno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.similarword != null" >
+        similarword = #{record.similarword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseaddress != null" >
+        houseaddress = #{record.houseaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchflag != null" >
+        matchflag = #{record.matchflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.communityid != null" >
+        communityid = #{record.communityid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cdgtl != null" >
+        cdgtl = #{record.cdgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mortgagematch
+    set mortgageno = #{record.mortgageno,jdbcType=VARCHAR},
+      matchno = #{record.matchno,jdbcType=VARCHAR},
+      similarword = #{record.similarword,jdbcType=VARCHAR},
+      houseaddress = #{record.houseaddress,jdbcType=VARCHAR},
+      matchflag = #{record.matchflag,jdbcType=VARCHAR},
+      communityid = #{record.communityid,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      cdgtl = #{record.cdgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Mortgagematch" >
+    update mortgagematch
+    <set >
+      <if test="similarword != null" >
+        similarword = #{similarword,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddress != null" >
+        houseaddress = #{houseaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="matchflag != null" >
+        matchflag = #{matchflag,jdbcType=VARCHAR},
+      </if>
+      <if test="communityid != null" >
+        communityid = #{communityid,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cdgtl != null" >
+        cdgtl = #{cdgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mortgageno = #{mortgageno,jdbcType=VARCHAR}
+      and matchno = #{matchno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Mortgagematch" >
+    update mortgagematch
+    set similarword = #{similarword,jdbcType=VARCHAR},
+      houseaddress = #{houseaddress,jdbcType=VARCHAR},
+      matchflag = #{matchflag,jdbcType=VARCHAR},
+      communityid = #{communityid,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      cdgtl = #{cdgtl,jdbcType=VARCHAR}
+    where mortgageno = #{mortgageno,jdbcType=VARCHAR}
+      and matchno = #{matchno,jdbcType=VARCHAR}
+  </update>
+</mapper>

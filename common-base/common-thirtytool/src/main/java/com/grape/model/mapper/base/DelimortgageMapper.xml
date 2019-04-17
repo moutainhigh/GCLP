@@ -1,0 +1,1820 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.DelimortgageMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Delimortgage" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="houseaddressnotes" property="houseaddressnotes" jdbcType="VARCHAR" />
+    <result column="houseaddressflg" property="houseaddressflg" jdbcType="CHAR" />
+    <result column="otherdeveloper" property="otherdeveloper" jdbcType="VARCHAR" />
+    <result column="developer" property="developer" jdbcType="VARCHAR" />
+    <result column="fallpopulation" property="fallpopulation" jdbcType="VARCHAR" />
+    <result column="livepeople" property="livepeople" jdbcType="VARCHAR" />
+    <result column="livesize" property="livesize" jdbcType="VARCHAR" />
+    <result column="areasize" property="areasize" jdbcType="VARCHAR" />
+    <result column="insidesize" property="insidesize" jdbcType="VARCHAR" />
+    <result column="carhousesize" property="carhousesize" jdbcType="VARCHAR" />
+    <result column="chrhousenotes" property="chrhousenotes" jdbcType="VARCHAR" />
+    <result column="havacarhouse" property="havacarhouse" jdbcType="CHAR" />
+    <result column="basementsize" property="basementsize" jdbcType="VARCHAR" />
+    <result column="isbasement" property="isbasement" jdbcType="CHAR" />
+    <result column="housestate" property="housestate" jdbcType="VARCHAR" />
+    <result column="follorpurpose" property="follorpurpose" jdbcType="VARCHAR" />
+    <result column="ismaritalpropertynotes" property="ismaritalpropertynotes" jdbcType="VARCHAR" />
+    <result column="ismaritalproperty" property="ismaritalproperty" jdbcType="CHAR" />
+    <result column="floors" property="floors" jdbcType="VARCHAR" />
+    <result column="numberoflayers" property="numberoflayers" jdbcType="VARCHAR" />
+    <result column="degreedecoration" property="degreedecoration" jdbcType="VARCHAR" />
+    <result column="houseorientation" property="houseorientation" jdbcType="VARCHAR" />
+    <result column="buildingtype" property="buildingtype" jdbcType="VARCHAR" />
+    <result column="buyhousedoc" property="buyhousedoc" jdbcType="VARCHAR" />
+    <result column="buyhousedate" property="buyhousedate" jdbcType="CHAR" />
+    <result column="isrentoutdate2" property="isrentoutdate2" jdbcType="TIMESTAMP" />
+    <result column="isrentoutdate" property="isrentoutdate" jdbcType="TIMESTAMP" />
+    <result column="isrentout" property="isrentout" jdbcType="CHAR" />
+    <result column="iselevatorroom" property="iselevatorroom" jdbcType="CHAR" />
+    <result column="issubwaynaer" property="issubwaynaer" jdbcType="CHAR" />
+    <result column="ishospitalnear" property="ishospitalnear" jdbcType="CHAR" />
+    <result column="isschoolnear" property="isschoolnear" jdbcType="CHAR" />
+    <result column="issupermarketnear" property="issupermarketnear" jdbcType="CHAR" />
+    <result column="issoleresidence" property="issoleresidence" jdbcType="CHAR" />
+    <result column="historyrate" property="historyrate" jdbcType="DECIMAL" />
+    <result column="buyerfasttransprice" property="buyerfasttransprice" jdbcType="DECIMAL" />
+    <result column="sellersfasttransprice" property="sellersfasttransprice" jdbcType="DECIMAL" />
+    <result column="hangingprice" property="hangingprice" jdbcType="DECIMAL" />
+    <result column="currenthangingprice" property="currenthangingprice" jdbcType="DECIMAL" />
+    <result column="houseunitprice" property="houseunitprice" jdbcType="DECIMAL" />
+    <result column="housetotalprice" property="housetotalprice" jdbcType="DECIMAL" />
+    <result column="isjudgenotclearlynotes" property="isjudgenotclearlynotes" jdbcType="VARCHAR" />
+    <result column="isjudgenotclearly" property="isjudgenotclearly" jdbcType="CHAR" />
+    <result column="issalelimitnotes" property="issalelimitnotes" jdbcType="VARCHAR" />
+    <result column="issalelimit" property="issalelimit" jdbcType="CHAR" />
+    <result column="isnotsameofhousenotes" property="isnotsameofhousenotes" jdbcType="VARCHAR" />
+    <result column="isnotsameofhouse" property="isnotsameofhouse" jdbcType="CHAR" />
+    <result column="isselfreformnotes" property="isselfreformnotes" jdbcType="VARCHAR" />
+    <result column="isselfreform" property="isselfreform" jdbcType="CHAR" />
+    <result column="isnotsafehousenotes" property="isnotsafehousenotes" jdbcType="VARCHAR" />
+    <result column="isnotsafehouse" property="isnotsafehouse" jdbcType="CHAR" />
+    <result column="isproblemcasenotes" property="isproblemcasenotes" jdbcType="VARCHAR" />
+    <result column="isproblemcase" property="isproblemcase" jdbcType="CHAR" />
+    <result column="issinglebuildingnotes" property="issinglebuildingnotes" jdbcType="VARCHAR" />
+    <result column="issinglebuilding" property="issinglebuilding" jdbcType="CHAR" />
+    <result column="isnotsameofownernotes" property="isnotsameofownernotes" jdbcType="VARCHAR" />
+    <result column="isnotsameofowner" property="isnotsameofowner" jdbcType="CHAR" />
+    <result column="isgenerationnotes" property="isgenerationnotes" jdbcType="VARCHAR" />
+    <result column="isgeneration" property="isgeneration" jdbcType="CHAR" />
+    <result column="isbadactionperson" property="isbadactionperson" jdbcType="CHAR" />
+    <result column="isnotsamenotes" property="isnotsamenotes" jdbcType="VARCHAR" />
+    <result column="isnotsameoffamilyinfo" property="isnotsameoffamilyinfo" jdbcType="CHAR" />
+    <result column="dateduebignotes" property="dateduebignotes" jdbcType="VARCHAR" />
+    <result column="istenantbiggerdatedue" property="istenantbiggerdatedue" jdbcType="CHAR" />
+    <result column="importdefectsnotes" property="importdefectsnotes" jdbcType="VARCHAR" />
+    <result column="isimportdefects" property="isimportdefects" jdbcType="CHAR" />
+    <result column="islistingsalenotes" property="islistingsalenotes" jdbcType="VARCHAR" />
+    <result column="islistingsale" property="islistingsale" jdbcType="CHAR" />
+    <result column="longtimenorecordnotes" property="longtimenorecordnotes" jdbcType="VARCHAR" />
+    <result column="longtimenorecord" property="longtimenorecord" jdbcType="CHAR" />
+    <result column="otherpicaddr" property="otherpicaddr" jdbcType="VARCHAR" />
+    <result column="balconyaddr" property="balconyaddr" jdbcType="VARCHAR" />
+    <result column="roomaddr" property="roomaddr" jdbcType="VARCHAR" />
+    <result column="livingroomaddr" property="livingroomaddr" jdbcType="VARCHAR" />
+    <result column="mortgagedooraddr" property="mortgagedooraddr" jdbcType="VARCHAR" />
+    <result column="unitdooraddr" property="unitdooraddr" jdbcType="VARCHAR" />
+    <result column="districtdooraddr" property="districtdooraddr" jdbcType="VARCHAR" />
+    <result column="insidepicaddr" property="insidepicaddr" jdbcType="VARCHAR" />
+    <result column="supmarketpicaddr" property="supmarketpicaddr" jdbcType="VARCHAR" />
+    <result column="subwaypicaddr" property="subwaypicaddr" jdbcType="VARCHAR" />
+    <result column="hospitalpicaddr" property="hospitalpicaddr" jdbcType="VARCHAR" />
+    <result column="schoolpicaddr" property="schoolpicaddr" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="degreeroom" property="degreeroom" jdbcType="VARCHAR" />
+    <result column="room" property="room" jdbcType="VARCHAR" />
+    <result column="hall" property="hall" jdbcType="VARCHAR" />
+    <result column="toilet" property="toilet" jdbcType="VARCHAR" />
+    <result column="balcony" property="balcony" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.grape.model.db.Delimortgage" extends="BaseResultMap" >
+    <result column="mortgageview" property="mortgageview" jdbcType="LONGVARCHAR" />
+    <result column="comments" property="comments" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, houseaddressnotes, houseaddressflg, otherdeveloper, developer, fallpopulation, 
+    livepeople, livesize, areasize, insidesize, carhousesize, chrhousenotes, havacarhouse, 
+    basementsize, isbasement, housestate, follorpurpose, ismaritalpropertynotes, ismaritalproperty, 
+    floors, numberoflayers, degreedecoration, houseorientation, buildingtype, buyhousedoc, 
+    buyhousedate, isrentoutdate2, isrentoutdate, isrentout, iselevatorroom, issubwaynaer, 
+    ishospitalnear, isschoolnear, issupermarketnear, issoleresidence, historyrate, buyerfasttransprice, 
+    sellersfasttransprice, hangingprice, currenthangingprice, houseunitprice, housetotalprice, 
+    isjudgenotclearlynotes, isjudgenotclearly, issalelimitnotes, issalelimit, isnotsameofhousenotes, 
+    isnotsameofhouse, isselfreformnotes, isselfreform, isnotsafehousenotes, isnotsafehouse, 
+    isproblemcasenotes, isproblemcase, issinglebuildingnotes, issinglebuilding, isnotsameofownernotes, 
+    isnotsameofowner, isgenerationnotes, isgeneration, isbadactionperson, isnotsamenotes, 
+    isnotsameoffamilyinfo, dateduebignotes, istenantbiggerdatedue, importdefectsnotes, 
+    isimportdefects, islistingsalenotes, islistingsale, longtimenorecordnotes, longtimenorecord, 
+    otherpicaddr, balconyaddr, roomaddr, livingroomaddr, mortgagedooraddr, unitdooraddr, 
+    districtdooraddr, insidepicaddr, supmarketpicaddr, subwaypicaddr, hospitalpicaddr, 
+    schoolpicaddr, chgdt, chgtl, degreeroom, room, hall, toilet, balcony
+  </sql>
+  <sql id="Blob_Column_List" >
+    mortgageview, comments
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.grape.model.db.DelimortgageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from delimortgage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.DelimortgageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from delimortgage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from delimortgage
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from delimortgage
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.DelimortgageExample" >
+    delete from delimortgage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Delimortgage" >
+    insert into delimortgage (id, workid, houseaddressnotes, 
+      houseaddressflg, otherdeveloper, developer, 
+      fallpopulation, livepeople, livesize, 
+      areasize, insidesize, carhousesize, 
+      chrhousenotes, havacarhouse, basementsize, 
+      isbasement, housestate, follorpurpose, 
+      ismaritalpropertynotes, ismaritalproperty, 
+      floors, numberoflayers, degreedecoration, 
+      houseorientation, buildingtype, buyhousedoc, 
+      buyhousedate, isrentoutdate2, isrentoutdate, 
+      isrentout, iselevatorroom, issubwaynaer, 
+      ishospitalnear, isschoolnear, issupermarketnear, 
+      issoleresidence, historyrate, buyerfasttransprice, 
+      sellersfasttransprice, hangingprice, currenthangingprice, 
+      houseunitprice, housetotalprice, isjudgenotclearlynotes, 
+      isjudgenotclearly, issalelimitnotes, issalelimit, 
+      isnotsameofhousenotes, isnotsameofhouse, isselfreformnotes, 
+      isselfreform, isnotsafehousenotes, isnotsafehouse, 
+      isproblemcasenotes, isproblemcase, issinglebuildingnotes, 
+      issinglebuilding, isnotsameofownernotes, isnotsameofowner, 
+      isgenerationnotes, isgeneration, isbadactionperson, 
+      isnotsamenotes, isnotsameoffamilyinfo, dateduebignotes, 
+      istenantbiggerdatedue, importdefectsnotes, 
+      isimportdefects, islistingsalenotes, islistingsale, 
+      longtimenorecordnotes, longtimenorecord, otherpicaddr, 
+      balconyaddr, roomaddr, livingroomaddr, 
+      mortgagedooraddr, unitdooraddr, districtdooraddr, 
+      insidepicaddr, supmarketpicaddr, subwaypicaddr, 
+      hospitalpicaddr, schoolpicaddr, chgdt, 
+      chgtl, degreeroom, room, 
+      hall, toilet, balcony, 
+      mortgageview, comments)
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{houseaddressnotes,jdbcType=VARCHAR}, 
+      #{houseaddressflg,jdbcType=CHAR}, #{otherdeveloper,jdbcType=VARCHAR}, #{developer,jdbcType=VARCHAR}, 
+      #{fallpopulation,jdbcType=VARCHAR}, #{livepeople,jdbcType=VARCHAR}, #{livesize,jdbcType=VARCHAR}, 
+      #{areasize,jdbcType=VARCHAR}, #{insidesize,jdbcType=VARCHAR}, #{carhousesize,jdbcType=VARCHAR}, 
+      #{chrhousenotes,jdbcType=VARCHAR}, #{havacarhouse,jdbcType=CHAR}, #{basementsize,jdbcType=VARCHAR}, 
+      #{isbasement,jdbcType=CHAR}, #{housestate,jdbcType=VARCHAR}, #{follorpurpose,jdbcType=VARCHAR}, 
+      #{ismaritalpropertynotes,jdbcType=VARCHAR}, #{ismaritalproperty,jdbcType=CHAR}, 
+      #{floors,jdbcType=VARCHAR}, #{numberoflayers,jdbcType=VARCHAR}, #{degreedecoration,jdbcType=VARCHAR}, 
+      #{houseorientation,jdbcType=VARCHAR}, #{buildingtype,jdbcType=VARCHAR}, #{buyhousedoc,jdbcType=VARCHAR}, 
+      #{buyhousedate,jdbcType=CHAR}, #{isrentoutdate2,jdbcType=TIMESTAMP}, #{isrentoutdate,jdbcType=TIMESTAMP}, 
+      #{isrentout,jdbcType=CHAR}, #{iselevatorroom,jdbcType=CHAR}, #{issubwaynaer,jdbcType=CHAR}, 
+      #{ishospitalnear,jdbcType=CHAR}, #{isschoolnear,jdbcType=CHAR}, #{issupermarketnear,jdbcType=CHAR}, 
+      #{issoleresidence,jdbcType=CHAR}, #{historyrate,jdbcType=DECIMAL}, #{buyerfasttransprice,jdbcType=DECIMAL}, 
+      #{sellersfasttransprice,jdbcType=DECIMAL}, #{hangingprice,jdbcType=DECIMAL}, #{currenthangingprice,jdbcType=DECIMAL}, 
+      #{houseunitprice,jdbcType=DECIMAL}, #{housetotalprice,jdbcType=DECIMAL}, #{isjudgenotclearlynotes,jdbcType=VARCHAR}, 
+      #{isjudgenotclearly,jdbcType=CHAR}, #{issalelimitnotes,jdbcType=VARCHAR}, #{issalelimit,jdbcType=CHAR}, 
+      #{isnotsameofhousenotes,jdbcType=VARCHAR}, #{isnotsameofhouse,jdbcType=CHAR}, #{isselfreformnotes,jdbcType=VARCHAR}, 
+      #{isselfreform,jdbcType=CHAR}, #{isnotsafehousenotes,jdbcType=VARCHAR}, #{isnotsafehouse,jdbcType=CHAR}, 
+      #{isproblemcasenotes,jdbcType=VARCHAR}, #{isproblemcase,jdbcType=CHAR}, #{issinglebuildingnotes,jdbcType=VARCHAR}, 
+      #{issinglebuilding,jdbcType=CHAR}, #{isnotsameofownernotes,jdbcType=VARCHAR}, #{isnotsameofowner,jdbcType=CHAR}, 
+      #{isgenerationnotes,jdbcType=VARCHAR}, #{isgeneration,jdbcType=CHAR}, #{isbadactionperson,jdbcType=CHAR}, 
+      #{isnotsamenotes,jdbcType=VARCHAR}, #{isnotsameoffamilyinfo,jdbcType=CHAR}, #{dateduebignotes,jdbcType=VARCHAR}, 
+      #{istenantbiggerdatedue,jdbcType=CHAR}, #{importdefectsnotes,jdbcType=VARCHAR}, 
+      #{isimportdefects,jdbcType=CHAR}, #{islistingsalenotes,jdbcType=VARCHAR}, #{islistingsale,jdbcType=CHAR}, 
+      #{longtimenorecordnotes,jdbcType=VARCHAR}, #{longtimenorecord,jdbcType=CHAR}, #{otherpicaddr,jdbcType=VARCHAR}, 
+      #{balconyaddr,jdbcType=VARCHAR}, #{roomaddr,jdbcType=VARCHAR}, #{livingroomaddr,jdbcType=VARCHAR}, 
+      #{mortgagedooraddr,jdbcType=VARCHAR}, #{unitdooraddr,jdbcType=VARCHAR}, #{districtdooraddr,jdbcType=VARCHAR}, 
+      #{insidepicaddr,jdbcType=VARCHAR}, #{supmarketpicaddr,jdbcType=VARCHAR}, #{subwaypicaddr,jdbcType=VARCHAR}, 
+      #{hospitalpicaddr,jdbcType=VARCHAR}, #{schoolpicaddr,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{chgtl,jdbcType=VARCHAR}, #{degreeroom,jdbcType=VARCHAR}, #{room,jdbcType=VARCHAR}, 
+      #{hall,jdbcType=VARCHAR}, #{toilet,jdbcType=VARCHAR}, #{balcony,jdbcType=VARCHAR}, 
+      #{mortgageview,jdbcType=LONGVARCHAR}, #{comments,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Delimortgage" >
+    insert into delimortgage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="houseaddressnotes != null" >
+        houseaddressnotes,
+      </if>
+      <if test="houseaddressflg != null" >
+        houseaddressflg,
+      </if>
+      <if test="otherdeveloper != null" >
+        otherdeveloper,
+      </if>
+      <if test="developer != null" >
+        developer,
+      </if>
+      <if test="fallpopulation != null" >
+        fallpopulation,
+      </if>
+      <if test="livepeople != null" >
+        livepeople,
+      </if>
+      <if test="livesize != null" >
+        livesize,
+      </if>
+      <if test="areasize != null" >
+        areasize,
+      </if>
+      <if test="insidesize != null" >
+        insidesize,
+      </if>
+      <if test="carhousesize != null" >
+        carhousesize,
+      </if>
+      <if test="chrhousenotes != null" >
+        chrhousenotes,
+      </if>
+      <if test="havacarhouse != null" >
+        havacarhouse,
+      </if>
+      <if test="basementsize != null" >
+        basementsize,
+      </if>
+      <if test="isbasement != null" >
+        isbasement,
+      </if>
+      <if test="housestate != null" >
+        housestate,
+      </if>
+      <if test="follorpurpose != null" >
+        follorpurpose,
+      </if>
+      <if test="ismaritalpropertynotes != null" >
+        ismaritalpropertynotes,
+      </if>
+      <if test="ismaritalproperty != null" >
+        ismaritalproperty,
+      </if>
+      <if test="floors != null" >
+        floors,
+      </if>
+      <if test="numberoflayers != null" >
+        numberoflayers,
+      </if>
+      <if test="degreedecoration != null" >
+        degreedecoration,
+      </if>
+      <if test="houseorientation != null" >
+        houseorientation,
+      </if>
+      <if test="buildingtype != null" >
+        buildingtype,
+      </if>
+      <if test="buyhousedoc != null" >
+        buyhousedoc,
+      </if>
+      <if test="buyhousedate != null" >
+        buyhousedate,
+      </if>
+      <if test="isrentoutdate2 != null" >
+        isrentoutdate2,
+      </if>
+      <if test="isrentoutdate != null" >
+        isrentoutdate,
+      </if>
+      <if test="isrentout != null" >
+        isrentout,
+      </if>
+      <if test="iselevatorroom != null" >
+        iselevatorroom,
+      </if>
+      <if test="issubwaynaer != null" >
+        issubwaynaer,
+      </if>
+      <if test="ishospitalnear != null" >
+        ishospitalnear,
+      </if>
+      <if test="isschoolnear != null" >
+        isschoolnear,
+      </if>
+      <if test="issupermarketnear != null" >
+        issupermarketnear,
+      </if>
+      <if test="issoleresidence != null" >
+        issoleresidence,
+      </if>
+      <if test="historyrate != null" >
+        historyrate,
+      </if>
+      <if test="buyerfasttransprice != null" >
+        buyerfasttransprice,
+      </if>
+      <if test="sellersfasttransprice != null" >
+        sellersfasttransprice,
+      </if>
+      <if test="hangingprice != null" >
+        hangingprice,
+      </if>
+      <if test="currenthangingprice != null" >
+        currenthangingprice,
+      </if>
+      <if test="houseunitprice != null" >
+        houseunitprice,
+      </if>
+      <if test="housetotalprice != null" >
+        housetotalprice,
+      </if>
+      <if test="isjudgenotclearlynotes != null" >
+        isjudgenotclearlynotes,
+      </if>
+      <if test="isjudgenotclearly != null" >
+        isjudgenotclearly,
+      </if>
+      <if test="issalelimitnotes != null" >
+        issalelimitnotes,
+      </if>
+      <if test="issalelimit != null" >
+        issalelimit,
+      </if>
+      <if test="isnotsameofhousenotes != null" >
+        isnotsameofhousenotes,
+      </if>
+      <if test="isnotsameofhouse != null" >
+        isnotsameofhouse,
+      </if>
+      <if test="isselfreformnotes != null" >
+        isselfreformnotes,
+      </if>
+      <if test="isselfreform != null" >
+        isselfreform,
+      </if>
+      <if test="isnotsafehousenotes != null" >
+        isnotsafehousenotes,
+      </if>
+      <if test="isnotsafehouse != null" >
+        isnotsafehouse,
+      </if>
+      <if test="isproblemcasenotes != null" >
+        isproblemcasenotes,
+      </if>
+      <if test="isproblemcase != null" >
+        isproblemcase,
+      </if>
+      <if test="issinglebuildingnotes != null" >
+        issinglebuildingnotes,
+      </if>
+      <if test="issinglebuilding != null" >
+        issinglebuilding,
+      </if>
+      <if test="isnotsameofownernotes != null" >
+        isnotsameofownernotes,
+      </if>
+      <if test="isnotsameofowner != null" >
+        isnotsameofowner,
+      </if>
+      <if test="isgenerationnotes != null" >
+        isgenerationnotes,
+      </if>
+      <if test="isgeneration != null" >
+        isgeneration,
+      </if>
+      <if test="isbadactionperson != null" >
+        isbadactionperson,
+      </if>
+      <if test="isnotsamenotes != null" >
+        isnotsamenotes,
+      </if>
+      <if test="isnotsameoffamilyinfo != null" >
+        isnotsameoffamilyinfo,
+      </if>
+      <if test="dateduebignotes != null" >
+        dateduebignotes,
+      </if>
+      <if test="istenantbiggerdatedue != null" >
+        istenantbiggerdatedue,
+      </if>
+      <if test="importdefectsnotes != null" >
+        importdefectsnotes,
+      </if>
+      <if test="isimportdefects != null" >
+        isimportdefects,
+      </if>
+      <if test="islistingsalenotes != null" >
+        islistingsalenotes,
+      </if>
+      <if test="islistingsale != null" >
+        islistingsale,
+      </if>
+      <if test="longtimenorecordnotes != null" >
+        longtimenorecordnotes,
+      </if>
+      <if test="longtimenorecord != null" >
+        longtimenorecord,
+      </if>
+      <if test="otherpicaddr != null" >
+        otherpicaddr,
+      </if>
+      <if test="balconyaddr != null" >
+        balconyaddr,
+      </if>
+      <if test="roomaddr != null" >
+        roomaddr,
+      </if>
+      <if test="livingroomaddr != null" >
+        livingroomaddr,
+      </if>
+      <if test="mortgagedooraddr != null" >
+        mortgagedooraddr,
+      </if>
+      <if test="unitdooraddr != null" >
+        unitdooraddr,
+      </if>
+      <if test="districtdooraddr != null" >
+        districtdooraddr,
+      </if>
+      <if test="insidepicaddr != null" >
+        insidepicaddr,
+      </if>
+      <if test="supmarketpicaddr != null" >
+        supmarketpicaddr,
+      </if>
+      <if test="subwaypicaddr != null" >
+        subwaypicaddr,
+      </if>
+      <if test="hospitalpicaddr != null" >
+        hospitalpicaddr,
+      </if>
+      <if test="schoolpicaddr != null" >
+        schoolpicaddr,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="degreeroom != null" >
+        degreeroom,
+      </if>
+      <if test="room != null" >
+        room,
+      </if>
+      <if test="hall != null" >
+        hall,
+      </if>
+      <if test="toilet != null" >
+        toilet,
+      </if>
+      <if test="balcony != null" >
+        balcony,
+      </if>
+      <if test="mortgageview != null" >
+        mortgageview,
+      </if>
+      <if test="comments != null" >
+        comments,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddressnotes != null" >
+        #{houseaddressnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddressflg != null" >
+        #{houseaddressflg,jdbcType=CHAR},
+      </if>
+      <if test="otherdeveloper != null" >
+        #{otherdeveloper,jdbcType=VARCHAR},
+      </if>
+      <if test="developer != null" >
+        #{developer,jdbcType=VARCHAR},
+      </if>
+      <if test="fallpopulation != null" >
+        #{fallpopulation,jdbcType=VARCHAR},
+      </if>
+      <if test="livepeople != null" >
+        #{livepeople,jdbcType=VARCHAR},
+      </if>
+      <if test="livesize != null" >
+        #{livesize,jdbcType=VARCHAR},
+      </if>
+      <if test="areasize != null" >
+        #{areasize,jdbcType=VARCHAR},
+      </if>
+      <if test="insidesize != null" >
+        #{insidesize,jdbcType=VARCHAR},
+      </if>
+      <if test="carhousesize != null" >
+        #{carhousesize,jdbcType=VARCHAR},
+      </if>
+      <if test="chrhousenotes != null" >
+        #{chrhousenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="havacarhouse != null" >
+        #{havacarhouse,jdbcType=CHAR},
+      </if>
+      <if test="basementsize != null" >
+        #{basementsize,jdbcType=VARCHAR},
+      </if>
+      <if test="isbasement != null" >
+        #{isbasement,jdbcType=CHAR},
+      </if>
+      <if test="housestate != null" >
+        #{housestate,jdbcType=VARCHAR},
+      </if>
+      <if test="follorpurpose != null" >
+        #{follorpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="ismaritalpropertynotes != null" >
+        #{ismaritalpropertynotes,jdbcType=VARCHAR},
+      </if>
+      <if test="ismaritalproperty != null" >
+        #{ismaritalproperty,jdbcType=CHAR},
+      </if>
+      <if test="floors != null" >
+        #{floors,jdbcType=VARCHAR},
+      </if>
+      <if test="numberoflayers != null" >
+        #{numberoflayers,jdbcType=VARCHAR},
+      </if>
+      <if test="degreedecoration != null" >
+        #{degreedecoration,jdbcType=VARCHAR},
+      </if>
+      <if test="houseorientation != null" >
+        #{houseorientation,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingtype != null" >
+        #{buildingtype,jdbcType=VARCHAR},
+      </if>
+      <if test="buyhousedoc != null" >
+        #{buyhousedoc,jdbcType=VARCHAR},
+      </if>
+      <if test="buyhousedate != null" >
+        #{buyhousedate,jdbcType=CHAR},
+      </if>
+      <if test="isrentoutdate2 != null" >
+        #{isrentoutdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrentoutdate != null" >
+        #{isrentoutdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrentout != null" >
+        #{isrentout,jdbcType=CHAR},
+      </if>
+      <if test="iselevatorroom != null" >
+        #{iselevatorroom,jdbcType=CHAR},
+      </if>
+      <if test="issubwaynaer != null" >
+        #{issubwaynaer,jdbcType=CHAR},
+      </if>
+      <if test="ishospitalnear != null" >
+        #{ishospitalnear,jdbcType=CHAR},
+      </if>
+      <if test="isschoolnear != null" >
+        #{isschoolnear,jdbcType=CHAR},
+      </if>
+      <if test="issupermarketnear != null" >
+        #{issupermarketnear,jdbcType=CHAR},
+      </if>
+      <if test="issoleresidence != null" >
+        #{issoleresidence,jdbcType=CHAR},
+      </if>
+      <if test="historyrate != null" >
+        #{historyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="buyerfasttransprice != null" >
+        #{buyerfasttransprice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellersfasttransprice != null" >
+        #{sellersfasttransprice,jdbcType=DECIMAL},
+      </if>
+      <if test="hangingprice != null" >
+        #{hangingprice,jdbcType=DECIMAL},
+      </if>
+      <if test="currenthangingprice != null" >
+        #{currenthangingprice,jdbcType=DECIMAL},
+      </if>
+      <if test="houseunitprice != null" >
+        #{houseunitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="housetotalprice != null" >
+        #{housetotalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="isjudgenotclearlynotes != null" >
+        #{isjudgenotclearlynotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isjudgenotclearly != null" >
+        #{isjudgenotclearly,jdbcType=CHAR},
+      </if>
+      <if test="issalelimitnotes != null" >
+        #{issalelimitnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="issalelimit != null" >
+        #{issalelimit,jdbcType=CHAR},
+      </if>
+      <if test="isnotsameofhousenotes != null" >
+        #{isnotsameofhousenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotsameofhouse != null" >
+        #{isnotsameofhouse,jdbcType=CHAR},
+      </if>
+      <if test="isselfreformnotes != null" >
+        #{isselfreformnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isselfreform != null" >
+        #{isselfreform,jdbcType=CHAR},
+      </if>
+      <if test="isnotsafehousenotes != null" >
+        #{isnotsafehousenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotsafehouse != null" >
+        #{isnotsafehouse,jdbcType=CHAR},
+      </if>
+      <if test="isproblemcasenotes != null" >
+        #{isproblemcasenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isproblemcase != null" >
+        #{isproblemcase,jdbcType=CHAR},
+      </if>
+      <if test="issinglebuildingnotes != null" >
+        #{issinglebuildingnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="issinglebuilding != null" >
+        #{issinglebuilding,jdbcType=CHAR},
+      </if>
+      <if test="isnotsameofownernotes != null" >
+        #{isnotsameofownernotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotsameofowner != null" >
+        #{isnotsameofowner,jdbcType=CHAR},
+      </if>
+      <if test="isgenerationnotes != null" >
+        #{isgenerationnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isgeneration != null" >
+        #{isgeneration,jdbcType=CHAR},
+      </if>
+      <if test="isbadactionperson != null" >
+        #{isbadactionperson,jdbcType=CHAR},
+      </if>
+      <if test="isnotsamenotes != null" >
+        #{isnotsamenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotsameoffamilyinfo != null" >
+        #{isnotsameoffamilyinfo,jdbcType=CHAR},
+      </if>
+      <if test="dateduebignotes != null" >
+        #{dateduebignotes,jdbcType=VARCHAR},
+      </if>
+      <if test="istenantbiggerdatedue != null" >
+        #{istenantbiggerdatedue,jdbcType=CHAR},
+      </if>
+      <if test="importdefectsnotes != null" >
+        #{importdefectsnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isimportdefects != null" >
+        #{isimportdefects,jdbcType=CHAR},
+      </if>
+      <if test="islistingsalenotes != null" >
+        #{islistingsalenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="islistingsale != null" >
+        #{islistingsale,jdbcType=CHAR},
+      </if>
+      <if test="longtimenorecordnotes != null" >
+        #{longtimenorecordnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="longtimenorecord != null" >
+        #{longtimenorecord,jdbcType=CHAR},
+      </if>
+      <if test="otherpicaddr != null" >
+        #{otherpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="balconyaddr != null" >
+        #{balconyaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="roomaddr != null" >
+        #{roomaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="livingroomaddr != null" >
+        #{livingroomaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagedooraddr != null" >
+        #{mortgagedooraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="unitdooraddr != null" >
+        #{unitdooraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="districtdooraddr != null" >
+        #{districtdooraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="insidepicaddr != null" >
+        #{insidepicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="supmarketpicaddr != null" >
+        #{supmarketpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="subwaypicaddr != null" >
+        #{subwaypicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalpicaddr != null" >
+        #{hospitalpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolpicaddr != null" >
+        #{schoolpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="degreeroom != null" >
+        #{degreeroom,jdbcType=VARCHAR},
+      </if>
+      <if test="room != null" >
+        #{room,jdbcType=VARCHAR},
+      </if>
+      <if test="hall != null" >
+        #{hall,jdbcType=VARCHAR},
+      </if>
+      <if test="toilet != null" >
+        #{toilet,jdbcType=VARCHAR},
+      </if>
+      <if test="balcony != null" >
+        #{balcony,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgageview != null" >
+        #{mortgageview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="comments != null" >
+        #{comments,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.DelimortgageExample" resultType="java.lang.Integer" >
+    select count(*) from delimortgage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update delimortgage
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseaddressnotes != null" >
+        houseaddressnotes = #{record.houseaddressnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseaddressflg != null" >
+        houseaddressflg = #{record.houseaddressflg,jdbcType=CHAR},
+      </if>
+      <if test="record.otherdeveloper != null" >
+        otherdeveloper = #{record.otherdeveloper,jdbcType=VARCHAR},
+      </if>
+      <if test="record.developer != null" >
+        developer = #{record.developer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fallpopulation != null" >
+        fallpopulation = #{record.fallpopulation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.livepeople != null" >
+        livepeople = #{record.livepeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.livesize != null" >
+        livesize = #{record.livesize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areasize != null" >
+        areasize = #{record.areasize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insidesize != null" >
+        insidesize = #{record.insidesize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carhousesize != null" >
+        carhousesize = #{record.carhousesize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chrhousenotes != null" >
+        chrhousenotes = #{record.chrhousenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.havacarhouse != null" >
+        havacarhouse = #{record.havacarhouse,jdbcType=CHAR},
+      </if>
+      <if test="record.basementsize != null" >
+        basementsize = #{record.basementsize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isbasement != null" >
+        isbasement = #{record.isbasement,jdbcType=CHAR},
+      </if>
+      <if test="record.housestate != null" >
+        housestate = #{record.housestate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.follorpurpose != null" >
+        follorpurpose = #{record.follorpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismaritalpropertynotes != null" >
+        ismaritalpropertynotes = #{record.ismaritalpropertynotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismaritalproperty != null" >
+        ismaritalproperty = #{record.ismaritalproperty,jdbcType=CHAR},
+      </if>
+      <if test="record.floors != null" >
+        floors = #{record.floors,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberoflayers != null" >
+        numberoflayers = #{record.numberoflayers,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degreedecoration != null" >
+        degreedecoration = #{record.degreedecoration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseorientation != null" >
+        houseorientation = #{record.houseorientation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildingtype != null" >
+        buildingtype = #{record.buildingtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyhousedoc != null" >
+        buyhousedoc = #{record.buyhousedoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyhousedate != null" >
+        buyhousedate = #{record.buyhousedate,jdbcType=CHAR},
+      </if>
+      <if test="record.isrentoutdate2 != null" >
+        isrentoutdate2 = #{record.isrentoutdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isrentoutdate != null" >
+        isrentoutdate = #{record.isrentoutdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isrentout != null" >
+        isrentout = #{record.isrentout,jdbcType=CHAR},
+      </if>
+      <if test="record.iselevatorroom != null" >
+        iselevatorroom = #{record.iselevatorroom,jdbcType=CHAR},
+      </if>
+      <if test="record.issubwaynaer != null" >
+        issubwaynaer = #{record.issubwaynaer,jdbcType=CHAR},
+      </if>
+      <if test="record.ishospitalnear != null" >
+        ishospitalnear = #{record.ishospitalnear,jdbcType=CHAR},
+      </if>
+      <if test="record.isschoolnear != null" >
+        isschoolnear = #{record.isschoolnear,jdbcType=CHAR},
+      </if>
+      <if test="record.issupermarketnear != null" >
+        issupermarketnear = #{record.issupermarketnear,jdbcType=CHAR},
+      </if>
+      <if test="record.issoleresidence != null" >
+        issoleresidence = #{record.issoleresidence,jdbcType=CHAR},
+      </if>
+      <if test="record.historyrate != null" >
+        historyrate = #{record.historyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buyerfasttransprice != null" >
+        buyerfasttransprice = #{record.buyerfasttransprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sellersfasttransprice != null" >
+        sellersfasttransprice = #{record.sellersfasttransprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.hangingprice != null" >
+        hangingprice = #{record.hangingprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.currenthangingprice != null" >
+        currenthangingprice = #{record.currenthangingprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.houseunitprice != null" >
+        houseunitprice = #{record.houseunitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.housetotalprice != null" >
+        housetotalprice = #{record.housetotalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isjudgenotclearlynotes != null" >
+        isjudgenotclearlynotes = #{record.isjudgenotclearlynotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isjudgenotclearly != null" >
+        isjudgenotclearly = #{record.isjudgenotclearly,jdbcType=CHAR},
+      </if>
+      <if test="record.issalelimitnotes != null" >
+        issalelimitnotes = #{record.issalelimitnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issalelimit != null" >
+        issalelimit = #{record.issalelimit,jdbcType=CHAR},
+      </if>
+      <if test="record.isnotsameofhousenotes != null" >
+        isnotsameofhousenotes = #{record.isnotsameofhousenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isnotsameofhouse != null" >
+        isnotsameofhouse = #{record.isnotsameofhouse,jdbcType=CHAR},
+      </if>
+      <if test="record.isselfreformnotes != null" >
+        isselfreformnotes = #{record.isselfreformnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isselfreform != null" >
+        isselfreform = #{record.isselfreform,jdbcType=CHAR},
+      </if>
+      <if test="record.isnotsafehousenotes != null" >
+        isnotsafehousenotes = #{record.isnotsafehousenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isnotsafehouse != null" >
+        isnotsafehouse = #{record.isnotsafehouse,jdbcType=CHAR},
+      </if>
+      <if test="record.isproblemcasenotes != null" >
+        isproblemcasenotes = #{record.isproblemcasenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isproblemcase != null" >
+        isproblemcase = #{record.isproblemcase,jdbcType=CHAR},
+      </if>
+      <if test="record.issinglebuildingnotes != null" >
+        issinglebuildingnotes = #{record.issinglebuildingnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issinglebuilding != null" >
+        issinglebuilding = #{record.issinglebuilding,jdbcType=CHAR},
+      </if>
+      <if test="record.isnotsameofownernotes != null" >
+        isnotsameofownernotes = #{record.isnotsameofownernotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isnotsameofowner != null" >
+        isnotsameofowner = #{record.isnotsameofowner,jdbcType=CHAR},
+      </if>
+      <if test="record.isgenerationnotes != null" >
+        isgenerationnotes = #{record.isgenerationnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isgeneration != null" >
+        isgeneration = #{record.isgeneration,jdbcType=CHAR},
+      </if>
+      <if test="record.isbadactionperson != null" >
+        isbadactionperson = #{record.isbadactionperson,jdbcType=CHAR},
+      </if>
+      <if test="record.isnotsamenotes != null" >
+        isnotsamenotes = #{record.isnotsamenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isnotsameoffamilyinfo != null" >
+        isnotsameoffamilyinfo = #{record.isnotsameoffamilyinfo,jdbcType=CHAR},
+      </if>
+      <if test="record.dateduebignotes != null" >
+        dateduebignotes = #{record.dateduebignotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.istenantbiggerdatedue != null" >
+        istenantbiggerdatedue = #{record.istenantbiggerdatedue,jdbcType=CHAR},
+      </if>
+      <if test="record.importdefectsnotes != null" >
+        importdefectsnotes = #{record.importdefectsnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isimportdefects != null" >
+        isimportdefects = #{record.isimportdefects,jdbcType=CHAR},
+      </if>
+      <if test="record.islistingsalenotes != null" >
+        islistingsalenotes = #{record.islistingsalenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.islistingsale != null" >
+        islistingsale = #{record.islistingsale,jdbcType=CHAR},
+      </if>
+      <if test="record.longtimenorecordnotes != null" >
+        longtimenorecordnotes = #{record.longtimenorecordnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longtimenorecord != null" >
+        longtimenorecord = #{record.longtimenorecord,jdbcType=CHAR},
+      </if>
+      <if test="record.otherpicaddr != null" >
+        otherpicaddr = #{record.otherpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balconyaddr != null" >
+        balconyaddr = #{record.balconyaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roomaddr != null" >
+        roomaddr = #{record.roomaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.livingroomaddr != null" >
+        livingroomaddr = #{record.livingroomaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgagedooraddr != null" >
+        mortgagedooraddr = #{record.mortgagedooraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitdooraddr != null" >
+        unitdooraddr = #{record.unitdooraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtdooraddr != null" >
+        districtdooraddr = #{record.districtdooraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insidepicaddr != null" >
+        insidepicaddr = #{record.insidepicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supmarketpicaddr != null" >
+        supmarketpicaddr = #{record.supmarketpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subwaypicaddr != null" >
+        subwaypicaddr = #{record.subwaypicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hospitalpicaddr != null" >
+        hospitalpicaddr = #{record.hospitalpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolpicaddr != null" >
+        schoolpicaddr = #{record.schoolpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degreeroom != null" >
+        degreeroom = #{record.degreeroom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.room != null" >
+        room = #{record.room,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hall != null" >
+        hall = #{record.hall,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toilet != null" >
+        toilet = #{record.toilet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balcony != null" >
+        balcony = #{record.balcony,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgageview != null" >
+        mortgageview = #{record.mortgageview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.comments != null" >
+        comments = #{record.comments,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update delimortgage
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      houseaddressnotes = #{record.houseaddressnotes,jdbcType=VARCHAR},
+      houseaddressflg = #{record.houseaddressflg,jdbcType=CHAR},
+      otherdeveloper = #{record.otherdeveloper,jdbcType=VARCHAR},
+      developer = #{record.developer,jdbcType=VARCHAR},
+      fallpopulation = #{record.fallpopulation,jdbcType=VARCHAR},
+      livepeople = #{record.livepeople,jdbcType=VARCHAR},
+      livesize = #{record.livesize,jdbcType=VARCHAR},
+      areasize = #{record.areasize,jdbcType=VARCHAR},
+      insidesize = #{record.insidesize,jdbcType=VARCHAR},
+      carhousesize = #{record.carhousesize,jdbcType=VARCHAR},
+      chrhousenotes = #{record.chrhousenotes,jdbcType=VARCHAR},
+      havacarhouse = #{record.havacarhouse,jdbcType=CHAR},
+      basementsize = #{record.basementsize,jdbcType=VARCHAR},
+      isbasement = #{record.isbasement,jdbcType=CHAR},
+      housestate = #{record.housestate,jdbcType=VARCHAR},
+      follorpurpose = #{record.follorpurpose,jdbcType=VARCHAR},
+      ismaritalpropertynotes = #{record.ismaritalpropertynotes,jdbcType=VARCHAR},
+      ismaritalproperty = #{record.ismaritalproperty,jdbcType=CHAR},
+      floors = #{record.floors,jdbcType=VARCHAR},
+      numberoflayers = #{record.numberoflayers,jdbcType=VARCHAR},
+      degreedecoration = #{record.degreedecoration,jdbcType=VARCHAR},
+      houseorientation = #{record.houseorientation,jdbcType=VARCHAR},
+      buildingtype = #{record.buildingtype,jdbcType=VARCHAR},
+      buyhousedoc = #{record.buyhousedoc,jdbcType=VARCHAR},
+      buyhousedate = #{record.buyhousedate,jdbcType=CHAR},
+      isrentoutdate2 = #{record.isrentoutdate2,jdbcType=TIMESTAMP},
+      isrentoutdate = #{record.isrentoutdate,jdbcType=TIMESTAMP},
+      isrentout = #{record.isrentout,jdbcType=CHAR},
+      iselevatorroom = #{record.iselevatorroom,jdbcType=CHAR},
+      issubwaynaer = #{record.issubwaynaer,jdbcType=CHAR},
+      ishospitalnear = #{record.ishospitalnear,jdbcType=CHAR},
+      isschoolnear = #{record.isschoolnear,jdbcType=CHAR},
+      issupermarketnear = #{record.issupermarketnear,jdbcType=CHAR},
+      issoleresidence = #{record.issoleresidence,jdbcType=CHAR},
+      historyrate = #{record.historyrate,jdbcType=DECIMAL},
+      buyerfasttransprice = #{record.buyerfasttransprice,jdbcType=DECIMAL},
+      sellersfasttransprice = #{record.sellersfasttransprice,jdbcType=DECIMAL},
+      hangingprice = #{record.hangingprice,jdbcType=DECIMAL},
+      currenthangingprice = #{record.currenthangingprice,jdbcType=DECIMAL},
+      houseunitprice = #{record.houseunitprice,jdbcType=DECIMAL},
+      housetotalprice = #{record.housetotalprice,jdbcType=DECIMAL},
+      isjudgenotclearlynotes = #{record.isjudgenotclearlynotes,jdbcType=VARCHAR},
+      isjudgenotclearly = #{record.isjudgenotclearly,jdbcType=CHAR},
+      issalelimitnotes = #{record.issalelimitnotes,jdbcType=VARCHAR},
+      issalelimit = #{record.issalelimit,jdbcType=CHAR},
+      isnotsameofhousenotes = #{record.isnotsameofhousenotes,jdbcType=VARCHAR},
+      isnotsameofhouse = #{record.isnotsameofhouse,jdbcType=CHAR},
+      isselfreformnotes = #{record.isselfreformnotes,jdbcType=VARCHAR},
+      isselfreform = #{record.isselfreform,jdbcType=CHAR},
+      isnotsafehousenotes = #{record.isnotsafehousenotes,jdbcType=VARCHAR},
+      isnotsafehouse = #{record.isnotsafehouse,jdbcType=CHAR},
+      isproblemcasenotes = #{record.isproblemcasenotes,jdbcType=VARCHAR},
+      isproblemcase = #{record.isproblemcase,jdbcType=CHAR},
+      issinglebuildingnotes = #{record.issinglebuildingnotes,jdbcType=VARCHAR},
+      issinglebuilding = #{record.issinglebuilding,jdbcType=CHAR},
+      isnotsameofownernotes = #{record.isnotsameofownernotes,jdbcType=VARCHAR},
+      isnotsameofowner = #{record.isnotsameofowner,jdbcType=CHAR},
+      isgenerationnotes = #{record.isgenerationnotes,jdbcType=VARCHAR},
+      isgeneration = #{record.isgeneration,jdbcType=CHAR},
+      isbadactionperson = #{record.isbadactionperson,jdbcType=CHAR},
+      isnotsamenotes = #{record.isnotsamenotes,jdbcType=VARCHAR},
+      isnotsameoffamilyinfo = #{record.isnotsameoffamilyinfo,jdbcType=CHAR},
+      dateduebignotes = #{record.dateduebignotes,jdbcType=VARCHAR},
+      istenantbiggerdatedue = #{record.istenantbiggerdatedue,jdbcType=CHAR},
+      importdefectsnotes = #{record.importdefectsnotes,jdbcType=VARCHAR},
+      isimportdefects = #{record.isimportdefects,jdbcType=CHAR},
+      islistingsalenotes = #{record.islistingsalenotes,jdbcType=VARCHAR},
+      islistingsale = #{record.islistingsale,jdbcType=CHAR},
+      longtimenorecordnotes = #{record.longtimenorecordnotes,jdbcType=VARCHAR},
+      longtimenorecord = #{record.longtimenorecord,jdbcType=CHAR},
+      otherpicaddr = #{record.otherpicaddr,jdbcType=VARCHAR},
+      balconyaddr = #{record.balconyaddr,jdbcType=VARCHAR},
+      roomaddr = #{record.roomaddr,jdbcType=VARCHAR},
+      livingroomaddr = #{record.livingroomaddr,jdbcType=VARCHAR},
+      mortgagedooraddr = #{record.mortgagedooraddr,jdbcType=VARCHAR},
+      unitdooraddr = #{record.unitdooraddr,jdbcType=VARCHAR},
+      districtdooraddr = #{record.districtdooraddr,jdbcType=VARCHAR},
+      insidepicaddr = #{record.insidepicaddr,jdbcType=VARCHAR},
+      supmarketpicaddr = #{record.supmarketpicaddr,jdbcType=VARCHAR},
+      subwaypicaddr = #{record.subwaypicaddr,jdbcType=VARCHAR},
+      hospitalpicaddr = #{record.hospitalpicaddr,jdbcType=VARCHAR},
+      schoolpicaddr = #{record.schoolpicaddr,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      degreeroom = #{record.degreeroom,jdbcType=VARCHAR},
+      room = #{record.room,jdbcType=VARCHAR},
+      hall = #{record.hall,jdbcType=VARCHAR},
+      toilet = #{record.toilet,jdbcType=VARCHAR},
+      balcony = #{record.balcony,jdbcType=VARCHAR},
+      mortgageview = #{record.mortgageview,jdbcType=LONGVARCHAR},
+      comments = #{record.comments,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update delimortgage
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      houseaddressnotes = #{record.houseaddressnotes,jdbcType=VARCHAR},
+      houseaddressflg = #{record.houseaddressflg,jdbcType=CHAR},
+      otherdeveloper = #{record.otherdeveloper,jdbcType=VARCHAR},
+      developer = #{record.developer,jdbcType=VARCHAR},
+      fallpopulation = #{record.fallpopulation,jdbcType=VARCHAR},
+      livepeople = #{record.livepeople,jdbcType=VARCHAR},
+      livesize = #{record.livesize,jdbcType=VARCHAR},
+      areasize = #{record.areasize,jdbcType=VARCHAR},
+      insidesize = #{record.insidesize,jdbcType=VARCHAR},
+      carhousesize = #{record.carhousesize,jdbcType=VARCHAR},
+      chrhousenotes = #{record.chrhousenotes,jdbcType=VARCHAR},
+      havacarhouse = #{record.havacarhouse,jdbcType=CHAR},
+      basementsize = #{record.basementsize,jdbcType=VARCHAR},
+      isbasement = #{record.isbasement,jdbcType=CHAR},
+      housestate = #{record.housestate,jdbcType=VARCHAR},
+      follorpurpose = #{record.follorpurpose,jdbcType=VARCHAR},
+      ismaritalpropertynotes = #{record.ismaritalpropertynotes,jdbcType=VARCHAR},
+      ismaritalproperty = #{record.ismaritalproperty,jdbcType=CHAR},
+      floors = #{record.floors,jdbcType=VARCHAR},
+      numberoflayers = #{record.numberoflayers,jdbcType=VARCHAR},
+      degreedecoration = #{record.degreedecoration,jdbcType=VARCHAR},
+      houseorientation = #{record.houseorientation,jdbcType=VARCHAR},
+      buildingtype = #{record.buildingtype,jdbcType=VARCHAR},
+      buyhousedoc = #{record.buyhousedoc,jdbcType=VARCHAR},
+      buyhousedate = #{record.buyhousedate,jdbcType=CHAR},
+      isrentoutdate2 = #{record.isrentoutdate2,jdbcType=TIMESTAMP},
+      isrentoutdate = #{record.isrentoutdate,jdbcType=TIMESTAMP},
+      isrentout = #{record.isrentout,jdbcType=CHAR},
+      iselevatorroom = #{record.iselevatorroom,jdbcType=CHAR},
+      issubwaynaer = #{record.issubwaynaer,jdbcType=CHAR},
+      ishospitalnear = #{record.ishospitalnear,jdbcType=CHAR},
+      isschoolnear = #{record.isschoolnear,jdbcType=CHAR},
+      issupermarketnear = #{record.issupermarketnear,jdbcType=CHAR},
+      issoleresidence = #{record.issoleresidence,jdbcType=CHAR},
+      historyrate = #{record.historyrate,jdbcType=DECIMAL},
+      buyerfasttransprice = #{record.buyerfasttransprice,jdbcType=DECIMAL},
+      sellersfasttransprice = #{record.sellersfasttransprice,jdbcType=DECIMAL},
+      hangingprice = #{record.hangingprice,jdbcType=DECIMAL},
+      currenthangingprice = #{record.currenthangingprice,jdbcType=DECIMAL},
+      houseunitprice = #{record.houseunitprice,jdbcType=DECIMAL},
+      housetotalprice = #{record.housetotalprice,jdbcType=DECIMAL},
+      isjudgenotclearlynotes = #{record.isjudgenotclearlynotes,jdbcType=VARCHAR},
+      isjudgenotclearly = #{record.isjudgenotclearly,jdbcType=CHAR},
+      issalelimitnotes = #{record.issalelimitnotes,jdbcType=VARCHAR},
+      issalelimit = #{record.issalelimit,jdbcType=CHAR},
+      isnotsameofhousenotes = #{record.isnotsameofhousenotes,jdbcType=VARCHAR},
+      isnotsameofhouse = #{record.isnotsameofhouse,jdbcType=CHAR},
+      isselfreformnotes = #{record.isselfreformnotes,jdbcType=VARCHAR},
+      isselfreform = #{record.isselfreform,jdbcType=CHAR},
+      isnotsafehousenotes = #{record.isnotsafehousenotes,jdbcType=VARCHAR},
+      isnotsafehouse = #{record.isnotsafehouse,jdbcType=CHAR},
+      isproblemcasenotes = #{record.isproblemcasenotes,jdbcType=VARCHAR},
+      isproblemcase = #{record.isproblemcase,jdbcType=CHAR},
+      issinglebuildingnotes = #{record.issinglebuildingnotes,jdbcType=VARCHAR},
+      issinglebuilding = #{record.issinglebuilding,jdbcType=CHAR},
+      isnotsameofownernotes = #{record.isnotsameofownernotes,jdbcType=VARCHAR},
+      isnotsameofowner = #{record.isnotsameofowner,jdbcType=CHAR},
+      isgenerationnotes = #{record.isgenerationnotes,jdbcType=VARCHAR},
+      isgeneration = #{record.isgeneration,jdbcType=CHAR},
+      isbadactionperson = #{record.isbadactionperson,jdbcType=CHAR},
+      isnotsamenotes = #{record.isnotsamenotes,jdbcType=VARCHAR},
+      isnotsameoffamilyinfo = #{record.isnotsameoffamilyinfo,jdbcType=CHAR},
+      dateduebignotes = #{record.dateduebignotes,jdbcType=VARCHAR},
+      istenantbiggerdatedue = #{record.istenantbiggerdatedue,jdbcType=CHAR},
+      importdefectsnotes = #{record.importdefectsnotes,jdbcType=VARCHAR},
+      isimportdefects = #{record.isimportdefects,jdbcType=CHAR},
+      islistingsalenotes = #{record.islistingsalenotes,jdbcType=VARCHAR},
+      islistingsale = #{record.islistingsale,jdbcType=CHAR},
+      longtimenorecordnotes = #{record.longtimenorecordnotes,jdbcType=VARCHAR},
+      longtimenorecord = #{record.longtimenorecord,jdbcType=CHAR},
+      otherpicaddr = #{record.otherpicaddr,jdbcType=VARCHAR},
+      balconyaddr = #{record.balconyaddr,jdbcType=VARCHAR},
+      roomaddr = #{record.roomaddr,jdbcType=VARCHAR},
+      livingroomaddr = #{record.livingroomaddr,jdbcType=VARCHAR},
+      mortgagedooraddr = #{record.mortgagedooraddr,jdbcType=VARCHAR},
+      unitdooraddr = #{record.unitdooraddr,jdbcType=VARCHAR},
+      districtdooraddr = #{record.districtdooraddr,jdbcType=VARCHAR},
+      insidepicaddr = #{record.insidepicaddr,jdbcType=VARCHAR},
+      supmarketpicaddr = #{record.supmarketpicaddr,jdbcType=VARCHAR},
+      subwaypicaddr = #{record.subwaypicaddr,jdbcType=VARCHAR},
+      hospitalpicaddr = #{record.hospitalpicaddr,jdbcType=VARCHAR},
+      schoolpicaddr = #{record.schoolpicaddr,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      degreeroom = #{record.degreeroom,jdbcType=VARCHAR},
+      room = #{record.room,jdbcType=VARCHAR},
+      hall = #{record.hall,jdbcType=VARCHAR},
+      toilet = #{record.toilet,jdbcType=VARCHAR},
+      balcony = #{record.balcony,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Delimortgage" >
+    update delimortgage
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddressnotes != null" >
+        houseaddressnotes = #{houseaddressnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="houseaddressflg != null" >
+        houseaddressflg = #{houseaddressflg,jdbcType=CHAR},
+      </if>
+      <if test="otherdeveloper != null" >
+        otherdeveloper = #{otherdeveloper,jdbcType=VARCHAR},
+      </if>
+      <if test="developer != null" >
+        developer = #{developer,jdbcType=VARCHAR},
+      </if>
+      <if test="fallpopulation != null" >
+        fallpopulation = #{fallpopulation,jdbcType=VARCHAR},
+      </if>
+      <if test="livepeople != null" >
+        livepeople = #{livepeople,jdbcType=VARCHAR},
+      </if>
+      <if test="livesize != null" >
+        livesize = #{livesize,jdbcType=VARCHAR},
+      </if>
+      <if test="areasize != null" >
+        areasize = #{areasize,jdbcType=VARCHAR},
+      </if>
+      <if test="insidesize != null" >
+        insidesize = #{insidesize,jdbcType=VARCHAR},
+      </if>
+      <if test="carhousesize != null" >
+        carhousesize = #{carhousesize,jdbcType=VARCHAR},
+      </if>
+      <if test="chrhousenotes != null" >
+        chrhousenotes = #{chrhousenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="havacarhouse != null" >
+        havacarhouse = #{havacarhouse,jdbcType=CHAR},
+      </if>
+      <if test="basementsize != null" >
+        basementsize = #{basementsize,jdbcType=VARCHAR},
+      </if>
+      <if test="isbasement != null" >
+        isbasement = #{isbasement,jdbcType=CHAR},
+      </if>
+      <if test="housestate != null" >
+        housestate = #{housestate,jdbcType=VARCHAR},
+      </if>
+      <if test="follorpurpose != null" >
+        follorpurpose = #{follorpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="ismaritalpropertynotes != null" >
+        ismaritalpropertynotes = #{ismaritalpropertynotes,jdbcType=VARCHAR},
+      </if>
+      <if test="ismaritalproperty != null" >
+        ismaritalproperty = #{ismaritalproperty,jdbcType=CHAR},
+      </if>
+      <if test="floors != null" >
+        floors = #{floors,jdbcType=VARCHAR},
+      </if>
+      <if test="numberoflayers != null" >
+        numberoflayers = #{numberoflayers,jdbcType=VARCHAR},
+      </if>
+      <if test="degreedecoration != null" >
+        degreedecoration = #{degreedecoration,jdbcType=VARCHAR},
+      </if>
+      <if test="houseorientation != null" >
+        houseorientation = #{houseorientation,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingtype != null" >
+        buildingtype = #{buildingtype,jdbcType=VARCHAR},
+      </if>
+      <if test="buyhousedoc != null" >
+        buyhousedoc = #{buyhousedoc,jdbcType=VARCHAR},
+      </if>
+      <if test="buyhousedate != null" >
+        buyhousedate = #{buyhousedate,jdbcType=CHAR},
+      </if>
+      <if test="isrentoutdate2 != null" >
+        isrentoutdate2 = #{isrentoutdate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrentoutdate != null" >
+        isrentoutdate = #{isrentoutdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrentout != null" >
+        isrentout = #{isrentout,jdbcType=CHAR},
+      </if>
+      <if test="iselevatorroom != null" >
+        iselevatorroom = #{iselevatorroom,jdbcType=CHAR},
+      </if>
+      <if test="issubwaynaer != null" >
+        issubwaynaer = #{issubwaynaer,jdbcType=CHAR},
+      </if>
+      <if test="ishospitalnear != null" >
+        ishospitalnear = #{ishospitalnear,jdbcType=CHAR},
+      </if>
+      <if test="isschoolnear != null" >
+        isschoolnear = #{isschoolnear,jdbcType=CHAR},
+      </if>
+      <if test="issupermarketnear != null" >
+        issupermarketnear = #{issupermarketnear,jdbcType=CHAR},
+      </if>
+      <if test="issoleresidence != null" >
+        issoleresidence = #{issoleresidence,jdbcType=CHAR},
+      </if>
+      <if test="historyrate != null" >
+        historyrate = #{historyrate,jdbcType=DECIMAL},
+      </if>
+      <if test="buyerfasttransprice != null" >
+        buyerfasttransprice = #{buyerfasttransprice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellersfasttransprice != null" >
+        sellersfasttransprice = #{sellersfasttransprice,jdbcType=DECIMAL},
+      </if>
+      <if test="hangingprice != null" >
+        hangingprice = #{hangingprice,jdbcType=DECIMAL},
+      </if>
+      <if test="currenthangingprice != null" >
+        currenthangingprice = #{currenthangingprice,jdbcType=DECIMAL},
+      </if>
+      <if test="houseunitprice != null" >
+        houseunitprice = #{houseunitprice,jdbcType=DECIMAL},
+      </if>
+      <if test="housetotalprice != null" >
+        housetotalprice = #{housetotalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="isjudgenotclearlynotes != null" >
+        isjudgenotclearlynotes = #{isjudgenotclearlynotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isjudgenotclearly != null" >
+        isjudgenotclearly = #{isjudgenotclearly,jdbcType=CHAR},
+      </if>
+      <if test="issalelimitnotes != null" >
+        issalelimitnotes = #{issalelimitnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="issalelimit != null" >
+        issalelimit = #{issalelimit,jdbcType=CHAR},
+      </if>
+      <if test="isnotsameofhousenotes != null" >
+        isnotsameofhousenotes = #{isnotsameofhousenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotsameofhouse != null" >
+        isnotsameofhouse = #{isnotsameofhouse,jdbcType=CHAR},
+      </if>
+      <if test="isselfreformnotes != null" >
+        isselfreformnotes = #{isselfreformnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isselfreform != null" >
+        isselfreform = #{isselfreform,jdbcType=CHAR},
+      </if>
+      <if test="isnotsafehousenotes != null" >
+        isnotsafehousenotes = #{isnotsafehousenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotsafehouse != null" >
+        isnotsafehouse = #{isnotsafehouse,jdbcType=CHAR},
+      </if>
+      <if test="isproblemcasenotes != null" >
+        isproblemcasenotes = #{isproblemcasenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isproblemcase != null" >
+        isproblemcase = #{isproblemcase,jdbcType=CHAR},
+      </if>
+      <if test="issinglebuildingnotes != null" >
+        issinglebuildingnotes = #{issinglebuildingnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="issinglebuilding != null" >
+        issinglebuilding = #{issinglebuilding,jdbcType=CHAR},
+      </if>
+      <if test="isnotsameofownernotes != null" >
+        isnotsameofownernotes = #{isnotsameofownernotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotsameofowner != null" >
+        isnotsameofowner = #{isnotsameofowner,jdbcType=CHAR},
+      </if>
+      <if test="isgenerationnotes != null" >
+        isgenerationnotes = #{isgenerationnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isgeneration != null" >
+        isgeneration = #{isgeneration,jdbcType=CHAR},
+      </if>
+      <if test="isbadactionperson != null" >
+        isbadactionperson = #{isbadactionperson,jdbcType=CHAR},
+      </if>
+      <if test="isnotsamenotes != null" >
+        isnotsamenotes = #{isnotsamenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotsameoffamilyinfo != null" >
+        isnotsameoffamilyinfo = #{isnotsameoffamilyinfo,jdbcType=CHAR},
+      </if>
+      <if test="dateduebignotes != null" >
+        dateduebignotes = #{dateduebignotes,jdbcType=VARCHAR},
+      </if>
+      <if test="istenantbiggerdatedue != null" >
+        istenantbiggerdatedue = #{istenantbiggerdatedue,jdbcType=CHAR},
+      </if>
+      <if test="importdefectsnotes != null" >
+        importdefectsnotes = #{importdefectsnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="isimportdefects != null" >
+        isimportdefects = #{isimportdefects,jdbcType=CHAR},
+      </if>
+      <if test="islistingsalenotes != null" >
+        islistingsalenotes = #{islistingsalenotes,jdbcType=VARCHAR},
+      </if>
+      <if test="islistingsale != null" >
+        islistingsale = #{islistingsale,jdbcType=CHAR},
+      </if>
+      <if test="longtimenorecordnotes != null" >
+        longtimenorecordnotes = #{longtimenorecordnotes,jdbcType=VARCHAR},
+      </if>
+      <if test="longtimenorecord != null" >
+        longtimenorecord = #{longtimenorecord,jdbcType=CHAR},
+      </if>
+      <if test="otherpicaddr != null" >
+        otherpicaddr = #{otherpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="balconyaddr != null" >
+        balconyaddr = #{balconyaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="roomaddr != null" >
+        roomaddr = #{roomaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="livingroomaddr != null" >
+        livingroomaddr = #{livingroomaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgagedooraddr != null" >
+        mortgagedooraddr = #{mortgagedooraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="unitdooraddr != null" >
+        unitdooraddr = #{unitdooraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="districtdooraddr != null" >
+        districtdooraddr = #{districtdooraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="insidepicaddr != null" >
+        insidepicaddr = #{insidepicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="supmarketpicaddr != null" >
+        supmarketpicaddr = #{supmarketpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="subwaypicaddr != null" >
+        subwaypicaddr = #{subwaypicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalpicaddr != null" >
+        hospitalpicaddr = #{hospitalpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolpicaddr != null" >
+        schoolpicaddr = #{schoolpicaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="degreeroom != null" >
+        degreeroom = #{degreeroom,jdbcType=VARCHAR},
+      </if>
+      <if test="room != null" >
+        room = #{room,jdbcType=VARCHAR},
+      </if>
+      <if test="hall != null" >
+        hall = #{hall,jdbcType=VARCHAR},
+      </if>
+      <if test="toilet != null" >
+        toilet = #{toilet,jdbcType=VARCHAR},
+      </if>
+      <if test="balcony != null" >
+        balcony = #{balcony,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgageview != null" >
+        mortgageview = #{mortgageview,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="comments != null" >
+        comments = #{comments,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.grape.model.db.Delimortgage" >
+    update delimortgage
+    set workid = #{workid,jdbcType=VARCHAR},
+      houseaddressnotes = #{houseaddressnotes,jdbcType=VARCHAR},
+      houseaddressflg = #{houseaddressflg,jdbcType=CHAR},
+      otherdeveloper = #{otherdeveloper,jdbcType=VARCHAR},
+      developer = #{developer,jdbcType=VARCHAR},
+      fallpopulation = #{fallpopulation,jdbcType=VARCHAR},
+      livepeople = #{livepeople,jdbcType=VARCHAR},
+      livesize = #{livesize,jdbcType=VARCHAR},
+      areasize = #{areasize,jdbcType=VARCHAR},
+      insidesize = #{insidesize,jdbcType=VARCHAR},
+      carhousesize = #{carhousesize,jdbcType=VARCHAR},
+      chrhousenotes = #{chrhousenotes,jdbcType=VARCHAR},
+      havacarhouse = #{havacarhouse,jdbcType=CHAR},
+      basementsize = #{basementsize,jdbcType=VARCHAR},
+      isbasement = #{isbasement,jdbcType=CHAR},
+      housestate = #{housestate,jdbcType=VARCHAR},
+      follorpurpose = #{follorpurpose,jdbcType=VARCHAR},
+      ismaritalpropertynotes = #{ismaritalpropertynotes,jdbcType=VARCHAR},
+      ismaritalproperty = #{ismaritalproperty,jdbcType=CHAR},
+      floors = #{floors,jdbcType=VARCHAR},
+      numberoflayers = #{numberoflayers,jdbcType=VARCHAR},
+      degreedecoration = #{degreedecoration,jdbcType=VARCHAR},
+      houseorientation = #{houseorientation,jdbcType=VARCHAR},
+      buildingtype = #{buildingtype,jdbcType=VARCHAR},
+      buyhousedoc = #{buyhousedoc,jdbcType=VARCHAR},
+      buyhousedate = #{buyhousedate,jdbcType=CHAR},
+      isrentoutdate2 = #{isrentoutdate2,jdbcType=TIMESTAMP},
+      isrentoutdate = #{isrentoutdate,jdbcType=TIMESTAMP},
+      isrentout = #{isrentout,jdbcType=CHAR},
+      iselevatorroom = #{iselevatorroom,jdbcType=CHAR},
+      issubwaynaer = #{issubwaynaer,jdbcType=CHAR},
+      ishospitalnear = #{ishospitalnear,jdbcType=CHAR},
+      isschoolnear = #{isschoolnear,jdbcType=CHAR},
+      issupermarketnear = #{issupermarketnear,jdbcType=CHAR},
+      issoleresidence = #{issoleresidence,jdbcType=CHAR},
+      historyrate = #{historyrate,jdbcType=DECIMAL},
+      buyerfasttransprice = #{buyerfasttransprice,jdbcType=DECIMAL},
+      sellersfasttransprice = #{sellersfasttransprice,jdbcType=DECIMAL},
+      hangingprice = #{hangingprice,jdbcType=DECIMAL},
+      currenthangingprice = #{currenthangingprice,jdbcType=DECIMAL},
+      houseunitprice = #{houseunitprice,jdbcType=DECIMAL},
+      housetotalprice = #{housetotalprice,jdbcType=DECIMAL},
+      isjudgenotclearlynotes = #{isjudgenotclearlynotes,jdbcType=VARCHAR},
+      isjudgenotclearly = #{isjudgenotclearly,jdbcType=CHAR},
+      issalelimitnotes = #{issalelimitnotes,jdbcType=VARCHAR},
+      issalelimit = #{issalelimit,jdbcType=CHAR},
+      isnotsameofhousenotes = #{isnotsameofhousenotes,jdbcType=VARCHAR},
+      isnotsameofhouse = #{isnotsameofhouse,jdbcType=CHAR},
+      isselfreformnotes = #{isselfreformnotes,jdbcType=VARCHAR},
+      isselfreform = #{isselfreform,jdbcType=CHAR},
+      isnotsafehousenotes = #{isnotsafehousenotes,jdbcType=VARCHAR},
+      isnotsafehouse = #{isnotsafehouse,jdbcType=CHAR},
+      isproblemcasenotes = #{isproblemcasenotes,jdbcType=VARCHAR},
+      isproblemcase = #{isproblemcase,jdbcType=CHAR},
+      issinglebuildingnotes = #{issinglebuildingnotes,jdbcType=VARCHAR},
+      issinglebuilding = #{issinglebuilding,jdbcType=CHAR},
+      isnotsameofownernotes = #{isnotsameofownernotes,jdbcType=VARCHAR},
+      isnotsameofowner = #{isnotsameofowner,jdbcType=CHAR},
+      isgenerationnotes = #{isgenerationnotes,jdbcType=VARCHAR},
+      isgeneration = #{isgeneration,jdbcType=CHAR},
+      isbadactionperson = #{isbadactionperson,jdbcType=CHAR},
+      isnotsamenotes = #{isnotsamenotes,jdbcType=VARCHAR},
+      isnotsameoffamilyinfo = #{isnotsameoffamilyinfo,jdbcType=CHAR},
+      dateduebignotes = #{dateduebignotes,jdbcType=VARCHAR},
+      istenantbiggerdatedue = #{istenantbiggerdatedue,jdbcType=CHAR},
+      importdefectsnotes = #{importdefectsnotes,jdbcType=VARCHAR},
+      isimportdefects = #{isimportdefects,jdbcType=CHAR},
+      islistingsalenotes = #{islistingsalenotes,jdbcType=VARCHAR},
+      islistingsale = #{islistingsale,jdbcType=CHAR},
+      longtimenorecordnotes = #{longtimenorecordnotes,jdbcType=VARCHAR},
+      longtimenorecord = #{longtimenorecord,jdbcType=CHAR},
+      otherpicaddr = #{otherpicaddr,jdbcType=VARCHAR},
+      balconyaddr = #{balconyaddr,jdbcType=VARCHAR},
+      roomaddr = #{roomaddr,jdbcType=VARCHAR},
+      livingroomaddr = #{livingroomaddr,jdbcType=VARCHAR},
+      mortgagedooraddr = #{mortgagedooraddr,jdbcType=VARCHAR},
+      unitdooraddr = #{unitdooraddr,jdbcType=VARCHAR},
+      districtdooraddr = #{districtdooraddr,jdbcType=VARCHAR},
+      insidepicaddr = #{insidepicaddr,jdbcType=VARCHAR},
+      supmarketpicaddr = #{supmarketpicaddr,jdbcType=VARCHAR},
+      subwaypicaddr = #{subwaypicaddr,jdbcType=VARCHAR},
+      hospitalpicaddr = #{hospitalpicaddr,jdbcType=VARCHAR},
+      schoolpicaddr = #{schoolpicaddr,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      degreeroom = #{degreeroom,jdbcType=VARCHAR},
+      room = #{room,jdbcType=VARCHAR},
+      hall = #{hall,jdbcType=VARCHAR},
+      toilet = #{toilet,jdbcType=VARCHAR},
+      balcony = #{balcony,jdbcType=VARCHAR},
+      mortgageview = #{mortgageview,jdbcType=LONGVARCHAR},
+      comments = #{comments,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Delimortgage" >
+    update delimortgage
+    set workid = #{workid,jdbcType=VARCHAR},
+      houseaddressnotes = #{houseaddressnotes,jdbcType=VARCHAR},
+      houseaddressflg = #{houseaddressflg,jdbcType=CHAR},
+      otherdeveloper = #{otherdeveloper,jdbcType=VARCHAR},
+      developer = #{developer,jdbcType=VARCHAR},
+      fallpopulation = #{fallpopulation,jdbcType=VARCHAR},
+      livepeople = #{livepeople,jdbcType=VARCHAR},
+      livesize = #{livesize,jdbcType=VARCHAR},
+      areasize = #{areasize,jdbcType=VARCHAR},
+      insidesize = #{insidesize,jdbcType=VARCHAR},
+      carhousesize = #{carhousesize,jdbcType=VARCHAR},
+      chrhousenotes = #{chrhousenotes,jdbcType=VARCHAR},
+      havacarhouse = #{havacarhouse,jdbcType=CHAR},
+      basementsize = #{basementsize,jdbcType=VARCHAR},
+      isbasement = #{isbasement,jdbcType=CHAR},
+      housestate = #{housestate,jdbcType=VARCHAR},
+      follorpurpose = #{follorpurpose,jdbcType=VARCHAR},
+      ismaritalpropertynotes = #{ismaritalpropertynotes,jdbcType=VARCHAR},
+      ismaritalproperty = #{ismaritalproperty,jdbcType=CHAR},
+      floors = #{floors,jdbcType=VARCHAR},
+      numberoflayers = #{numberoflayers,jdbcType=VARCHAR},
+      degreedecoration = #{degreedecoration,jdbcType=VARCHAR},
+      houseorientation = #{houseorientation,jdbcType=VARCHAR},
+      buildingtype = #{buildingtype,jdbcType=VARCHAR},
+      buyhousedoc = #{buyhousedoc,jdbcType=VARCHAR},
+      buyhousedate = #{buyhousedate,jdbcType=CHAR},
+      isrentoutdate2 = #{isrentoutdate2,jdbcType=TIMESTAMP},
+      isrentoutdate = #{isrentoutdate,jdbcType=TIMESTAMP},
+      isrentout = #{isrentout,jdbcType=CHAR},
+      iselevatorroom = #{iselevatorroom,jdbcType=CHAR},
+      issubwaynaer = #{issubwaynaer,jdbcType=CHAR},
+      ishospitalnear = #{ishospitalnear,jdbcType=CHAR},
+      isschoolnear = #{isschoolnear,jdbcType=CHAR},
+      issupermarketnear = #{issupermarketnear,jdbcType=CHAR},
+      issoleresidence = #{issoleresidence,jdbcType=CHAR},
+      historyrate = #{historyrate,jdbcType=DECIMAL},
+      buyerfasttransprice = #{buyerfasttransprice,jdbcType=DECIMAL},
+      sellersfasttransprice = #{sellersfasttransprice,jdbcType=DECIMAL},
+      hangingprice = #{hangingprice,jdbcType=DECIMAL},
+      currenthangingprice = #{currenthangingprice,jdbcType=DECIMAL},
+      houseunitprice = #{houseunitprice,jdbcType=DECIMAL},
+      housetotalprice = #{housetotalprice,jdbcType=DECIMAL},
+      isjudgenotclearlynotes = #{isjudgenotclearlynotes,jdbcType=VARCHAR},
+      isjudgenotclearly = #{isjudgenotclearly,jdbcType=CHAR},
+      issalelimitnotes = #{issalelimitnotes,jdbcType=VARCHAR},
+      issalelimit = #{issalelimit,jdbcType=CHAR},
+      isnotsameofhousenotes = #{isnotsameofhousenotes,jdbcType=VARCHAR},
+      isnotsameofhouse = #{isnotsameofhouse,jdbcType=CHAR},
+      isselfreformnotes = #{isselfreformnotes,jdbcType=VARCHAR},
+      isselfreform = #{isselfreform,jdbcType=CHAR},
+      isnotsafehousenotes = #{isnotsafehousenotes,jdbcType=VARCHAR},
+      isnotsafehouse = #{isnotsafehouse,jdbcType=CHAR},
+      isproblemcasenotes = #{isproblemcasenotes,jdbcType=VARCHAR},
+      isproblemcase = #{isproblemcase,jdbcType=CHAR},
+      issinglebuildingnotes = #{issinglebuildingnotes,jdbcType=VARCHAR},
+      issinglebuilding = #{issinglebuilding,jdbcType=CHAR},
+      isnotsameofownernotes = #{isnotsameofownernotes,jdbcType=VARCHAR},
+      isnotsameofowner = #{isnotsameofowner,jdbcType=CHAR},
+      isgenerationnotes = #{isgenerationnotes,jdbcType=VARCHAR},
+      isgeneration = #{isgeneration,jdbcType=CHAR},
+      isbadactionperson = #{isbadactionperson,jdbcType=CHAR},
+      isnotsamenotes = #{isnotsamenotes,jdbcType=VARCHAR},
+      isnotsameoffamilyinfo = #{isnotsameoffamilyinfo,jdbcType=CHAR},
+      dateduebignotes = #{dateduebignotes,jdbcType=VARCHAR},
+      istenantbiggerdatedue = #{istenantbiggerdatedue,jdbcType=CHAR},
+      importdefectsnotes = #{importdefectsnotes,jdbcType=VARCHAR},
+      isimportdefects = #{isimportdefects,jdbcType=CHAR},
+      islistingsalenotes = #{islistingsalenotes,jdbcType=VARCHAR},
+      islistingsale = #{islistingsale,jdbcType=CHAR},
+      longtimenorecordnotes = #{longtimenorecordnotes,jdbcType=VARCHAR},
+      longtimenorecord = #{longtimenorecord,jdbcType=CHAR},
+      otherpicaddr = #{otherpicaddr,jdbcType=VARCHAR},
+      balconyaddr = #{balconyaddr,jdbcType=VARCHAR},
+      roomaddr = #{roomaddr,jdbcType=VARCHAR},
+      livingroomaddr = #{livingroomaddr,jdbcType=VARCHAR},
+      mortgagedooraddr = #{mortgagedooraddr,jdbcType=VARCHAR},
+      unitdooraddr = #{unitdooraddr,jdbcType=VARCHAR},
+      districtdooraddr = #{districtdooraddr,jdbcType=VARCHAR},
+      insidepicaddr = #{insidepicaddr,jdbcType=VARCHAR},
+      supmarketpicaddr = #{supmarketpicaddr,jdbcType=VARCHAR},
+      subwaypicaddr = #{subwaypicaddr,jdbcType=VARCHAR},
+      hospitalpicaddr = #{hospitalpicaddr,jdbcType=VARCHAR},
+      schoolpicaddr = #{schoolpicaddr,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      degreeroom = #{degreeroom,jdbcType=VARCHAR},
+      room = #{room,jdbcType=VARCHAR},
+      hall = #{hall,jdbcType=VARCHAR},
+      toilet = #{toilet,jdbcType=VARCHAR},
+      balcony = #{balcony,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

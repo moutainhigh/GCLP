@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ApplyinfoofcomMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Applyinfoofcom" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <id column="socialcreditcode" property="socialcreditcode" jdbcType="VARCHAR" />
+    <result column="applyertype" property="applyertype" jdbcType="VARCHAR" />
+    <result column="applymainbody" property="applymainbody" jdbcType="VARCHAR" />
+    <result column="orgname" property="orgname" jdbcType="VARCHAR" />
+    <result column="managetype" property="managetype" jdbcType="VARCHAR" />
+    <result column="juridical" property="juridical" jdbcType="VARCHAR" />
+    <result column="comstartdate" property="comstartdate" jdbcType="TIMESTAMP" />
+    <result column="comenddate" property="comenddate" jdbcType="TIMESTAMP" />
+    <result column="registcapital" property="registcapital" jdbcType="DECIMAL" />
+    <result column="contricapital" property="contricapital" jdbcType="DECIMAL" />
+    <result column="comaddress" property="comaddress" jdbcType="VARCHAR" />
+    <result column="comaddressarea" property="comaddressarea" jdbcType="VARCHAR" />
+    <result column="comaddresscity" property="comaddresscity" jdbcType="VARCHAR" />
+    <result column="comaddressprovince" property="comaddressprovince" jdbcType="VARCHAR" />
+    <result column="realcomaddress" property="realcomaddress" jdbcType="VARCHAR" />
+    <result column="realcomaddressarea" property="realcomaddressarea" jdbcType="VARCHAR" />
+    <result column="realcomaddresscity" property="realcomaddresscity" jdbcType="VARCHAR" />
+    <result column="realcomaddressprovince" property="realcomaddressprovince" jdbcType="VARCHAR" />
+    <result column="managearea" property="managearea" jdbcType="VARCHAR" />
+    <result column="industrysecond" property="industrysecond" jdbcType="VARCHAR" />
+    <result column="industryfirst" property="industryfirst" jdbcType="VARCHAR" />
+    <result column="mianbusiness" property="mianbusiness" jdbcType="VARCHAR" />
+    <result column="mainsupplier" property="mainsupplier" jdbcType="VARCHAR" />
+    <result column="maincustomer" property="maincustomer" jdbcType="VARCHAR" />
+    <result column="shareremark" property="shareremark" jdbcType="VARCHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, socialcreditcode, applyertype, applymainbody, orgname, managetype, juridical, 
+    comstartdate, comenddate, registcapital, contricapital, comaddress, comaddressarea, 
+    comaddresscity, comaddressprovince, realcomaddress, realcomaddressarea, realcomaddresscity, 
+    realcomaddressprovince, managearea, industrysecond, industryfirst, mianbusiness, 
+    mainsupplier, maincustomer, shareremark, chgtl, chgdt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ApplyinfoofcomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from applyinfoofcom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from applyinfoofcom
+    where workid = #{workid,jdbcType=VARCHAR}
+      and socialcreditcode = #{socialcreditcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from applyinfoofcom
+    where workid = #{workid,jdbcType=VARCHAR}
+      and socialcreditcode = #{socialcreditcode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ApplyinfoofcomExample" >
+    delete from applyinfoofcom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Applyinfoofcom" >
+    insert into applyinfoofcom (workid, socialcreditcode, applyertype, 
+      applymainbody, orgname, managetype, 
+      juridical, comstartdate, comenddate, 
+      registcapital, contricapital, comaddress, 
+      comaddressarea, comaddresscity, comaddressprovince, 
+      realcomaddress, realcomaddressarea, realcomaddresscity, 
+      realcomaddressprovince, managearea, industrysecond, 
+      industryfirst, mianbusiness, mainsupplier, 
+      maincustomer, shareremark, chgtl, 
+      chgdt)
+    values (#{workid,jdbcType=VARCHAR}, #{socialcreditcode,jdbcType=VARCHAR}, #{applyertype,jdbcType=VARCHAR}, 
+      #{applymainbody,jdbcType=VARCHAR}, #{orgname,jdbcType=VARCHAR}, #{managetype,jdbcType=VARCHAR}, 
+      #{juridical,jdbcType=VARCHAR}, #{comstartdate,jdbcType=TIMESTAMP}, #{comenddate,jdbcType=TIMESTAMP}, 
+      #{registcapital,jdbcType=DECIMAL}, #{contricapital,jdbcType=DECIMAL}, #{comaddress,jdbcType=VARCHAR}, 
+      #{comaddressarea,jdbcType=VARCHAR}, #{comaddresscity,jdbcType=VARCHAR}, #{comaddressprovince,jdbcType=VARCHAR}, 
+      #{realcomaddress,jdbcType=VARCHAR}, #{realcomaddressarea,jdbcType=VARCHAR}, #{realcomaddresscity,jdbcType=VARCHAR}, 
+      #{realcomaddressprovince,jdbcType=VARCHAR}, #{managearea,jdbcType=VARCHAR}, #{industrysecond,jdbcType=VARCHAR}, 
+      #{industryfirst,jdbcType=VARCHAR}, #{mianbusiness,jdbcType=VARCHAR}, #{mainsupplier,jdbcType=VARCHAR}, 
+      #{maincustomer,jdbcType=VARCHAR}, #{shareremark,jdbcType=VARCHAR}, #{chgtl,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Applyinfoofcom" >
+    insert into applyinfoofcom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="socialcreditcode != null" >
+        socialcreditcode,
+      </if>
+      <if test="applyertype != null" >
+        applyertype,
+      </if>
+      <if test="applymainbody != null" >
+        applymainbody,
+      </if>
+      <if test="orgname != null" >
+        orgname,
+      </if>
+      <if test="managetype != null" >
+        managetype,
+      </if>
+      <if test="juridical != null" >
+        juridical,
+      </if>
+      <if test="comstartdate != null" >
+        comstartdate,
+      </if>
+      <if test="comenddate != null" >
+        comenddate,
+      </if>
+      <if test="registcapital != null" >
+        registcapital,
+      </if>
+      <if test="contricapital != null" >
+        contricapital,
+      </if>
+      <if test="comaddress != null" >
+        comaddress,
+      </if>
+      <if test="comaddressarea != null" >
+        comaddressarea,
+      </if>
+      <if test="comaddresscity != null" >
+        comaddresscity,
+      </if>
+      <if test="comaddressprovince != null" >
+        comaddressprovince,
+      </if>
+      <if test="realcomaddress != null" >
+        realcomaddress,
+      </if>
+      <if test="realcomaddressarea != null" >
+        realcomaddressarea,
+      </if>
+      <if test="realcomaddresscity != null" >
+        realcomaddresscity,
+      </if>
+      <if test="realcomaddressprovince != null" >
+        realcomaddressprovince,
+      </if>
+      <if test="managearea != null" >
+        managearea,
+      </if>
+      <if test="industrysecond != null" >
+        industrysecond,
+      </if>
+      <if test="industryfirst != null" >
+        industryfirst,
+      </if>
+      <if test="mianbusiness != null" >
+        mianbusiness,
+      </if>
+      <if test="mainsupplier != null" >
+        mainsupplier,
+      </if>
+      <if test="maincustomer != null" >
+        maincustomer,
+      </if>
+      <if test="shareremark != null" >
+        shareremark,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="socialcreditcode != null" >
+        #{socialcreditcode,jdbcType=VARCHAR},
+      </if>
+      <if test="applyertype != null" >
+        #{applyertype,jdbcType=VARCHAR},
+      </if>
+      <if test="applymainbody != null" >
+        #{applymainbody,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="managetype != null" >
+        #{managetype,jdbcType=VARCHAR},
+      </if>
+      <if test="juridical != null" >
+        #{juridical,jdbcType=VARCHAR},
+      </if>
+      <if test="comstartdate != null" >
+        #{comstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comenddate != null" >
+        #{comenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registcapital != null" >
+        #{registcapital,jdbcType=DECIMAL},
+      </if>
+      <if test="contricapital != null" >
+        #{contricapital,jdbcType=DECIMAL},
+      </if>
+      <if test="comaddress != null" >
+        #{comaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="comaddressarea != null" >
+        #{comaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="comaddresscity != null" >
+        #{comaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="comaddressprovince != null" >
+        #{comaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="realcomaddress != null" >
+        #{realcomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="realcomaddressarea != null" >
+        #{realcomaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="realcomaddresscity != null" >
+        #{realcomaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="realcomaddressprovince != null" >
+        #{realcomaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="managearea != null" >
+        #{managearea,jdbcType=VARCHAR},
+      </if>
+      <if test="industrysecond != null" >
+        #{industrysecond,jdbcType=VARCHAR},
+      </if>
+      <if test="industryfirst != null" >
+        #{industryfirst,jdbcType=VARCHAR},
+      </if>
+      <if test="mianbusiness != null" >
+        #{mianbusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="mainsupplier != null" >
+        #{mainsupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="maincustomer != null" >
+        #{maincustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="shareremark != null" >
+        #{shareremark,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ApplyinfoofcomExample" resultType="java.lang.Integer" >
+    select count(*) from applyinfoofcom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update applyinfoofcom
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.socialcreditcode != null" >
+        socialcreditcode = #{record.socialcreditcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyertype != null" >
+        applyertype = #{record.applyertype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applymainbody != null" >
+        applymainbody = #{record.applymainbody,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgname != null" >
+        orgname = #{record.orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managetype != null" >
+        managetype = #{record.managetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.juridical != null" >
+        juridical = #{record.juridical,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comstartdate != null" >
+        comstartdate = #{record.comstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.comenddate != null" >
+        comenddate = #{record.comenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.registcapital != null" >
+        registcapital = #{record.registcapital,jdbcType=DECIMAL},
+      </if>
+      <if test="record.contricapital != null" >
+        contricapital = #{record.contricapital,jdbcType=DECIMAL},
+      </if>
+      <if test="record.comaddress != null" >
+        comaddress = #{record.comaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comaddressarea != null" >
+        comaddressarea = #{record.comaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comaddresscity != null" >
+        comaddresscity = #{record.comaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comaddressprovince != null" >
+        comaddressprovince = #{record.comaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realcomaddress != null" >
+        realcomaddress = #{record.realcomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realcomaddressarea != null" >
+        realcomaddressarea = #{record.realcomaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realcomaddresscity != null" >
+        realcomaddresscity = #{record.realcomaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realcomaddressprovince != null" >
+        realcomaddressprovince = #{record.realcomaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managearea != null" >
+        managearea = #{record.managearea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industrysecond != null" >
+        industrysecond = #{record.industrysecond,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industryfirst != null" >
+        industryfirst = #{record.industryfirst,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mianbusiness != null" >
+        mianbusiness = #{record.mianbusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainsupplier != null" >
+        mainsupplier = #{record.mainsupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maincustomer != null" >
+        maincustomer = #{record.maincustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareremark != null" >
+        shareremark = #{record.shareremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update applyinfoofcom
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      socialcreditcode = #{record.socialcreditcode,jdbcType=VARCHAR},
+      applyertype = #{record.applyertype,jdbcType=VARCHAR},
+      applymainbody = #{record.applymainbody,jdbcType=VARCHAR},
+      orgname = #{record.orgname,jdbcType=VARCHAR},
+      managetype = #{record.managetype,jdbcType=VARCHAR},
+      juridical = #{record.juridical,jdbcType=VARCHAR},
+      comstartdate = #{record.comstartdate,jdbcType=TIMESTAMP},
+      comenddate = #{record.comenddate,jdbcType=TIMESTAMP},
+      registcapital = #{record.registcapital,jdbcType=DECIMAL},
+      contricapital = #{record.contricapital,jdbcType=DECIMAL},
+      comaddress = #{record.comaddress,jdbcType=VARCHAR},
+      comaddressarea = #{record.comaddressarea,jdbcType=VARCHAR},
+      comaddresscity = #{record.comaddresscity,jdbcType=VARCHAR},
+      comaddressprovince = #{record.comaddressprovince,jdbcType=VARCHAR},
+      realcomaddress = #{record.realcomaddress,jdbcType=VARCHAR},
+      realcomaddressarea = #{record.realcomaddressarea,jdbcType=VARCHAR},
+      realcomaddresscity = #{record.realcomaddresscity,jdbcType=VARCHAR},
+      realcomaddressprovince = #{record.realcomaddressprovince,jdbcType=VARCHAR},
+      managearea = #{record.managearea,jdbcType=VARCHAR},
+      industrysecond = #{record.industrysecond,jdbcType=VARCHAR},
+      industryfirst = #{record.industryfirst,jdbcType=VARCHAR},
+      mianbusiness = #{record.mianbusiness,jdbcType=VARCHAR},
+      mainsupplier = #{record.mainsupplier,jdbcType=VARCHAR},
+      maincustomer = #{record.maincustomer,jdbcType=VARCHAR},
+      shareremark = #{record.shareremark,jdbcType=VARCHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Applyinfoofcom" >
+    update applyinfoofcom
+    <set >
+      <if test="applyertype != null" >
+        applyertype = #{applyertype,jdbcType=VARCHAR},
+      </if>
+      <if test="applymainbody != null" >
+        applymainbody = #{applymainbody,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        orgname = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="managetype != null" >
+        managetype = #{managetype,jdbcType=VARCHAR},
+      </if>
+      <if test="juridical != null" >
+        juridical = #{juridical,jdbcType=VARCHAR},
+      </if>
+      <if test="comstartdate != null" >
+        comstartdate = #{comstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comenddate != null" >
+        comenddate = #{comenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registcapital != null" >
+        registcapital = #{registcapital,jdbcType=DECIMAL},
+      </if>
+      <if test="contricapital != null" >
+        contricapital = #{contricapital,jdbcType=DECIMAL},
+      </if>
+      <if test="comaddress != null" >
+        comaddress = #{comaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="comaddressarea != null" >
+        comaddressarea = #{comaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="comaddresscity != null" >
+        comaddresscity = #{comaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="comaddressprovince != null" >
+        comaddressprovince = #{comaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="realcomaddress != null" >
+        realcomaddress = #{realcomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="realcomaddressarea != null" >
+        realcomaddressarea = #{realcomaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="realcomaddresscity != null" >
+        realcomaddresscity = #{realcomaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="realcomaddressprovince != null" >
+        realcomaddressprovince = #{realcomaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="managearea != null" >
+        managearea = #{managearea,jdbcType=VARCHAR},
+      </if>
+      <if test="industrysecond != null" >
+        industrysecond = #{industrysecond,jdbcType=VARCHAR},
+      </if>
+      <if test="industryfirst != null" >
+        industryfirst = #{industryfirst,jdbcType=VARCHAR},
+      </if>
+      <if test="mianbusiness != null" >
+        mianbusiness = #{mianbusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="mainsupplier != null" >
+        mainsupplier = #{mainsupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="maincustomer != null" >
+        maincustomer = #{maincustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="shareremark != null" >
+        shareremark = #{shareremark,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+      and socialcreditcode = #{socialcreditcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Applyinfoofcom" >
+    update applyinfoofcom
+    set applyertype = #{applyertype,jdbcType=VARCHAR},
+      applymainbody = #{applymainbody,jdbcType=VARCHAR},
+      orgname = #{orgname,jdbcType=VARCHAR},
+      managetype = #{managetype,jdbcType=VARCHAR},
+      juridical = #{juridical,jdbcType=VARCHAR},
+      comstartdate = #{comstartdate,jdbcType=TIMESTAMP},
+      comenddate = #{comenddate,jdbcType=TIMESTAMP},
+      registcapital = #{registcapital,jdbcType=DECIMAL},
+      contricapital = #{contricapital,jdbcType=DECIMAL},
+      comaddress = #{comaddress,jdbcType=VARCHAR},
+      comaddressarea = #{comaddressarea,jdbcType=VARCHAR},
+      comaddresscity = #{comaddresscity,jdbcType=VARCHAR},
+      comaddressprovince = #{comaddressprovince,jdbcType=VARCHAR},
+      realcomaddress = #{realcomaddress,jdbcType=VARCHAR},
+      realcomaddressarea = #{realcomaddressarea,jdbcType=VARCHAR},
+      realcomaddresscity = #{realcomaddresscity,jdbcType=VARCHAR},
+      realcomaddressprovince = #{realcomaddressprovince,jdbcType=VARCHAR},
+      managearea = #{managearea,jdbcType=VARCHAR},
+      industrysecond = #{industrysecond,jdbcType=VARCHAR},
+      industryfirst = #{industryfirst,jdbcType=VARCHAR},
+      mianbusiness = #{mianbusiness,jdbcType=VARCHAR},
+      mainsupplier = #{mainsupplier,jdbcType=VARCHAR},
+      maincustomer = #{maincustomer,jdbcType=VARCHAR},
+      shareremark = #{shareremark,jdbcType=VARCHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP}
+    where workid = #{workid,jdbcType=VARCHAR}
+      and socialcreditcode = #{socialcreditcode,jdbcType=VARCHAR}
+  </update>
+</mapper>

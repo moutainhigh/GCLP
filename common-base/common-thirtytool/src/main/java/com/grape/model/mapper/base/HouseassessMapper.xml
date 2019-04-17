@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.HouseassessMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Houseassess" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <id column="mortgageno" property="mortgageno" jdbcType="VARCHAR" />
+    <id column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="assess_online_price" property="assessOnlinePrice" jdbcType="DECIMAL" />
+    <result column="assess_online_total" property="assessOnlineTotal" jdbcType="DECIMAL" />
+    <result column="assess_control_total" property="assessControlTotal" jdbcType="DECIMAL" />
+    <result column="assess_control_price" property="assessControlPrice" jdbcType="DECIMAL" />
+    <result column="assess_again_price" property="assessAgainPrice" jdbcType="DECIMAL" />
+    <result column="assess_again_total" property="assessAgainTotal" jdbcType="DECIMAL" />
+    <result column="quick_unit_price" property="quickUnitPrice" jdbcType="DECIMAL" />
+    <result column="general_unit_price" property="generalUnitPrice" jdbcType="DECIMAL" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="channelname" property="channelname" jdbcType="VARCHAR" />
+    <result column="assessaddress" property="assessaddress" jdbcType="VARCHAR" />
+    <result column="assessprogress" property="assessprogress" jdbcType="VARCHAR" />
+    <result column="valuetype" property="valuetype" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, mortgageno, channel, assess_online_price, assess_online_total, assess_control_total, 
+    assess_control_price, assess_again_price, assess_again_total, quick_unit_price, general_unit_price, 
+    chgdt, chgtl, channelname, assessaddress, assessprogress, valuetype, filename
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.HouseassessExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from houseassess
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from houseassess
+    where workid = #{workid,jdbcType=VARCHAR}
+      and mortgageno = #{mortgageno,jdbcType=VARCHAR}
+      and channel = #{channel,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from houseassess
+    where workid = #{workid,jdbcType=VARCHAR}
+      and mortgageno = #{mortgageno,jdbcType=VARCHAR}
+      and channel = #{channel,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.HouseassessExample" >
+    delete from houseassess
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Houseassess" >
+    insert into houseassess (workid, mortgageno, channel, 
+      assess_online_price, assess_online_total, assess_control_total, 
+      assess_control_price, assess_again_price, assess_again_total, 
+      quick_unit_price, general_unit_price, chgdt, 
+      chgtl, channelname, assessaddress, 
+      assessprogress, valuetype, filename
+      )
+    values (#{workid,jdbcType=VARCHAR}, #{mortgageno,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
+      #{assessOnlinePrice,jdbcType=DECIMAL}, #{assessOnlineTotal,jdbcType=DECIMAL}, #{assessControlTotal,jdbcType=DECIMAL}, 
+      #{assessControlPrice,jdbcType=DECIMAL}, #{assessAgainPrice,jdbcType=DECIMAL}, #{assessAgainTotal,jdbcType=DECIMAL}, 
+      #{quickUnitPrice,jdbcType=DECIMAL}, #{generalUnitPrice,jdbcType=DECIMAL}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{chgtl,jdbcType=VARCHAR}, #{channelname,jdbcType=VARCHAR}, #{assessaddress,jdbcType=VARCHAR}, 
+      #{assessprogress,jdbcType=VARCHAR}, #{valuetype,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Houseassess" >
+    insert into houseassess
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="mortgageno != null" >
+        mortgageno,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="assessOnlinePrice != null" >
+        assess_online_price,
+      </if>
+      <if test="assessOnlineTotal != null" >
+        assess_online_total,
+      </if>
+      <if test="assessControlTotal != null" >
+        assess_control_total,
+      </if>
+      <if test="assessControlPrice != null" >
+        assess_control_price,
+      </if>
+      <if test="assessAgainPrice != null" >
+        assess_again_price,
+      </if>
+      <if test="assessAgainTotal != null" >
+        assess_again_total,
+      </if>
+      <if test="quickUnitPrice != null" >
+        quick_unit_price,
+      </if>
+      <if test="generalUnitPrice != null" >
+        general_unit_price,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="channelname != null" >
+        channelname,
+      </if>
+      <if test="assessaddress != null" >
+        assessaddress,
+      </if>
+      <if test="assessprogress != null" >
+        assessprogress,
+      </if>
+      <if test="valuetype != null" >
+        valuetype,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="mortgageno != null" >
+        #{mortgageno,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="assessOnlinePrice != null" >
+        #{assessOnlinePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="assessOnlineTotal != null" >
+        #{assessOnlineTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="assessControlTotal != null" >
+        #{assessControlTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="assessControlPrice != null" >
+        #{assessControlPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="assessAgainPrice != null" >
+        #{assessAgainPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="assessAgainTotal != null" >
+        #{assessAgainTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="quickUnitPrice != null" >
+        #{quickUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="generalUnitPrice != null" >
+        #{generalUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="channelname != null" >
+        #{channelname,jdbcType=VARCHAR},
+      </if>
+      <if test="assessaddress != null" >
+        #{assessaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="assessprogress != null" >
+        #{assessprogress,jdbcType=VARCHAR},
+      </if>
+      <if test="valuetype != null" >
+        #{valuetype,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.HouseassessExample" resultType="java.lang.Integer" >
+    select count(*) from houseassess
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update houseassess
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mortgageno != null" >
+        mortgageno = #{record.mortgageno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null" >
+        channel = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assessOnlinePrice != null" >
+        assess_online_price = #{record.assessOnlinePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.assessOnlineTotal != null" >
+        assess_online_total = #{record.assessOnlineTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.assessControlTotal != null" >
+        assess_control_total = #{record.assessControlTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.assessControlPrice != null" >
+        assess_control_price = #{record.assessControlPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.assessAgainPrice != null" >
+        assess_again_price = #{record.assessAgainPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.assessAgainTotal != null" >
+        assess_again_total = #{record.assessAgainTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.quickUnitPrice != null" >
+        quick_unit_price = #{record.quickUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.generalUnitPrice != null" >
+        general_unit_price = #{record.generalUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelname != null" >
+        channelname = #{record.channelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assessaddress != null" >
+        assessaddress = #{record.assessaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assessprogress != null" >
+        assessprogress = #{record.assessprogress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valuetype != null" >
+        valuetype = #{record.valuetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filename != null" >
+        filename = #{record.filename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update houseassess
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      mortgageno = #{record.mortgageno,jdbcType=VARCHAR},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      assess_online_price = #{record.assessOnlinePrice,jdbcType=DECIMAL},
+      assess_online_total = #{record.assessOnlineTotal,jdbcType=DECIMAL},
+      assess_control_total = #{record.assessControlTotal,jdbcType=DECIMAL},
+      assess_control_price = #{record.assessControlPrice,jdbcType=DECIMAL},
+      assess_again_price = #{record.assessAgainPrice,jdbcType=DECIMAL},
+      assess_again_total = #{record.assessAgainTotal,jdbcType=DECIMAL},
+      quick_unit_price = #{record.quickUnitPrice,jdbcType=DECIMAL},
+      general_unit_price = #{record.generalUnitPrice,jdbcType=DECIMAL},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      channelname = #{record.channelname,jdbcType=VARCHAR},
+      assessaddress = #{record.assessaddress,jdbcType=VARCHAR},
+      assessprogress = #{record.assessprogress,jdbcType=VARCHAR},
+      valuetype = #{record.valuetype,jdbcType=VARCHAR},
+      filename = #{record.filename,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Houseassess" >
+    update houseassess
+    <set >
+      <if test="assessOnlinePrice != null" >
+        assess_online_price = #{assessOnlinePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="assessOnlineTotal != null" >
+        assess_online_total = #{assessOnlineTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="assessControlTotal != null" >
+        assess_control_total = #{assessControlTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="assessControlPrice != null" >
+        assess_control_price = #{assessControlPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="assessAgainPrice != null" >
+        assess_again_price = #{assessAgainPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="assessAgainTotal != null" >
+        assess_again_total = #{assessAgainTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="quickUnitPrice != null" >
+        quick_unit_price = #{quickUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="generalUnitPrice != null" >
+        general_unit_price = #{generalUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="channelname != null" >
+        channelname = #{channelname,jdbcType=VARCHAR},
+      </if>
+      <if test="assessaddress != null" >
+        assessaddress = #{assessaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="assessprogress != null" >
+        assessprogress = #{assessprogress,jdbcType=VARCHAR},
+      </if>
+      <if test="valuetype != null" >
+        valuetype = #{valuetype,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+      and mortgageno = #{mortgageno,jdbcType=VARCHAR}
+      and channel = #{channel,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Houseassess" >
+    update houseassess
+    set assess_online_price = #{assessOnlinePrice,jdbcType=DECIMAL},
+      assess_online_total = #{assessOnlineTotal,jdbcType=DECIMAL},
+      assess_control_total = #{assessControlTotal,jdbcType=DECIMAL},
+      assess_control_price = #{assessControlPrice,jdbcType=DECIMAL},
+      assess_again_price = #{assessAgainPrice,jdbcType=DECIMAL},
+      assess_again_total = #{assessAgainTotal,jdbcType=DECIMAL},
+      quick_unit_price = #{quickUnitPrice,jdbcType=DECIMAL},
+      general_unit_price = #{generalUnitPrice,jdbcType=DECIMAL},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      channelname = #{channelname,jdbcType=VARCHAR},
+      assessaddress = #{assessaddress,jdbcType=VARCHAR},
+      assessprogress = #{assessprogress,jdbcType=VARCHAR},
+      valuetype = #{valuetype,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+      and mortgageno = #{mortgageno,jdbcType=VARCHAR}
+      and channel = #{channel,jdbcType=VARCHAR}
+  </update>
+</mapper>

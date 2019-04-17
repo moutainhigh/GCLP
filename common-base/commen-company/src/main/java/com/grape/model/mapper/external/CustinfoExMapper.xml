@@ -1,0 +1,57 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.CustinfoExMapper">
+			
+	<select id="findMainborrower" resultType="com.grape.controller.reponse.bean.WaihuCustinfo" parameterType="map">
+        select c.telnumber as number,c.custname as name,ct.coddes as typedes,ct.codflg as type 
+        from custinfo c,codetable ct
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and c.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        and c.custtype like '%1%'
+        and ct.codtyp = 'CUSTTYPE'
+        and ct.codflg = '1'
+    </select>
+
+    <select id="findCoborrower" resultType="com.grape.controller.reponse.bean.WaihuCustinfo" parameterType="map">
+        select c.telnumber as number,c.custname as name,ct.coddes as typedes,ct.codflg as type 
+        from custinfo c,codetable ct
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and c.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        and c.custtype like '%2%'
+        and ct.codtyp = 'CUSTTYPE'
+        and ct.codflg = '2'
+    </select>
+    
+    <select id="findGuarantor" resultType="com.grape.controller.reponse.bean.WaihuCustinfo" parameterType="map">
+        select c.telnumber as number,c.custname as name,ct.coddes as typedes,ct.codflg as type 
+        from custinfo c,codetable ct
+        
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and c.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        and c.custtype like '%3%'
+        and ct.codtyp = 'CUSTTYPE'
+        and ct.codflg = '3'
+    </select>
+    
+    <select id="findMortgagor" resultType="com.grape.controller.reponse.bean.WaihuCustinfo" parameterType="map">
+        select c.telnumber as number,c.custname as name,ct.coddes as typedes,ct.codflg as type 
+        from custinfo c,codetable ct
+      
+        where 1=1
+        <if test="workid!=null and workid!=''">
+           and c.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        and c.custtype like '%4%'
+        and ct.codtyp = 'CUSTTYPE'
+        and ct.codflg = '4'
+    </select>
+	
+	
+    
+    
+</mapper> 

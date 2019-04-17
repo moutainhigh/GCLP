@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.RepayinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Repayinfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="repayperson" property="repayperson" jdbcType="VARCHAR" />
+    <result column="repayamount" property="repayamount" jdbcType="DECIMAL" />
+    <result column="refundissue" property="refundissue" jdbcType="INTEGER" />
+    <result column="refundmoney" property="refundmoney" jdbcType="DECIMAL" />
+    <result column="refundinterest" property="refundinterest" jdbcType="DECIMAL" />
+    <result column="realityrefunddate" property="realityrefunddate" jdbcType="TIMESTAMP" />
+    <result column="interestmoney" property="interestmoney" jdbcType="DECIMAL" />
+    <result column="interestmoneydate" property="interestmoneydate" jdbcType="TIMESTAMP" />
+    <result column="delayingpayment" property="delayingpayment" jdbcType="DECIMAL" />
+    <result column="delayingpaymentdate" property="delayingpaymentdate" jdbcType="TIMESTAMP" />
+    <result column="breachofcontract" property="breachofcontract" jdbcType="DECIMAL" />
+    <result column="repaymethod" property="repaymethod" jdbcType="VARCHAR" />
+    <result column="whetheroverdue" property="whetheroverdue" jdbcType="VARCHAR" />
+    <result column="unifiedtime" property="unifiedtime" jdbcType="TIMESTAMP" />
+    <result column="repayaccount" property="repayaccount" jdbcType="VARCHAR" />
+    <result column="repaybank" property="repaybank" jdbcType="VARCHAR" />
+    <result column="accountnumber" property="accountnumber" jdbcType="VARCHAR" />
+    <result column="payee" property="payee" jdbcType="VARCHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, workid, repayperson, repayamount, refundissue, refundmoney, refundinterest, realityrefunddate, 
+    interestmoney, interestmoneydate, delayingpayment, delayingpaymentdate, breachofcontract, 
+    repaymethod, whetheroverdue, unifiedtime, repayaccount, repaybank, accountnumber, 
+    payee, chgtl, chgdt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.RepayinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from repayinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from repayinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from repayinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.RepayinfoExample" >
+    delete from repayinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Repayinfo" >
+    insert into repayinfo (id, workid, repayperson, 
+      repayamount, refundissue, refundmoney, 
+      refundinterest, realityrefunddate, interestmoney, 
+      interestmoneydate, delayingpayment, delayingpaymentdate, 
+      breachofcontract, repaymethod, whetheroverdue, 
+      unifiedtime, repayaccount, repaybank, 
+      accountnumber, payee, chgtl, 
+      chgdt)
+    values (#{id,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, #{repayperson,jdbcType=VARCHAR}, 
+      #{repayamount,jdbcType=DECIMAL}, #{refundissue,jdbcType=INTEGER}, #{refundmoney,jdbcType=DECIMAL}, 
+      #{refundinterest,jdbcType=DECIMAL}, #{realityrefunddate,jdbcType=TIMESTAMP}, #{interestmoney,jdbcType=DECIMAL}, 
+      #{interestmoneydate,jdbcType=TIMESTAMP}, #{delayingpayment,jdbcType=DECIMAL}, #{delayingpaymentdate,jdbcType=TIMESTAMP}, 
+      #{breachofcontract,jdbcType=DECIMAL}, #{repaymethod,jdbcType=VARCHAR}, #{whetheroverdue,jdbcType=VARCHAR}, 
+      #{unifiedtime,jdbcType=TIMESTAMP}, #{repayaccount,jdbcType=VARCHAR}, #{repaybank,jdbcType=VARCHAR}, 
+      #{accountnumber,jdbcType=VARCHAR}, #{payee,jdbcType=VARCHAR}, #{chgtl,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Repayinfo" >
+    insert into repayinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="repayperson != null" >
+        repayperson,
+      </if>
+      <if test="repayamount != null" >
+        repayamount,
+      </if>
+      <if test="refundissue != null" >
+        refundissue,
+      </if>
+      <if test="refundmoney != null" >
+        refundmoney,
+      </if>
+      <if test="refundinterest != null" >
+        refundinterest,
+      </if>
+      <if test="realityrefunddate != null" >
+        realityrefunddate,
+      </if>
+      <if test="interestmoney != null" >
+        interestmoney,
+      </if>
+      <if test="interestmoneydate != null" >
+        interestmoneydate,
+      </if>
+      <if test="delayingpayment != null" >
+        delayingpayment,
+      </if>
+      <if test="delayingpaymentdate != null" >
+        delayingpaymentdate,
+      </if>
+      <if test="breachofcontract != null" >
+        breachofcontract,
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod,
+      </if>
+      <if test="whetheroverdue != null" >
+        whetheroverdue,
+      </if>
+      <if test="unifiedtime != null" >
+        unifiedtime,
+      </if>
+      <if test="repayaccount != null" >
+        repayaccount,
+      </if>
+      <if test="repaybank != null" >
+        repaybank,
+      </if>
+      <if test="accountnumber != null" >
+        accountnumber,
+      </if>
+      <if test="payee != null" >
+        payee,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="repayperson != null" >
+        #{repayperson,jdbcType=VARCHAR},
+      </if>
+      <if test="repayamount != null" >
+        #{repayamount,jdbcType=DECIMAL},
+      </if>
+      <if test="refundissue != null" >
+        #{refundissue,jdbcType=INTEGER},
+      </if>
+      <if test="refundmoney != null" >
+        #{refundmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="refundinterest != null" >
+        #{refundinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="realityrefunddate != null" >
+        #{realityrefunddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interestmoney != null" >
+        #{interestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="interestmoneydate != null" >
+        #{interestmoneydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delayingpayment != null" >
+        #{delayingpayment,jdbcType=DECIMAL},
+      </if>
+      <if test="delayingpaymentdate != null" >
+        #{delayingpaymentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="breachofcontract != null" >
+        #{breachofcontract,jdbcType=DECIMAL},
+      </if>
+      <if test="repaymethod != null" >
+        #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="whetheroverdue != null" >
+        #{whetheroverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="unifiedtime != null" >
+        #{unifiedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repayaccount != null" >
+        #{repayaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="repaybank != null" >
+        #{repaybank,jdbcType=VARCHAR},
+      </if>
+      <if test="accountnumber != null" >
+        #{accountnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="payee != null" >
+        #{payee,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.RepayinfoExample" resultType="java.lang.Integer" >
+    select count(*) from repayinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update repayinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repayperson != null" >
+        repayperson = #{record.repayperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repayamount != null" >
+        repayamount = #{record.repayamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.refundissue != null" >
+        refundissue = #{record.refundissue,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundmoney != null" >
+        refundmoney = #{record.refundmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.refundinterest != null" >
+        refundinterest = #{record.refundinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realityrefunddate != null" >
+        realityrefunddate = #{record.realityrefunddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.interestmoney != null" >
+        interestmoney = #{record.interestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interestmoneydate != null" >
+        interestmoneydate = #{record.interestmoneydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delayingpayment != null" >
+        delayingpayment = #{record.delayingpayment,jdbcType=DECIMAL},
+      </if>
+      <if test="record.delayingpaymentdate != null" >
+        delayingpaymentdate = #{record.delayingpaymentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.breachofcontract != null" >
+        breachofcontract = #{record.breachofcontract,jdbcType=DECIMAL},
+      </if>
+      <if test="record.repaymethod != null" >
+        repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.whetheroverdue != null" >
+        whetheroverdue = #{record.whetheroverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unifiedtime != null" >
+        unifiedtime = #{record.unifiedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.repayaccount != null" >
+        repayaccount = #{record.repayaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repaybank != null" >
+        repaybank = #{record.repaybank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountnumber != null" >
+        accountnumber = #{record.accountnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payee != null" >
+        payee = #{record.payee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update repayinfo
+    set id = #{record.id,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      repayperson = #{record.repayperson,jdbcType=VARCHAR},
+      repayamount = #{record.repayamount,jdbcType=DECIMAL},
+      refundissue = #{record.refundissue,jdbcType=INTEGER},
+      refundmoney = #{record.refundmoney,jdbcType=DECIMAL},
+      refundinterest = #{record.refundinterest,jdbcType=DECIMAL},
+      realityrefunddate = #{record.realityrefunddate,jdbcType=TIMESTAMP},
+      interestmoney = #{record.interestmoney,jdbcType=DECIMAL},
+      interestmoneydate = #{record.interestmoneydate,jdbcType=TIMESTAMP},
+      delayingpayment = #{record.delayingpayment,jdbcType=DECIMAL},
+      delayingpaymentdate = #{record.delayingpaymentdate,jdbcType=TIMESTAMP},
+      breachofcontract = #{record.breachofcontract,jdbcType=DECIMAL},
+      repaymethod = #{record.repaymethod,jdbcType=VARCHAR},
+      whetheroverdue = #{record.whetheroverdue,jdbcType=VARCHAR},
+      unifiedtime = #{record.unifiedtime,jdbcType=TIMESTAMP},
+      repayaccount = #{record.repayaccount,jdbcType=VARCHAR},
+      repaybank = #{record.repaybank,jdbcType=VARCHAR},
+      accountnumber = #{record.accountnumber,jdbcType=VARCHAR},
+      payee = #{record.payee,jdbcType=VARCHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Repayinfo" >
+    update repayinfo
+    <set >
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="repayperson != null" >
+        repayperson = #{repayperson,jdbcType=VARCHAR},
+      </if>
+      <if test="repayamount != null" >
+        repayamount = #{repayamount,jdbcType=DECIMAL},
+      </if>
+      <if test="refundissue != null" >
+        refundissue = #{refundissue,jdbcType=INTEGER},
+      </if>
+      <if test="refundmoney != null" >
+        refundmoney = #{refundmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="refundinterest != null" >
+        refundinterest = #{refundinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="realityrefunddate != null" >
+        realityrefunddate = #{realityrefunddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interestmoney != null" >
+        interestmoney = #{interestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="interestmoneydate != null" >
+        interestmoneydate = #{interestmoneydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delayingpayment != null" >
+        delayingpayment = #{delayingpayment,jdbcType=DECIMAL},
+      </if>
+      <if test="delayingpaymentdate != null" >
+        delayingpaymentdate = #{delayingpaymentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="breachofcontract != null" >
+        breachofcontract = #{breachofcontract,jdbcType=DECIMAL},
+      </if>
+      <if test="repaymethod != null" >
+        repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      </if>
+      <if test="whetheroverdue != null" >
+        whetheroverdue = #{whetheroverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="unifiedtime != null" >
+        unifiedtime = #{unifiedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repayaccount != null" >
+        repayaccount = #{repayaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="repaybank != null" >
+        repaybank = #{repaybank,jdbcType=VARCHAR},
+      </if>
+      <if test="accountnumber != null" >
+        accountnumber = #{accountnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="payee != null" >
+        payee = #{payee,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Repayinfo" >
+    update repayinfo
+    set workid = #{workid,jdbcType=VARCHAR},
+      repayperson = #{repayperson,jdbcType=VARCHAR},
+      repayamount = #{repayamount,jdbcType=DECIMAL},
+      refundissue = #{refundissue,jdbcType=INTEGER},
+      refundmoney = #{refundmoney,jdbcType=DECIMAL},
+      refundinterest = #{refundinterest,jdbcType=DECIMAL},
+      realityrefunddate = #{realityrefunddate,jdbcType=TIMESTAMP},
+      interestmoney = #{interestmoney,jdbcType=DECIMAL},
+      interestmoneydate = #{interestmoneydate,jdbcType=TIMESTAMP},
+      delayingpayment = #{delayingpayment,jdbcType=DECIMAL},
+      delayingpaymentdate = #{delayingpaymentdate,jdbcType=TIMESTAMP},
+      breachofcontract = #{breachofcontract,jdbcType=DECIMAL},
+      repaymethod = #{repaymethod,jdbcType=VARCHAR},
+      whetheroverdue = #{whetheroverdue,jdbcType=VARCHAR},
+      unifiedtime = #{unifiedtime,jdbcType=TIMESTAMP},
+      repayaccount = #{repayaccount,jdbcType=VARCHAR},
+      repaybank = #{repaybank,jdbcType=VARCHAR},
+      accountnumber = #{accountnumber,jdbcType=VARCHAR},
+      payee = #{payee,jdbcType=VARCHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

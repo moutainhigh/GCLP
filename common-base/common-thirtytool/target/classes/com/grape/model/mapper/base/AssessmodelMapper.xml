@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.AssessmodelMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Assessmodel" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="float_online" property="floatOnline" jdbcType="REAL" />
+    <result column="tonevalue_online" property="tonevalueOnline" jdbcType="DECIMAL" />
+    <result column="lowervalue_online" property="lowervalueOnline" jdbcType="DECIMAL" />
+    <result column="float_bng" property="floatBng" jdbcType="REAL" />
+    <result column="tonevalue_bng" property="tonevalueBng" jdbcType="DECIMAL" />
+    <result column="lowervalue_bng" property="lowervalueBng" jdbcType="DECIMAL" />
+    <result column="tonevalue_bng2" property="tonevalueBng2" jdbcType="DECIMAL" />
+    <result column="lowervalue_bng2" property="lowervalueBng2" jdbcType="DECIMAL" />
+    <result column="float_cno" property="floatCno" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, float_online, tonevalue_online, lowervalue_online, float_bng, tonevalue_bng, 
+    lowervalue_bng, tonevalue_bng2, lowervalue_bng2, float_cno
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.AssessmodelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from assessmodel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from assessmodel
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from assessmodel
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.AssessmodelExample" >
+    delete from assessmodel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Assessmodel" >
+    insert into assessmodel (id, float_online, tonevalue_online, 
+      lowervalue_online, float_bng, tonevalue_bng, 
+      lowervalue_bng, tonevalue_bng2, lowervalue_bng2, 
+      float_cno)
+    values (#{id,jdbcType=INTEGER}, #{floatOnline,jdbcType=REAL}, #{tonevalueOnline,jdbcType=DECIMAL}, 
+      #{lowervalueOnline,jdbcType=DECIMAL}, #{floatBng,jdbcType=REAL}, #{tonevalueBng,jdbcType=DECIMAL}, 
+      #{lowervalueBng,jdbcType=DECIMAL}, #{tonevalueBng2,jdbcType=DECIMAL}, #{lowervalueBng2,jdbcType=DECIMAL}, 
+      #{floatCno,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Assessmodel" >
+    insert into assessmodel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="floatOnline != null" >
+        float_online,
+      </if>
+      <if test="tonevalueOnline != null" >
+        tonevalue_online,
+      </if>
+      <if test="lowervalueOnline != null" >
+        lowervalue_online,
+      </if>
+      <if test="floatBng != null" >
+        float_bng,
+      </if>
+      <if test="tonevalueBng != null" >
+        tonevalue_bng,
+      </if>
+      <if test="lowervalueBng != null" >
+        lowervalue_bng,
+      </if>
+      <if test="tonevalueBng2 != null" >
+        tonevalue_bng2,
+      </if>
+      <if test="lowervalueBng2 != null" >
+        lowervalue_bng2,
+      </if>
+      <if test="floatCno != null" >
+        float_cno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="floatOnline != null" >
+        #{floatOnline,jdbcType=REAL},
+      </if>
+      <if test="tonevalueOnline != null" >
+        #{tonevalueOnline,jdbcType=DECIMAL},
+      </if>
+      <if test="lowervalueOnline != null" >
+        #{lowervalueOnline,jdbcType=DECIMAL},
+      </if>
+      <if test="floatBng != null" >
+        #{floatBng,jdbcType=REAL},
+      </if>
+      <if test="tonevalueBng != null" >
+        #{tonevalueBng,jdbcType=DECIMAL},
+      </if>
+      <if test="lowervalueBng != null" >
+        #{lowervalueBng,jdbcType=DECIMAL},
+      </if>
+      <if test="tonevalueBng2 != null" >
+        #{tonevalueBng2,jdbcType=DECIMAL},
+      </if>
+      <if test="lowervalueBng2 != null" >
+        #{lowervalueBng2,jdbcType=DECIMAL},
+      </if>
+      <if test="floatCno != null" >
+        #{floatCno,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.AssessmodelExample" resultType="java.lang.Integer" >
+    select count(*) from assessmodel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update assessmodel
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.floatOnline != null" >
+        float_online = #{record.floatOnline,jdbcType=REAL},
+      </if>
+      <if test="record.tonevalueOnline != null" >
+        tonevalue_online = #{record.tonevalueOnline,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lowervalueOnline != null" >
+        lowervalue_online = #{record.lowervalueOnline,jdbcType=DECIMAL},
+      </if>
+      <if test="record.floatBng != null" >
+        float_bng = #{record.floatBng,jdbcType=REAL},
+      </if>
+      <if test="record.tonevalueBng != null" >
+        tonevalue_bng = #{record.tonevalueBng,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lowervalueBng != null" >
+        lowervalue_bng = #{record.lowervalueBng,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tonevalueBng2 != null" >
+        tonevalue_bng2 = #{record.tonevalueBng2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lowervalueBng2 != null" >
+        lowervalue_bng2 = #{record.lowervalueBng2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.floatCno != null" >
+        float_cno = #{record.floatCno,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update assessmodel
+    set id = #{record.id,jdbcType=INTEGER},
+      float_online = #{record.floatOnline,jdbcType=REAL},
+      tonevalue_online = #{record.tonevalueOnline,jdbcType=DECIMAL},
+      lowervalue_online = #{record.lowervalueOnline,jdbcType=DECIMAL},
+      float_bng = #{record.floatBng,jdbcType=REAL},
+      tonevalue_bng = #{record.tonevalueBng,jdbcType=DECIMAL},
+      lowervalue_bng = #{record.lowervalueBng,jdbcType=DECIMAL},
+      tonevalue_bng2 = #{record.tonevalueBng2,jdbcType=DECIMAL},
+      lowervalue_bng2 = #{record.lowervalueBng2,jdbcType=DECIMAL},
+      float_cno = #{record.floatCno,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Assessmodel" >
+    update assessmodel
+    <set >
+      <if test="floatOnline != null" >
+        float_online = #{floatOnline,jdbcType=REAL},
+      </if>
+      <if test="tonevalueOnline != null" >
+        tonevalue_online = #{tonevalueOnline,jdbcType=DECIMAL},
+      </if>
+      <if test="lowervalueOnline != null" >
+        lowervalue_online = #{lowervalueOnline,jdbcType=DECIMAL},
+      </if>
+      <if test="floatBng != null" >
+        float_bng = #{floatBng,jdbcType=REAL},
+      </if>
+      <if test="tonevalueBng != null" >
+        tonevalue_bng = #{tonevalueBng,jdbcType=DECIMAL},
+      </if>
+      <if test="lowervalueBng != null" >
+        lowervalue_bng = #{lowervalueBng,jdbcType=DECIMAL},
+      </if>
+      <if test="tonevalueBng2 != null" >
+        tonevalue_bng2 = #{tonevalueBng2,jdbcType=DECIMAL},
+      </if>
+      <if test="lowervalueBng2 != null" >
+        lowervalue_bng2 = #{lowervalueBng2,jdbcType=DECIMAL},
+      </if>
+      <if test="floatCno != null" >
+        float_cno = #{floatCno,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Assessmodel" >
+    update assessmodel
+    set float_online = #{floatOnline,jdbcType=REAL},
+      tonevalue_online = #{tonevalueOnline,jdbcType=DECIMAL},
+      lowervalue_online = #{lowervalueOnline,jdbcType=DECIMAL},
+      float_bng = #{floatBng,jdbcType=REAL},
+      tonevalue_bng = #{tonevalueBng,jdbcType=DECIMAL},
+      lowervalue_bng = #{lowervalueBng,jdbcType=DECIMAL},
+      tonevalue_bng2 = #{tonevalueBng2,jdbcType=DECIMAL},
+      lowervalue_bng2 = #{lowervalueBng2,jdbcType=DECIMAL},
+      float_cno = #{floatCno,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

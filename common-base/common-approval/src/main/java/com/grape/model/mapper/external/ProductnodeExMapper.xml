@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.ProductnodeExMapper" >
+	<select id="selectProDate" resultType="com.grape.model.db.Productnode">
+		select * from productnode where type='task'
+	</select>
+	
+	<select id="selectNameByWorkid" resultType="com.grape.controller.bean.WorkitemBean">
+		select work.*,pro.nodename from workitem work
+		inner join productnode pro on pro.nodeid=work.node
+		where work.state='1' and work.workid=#{workid} and work.node not like '%F%'
+	</select>
+	
+</mapper>

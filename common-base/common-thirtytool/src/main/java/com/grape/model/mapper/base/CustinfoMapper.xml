@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.CustinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Custinfo" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <id column="cerdid" property="cerdid" jdbcType="VARCHAR" />
+    <result column="custno" property="custno" jdbcType="VARCHAR" />
+    <result column="custtype" property="custtype" jdbcType="VARCHAR" />
+    <result column="custname" property="custname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="cerdtype" property="cerdtype" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="telnumber" property="telnumber" jdbcType="VARCHAR" />
+    <result column="familyaddressprovince" property="familyaddressprovince" jdbcType="VARCHAR" />
+    <result column="familyaddresscity" property="familyaddresscity" jdbcType="VARCHAR" />
+    <result column="familyaddressarea" property="familyaddressarea" jdbcType="VARCHAR" />
+    <result column="familyaddressdetail" property="familyaddressdetail" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="VARCHAR" />
+    <result column="censusregisterprovvince" property="censusregisterprovvince" jdbcType="VARCHAR" />
+    <result column="censusregistercity" property="censusregistercity" jdbcType="VARCHAR" />
+    <result column="maritalstatus" property="maritalstatus" jdbcType="CHAR" />
+    <result column="islitigation" property="islitigation" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="applymain" property="applymain" jdbcType="VARCHAR" />
+    <result column="comname" property="comname" jdbcType="VARCHAR" />
+    <result column="comproperty1" property="comproperty1" jdbcType="VARCHAR" />
+    <result column="comproperty" property="comproperty" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="monthincome" property="monthincome" jdbcType="DECIMAL" />
+    <result column="realcomaddress" property="realcomaddress" jdbcType="VARCHAR" />
+    <result column="receipt" property="receipt" jdbcType="DECIMAL" />
+    <result column="netmargin" property="netmargin" jdbcType="DECIMAL" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="busilicence" property="busilicence" jdbcType="VARCHAR" />
+    <result column="cerditaddress" property="cerditaddress" jdbcType="VARCHAR" />
+    <result column="creditimage" property="creditimage" jdbcType="VARCHAR" />
+    <result column="creditimage2" property="creditimage2" jdbcType="VARCHAR" />
+    <result column="nativeplaceprovince" property="nativeplaceprovince" jdbcType="VARCHAR" />
+    <result column="nativeplacecity" property="nativeplacecity" jdbcType="VARCHAR" />
+    <result column="nativeplacearea" property="nativeplacearea" jdbcType="VARCHAR" />
+    <result column="discoverdate" property="discoverdate" jdbcType="TIMESTAMP" />
+    <result column="discoversign" property="discoversign" jdbcType="VARCHAR" />
+    <result column="estatedescription" property="estatedescription" jdbcType="VARCHAR" />
+    <result column="havachildflg" property="havachildflg" jdbcType="CHAR" />
+    <result column="childcount" property="childcount" jdbcType="VARCHAR" />
+    <result column="childdescription" property="childdescription" jdbcType="VARCHAR" />
+    <result column="dangerjob" property="dangerjob" jdbcType="CHAR" />
+    <result column="relationship" property="relationship" jdbcType="VARCHAR" />
+    <result column="relationcerdid" property="relationcerdid" jdbcType="VARCHAR" />
+    <result column="ismarrow" property="ismarrow" jdbcType="CHAR" />
+    <result column="comhavelitigat" property="comhavelitigat" jdbcType="CHAR" />
+    <result column="comhavalitigat" property="comhavalitigat" jdbcType="CHAR" />
+    <result column="jobnation" property="jobnation" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.grape.model.db.Custinfo" extends="BaseResultMap" >
+    <result column="busdescription" property="busdescription" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, cerdid, custno, custtype, custname, sex, cerdtype, birthday, telnumber, familyaddressprovince, 
+    familyaddresscity, familyaddressarea, familyaddressdetail, age, censusregisterprovvince, 
+    censusregistercity, maritalstatus, islitigation, job, chgdt, chgtl, applymain, comname, 
+    comproperty1, comproperty, position, monthincome, realcomaddress, receipt, netmargin, 
+    country, busilicence, cerditaddress, creditimage, creditimage2, nativeplaceprovince, 
+    nativeplacecity, nativeplacearea, discoverdate, discoversign, estatedescription, 
+    havachildflg, childcount, childdescription, dangerjob, relationship, relationcerdid, 
+    ismarrow, comhavelitigat, comhavalitigat, jobnation
+  </sql>
+  <sql id="Blob_Column_List" >
+    busdescription
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.grape.model.db.CustinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from custinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.CustinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from custinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from custinfo
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from custinfo
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.CustinfoExample" >
+    delete from custinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Custinfo" >
+    insert into custinfo (workid, cerdid, custno, 
+      custtype, custname, sex, 
+      cerdtype, birthday, telnumber, 
+      familyaddressprovince, familyaddresscity, 
+      familyaddressarea, familyaddressdetail, 
+      age, censusregisterprovvince, censusregistercity, 
+      maritalstatus, islitigation, job, 
+      chgdt, chgtl, applymain, 
+      comname, comproperty1, comproperty, 
+      position, monthincome, realcomaddress, 
+      receipt, netmargin, country, 
+      busilicence, cerditaddress, creditimage, 
+      creditimage2, nativeplaceprovince, nativeplacecity, 
+      nativeplacearea, discoverdate, discoversign, 
+      estatedescription, havachildflg, childcount, 
+      childdescription, dangerjob, relationship, 
+      relationcerdid, ismarrow, comhavelitigat, 
+      comhavalitigat, jobnation, busdescription
+      )
+    values (#{workid,jdbcType=VARCHAR}, #{cerdid,jdbcType=VARCHAR}, #{custno,jdbcType=VARCHAR}, 
+      #{custtype,jdbcType=VARCHAR}, #{custname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{cerdtype,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{telnumber,jdbcType=VARCHAR}, 
+      #{familyaddressprovince,jdbcType=VARCHAR}, #{familyaddresscity,jdbcType=VARCHAR}, 
+      #{familyaddressarea,jdbcType=VARCHAR}, #{familyaddressdetail,jdbcType=VARCHAR}, 
+      #{age,jdbcType=VARCHAR}, #{censusregisterprovvince,jdbcType=VARCHAR}, #{censusregistercity,jdbcType=VARCHAR}, 
+      #{maritalstatus,jdbcType=CHAR}, #{islitigation,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}, #{applymain,jdbcType=VARCHAR}, 
+      #{comname,jdbcType=VARCHAR}, #{comproperty1,jdbcType=VARCHAR}, #{comproperty,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{monthincome,jdbcType=DECIMAL}, #{realcomaddress,jdbcType=VARCHAR}, 
+      #{receipt,jdbcType=DECIMAL}, #{netmargin,jdbcType=DECIMAL}, #{country,jdbcType=VARCHAR}, 
+      #{busilicence,jdbcType=VARCHAR}, #{cerditaddress,jdbcType=VARCHAR}, #{creditimage,jdbcType=VARCHAR}, 
+      #{creditimage2,jdbcType=VARCHAR}, #{nativeplaceprovince,jdbcType=VARCHAR}, #{nativeplacecity,jdbcType=VARCHAR}, 
+      #{nativeplacearea,jdbcType=VARCHAR}, #{discoverdate,jdbcType=TIMESTAMP}, #{discoversign,jdbcType=VARCHAR}, 
+      #{estatedescription,jdbcType=VARCHAR}, #{havachildflg,jdbcType=CHAR}, #{childcount,jdbcType=VARCHAR}, 
+      #{childdescription,jdbcType=VARCHAR}, #{dangerjob,jdbcType=CHAR}, #{relationship,jdbcType=VARCHAR}, 
+      #{relationcerdid,jdbcType=VARCHAR}, #{ismarrow,jdbcType=CHAR}, #{comhavelitigat,jdbcType=CHAR}, 
+      #{comhavalitigat,jdbcType=CHAR}, #{jobnation,jdbcType=VARCHAR}, #{busdescription,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Custinfo" >
+    insert into custinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="cerdid != null" >
+        cerdid,
+      </if>
+      <if test="custno != null" >
+        custno,
+      </if>
+      <if test="custtype != null" >
+        custtype,
+      </if>
+      <if test="custname != null" >
+        custname,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="cerdtype != null" >
+        cerdtype,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="telnumber != null" >
+        telnumber,
+      </if>
+      <if test="familyaddressprovince != null" >
+        familyaddressprovince,
+      </if>
+      <if test="familyaddresscity != null" >
+        familyaddresscity,
+      </if>
+      <if test="familyaddressarea != null" >
+        familyaddressarea,
+      </if>
+      <if test="familyaddressdetail != null" >
+        familyaddressdetail,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="censusregisterprovvince != null" >
+        censusregisterprovvince,
+      </if>
+      <if test="censusregistercity != null" >
+        censusregistercity,
+      </if>
+      <if test="maritalstatus != null" >
+        maritalstatus,
+      </if>
+      <if test="islitigation != null" >
+        islitigation,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="applymain != null" >
+        applymain,
+      </if>
+      <if test="comname != null" >
+        comname,
+      </if>
+      <if test="comproperty1 != null" >
+        comproperty1,
+      </if>
+      <if test="comproperty != null" >
+        comproperty,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="monthincome != null" >
+        monthincome,
+      </if>
+      <if test="realcomaddress != null" >
+        realcomaddress,
+      </if>
+      <if test="receipt != null" >
+        receipt,
+      </if>
+      <if test="netmargin != null" >
+        netmargin,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="busilicence != null" >
+        busilicence,
+      </if>
+      <if test="cerditaddress != null" >
+        cerditaddress,
+      </if>
+      <if test="creditimage != null" >
+        creditimage,
+      </if>
+      <if test="creditimage2 != null" >
+        creditimage2,
+      </if>
+      <if test="nativeplaceprovince != null" >
+        nativeplaceprovince,
+      </if>
+      <if test="nativeplacecity != null" >
+        nativeplacecity,
+      </if>
+      <if test="nativeplacearea != null" >
+        nativeplacearea,
+      </if>
+      <if test="discoverdate != null" >
+        discoverdate,
+      </if>
+      <if test="discoversign != null" >
+        discoversign,
+      </if>
+      <if test="estatedescription != null" >
+        estatedescription,
+      </if>
+      <if test="havachildflg != null" >
+        havachildflg,
+      </if>
+      <if test="childcount != null" >
+        childcount,
+      </if>
+      <if test="childdescription != null" >
+        childdescription,
+      </if>
+      <if test="dangerjob != null" >
+        dangerjob,
+      </if>
+      <if test="relationship != null" >
+        relationship,
+      </if>
+      <if test="relationcerdid != null" >
+        relationcerdid,
+      </if>
+      <if test="ismarrow != null" >
+        ismarrow,
+      </if>
+      <if test="comhavelitigat != null" >
+        comhavelitigat,
+      </if>
+      <if test="comhavalitigat != null" >
+        comhavalitigat,
+      </if>
+      <if test="jobnation != null" >
+        jobnation,
+      </if>
+      <if test="busdescription != null" >
+        busdescription,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdid != null" >
+        #{cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="custno != null" >
+        #{custno,jdbcType=VARCHAR},
+      </if>
+      <if test="custtype != null" >
+        #{custtype,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdtype != null" >
+        #{cerdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telnumber != null" >
+        #{telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddressprovince != null" >
+        #{familyaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddresscity != null" >
+        #{familyaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddressarea != null" >
+        #{familyaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddressdetail != null" >
+        #{familyaddressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="censusregisterprovvince != null" >
+        #{censusregisterprovvince,jdbcType=VARCHAR},
+      </if>
+      <if test="censusregistercity != null" >
+        #{censusregistercity,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalstatus != null" >
+        #{maritalstatus,jdbcType=CHAR},
+      </if>
+      <if test="islitigation != null" >
+        #{islitigation,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="applymain != null" >
+        #{applymain,jdbcType=VARCHAR},
+      </if>
+      <if test="comname != null" >
+        #{comname,jdbcType=VARCHAR},
+      </if>
+      <if test="comproperty1 != null" >
+        #{comproperty1,jdbcType=VARCHAR},
+      </if>
+      <if test="comproperty != null" >
+        #{comproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="monthincome != null" >
+        #{monthincome,jdbcType=DECIMAL},
+      </if>
+      <if test="realcomaddress != null" >
+        #{realcomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receipt != null" >
+        #{receipt,jdbcType=DECIMAL},
+      </if>
+      <if test="netmargin != null" >
+        #{netmargin,jdbcType=DECIMAL},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="busilicence != null" >
+        #{busilicence,jdbcType=VARCHAR},
+      </if>
+      <if test="cerditaddress != null" >
+        #{cerditaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="creditimage != null" >
+        #{creditimage,jdbcType=VARCHAR},
+      </if>
+      <if test="creditimage2 != null" >
+        #{creditimage2,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplaceprovince != null" >
+        #{nativeplaceprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplacecity != null" >
+        #{nativeplacecity,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplacearea != null" >
+        #{nativeplacearea,jdbcType=VARCHAR},
+      </if>
+      <if test="discoverdate != null" >
+        #{discoverdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discoversign != null" >
+        #{discoversign,jdbcType=VARCHAR},
+      </if>
+      <if test="estatedescription != null" >
+        #{estatedescription,jdbcType=VARCHAR},
+      </if>
+      <if test="havachildflg != null" >
+        #{havachildflg,jdbcType=CHAR},
+      </if>
+      <if test="childcount != null" >
+        #{childcount,jdbcType=VARCHAR},
+      </if>
+      <if test="childdescription != null" >
+        #{childdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerjob != null" >
+        #{dangerjob,jdbcType=CHAR},
+      </if>
+      <if test="relationship != null" >
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="relationcerdid != null" >
+        #{relationcerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="ismarrow != null" >
+        #{ismarrow,jdbcType=CHAR},
+      </if>
+      <if test="comhavelitigat != null" >
+        #{comhavelitigat,jdbcType=CHAR},
+      </if>
+      <if test="comhavalitigat != null" >
+        #{comhavalitigat,jdbcType=CHAR},
+      </if>
+      <if test="jobnation != null" >
+        #{jobnation,jdbcType=VARCHAR},
+      </if>
+      <if test="busdescription != null" >
+        #{busdescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.CustinfoExample" resultType="java.lang.Integer" >
+    select count(*) from custinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update custinfo
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerdid != null" >
+        cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custno != null" >
+        custno = #{record.custno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custtype != null" >
+        custtype = #{record.custtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custname != null" >
+        custname = #{record.custname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerdtype != null" >
+        cerdtype = #{record.cerdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.telnumber != null" >
+        telnumber = #{record.telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyaddressprovince != null" >
+        familyaddressprovince = #{record.familyaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyaddresscity != null" >
+        familyaddresscity = #{record.familyaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyaddressarea != null" >
+        familyaddressarea = #{record.familyaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyaddressdetail != null" >
+        familyaddressdetail = #{record.familyaddressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.censusregisterprovvince != null" >
+        censusregisterprovvince = #{record.censusregisterprovvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.censusregistercity != null" >
+        censusregistercity = #{record.censusregistercity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maritalstatus != null" >
+        maritalstatus = #{record.maritalstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.islitigation != null" >
+        islitigation = #{record.islitigation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null" >
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applymain != null" >
+        applymain = #{record.applymain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comname != null" >
+        comname = #{record.comname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comproperty1 != null" >
+        comproperty1 = #{record.comproperty1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comproperty != null" >
+        comproperty = #{record.comproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthincome != null" >
+        monthincome = #{record.monthincome,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realcomaddress != null" >
+        realcomaddress = #{record.realcomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receipt != null" >
+        receipt = #{record.receipt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.netmargin != null" >
+        netmargin = #{record.netmargin,jdbcType=DECIMAL},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busilicence != null" >
+        busilicence = #{record.busilicence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerditaddress != null" >
+        cerditaddress = #{record.cerditaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditimage != null" >
+        creditimage = #{record.creditimage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditimage2 != null" >
+        creditimage2 = #{record.creditimage2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativeplaceprovince != null" >
+        nativeplaceprovince = #{record.nativeplaceprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativeplacecity != null" >
+        nativeplacecity = #{record.nativeplacecity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativeplacearea != null" >
+        nativeplacearea = #{record.nativeplacearea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discoverdate != null" >
+        discoverdate = #{record.discoverdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.discoversign != null" >
+        discoversign = #{record.discoversign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.estatedescription != null" >
+        estatedescription = #{record.estatedescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.havachildflg != null" >
+        havachildflg = #{record.havachildflg,jdbcType=CHAR},
+      </if>
+      <if test="record.childcount != null" >
+        childcount = #{record.childcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.childdescription != null" >
+        childdescription = #{record.childdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dangerjob != null" >
+        dangerjob = #{record.dangerjob,jdbcType=CHAR},
+      </if>
+      <if test="record.relationship != null" >
+        relationship = #{record.relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relationcerdid != null" >
+        relationcerdid = #{record.relationcerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismarrow != null" >
+        ismarrow = #{record.ismarrow,jdbcType=CHAR},
+      </if>
+      <if test="record.comhavelitigat != null" >
+        comhavelitigat = #{record.comhavelitigat,jdbcType=CHAR},
+      </if>
+      <if test="record.comhavalitigat != null" >
+        comhavalitigat = #{record.comhavalitigat,jdbcType=CHAR},
+      </if>
+      <if test="record.jobnation != null" >
+        jobnation = #{record.jobnation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busdescription != null" >
+        busdescription = #{record.busdescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update custinfo
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      custno = #{record.custno,jdbcType=VARCHAR},
+      custtype = #{record.custtype,jdbcType=VARCHAR},
+      custname = #{record.custname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      cerdtype = #{record.cerdtype,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      telnumber = #{record.telnumber,jdbcType=VARCHAR},
+      familyaddressprovince = #{record.familyaddressprovince,jdbcType=VARCHAR},
+      familyaddresscity = #{record.familyaddresscity,jdbcType=VARCHAR},
+      familyaddressarea = #{record.familyaddressarea,jdbcType=VARCHAR},
+      familyaddressdetail = #{record.familyaddressdetail,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=VARCHAR},
+      censusregisterprovvince = #{record.censusregisterprovvince,jdbcType=VARCHAR},
+      censusregistercity = #{record.censusregistercity,jdbcType=VARCHAR},
+      maritalstatus = #{record.maritalstatus,jdbcType=CHAR},
+      islitigation = #{record.islitigation,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      applymain = #{record.applymain,jdbcType=VARCHAR},
+      comname = #{record.comname,jdbcType=VARCHAR},
+      comproperty1 = #{record.comproperty1,jdbcType=VARCHAR},
+      comproperty = #{record.comproperty,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      monthincome = #{record.monthincome,jdbcType=DECIMAL},
+      realcomaddress = #{record.realcomaddress,jdbcType=VARCHAR},
+      receipt = #{record.receipt,jdbcType=DECIMAL},
+      netmargin = #{record.netmargin,jdbcType=DECIMAL},
+      country = #{record.country,jdbcType=VARCHAR},
+      busilicence = #{record.busilicence,jdbcType=VARCHAR},
+      cerditaddress = #{record.cerditaddress,jdbcType=VARCHAR},
+      creditimage = #{record.creditimage,jdbcType=VARCHAR},
+      creditimage2 = #{record.creditimage2,jdbcType=VARCHAR},
+      nativeplaceprovince = #{record.nativeplaceprovince,jdbcType=VARCHAR},
+      nativeplacecity = #{record.nativeplacecity,jdbcType=VARCHAR},
+      nativeplacearea = #{record.nativeplacearea,jdbcType=VARCHAR},
+      discoverdate = #{record.discoverdate,jdbcType=TIMESTAMP},
+      discoversign = #{record.discoversign,jdbcType=VARCHAR},
+      estatedescription = #{record.estatedescription,jdbcType=VARCHAR},
+      havachildflg = #{record.havachildflg,jdbcType=CHAR},
+      childcount = #{record.childcount,jdbcType=VARCHAR},
+      childdescription = #{record.childdescription,jdbcType=VARCHAR},
+      dangerjob = #{record.dangerjob,jdbcType=CHAR},
+      relationship = #{record.relationship,jdbcType=VARCHAR},
+      relationcerdid = #{record.relationcerdid,jdbcType=VARCHAR},
+      ismarrow = #{record.ismarrow,jdbcType=CHAR},
+      comhavelitigat = #{record.comhavelitigat,jdbcType=CHAR},
+      comhavalitigat = #{record.comhavalitigat,jdbcType=CHAR},
+      jobnation = #{record.jobnation,jdbcType=VARCHAR},
+      busdescription = #{record.busdescription,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update custinfo
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      cerdid = #{record.cerdid,jdbcType=VARCHAR},
+      custno = #{record.custno,jdbcType=VARCHAR},
+      custtype = #{record.custtype,jdbcType=VARCHAR},
+      custname = #{record.custname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      cerdtype = #{record.cerdtype,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      telnumber = #{record.telnumber,jdbcType=VARCHAR},
+      familyaddressprovince = #{record.familyaddressprovince,jdbcType=VARCHAR},
+      familyaddresscity = #{record.familyaddresscity,jdbcType=VARCHAR},
+      familyaddressarea = #{record.familyaddressarea,jdbcType=VARCHAR},
+      familyaddressdetail = #{record.familyaddressdetail,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=VARCHAR},
+      censusregisterprovvince = #{record.censusregisterprovvince,jdbcType=VARCHAR},
+      censusregistercity = #{record.censusregistercity,jdbcType=VARCHAR},
+      maritalstatus = #{record.maritalstatus,jdbcType=CHAR},
+      islitigation = #{record.islitigation,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      applymain = #{record.applymain,jdbcType=VARCHAR},
+      comname = #{record.comname,jdbcType=VARCHAR},
+      comproperty1 = #{record.comproperty1,jdbcType=VARCHAR},
+      comproperty = #{record.comproperty,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      monthincome = #{record.monthincome,jdbcType=DECIMAL},
+      realcomaddress = #{record.realcomaddress,jdbcType=VARCHAR},
+      receipt = #{record.receipt,jdbcType=DECIMAL},
+      netmargin = #{record.netmargin,jdbcType=DECIMAL},
+      country = #{record.country,jdbcType=VARCHAR},
+      busilicence = #{record.busilicence,jdbcType=VARCHAR},
+      cerditaddress = #{record.cerditaddress,jdbcType=VARCHAR},
+      creditimage = #{record.creditimage,jdbcType=VARCHAR},
+      creditimage2 = #{record.creditimage2,jdbcType=VARCHAR},
+      nativeplaceprovince = #{record.nativeplaceprovince,jdbcType=VARCHAR},
+      nativeplacecity = #{record.nativeplacecity,jdbcType=VARCHAR},
+      nativeplacearea = #{record.nativeplacearea,jdbcType=VARCHAR},
+      discoverdate = #{record.discoverdate,jdbcType=TIMESTAMP},
+      discoversign = #{record.discoversign,jdbcType=VARCHAR},
+      estatedescription = #{record.estatedescription,jdbcType=VARCHAR},
+      havachildflg = #{record.havachildflg,jdbcType=CHAR},
+      childcount = #{record.childcount,jdbcType=VARCHAR},
+      childdescription = #{record.childdescription,jdbcType=VARCHAR},
+      dangerjob = #{record.dangerjob,jdbcType=CHAR},
+      relationship = #{record.relationship,jdbcType=VARCHAR},
+      relationcerdid = #{record.relationcerdid,jdbcType=VARCHAR},
+      ismarrow = #{record.ismarrow,jdbcType=CHAR},
+      comhavelitigat = #{record.comhavelitigat,jdbcType=CHAR},
+      comhavalitigat = #{record.comhavalitigat,jdbcType=CHAR},
+      jobnation = #{record.jobnation,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Custinfo" >
+    update custinfo
+    <set >
+      <if test="custno != null" >
+        custno = #{custno,jdbcType=VARCHAR},
+      </if>
+      <if test="custtype != null" >
+        custtype = #{custtype,jdbcType=VARCHAR},
+      </if>
+      <if test="custname != null" >
+        custname = #{custname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="cerdtype != null" >
+        cerdtype = #{cerdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telnumber != null" >
+        telnumber = #{telnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddressprovince != null" >
+        familyaddressprovince = #{familyaddressprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddresscity != null" >
+        familyaddresscity = #{familyaddresscity,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddressarea != null" >
+        familyaddressarea = #{familyaddressarea,jdbcType=VARCHAR},
+      </if>
+      <if test="familyaddressdetail != null" >
+        familyaddressdetail = #{familyaddressdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="censusregisterprovvince != null" >
+        censusregisterprovvince = #{censusregisterprovvince,jdbcType=VARCHAR},
+      </if>
+      <if test="censusregistercity != null" >
+        censusregistercity = #{censusregistercity,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalstatus != null" >
+        maritalstatus = #{maritalstatus,jdbcType=CHAR},
+      </if>
+      <if test="islitigation != null" >
+        islitigation = #{islitigation,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="applymain != null" >
+        applymain = #{applymain,jdbcType=VARCHAR},
+      </if>
+      <if test="comname != null" >
+        comname = #{comname,jdbcType=VARCHAR},
+      </if>
+      <if test="comproperty1 != null" >
+        comproperty1 = #{comproperty1,jdbcType=VARCHAR},
+      </if>
+      <if test="comproperty != null" >
+        comproperty = #{comproperty,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="monthincome != null" >
+        monthincome = #{monthincome,jdbcType=DECIMAL},
+      </if>
+      <if test="realcomaddress != null" >
+        realcomaddress = #{realcomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receipt != null" >
+        receipt = #{receipt,jdbcType=DECIMAL},
+      </if>
+      <if test="netmargin != null" >
+        netmargin = #{netmargin,jdbcType=DECIMAL},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="busilicence != null" >
+        busilicence = #{busilicence,jdbcType=VARCHAR},
+      </if>
+      <if test="cerditaddress != null" >
+        cerditaddress = #{cerditaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="creditimage != null" >
+        creditimage = #{creditimage,jdbcType=VARCHAR},
+      </if>
+      <if test="creditimage2 != null" >
+        creditimage2 = #{creditimage2,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplaceprovince != null" >
+        nativeplaceprovince = #{nativeplaceprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplacecity != null" >
+        nativeplacecity = #{nativeplacecity,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplacearea != null" >
+        nativeplacearea = #{nativeplacearea,jdbcType=VARCHAR},
+      </if>
+      <if test="discoverdate != null" >
+        discoverdate = #{discoverdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="discoversign != null" >
+        discoversign = #{discoversign,jdbcType=VARCHAR},
+      </if>
+      <if test="estatedescription != null" >
+        estatedescription = #{estatedescription,jdbcType=VARCHAR},
+      </if>
+      <if test="havachildflg != null" >
+        havachildflg = #{havachildflg,jdbcType=CHAR},
+      </if>
+      <if test="childcount != null" >
+        childcount = #{childcount,jdbcType=VARCHAR},
+      </if>
+      <if test="childdescription != null" >
+        childdescription = #{childdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerjob != null" >
+        dangerjob = #{dangerjob,jdbcType=CHAR},
+      </if>
+      <if test="relationship != null" >
+        relationship = #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="relationcerdid != null" >
+        relationcerdid = #{relationcerdid,jdbcType=VARCHAR},
+      </if>
+      <if test="ismarrow != null" >
+        ismarrow = #{ismarrow,jdbcType=CHAR},
+      </if>
+      <if test="comhavelitigat != null" >
+        comhavelitigat = #{comhavelitigat,jdbcType=CHAR},
+      </if>
+      <if test="comhavalitigat != null" >
+        comhavalitigat = #{comhavalitigat,jdbcType=CHAR},
+      </if>
+      <if test="jobnation != null" >
+        jobnation = #{jobnation,jdbcType=VARCHAR},
+      </if>
+      <if test="busdescription != null" >
+        busdescription = #{busdescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.grape.model.db.Custinfo" >
+    update custinfo
+    set custno = #{custno,jdbcType=VARCHAR},
+      custtype = #{custtype,jdbcType=VARCHAR},
+      custname = #{custname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      cerdtype = #{cerdtype,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      telnumber = #{telnumber,jdbcType=VARCHAR},
+      familyaddressprovince = #{familyaddressprovince,jdbcType=VARCHAR},
+      familyaddresscity = #{familyaddresscity,jdbcType=VARCHAR},
+      familyaddressarea = #{familyaddressarea,jdbcType=VARCHAR},
+      familyaddressdetail = #{familyaddressdetail,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      censusregisterprovvince = #{censusregisterprovvince,jdbcType=VARCHAR},
+      censusregistercity = #{censusregistercity,jdbcType=VARCHAR},
+      maritalstatus = #{maritalstatus,jdbcType=CHAR},
+      islitigation = #{islitigation,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      applymain = #{applymain,jdbcType=VARCHAR},
+      comname = #{comname,jdbcType=VARCHAR},
+      comproperty1 = #{comproperty1,jdbcType=VARCHAR},
+      comproperty = #{comproperty,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      monthincome = #{monthincome,jdbcType=DECIMAL},
+      realcomaddress = #{realcomaddress,jdbcType=VARCHAR},
+      receipt = #{receipt,jdbcType=DECIMAL},
+      netmargin = #{netmargin,jdbcType=DECIMAL},
+      country = #{country,jdbcType=VARCHAR},
+      busilicence = #{busilicence,jdbcType=VARCHAR},
+      cerditaddress = #{cerditaddress,jdbcType=VARCHAR},
+      creditimage = #{creditimage,jdbcType=VARCHAR},
+      creditimage2 = #{creditimage2,jdbcType=VARCHAR},
+      nativeplaceprovince = #{nativeplaceprovince,jdbcType=VARCHAR},
+      nativeplacecity = #{nativeplacecity,jdbcType=VARCHAR},
+      nativeplacearea = #{nativeplacearea,jdbcType=VARCHAR},
+      discoverdate = #{discoverdate,jdbcType=TIMESTAMP},
+      discoversign = #{discoversign,jdbcType=VARCHAR},
+      estatedescription = #{estatedescription,jdbcType=VARCHAR},
+      havachildflg = #{havachildflg,jdbcType=CHAR},
+      childcount = #{childcount,jdbcType=VARCHAR},
+      childdescription = #{childdescription,jdbcType=VARCHAR},
+      dangerjob = #{dangerjob,jdbcType=CHAR},
+      relationship = #{relationship,jdbcType=VARCHAR},
+      relationcerdid = #{relationcerdid,jdbcType=VARCHAR},
+      ismarrow = #{ismarrow,jdbcType=CHAR},
+      comhavelitigat = #{comhavelitigat,jdbcType=CHAR},
+      comhavalitigat = #{comhavalitigat,jdbcType=CHAR},
+      jobnation = #{jobnation,jdbcType=VARCHAR},
+      busdescription = #{busdescription,jdbcType=LONGVARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Custinfo" >
+    update custinfo
+    set custno = #{custno,jdbcType=VARCHAR},
+      custtype = #{custtype,jdbcType=VARCHAR},
+      custname = #{custname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      cerdtype = #{cerdtype,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      telnumber = #{telnumber,jdbcType=VARCHAR},
+      familyaddressprovince = #{familyaddressprovince,jdbcType=VARCHAR},
+      familyaddresscity = #{familyaddresscity,jdbcType=VARCHAR},
+      familyaddressarea = #{familyaddressarea,jdbcType=VARCHAR},
+      familyaddressdetail = #{familyaddressdetail,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      censusregisterprovvince = #{censusregisterprovvince,jdbcType=VARCHAR},
+      censusregistercity = #{censusregistercity,jdbcType=VARCHAR},
+      maritalstatus = #{maritalstatus,jdbcType=CHAR},
+      islitigation = #{islitigation,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      applymain = #{applymain,jdbcType=VARCHAR},
+      comname = #{comname,jdbcType=VARCHAR},
+      comproperty1 = #{comproperty1,jdbcType=VARCHAR},
+      comproperty = #{comproperty,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      monthincome = #{monthincome,jdbcType=DECIMAL},
+      realcomaddress = #{realcomaddress,jdbcType=VARCHAR},
+      receipt = #{receipt,jdbcType=DECIMAL},
+      netmargin = #{netmargin,jdbcType=DECIMAL},
+      country = #{country,jdbcType=VARCHAR},
+      busilicence = #{busilicence,jdbcType=VARCHAR},
+      cerditaddress = #{cerditaddress,jdbcType=VARCHAR},
+      creditimage = #{creditimage,jdbcType=VARCHAR},
+      creditimage2 = #{creditimage2,jdbcType=VARCHAR},
+      nativeplaceprovince = #{nativeplaceprovince,jdbcType=VARCHAR},
+      nativeplacecity = #{nativeplacecity,jdbcType=VARCHAR},
+      nativeplacearea = #{nativeplacearea,jdbcType=VARCHAR},
+      discoverdate = #{discoverdate,jdbcType=TIMESTAMP},
+      discoversign = #{discoversign,jdbcType=VARCHAR},
+      estatedescription = #{estatedescription,jdbcType=VARCHAR},
+      havachildflg = #{havachildflg,jdbcType=CHAR},
+      childcount = #{childcount,jdbcType=VARCHAR},
+      childdescription = #{childdescription,jdbcType=VARCHAR},
+      dangerjob = #{dangerjob,jdbcType=CHAR},
+      relationship = #{relationship,jdbcType=VARCHAR},
+      relationcerdid = #{relationcerdid,jdbcType=VARCHAR},
+      ismarrow = #{ismarrow,jdbcType=CHAR},
+      comhavelitigat = #{comhavelitigat,jdbcType=CHAR},
+      comhavalitigat = #{comhavalitigat,jdbcType=CHAR},
+      jobnation = #{jobnation,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+      and cerdid = #{cerdid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.RefundfinanceMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Refundfinance" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="logid" property="logid" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="serveramount" property="serveramount" jdbcType="DECIMAL" />
+    <result column="serverdate" property="serverdate" jdbcType="TIMESTAMP" />
+    <result column="approvalamount" property="approvalamount" jdbcType="DECIMAL" />
+    <result column="approvaldate" property="approvaldate" jdbcType="TIMESTAMP" />
+    <result column="prepaymentamount" property="prepaymentamount" jdbcType="DECIMAL" />
+    <result column="prepaymemtdate" property="prepaymemtdate" jdbcType="TIMESTAMP" />
+    <result column="rateamount" property="rateamount" jdbcType="DECIMAL" />
+    <result column="ratedate" property="ratedate" jdbcType="TIMESTAMP" />
+    <result column="loanamount" property="loanamount" jdbcType="DECIMAL" />
+    <result column="loandate" property="loandate" jdbcType="TIMESTAMP" />
+    <result column="notation" property="notation" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, logid, workid, serveramount, serverdate, approvalamount, approvaldate, prepaymentamount, 
+    prepaymemtdate, rateamount, ratedate, loanamount, loandate, notation, chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.RefundfinanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from refundfinance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from refundfinance
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from refundfinance
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.RefundfinanceExample" >
+    delete from refundfinance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Refundfinance" >
+    insert into refundfinance (id, logid, workid, 
+      serveramount, serverdate, approvalamount, 
+      approvaldate, prepaymentamount, prepaymemtdate, 
+      rateamount, ratedate, loanamount, 
+      loandate, notation, chgdt, 
+      chgtl)
+    values (#{id,jdbcType=VARCHAR}, #{logid,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, 
+      #{serveramount,jdbcType=DECIMAL}, #{serverdate,jdbcType=TIMESTAMP}, #{approvalamount,jdbcType=DECIMAL}, 
+      #{approvaldate,jdbcType=TIMESTAMP}, #{prepaymentamount,jdbcType=DECIMAL}, #{prepaymemtdate,jdbcType=TIMESTAMP}, 
+      #{rateamount,jdbcType=DECIMAL}, #{ratedate,jdbcType=TIMESTAMP}, #{loanamount,jdbcType=DECIMAL}, 
+      #{loandate,jdbcType=TIMESTAMP}, #{notation,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{chgtl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Refundfinance" >
+    insert into refundfinance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="logid != null" >
+        logid,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="serveramount != null" >
+        serveramount,
+      </if>
+      <if test="serverdate != null" >
+        serverdate,
+      </if>
+      <if test="approvalamount != null" >
+        approvalamount,
+      </if>
+      <if test="approvaldate != null" >
+        approvaldate,
+      </if>
+      <if test="prepaymentamount != null" >
+        prepaymentamount,
+      </if>
+      <if test="prepaymemtdate != null" >
+        prepaymemtdate,
+      </if>
+      <if test="rateamount != null" >
+        rateamount,
+      </if>
+      <if test="ratedate != null" >
+        ratedate,
+      </if>
+      <if test="loanamount != null" >
+        loanamount,
+      </if>
+      <if test="loandate != null" >
+        loandate,
+      </if>
+      <if test="notation != null" >
+        notation,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="logid != null" >
+        #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="serveramount != null" >
+        #{serveramount,jdbcType=DECIMAL},
+      </if>
+      <if test="serverdate != null" >
+        #{serverdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalamount != null" >
+        #{approvalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="approvaldate != null" >
+        #{approvaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prepaymentamount != null" >
+        #{prepaymentamount,jdbcType=DECIMAL},
+      </if>
+      <if test="prepaymemtdate != null" >
+        #{prepaymemtdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rateamount != null" >
+        #{rateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="ratedate != null" >
+        #{ratedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanamount != null" >
+        #{loanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="loandate != null" >
+        #{loandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notation != null" >
+        #{notation,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.RefundfinanceExample" resultType="java.lang.Integer" >
+    select count(*) from refundfinance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update refundfinance
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logid != null" >
+        logid = #{record.logid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serveramount != null" >
+        serveramount = #{record.serveramount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.serverdate != null" >
+        serverdate = #{record.serverdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approvalamount != null" >
+        approvalamount = #{record.approvalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.approvaldate != null" >
+        approvaldate = #{record.approvaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prepaymentamount != null" >
+        prepaymentamount = #{record.prepaymentamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.prepaymemtdate != null" >
+        prepaymemtdate = #{record.prepaymemtdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rateamount != null" >
+        rateamount = #{record.rateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ratedate != null" >
+        ratedate = #{record.ratedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loanamount != null" >
+        loanamount = #{record.loanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.loandate != null" >
+        loandate = #{record.loandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.notation != null" >
+        notation = #{record.notation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update refundfinance
+    set id = #{record.id,jdbcType=VARCHAR},
+      logid = #{record.logid,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      serveramount = #{record.serveramount,jdbcType=DECIMAL},
+      serverdate = #{record.serverdate,jdbcType=TIMESTAMP},
+      approvalamount = #{record.approvalamount,jdbcType=DECIMAL},
+      approvaldate = #{record.approvaldate,jdbcType=TIMESTAMP},
+      prepaymentamount = #{record.prepaymentamount,jdbcType=DECIMAL},
+      prepaymemtdate = #{record.prepaymemtdate,jdbcType=TIMESTAMP},
+      rateamount = #{record.rateamount,jdbcType=DECIMAL},
+      ratedate = #{record.ratedate,jdbcType=TIMESTAMP},
+      loanamount = #{record.loanamount,jdbcType=DECIMAL},
+      loandate = #{record.loandate,jdbcType=TIMESTAMP},
+      notation = #{record.notation,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Refundfinance" >
+    update refundfinance
+    <set >
+      <if test="logid != null" >
+        logid = #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="serveramount != null" >
+        serveramount = #{serveramount,jdbcType=DECIMAL},
+      </if>
+      <if test="serverdate != null" >
+        serverdate = #{serverdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalamount != null" >
+        approvalamount = #{approvalamount,jdbcType=DECIMAL},
+      </if>
+      <if test="approvaldate != null" >
+        approvaldate = #{approvaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prepaymentamount != null" >
+        prepaymentamount = #{prepaymentamount,jdbcType=DECIMAL},
+      </if>
+      <if test="prepaymemtdate != null" >
+        prepaymemtdate = #{prepaymemtdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rateamount != null" >
+        rateamount = #{rateamount,jdbcType=DECIMAL},
+      </if>
+      <if test="ratedate != null" >
+        ratedate = #{ratedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loanamount != null" >
+        loanamount = #{loanamount,jdbcType=DECIMAL},
+      </if>
+      <if test="loandate != null" >
+        loandate = #{loandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notation != null" >
+        notation = #{notation,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Refundfinance" >
+    update refundfinance
+    set logid = #{logid,jdbcType=VARCHAR},
+      workid = #{workid,jdbcType=VARCHAR},
+      serveramount = #{serveramount,jdbcType=DECIMAL},
+      serverdate = #{serverdate,jdbcType=TIMESTAMP},
+      approvalamount = #{approvalamount,jdbcType=DECIMAL},
+      approvaldate = #{approvaldate,jdbcType=TIMESTAMP},
+      prepaymentamount = #{prepaymentamount,jdbcType=DECIMAL},
+      prepaymemtdate = #{prepaymemtdate,jdbcType=TIMESTAMP},
+      rateamount = #{rateamount,jdbcType=DECIMAL},
+      ratedate = #{ratedate,jdbcType=TIMESTAMP},
+      loanamount = #{loanamount,jdbcType=DECIMAL},
+      loandate = #{loandate,jdbcType=TIMESTAMP},
+      notation = #{notation,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

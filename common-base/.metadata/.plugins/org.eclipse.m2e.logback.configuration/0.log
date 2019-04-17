@@ -1,0 +1,93 @@
+2019-03-18 11:47:08,868 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.grape:common-auth:0.0.1-SNAPSHOT @ D:\GCLP\codes\common-base\common-auth\pom.xml.
+2019-03-18 11:47:14,078 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.grape:common-thirtytool:0.0.1-SNAPSHOT @ D:\GCLP\codes\common-base\common-thirtytool\pom.xml.
+2019-03-18 11:47:15,673 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.grape:common-approval:0.0.1-SNAPSHOT @ D:\GCLP\codes\common-base\common-approval\pom.xml.
+2019-03-18 11:47:17,941 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.grape:frame-home:0.0.1-SNAPSHOT @ D:\GCLP\codes\common-base\frame-home\pom.xml.
+2019-03-18 11:47:20,209 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.grape:management:0.0.1-SNAPSHOT @ D:\GCLP\codes\common-base\management\pom.xml.
+2019-03-18 11:47:22,326 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.grape:common-cloud-zuul:0.0.1-SNAPSHOT @ D:\GCLP\codes\common-base\common-cloud-zuul\pom.xml.
+2019-03-18 11:47:24,283 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.grape:common-spring-eureka:0.0.1-SNAPSHOT @ D:\GCLP\codes\common-base\common-cloud-eureka\pom.xml.
+2019-03-18 11:47:25,967 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: workflow:workflow:0.0.1-SNAPSHOT @ D:\GCLP\codes\common-base\workflow\pom.xml.
+2019-03-18 11:47:27,920 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.grape:commen-company:0.0.1-SNAPSHOT @ D:\GCLP\codes\common-base\commen-company\pom.xml.
+2019-03-18 11:47:39,899 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common-thirtytool/src/main/java
+2019-03-18 11:47:39,900 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Resources folder /common-thirtytool/src/main/java overlaps with sources folder /common-thirtytool/src/main/java
+2019-03-18 11:47:39,907 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common-thirtytool/src/test/java
+2019-03-18 11:47:40,696 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /management/src/main/java
+2019-03-18 11:47:40,697 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Resources folder /management/src/main/java overlaps with sources folder /management/src/main/java
+2019-03-18 11:47:40,699 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /management/src/main/resources
+2019-03-18 11:47:40,719 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /management/src/test/java
+2019-03-18 11:47:41,731 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /workflow/src/main/java
+2019-03-18 11:47:41,731 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Resources folder /workflow/src/main/java overlaps with sources folder /workflow/src/main/java
+2019-03-18 11:47:41,733 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /workflow/src/main/resources
+2019-03-18 11:47:41,746 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /workflow/src/test/java
+2019-03-18 11:47:43,310 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common-auth/src/main/java
+2019-03-18 11:47:43,310 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common-auth/src/main/resources
+2019-03-18 11:47:43,311 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common-auth/src/test/java
+2019-03-18 11:47:44,107 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /commen-company/src/main/java
+2019-03-18 11:47:44,108 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Resources folder /commen-company/src/main/java overlaps with sources folder /commen-company/src/main/java
+2019-03-18 11:47:44,110 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /commen-company/src/main/resources
+2019-03-18 11:47:44,112 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /commen-company/src/test/java
+2019-03-18 11:47:44,898 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /frame-home/src/main/java
+2019-03-18 11:47:44,898 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Resources folder /frame-home/src/main/java overlaps with sources folder /frame-home/src/main/java
+2019-03-18 11:47:44,899 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /frame-home/src/main/resources
+2019-03-18 11:47:44,900 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /frame-home/src/test/java
+2019-03-18 11:47:45,573 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common-approval/src/main/java
+2019-03-18 11:47:45,574 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Resources folder /common-approval/src/main/java overlaps with sources folder /common-approval/src/main/java
+2019-03-18 11:47:45,581 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common-approval/src/main/resources
+2019-03-18 11:47:45,582 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common-approval/src/test/java
+2019-03-18 11:47:46,453 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common-cloud-zuul/src/main/java
+2019-03-18 11:47:46,453 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common-cloud-zuul/src/main/resources
+2019-03-18 11:47:46,454 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common-cloud-zuul/src/test/java
+2019-03-18 11:47:47,110 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common-cloud-eureka/src/main/java
+2019-03-18 11:47:47,110 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common-cloud-eureka/src/main/resources
+2019-03-18 11:47:47,110 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common-cloud-eureka/src/test/java
+2019-03-18 11:47:47,111 [Worker-7] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common-cloud-eureka/src/test/resources
+2019-03-18 11:47:47,670 [Worker-7] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 9 project(s) in 55 sec
+2019-03-18 11:47:53,835 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:47:53,844 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 5 resources
+2019-03-18 11:47:53,869 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:47:53,869 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-03-18 11:47:57,750 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:47:57,751 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2019-03-18 11:47:57,761 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:47:57,761 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\GCLP\codes\common-base\common-cloud-zuul\src\test\resources
+2019-03-18 11:48:14,292 [Worker-11] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.grape:systemanage:1.0-SNAPSHOT @ D:\GCLP\codes\common-base\systemanage\pom.xml.
+2019-03-18 11:48:19,312 [Worker-11] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /systemanage/src/main/java
+2019-03-18 11:48:19,313 [Worker-11] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /systemanage/src/main/resources
+2019-03-18 11:48:19,314 [Worker-11] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /systemanage/src/test/java
+2019-03-18 11:48:20,560 [Worker-11] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 8 sec
+2019-03-18 11:48:24,460 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:24,466 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 137 resources
+2019-03-18 11:48:24,934 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:24,934 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\GCLP\codes\common-base\common-thirtytool\src\test\resources
+2019-03-18 11:48:29,674 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:29,674 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2019-03-18 11:48:29,685 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:29,685 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\GCLP\codes\common-base\common-auth\src\test\resources
+2019-03-18 11:48:38,641 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:38,642 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 18 resources
+2019-03-18 11:48:38,701 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2019-03-18 11:48:38,711 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:38,711 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\GCLP\codes\common-base\common-approval\src\test\resources
+2019-03-18 11:48:44,255 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:44,256 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 5 resources
+2019-03-18 11:48:44,273 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-03-18 11:48:44,279 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:44,279 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\GCLP\codes\common-base\commen-company\src\test\resources
+2019-03-18 11:48:49,580 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:49,581 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 8 resources
+2019-03-18 11:48:49,605 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 10 resources
+2019-03-18 11:48:49,638 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:49,639 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\GCLP\codes\common-base\frame-home\src\test\resources
+2019-03-18 11:48:54,575 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:54,576 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 8 resources
+2019-03-18 11:48:54,610 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 3 resources
+2019-03-18 11:48:54,617 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:54,617 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\GCLP\codes\common-base\management\src\test\resources
+2019-03-18 11:48:59,051 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:59,052 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2019-03-18 11:48:59,059 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:48:59,059 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\GCLP\codes\common-base\systemanage\src\test\resources
+2019-03-18 11:49:04,078 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:49:04,079 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 9 resources
+2019-03-18 11:49:04,120 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2019-03-18 11:49:04,139 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-03-18 11:49:04,140 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\GCLP\codes\common-base\workflow\src\test\resources

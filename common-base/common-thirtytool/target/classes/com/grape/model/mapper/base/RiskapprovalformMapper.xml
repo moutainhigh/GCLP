@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.RiskapprovalformMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Riskapprovalform" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="logid" property="logid" jdbcType="VARCHAR" />
+    <result column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="pactsignflg" property="pactsignflg" jdbcType="CHAR" />
+    <result column="pactsignnote" property="pactsignnote" jdbcType="VARCHAR" />
+    <result column="statesignflg" property="statesignflg" jdbcType="CHAR" />
+    <result column="statesignnote" property="statesignnote" jdbcType="VARCHAR" />
+    <result column="notation" property="notation" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="nodeid" property="nodeid" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, logid, workid, pactsignflg, pactsignnote, statesignflg, statesignnote, notation, 
+    userid, nodeid, chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.RiskapprovalformExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from riskapprovalform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from riskapprovalform
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from riskapprovalform
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.RiskapprovalformExample" >
+    delete from riskapprovalform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Riskapprovalform" >
+    insert into riskapprovalform (id, logid, workid, 
+      pactsignflg, pactsignnote, statesignflg, 
+      statesignnote, notation, userid, 
+      nodeid, chgdt, chgtl
+      )
+    values (#{id,jdbcType=VARCHAR}, #{logid,jdbcType=VARCHAR}, #{workid,jdbcType=VARCHAR}, 
+      #{pactsignflg,jdbcType=CHAR}, #{pactsignnote,jdbcType=VARCHAR}, #{statesignflg,jdbcType=CHAR}, 
+      #{statesignnote,jdbcType=VARCHAR}, #{notation,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{nodeid,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Riskapprovalform" >
+    insert into riskapprovalform
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="logid != null" >
+        logid,
+      </if>
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="pactsignflg != null" >
+        pactsignflg,
+      </if>
+      <if test="pactsignnote != null" >
+        pactsignnote,
+      </if>
+      <if test="statesignflg != null" >
+        statesignflg,
+      </if>
+      <if test="statesignnote != null" >
+        statesignnote,
+      </if>
+      <if test="notation != null" >
+        notation,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="nodeid != null" >
+        nodeid,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="logid != null" >
+        #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="pactsignflg != null" >
+        #{pactsignflg,jdbcType=CHAR},
+      </if>
+      <if test="pactsignnote != null" >
+        #{pactsignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="statesignflg != null" >
+        #{statesignflg,jdbcType=CHAR},
+      </if>
+      <if test="statesignnote != null" >
+        #{statesignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="notation != null" >
+        #{notation,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.RiskapprovalformExample" resultType="java.lang.Integer" >
+    select count(*) from riskapprovalform
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update riskapprovalform
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logid != null" >
+        logid = #{record.logid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pactsignflg != null" >
+        pactsignflg = #{record.pactsignflg,jdbcType=CHAR},
+      </if>
+      <if test="record.pactsignnote != null" >
+        pactsignnote = #{record.pactsignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statesignflg != null" >
+        statesignflg = #{record.statesignflg,jdbcType=CHAR},
+      </if>
+      <if test="record.statesignnote != null" >
+        statesignnote = #{record.statesignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notation != null" >
+        notation = #{record.notation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nodeid != null" >
+        nodeid = #{record.nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update riskapprovalform
+    set id = #{record.id,jdbcType=VARCHAR},
+      logid = #{record.logid,jdbcType=VARCHAR},
+      workid = #{record.workid,jdbcType=VARCHAR},
+      pactsignflg = #{record.pactsignflg,jdbcType=CHAR},
+      pactsignnote = #{record.pactsignnote,jdbcType=VARCHAR},
+      statesignflg = #{record.statesignflg,jdbcType=CHAR},
+      statesignnote = #{record.statesignnote,jdbcType=VARCHAR},
+      notation = #{record.notation,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      nodeid = #{record.nodeid,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Riskapprovalform" >
+    update riskapprovalform
+    <set >
+      <if test="logid != null" >
+        logid = #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="workid != null" >
+        workid = #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="pactsignflg != null" >
+        pactsignflg = #{pactsignflg,jdbcType=CHAR},
+      </if>
+      <if test="pactsignnote != null" >
+        pactsignnote = #{pactsignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="statesignflg != null" >
+        statesignflg = #{statesignflg,jdbcType=CHAR},
+      </if>
+      <if test="statesignnote != null" >
+        statesignnote = #{statesignnote,jdbcType=VARCHAR},
+      </if>
+      <if test="notation != null" >
+        notation = #{notation,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        nodeid = #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Riskapprovalform" >
+    update riskapprovalform
+    set logid = #{logid,jdbcType=VARCHAR},
+      workid = #{workid,jdbcType=VARCHAR},
+      pactsignflg = #{pactsignflg,jdbcType=CHAR},
+      pactsignnote = #{pactsignnote,jdbcType=VARCHAR},
+      statesignflg = #{statesignflg,jdbcType=CHAR},
+      statesignnote = #{statesignnote,jdbcType=VARCHAR},
+      notation = #{notation,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=VARCHAR},
+      nodeid = #{nodeid,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

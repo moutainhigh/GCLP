@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.ExchannelMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Exchannel" >
+    <id column="channelno" property="channelno" jdbcType="VARCHAR" />
+    <result column="channelname" property="channelname" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="accesskeyid" property="accesskeyid" jdbcType="VARCHAR" />
+    <result column="accesskeysecret" property="accesskeysecret" jdbcType="VARCHAR" />
+    <result column="secret" property="secret" jdbcType="VARCHAR" />
+    <result column="conid" property="conid" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="pushdomain" property="pushdomain" jdbcType="VARCHAR" />
+    <result column="livedomain" property="livedomain" jdbcType="VARCHAR" />
+    <result column="appname" property="appname" jdbcType="VARCHAR" />
+    <result column="livekey" property="livekey" jdbcType="VARCHAR" />
+    <result column="pushkey" property="pushkey" jdbcType="VARCHAR" />
+    <result column="videocenter" property="videocenter" jdbcType="VARCHAR" />
+    <result column="openflg" property="openflg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    channelno, channelname, username, password, accesskeyid, accesskeysecret, secret, 
+    conid, price, pushdomain, livedomain, appname, livekey, pushkey, videocenter, openflg
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.ExchannelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from exchannel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from exchannel
+    where channelno = #{channelno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from exchannel
+    where channelno = #{channelno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.ExchannelExample" >
+    delete from exchannel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Exchannel" >
+    insert into exchannel (channelno, channelname, username, 
+      password, accesskeyid, accesskeysecret, 
+      secret, conid, price, 
+      pushdomain, livedomain, appname, 
+      livekey, pushkey, videocenter, 
+      openflg)
+    values (#{channelno,jdbcType=VARCHAR}, #{channelname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{accesskeyid,jdbcType=VARCHAR}, #{accesskeysecret,jdbcType=VARCHAR}, 
+      #{secret,jdbcType=VARCHAR}, #{conid,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{pushdomain,jdbcType=VARCHAR}, #{livedomain,jdbcType=VARCHAR}, #{appname,jdbcType=VARCHAR}, 
+      #{livekey,jdbcType=VARCHAR}, #{pushkey,jdbcType=VARCHAR}, #{videocenter,jdbcType=VARCHAR}, 
+      #{openflg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Exchannel" >
+    insert into exchannel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="channelno != null" >
+        channelno,
+      </if>
+      <if test="channelname != null" >
+        channelname,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="accesskeyid != null" >
+        accesskeyid,
+      </if>
+      <if test="accesskeysecret != null" >
+        accesskeysecret,
+      </if>
+      <if test="secret != null" >
+        secret,
+      </if>
+      <if test="conid != null" >
+        conid,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="pushdomain != null" >
+        pushdomain,
+      </if>
+      <if test="livedomain != null" >
+        livedomain,
+      </if>
+      <if test="appname != null" >
+        appname,
+      </if>
+      <if test="livekey != null" >
+        livekey,
+      </if>
+      <if test="pushkey != null" >
+        pushkey,
+      </if>
+      <if test="videocenter != null" >
+        videocenter,
+      </if>
+      <if test="openflg != null" >
+        openflg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="channelno != null" >
+        #{channelno,jdbcType=VARCHAR},
+      </if>
+      <if test="channelname != null" >
+        #{channelname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="accesskeyid != null" >
+        #{accesskeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="accesskeysecret != null" >
+        #{accesskeysecret,jdbcType=VARCHAR},
+      </if>
+      <if test="secret != null" >
+        #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="conid != null" >
+        #{conid,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pushdomain != null" >
+        #{pushdomain,jdbcType=VARCHAR},
+      </if>
+      <if test="livedomain != null" >
+        #{livedomain,jdbcType=VARCHAR},
+      </if>
+      <if test="appname != null" >
+        #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="livekey != null" >
+        #{livekey,jdbcType=VARCHAR},
+      </if>
+      <if test="pushkey != null" >
+        #{pushkey,jdbcType=VARCHAR},
+      </if>
+      <if test="videocenter != null" >
+        #{videocenter,jdbcType=VARCHAR},
+      </if>
+      <if test="openflg != null" >
+        #{openflg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.ExchannelExample" resultType="java.lang.Integer" >
+    select count(*) from exchannel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update exchannel
+    <set >
+      <if test="record.channelno != null" >
+        channelno = #{record.channelno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelname != null" >
+        channelname = #{record.channelname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accesskeyid != null" >
+        accesskeyid = #{record.accesskeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accesskeysecret != null" >
+        accesskeysecret = #{record.accesskeysecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secret != null" >
+        secret = #{record.secret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conid != null" >
+        conid = #{record.conid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pushdomain != null" >
+        pushdomain = #{record.pushdomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.livedomain != null" >
+        livedomain = #{record.livedomain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appname != null" >
+        appname = #{record.appname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.livekey != null" >
+        livekey = #{record.livekey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pushkey != null" >
+        pushkey = #{record.pushkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videocenter != null" >
+        videocenter = #{record.videocenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openflg != null" >
+        openflg = #{record.openflg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update exchannel
+    set channelno = #{record.channelno,jdbcType=VARCHAR},
+      channelname = #{record.channelname,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      accesskeyid = #{record.accesskeyid,jdbcType=VARCHAR},
+      accesskeysecret = #{record.accesskeysecret,jdbcType=VARCHAR},
+      secret = #{record.secret,jdbcType=VARCHAR},
+      conid = #{record.conid,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      pushdomain = #{record.pushdomain,jdbcType=VARCHAR},
+      livedomain = #{record.livedomain,jdbcType=VARCHAR},
+      appname = #{record.appname,jdbcType=VARCHAR},
+      livekey = #{record.livekey,jdbcType=VARCHAR},
+      pushkey = #{record.pushkey,jdbcType=VARCHAR},
+      videocenter = #{record.videocenter,jdbcType=VARCHAR},
+      openflg = #{record.openflg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Exchannel" >
+    update exchannel
+    <set >
+      <if test="channelname != null" >
+        channelname = #{channelname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="accesskeyid != null" >
+        accesskeyid = #{accesskeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="accesskeysecret != null" >
+        accesskeysecret = #{accesskeysecret,jdbcType=VARCHAR},
+      </if>
+      <if test="secret != null" >
+        secret = #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="conid != null" >
+        conid = #{conid,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="pushdomain != null" >
+        pushdomain = #{pushdomain,jdbcType=VARCHAR},
+      </if>
+      <if test="livedomain != null" >
+        livedomain = #{livedomain,jdbcType=VARCHAR},
+      </if>
+      <if test="appname != null" >
+        appname = #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="livekey != null" >
+        livekey = #{livekey,jdbcType=VARCHAR},
+      </if>
+      <if test="pushkey != null" >
+        pushkey = #{pushkey,jdbcType=VARCHAR},
+      </if>
+      <if test="videocenter != null" >
+        videocenter = #{videocenter,jdbcType=VARCHAR},
+      </if>
+      <if test="openflg != null" >
+        openflg = #{openflg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where channelno = #{channelno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Exchannel" >
+    update exchannel
+    set channelname = #{channelname,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      accesskeyid = #{accesskeyid,jdbcType=VARCHAR},
+      accesskeysecret = #{accesskeysecret,jdbcType=VARCHAR},
+      secret = #{secret,jdbcType=VARCHAR},
+      conid = #{conid,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      pushdomain = #{pushdomain,jdbcType=VARCHAR},
+      livedomain = #{livedomain,jdbcType=VARCHAR},
+      appname = #{appname,jdbcType=VARCHAR},
+      livekey = #{livekey,jdbcType=VARCHAR},
+      pushkey = #{pushkey,jdbcType=VARCHAR},
+      videocenter = #{videocenter,jdbcType=VARCHAR},
+      openflg = #{openflg,jdbcType=VARCHAR}
+    where channelno = #{channelno,jdbcType=VARCHAR}
+  </update>
+</mapper>

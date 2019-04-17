@@ -1,0 +1,47 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grape.model.mapper.external.LiveinfoExMapper">
+    <select id="findLiveinfoListOrderByEndtimeDesc" resultType="com.grape.model.db.Liveinfo" parameterType="map">
+       select * from liveinfo l
+       where 1=1
+       
+        <if test="workid!=null and workid!=''">
+           and l.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+        <if test="mortgageno!=null and mortgageno!=''">
+           and l.mortgageno=#{mortgageno, jdbcType = VARCHAR}
+        </if>
+        <if test="type!=null and type!=''">
+           and l.type=#{type, jdbcType = VARCHAR}
+        </if>
+        
+        order by l.liveendtime desc
+    </select>
+
+    <select id="findLiveinfoListOrderByStarttimeAsc" resultType="com.grape.model.db.Liveinfo" parameterType="map">
+       select * from liveinfo l
+       where 1=1
+       
+        <if test="workid!=null and workid!=''">
+           and l.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+          <if test="mortgageno!=null and mortgageno!=''">
+           and l.mortgageno=#{mortgageno, jdbcType = VARCHAR}
+        </if>
+        <if test="type!=null and type!=''">
+           and l.type=#{type, jdbcType = VARCHAR}
+        </if>
+        order by l.livestarttime asc
+    </select>
+	
+	<select id="findByWorkid" resultType="java.lang.String" parameterType="map">
+       select DISTINCT type from liveinfo l
+       where 1=1
+       
+        <if test="workid!=null and workid!=''">
+           and l.workid=#{workid, jdbcType = VARCHAR}
+        </if>
+       		and l.type is not null
+    </select>
+    
+    
+</mapper> 

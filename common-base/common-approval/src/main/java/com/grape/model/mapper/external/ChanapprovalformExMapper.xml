@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.ChanapprovalformExMapper" >
+	<select id="findMortgagenoteByMap" resultType="com.grape.model.db.Chanapprovalform" parameterType="map">
+		select c.* from chanapprovalform c
+		where 1=1
+			and c.workid = #{workid}
+			and c.mortgagenote is not null and c.mortgagenote != '' 
+		order by c.id desc
+	</select>
+	
+	<select id="findChanapprovalformByMap" resultType="com.grape.model.db.Chanapprovalform" parameterType="map">
+		select c.* from chanapprovalform c
+		where c.workid=#{workid} and (c.id=(select max(id) from chanapprovalform chan where chan.suggestmortgagerate is not null or chan.mortgageratenote is not null or chan.afterloandebtrate is not null or chan.afterloandebtratenote is not null or chan.mortgagerateamount is not null or chan.debtrateamount is not null or chan.maxcreditamount is not null or chan.realcreditamount is not null) or c.tempflg='1')
+	</select>
+	
+	<select id="selectTempChanapprovalform" parameterType="map" resultType="com.grape.model.db.Chanapprovalform">
+	SELECT * from chanapprovalform where workid = #{workid } and tempflg='1'
+	</select>
+</mapper>

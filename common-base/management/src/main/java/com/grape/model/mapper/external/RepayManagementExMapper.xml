@@ -1,0 +1,542 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3w.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.external.RepayManagementExMapper">
+
+    <select id="getnum" resultType="Integer" parameterType="map">
+        select count(1) num from postloaninfo,doctask where postloaninfo.workid=doctask.workid
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '04'.toString() ">
+            and doctask.terrcaeno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getOverdueInfo" resultType="map" parameterType="map">
+        select count(1) count,COALESCE(sum(postloaninfo.overduecorpus),0) AS sum from postloaninfo,doctask where
+        postloaninfo.workid=doctask.workid
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '04'.toString() ">
+            and doctask.terrcaeno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+
+        <if test=" endDate == null ">
+            <if test=" binding == '0'.toString() ">
+                and postloaninfo.overduedate is not null
+            </if>
+            <if test=" binding == '30'.toString() ">
+                and postloaninfo.overduenum &lt;= #{binding , jdbcType=VARCHAR}
+            </if>
+            <if test=" binding == '60'.toString() ">
+                and postloaninfo.overduenum &lt;= #{binding , jdbcType=VARCHAR}
+            </if>
+            <if test=" binding == '90'.toString() ">
+                and postloaninfo.overduenum &lt;= #{binding , jdbcType=VARCHAR}
+            </if>
+            <if test=" binding == '120'.toString() ">
+                and postloaninfo.overduenum &gt; 90
+            </if>
+            AND postloaninfo.overdueflg="Y"
+        </if>
+
+        <if test=" endDate !=null ">
+            <if test=" binding == '0'.toString() ">
+                and postloaninfo.overduedate is not null
+            </if>
+            <if test=" binding == '30'.toString() ">
+                and DATEDIFF(#{endDate , jdbcType=TIMESTAMP},postloaninfo.overduedate) &lt;=
+                #{binding , jdbcType=VARCHAR}
+            </if>
+            <if test=" binding == '60'.toString() ">
+                and DATEDIFF(#{endDate , jdbcType=TIMESTAMP},postloaninfo.overduedate) &lt;=
+                #{binding , jdbcType=VARCHAR}
+            </if>
+            <if test=" binding == '90'.toString() ">
+                and DATEDIFF(#{endDate , jdbcType=TIMESTAMP},postloaninfo.overduedate) &lt;=
+                #{binding , jdbcType=VARCHAR}
+            </if>
+            <if test=" binding == '120'.toString() ">
+                and DATEDIFF(#{endDate , jdbcType=TIMESTAMP},postloaninfo.overduedate) &gt; 90
+            </if>
+            AND postloaninfo.overdueflg="Y" and postloaninfo.overduedate &lt; DATE_ADD(#{endDate , jdbcType=TIMESTAMP}, interval 1 DAY)
+        </if>
+
+    </select>
+
+    <!-- <select id="overdueStatReponse" resultType="com.grape.controller.reponse.bean.OverdueStatBean"
+        parameterType="map">
+        select temp2.sum1,temp2.sum2,temp2.sum1/temp2.sum3 as overdueprob,temp3.lastoverdueprob
+        from(select sum(case when temp1.overdueflg='Y' then 1 else 0 end) sum1,
+                 sum(case when temp1.overdueflg='Y' then temp1.overduecorpus else 0 end) sum2,
+                 count(1) sum3,DATE_FORMAT(NOW(),'%y%m') as nowdate
+                from(select postloaninfo.* from postloaninfo postloaninfo
+                    left join doctask doctask on doctask.workid=postloaninfo.workid where 1=1
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" binding == '30'.toString() ">
+            and postloaninfo.addoverduedaynum &lt;= #{binding , jdbcType=VARCHAR}
+        </if>
+        <if test=" binding == '60'.toString() ">
+            and postloaninfo.addoverduedaynum &lt;= #{binding , jdbcType=VARCHAR}
+        </if>
+        <if test=" binding == '90'.toString() ">
+            and postloaninfo.addoverduedaynum &lt;= #{binding , jdbcType=VARCHAR}
+        </if>
+        <if test=" binding == '120'.toString() ">
+            and postloaninfo.addoverduedaynum &gt; #{bindingtime , jdbcType=VARCHAR}
+        </if>
+        )temp1 )temp2
+        left join (select AVG(monthlystat.overdueprob) as
+        lastoverdueprob,monthlystat.monthnum
+        from monthlystat
+        where 1=1
+        <if test=" orgbelongsto == '01'.toString() ">
+            and monthlystat.channelno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and monthlystat.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and monthlystat.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        GROUP BY monthlystat.monthnum )
+        temp3 on temp3.monthnum=temp2.nowdate-1
+    </select> -->
+
+    <select id="managementlistBean" resultType="com.grape.controller.reponse.bean.ManagementlistBean"
+            parameterType="map">
+        select doctask.workid,area.areaname,organization.organizationname,organization.organizationno,pc.coddes,
+        pc.productname,pc.productno,custinfo.custname,doctask.applydate,
+        postloaninfo.ishaveread,productnode.nodename,productnode.nodeid
+        from doctask doctask
+        left join area area on area.areaid=doctask.areaid
+        left join organization organization on doctask.channelno=organization.organizationno
+        left join (select p.productno,p.productname,c.coddes from product p,codetable c
+        where p.producttype=c.codflg and c.codtyp='PRODUCTTYPE') pc on doctask.productno=pc.productno
+        left join custinfo custinfo on doctask.workid=custinfo.workid and custinfo.custtype like '%1%'
+        INNER join postloaninfo postloaninfo on postloaninfo.workid=doctask.workid
+        left join workitem workitem on doctask.workid=workitem.workid
+        left join productnode productnode on productnode.nodeid=workitem.node
+        left join person person on person.workerid=doctask.userid
+        left join department department on department.departmentno=doctask.departmentno
+        where workitem.fork=0 and workitem.branch=0 and (1=1
+        <if test=" startDate !=null ">
+        	and postloaninfo.nextrepaydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+        	and postloaninfo.nextrepaydate &lt; #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        and 1=1)
+        <if test=" productno !=null and productno !='' ">
+            and pc.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" workid !=null and workid !='' ">
+            and doctask.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" custname !=null and custname !='' ">
+            and custinfo.custname like CONCAT(CONCAT('%', #{custname}), '%')
+        </if>
+        <if test=" cerdid !=null and cerdid !='' ">
+            and custinfo.cerdid = #{cerdid , jdbcType=VARCHAR}
+        </if>
+        <if test=" houseno !=null and houseno !='' ">
+            and exists(select 1 from mortgage where mortgage.workid=doctask.workid and
+            houseno=#{houseno , jdbcType=VARCHAR})
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+            <if test=" plevel != '9'.toString() ">
+                and (doctask.userid = #{workerid , jdbcType=VARCHAR} or person.supervisor =
+                #{workerid , jdbcType=VARCHAR})
+            </if>
+            <if test=" plevel == '9'.toString() and dlevel !=  '1'.toString() ">
+                and doctask.departmentno = #{departmentno , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        ORDER BY postloaninfo.nextrepaydate asc limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="managementCount" resultType="Integer" parameterType="map">
+        select count(1) from doctask doctask
+        left join area area on area.areaid=doctask.areaid
+        left join organization organization on doctask.channelno=organization.organizationno
+        left join (select p.productno,p.productname,c.coddes from product p,codetable c
+        where p.producttype=c.codflg and c.codtyp='PRODUCTTYPE') pc on doctask.productno=pc.productno
+        left join custinfo custinfo on doctask.workid=custinfo.workid and custinfo.custtype like '%1%'
+        INNER join postloaninfo postloaninfo on postloaninfo.workid=doctask.workid
+        left join workitem workitem on doctask.workid=workitem.workid
+        left join productnode productnode on productnode.nodeid=workitem.node
+        left join person person on person.workerid=doctask.userid
+        left join department department on department.departmentno=doctask.departmentno
+        where workitem.fork=0 and workitem.branch=0 and (1=1
+        <if test=" startDate !=null ">
+           and postloaninfo.nextrepaydate &gt;= #{startDate , jdbcType=TIMESTAMP}
+        </if>
+        <if test=" endDate !=null ">
+           and postloaninfo.nextrepaydate &lt; #{endDate , jdbcType=TIMESTAMP}
+        </if>
+        and 1=1)
+        <if test=" productno !=null and productno !='' ">
+            and pc.productno = #{productno , jdbcType=VARCHAR}
+        </if>
+        <if test=" workid !=null and workid !='' ">
+            and doctask.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" custname !=null and custname !='' ">
+            and custinfo.custname like CONCAT(CONCAT('%', #{custname}), '%')
+        </if>
+        <if test=" cerdid !=null and cerdid !='' ">
+            and custinfo.cerdid = #{cerdid , jdbcType=VARCHAR}
+        </if>
+        <if test=" houseno !=null and houseno !='' ">
+            and exists(select 1 from mortgage where mortgage.workid=doctask.workid and
+            houseno=#{houseno , jdbcType=VARCHAR})
+        </if>
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+            <if test=" plevel != '9'.toString() ">
+                and (doctask.userid = #{workerid , jdbcType=VARCHAR} or person.supervisor =
+                #{workerid , jdbcType=VARCHAR})
+            </if>
+            <if test=" plevel == '9'.toString() and dlevel !=  '1'.toString() ">
+                and doctask.departmentno = #{departmentno , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="statisticalRepay" resultType="com.grape.controller.reponse.bean.StatisticalRepay" parameterType="map">
+        select IFNULL(ABS(DATEDIFF(SYSDATE(),p.nextrepaydate)),0) as reminddays,
+        r.refundmoney AS refundmoneySum,r.refundinterest AS refundinterestSum,
+        (r.refundinterest +o.defaultinterest) AS penaltIinterestSum,
+        r.delayingpayment AS rdelayingSum,
+        r.breachofcontract AS breachofcontractSum,
+        o.overduecorpus AS overduecorpusSum,o.overdueaccrual AS overdueaccrualSum,
+        o.defaultinterest AS defaultinterestSum,o.delayingpayment AS odelayingSum,
+        p.addoverduedaynum
+        from postloaninfo p
+        left join (SELECT workid,refundissue,SUM(delayingpayment) AS delayingpayment,SUM(refundmoney) AS refundmoney,
+        SUM(refundinterest) AS refundinterest,SUM(breachofcontract) AS breachofcontract FROM repayinfo WHERE workid =  #{workid , jdbcType=VARCHAR}
+        AND refundissue IS NOT NULL GROUP BY workid) AS r ON r.workid = p.workid
+        left join (SELECT workid,SUM(overdueterm) AS overdueterm,SUM(overduecorpus )AS overduecorpus,
+        SUM(defaultinterest) AS defaultinterest,SUM(delayingpayment) AS delayingpayment,SUM(overdueaccrual) AS overdueaccrual FROM overdue
+        WHERE workid = #{workid , jdbcType=VARCHAR} GROUP BY workid) AS o ON o.workid = p.workid
+        where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and p.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+--         GROUP BY p.addoverduedaynum,reminddays
+    </select>
+
+    <select id="getPostloaninfo" resultType="map" parameterType="map">
+        select loanbalance,repaymethod from postloaninfo where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and workid = #{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="repayManagementBeanlist" resultType="com.grape.controller.reponse.bean.RepayManagementBean"
+            parameterType="map">
+        select plan.repayterm,plan.repaycapital,plan.repayaccrual,plan.repaydate,
+        r.refundmoneySum,r.refundinterestSum,
+        o.defaultinterest,r.interestmoneySum,o.overduedays overduedays,
+        o.delayingpayment,r.delayingpaymentSum,o.overduedays latefeedays,plan.status
+        from repayplan plan
+        left join (select workid,refundissue,sum(refundmoney) refundmoneySum,sum(refundinterest) refundinterestSum,
+        sum(interestmoney) interestmoneySum,sum(delayingpayment) delayingpaymentSum from repayinfo GROUP BY
+        workid,refundissue) r
+        on r.workid=plan.workid and r.refundissue=plan.repayterm
+        left join (select workid,overdueterm,overduecorpus,overdueaccrual,defaultinterest,delayingpayment,overduedays
+        from overdue) o
+        on o.workid=plan.workid and o.overdueterm=plan.repayterm
+        left join postloaninfo p on p.workid = plan.workid
+        where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and plan.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" checktype == '2'.toString() ">
+            /*and plan.repaycapital=r.refundmoneySum
+            and plan.repayaccrual=r.refundinterestSum
+            and (o.defaultinterest=r.interestmoneySum or o.defaultinterest IS NULL)
+            and (o.delayingpayment=r.delayingpaymentSum or o.delayingpayment IS NULL)*/
+            and plan.status=1
+        </if>
+        <if test=" checktype == '3'.toString() ">
+            /*and ((plan.repaycapital!=r.refundmoneySum or r.refundmoneySum is null)
+            or (plan.repayaccrual!=r.refundinterestSum or r.refundinterestSum is null)
+            or (o.defaultinterest>0 ) or (o.delayingpayment>0 ))*/
+            and plan.status=0
+        </if>
+        <if test=" checktype == '4'.toString() ">
+            and p.overdueflg='Y' AND o.overduedays IS NOT NULL
+        </if>
+        ORDER BY plan.repayterm limit #{pagenum},#{pagesize}
+    </select>
+
+    <select id="repayManagementBeanCount" resultType="Integer" parameterType="map">
+        select count(1) from repayplan plan
+        left join (select workid,refundissue,sum(refundmoney) refundmoneySum,sum(refundinterest) refundinterestSum,
+        sum(interestmoney) interestmoneySum,sum(delayingpayment) delayingpaymentSum from repayinfo GROUP BY
+        workid,refundissue) r
+        on r.workid=plan.workid and r.refundissue=plan.repayterm
+        left join (select workid,overdueterm,overduecorpus,overdueaccrual,defaultinterest,delayingpayment,overduedays
+        from overdue) o
+        on o.workid=plan.workid and o.overdueterm=plan.repayterm
+        left join postloaninfo p on p.workid = plan.workid
+        where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and plan.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" checktype == '2'.toString() ">
+            /*and plan.repaycapital=r.refundmoneySum
+            and plan.repayaccrual=r.refundinterestSum
+            and (o.defaultinterest=r.interestmoneySum or o.defaultinterest IS NULL)
+            and (o.delayingpayment=r.delayingpaymentSum or o.delayingpayment IS NULL)*/
+            and plan.status=1
+        </if>
+        <if test=" checktype == '3'.toString() ">
+            /*and ((plan.repaycapital!=r.refundmoneySum or r.refundmoneySum is null)
+            or (plan.repayaccrual!=r.refundinterestSum or r.refundinterestSum is null)
+            or (o.defaultinterest>0 ) or (o.delayingpayment>0 ))*/
+            and plan.status=0
+        </if>
+        <if test=" checktype == '4'.toString() ">
+            and p.overdueflg='Y' AND o.overduedays IS NOT NULL
+        </if>
+    </select>
+
+    <select id="getDatetime" resultType="map" parameterType="map">
+        select
+        MAX(realityrefunddate) realityrefunddate,
+        MAX(interestmoneydate) interestmoneydate,
+        MAX(delayingpaymentdate) delayingpaymentdate
+        from repayinfo where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" refundissue !=null and refundissue !='' ">
+            and refundissue = #{refundissue , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getmethod" resultType="map" parameterType="map">
+        select coddes from repayinfo repayinfo
+        LEFT JOIN codetable codetable on codetable.codflg=repayinfo.repaymethod and codtyp='REPAYWAY'
+        where unifiedtime = (select MAX(unifiedtime) from repayinfo where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" refundissue !=null and refundissue !='' ">
+            and refundissue = #{refundissue , jdbcType=VARCHAR}
+        </if>) and repayinfo.id = (select MAX(repayinfo.id) where 1=1
+        <if test=" refundissue !=null and refundissue !='' ">
+            and repayinfo.refundissue = #{refundissue , jdbcType=VARCHAR}
+        </if>
+        <if test=" workid !=null and workid !='' ">
+            and repayinfo.workid = #{workid , jdbcType=VARCHAR}
+        </if>)
+    </select>
+
+    <select id="getnewWorkid" resultType="String" parameterType="String">
+        select newworkid from applyforex where 1=1
+        <if test=" value !=null and value !='' ">
+            and workid = #{value , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getrepaycapital" resultType="map" parameterType="String">
+        SELECT repaycapital from repayplan
+        where repayterm = (select MAX(repayterm) from repayplan
+        <if test=" value !=null and value !='' ">
+            where workid = #{value , jdbcType=VARCHAR}
+        </if>)
+    </select>
+
+    <select id="getsumofamount" resultType="map" parameterType="String">
+        SELECT sumofamount from repaytoinfo where repaytoinfo.isfinilyflg='1'
+        <if test=" value !=null and value !='' ">
+            and workid = #{value , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="repaymenthistoryBeanlist" resultType="com.grape.controller.reponse.bean.RepaymenthistoryBean"
+            parameterType="map">
+        select
+        refundmoney,refundinterest,realityrefunddate,
+        interestmoney,interestmoneydate,
+        delayingpayment,delayingpaymentdate
+        from repayinfo where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" refundissue !=null and refundissue !='' ">
+            and refundissue = #{refundissue , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getBasicInformationBean" resultType="com.grape.controller.reponse.bean.BasicInformationBean"
+            parameterType="map">
+        select
+        custinfo.custname,doctask.contractno,doctask.workid,area.areaname,organization.organizationname,pc.coddes,pc.productname,person.workername,
+        repaytoinfo.totaluseamount,repaytoinfo.totaluseterm,repaytoinfo.sumofamount,repaytoinfo.interestrate,repaytoinfo.loanlimittime,
+        repaytoinfo.repaymethod,case when house.sum = 0 then 0 else repaytoinfo.sumofamount/house.sum end cvs,
+        postloaninfo.firstloandate,postloaninfo.maturitydate,postloaninfo.settledate,postloaninfo.loanbalance,
+        (SELECT COUNT(*) FROM repayplan WHERE workid= #{workid , jdbcType=VARCHAR} AND status=0) as remainingdays,
+        bnkaccount.accountname,bnkaccount.account,bnkaccount.bnk,bnkaccount.repayaccountname,bnkaccount.repayaccount,bnkaccount.repayaccountbnk,
+        otherapplyinfo.usageofloan,otherapplyinfo.usageloanplan,otherapplyinfo.repaysource,otherapplyinfo.repayplan
+        from doctask doctask
+        LEFT JOIN area area on area.areaid=doctask.areaid
+        LEFT JOIN organization organization on organization.organizationno=doctask.channelno
+        LEFT JOIN (select p.productno,p.productname,c.coddes from product p,codetable c where p.producttype=c.codflg and
+        c.codtyp='PRODUCTTYPE') pc on pc.productno=doctask.productno
+        LEFT JOIN person person on person.workerid=doctask.userid
+        LEFT JOIN repaytoinfo repaytoinfo on repaytoinfo.workid=doctask.workid
+        LEFT JOIN codetable codetable on codetable.codflg=repaytoinfo.repaymethod and codtyp='REPAYTYPE'
+        left join (select houseassess.workid,SUM(houseassess.assess_control_total) sum from houseassess GROUP BY
+        houseassess.workid) house on house.workid=doctask.workid
+        LEFT JOIN postloaninfo postloaninfo on postloaninfo.workid=doctask.workid
+        LEFT JOIN bnkaccount bnkaccount on bnkaccount.workid=doctask.workid
+        LEFT JOIN otherapplyinfo otherapplyinfo on otherapplyinfo.workid=doctask.workid
+        LEFT JOIN custinfo custinfo on doctask.workid=custinfo.workid and custinfo.custtype like '%1%'
+        LEFT JOIN (select workid,MAX(repayterm) maxplan from repayplan GROUP BY workid) plan on
+        plan.workid=doctask.workid
+        where repaytoinfo.isfinilyflg='1'
+        <if test=" workid !=null and workid !='' ">
+            and doctask.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="overduelistBean" resultType="com.grape.controller.reponse.bean.OverduelistBean" parameterType="map">
+        select doctask.workid,product.productname,custinfo.custname,
+        postloaninfo.overduedate,postloaninfo.addoverduedaynum,product.productno,productnode.nodeid
+        from doctask
+        left join product product on doctask.productno=product.productno
+        left join postloaninfo postloaninfo on postloaninfo.workid=doctask.workid
+        left join custinfo custinfo on doctask.workid=custinfo.workid and custinfo.custtype like '%1%'
+        left join workitem workitem on doctask.workid=workitem.workid
+        left join productnode productnode on productnode.nodeid=workitem.node
+        left join person person on person.workerid=doctask.userid
+        left join department department on department.departmentno=doctask.departmentno
+        where workitem.fork=0 and workitem.branch=0 and postloaninfo.overdueflg='Y'
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+            <if test=" plevel != '9'.toString() ">
+                and (doctask.userid = #{workerid , jdbcType=VARCHAR} or person.supervisor =
+                #{workerid , jdbcType=VARCHAR})
+            </if>
+            <if test=" plevel == '9'.toString() and dlevel !=  '1'.toString() ">
+                and doctask.departmentno = #{departmentno , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        ORDER BY postloaninfo.addoverduedaynum desc
+    </select>
+
+    <select id="promptpaymentBean" resultType="com.grape.controller.reponse.bean.PromptpaymentBean" parameterType="map">
+        select doctask.workid,product.productname,custinfo.custname,postloaninfo.nextrepaydate,
+        DATEDIFF(postloaninfo.nextrepaydate,SYSDATE())
+        repaydates,repayplan.repaycapital,repayplan.repayaccrual,product.productno,productnode.nodeid,list.custname AS mortgager
+        from doctask
+        left join product product on doctask.productno=product.productno
+        left join postloaninfo postloaninfo on postloaninfo.workid=doctask.workid
+        left join custinfo custinfo on doctask.workid=custinfo.workid and custinfo.custtype like '%1%'
+        left join workitem workitem on doctask.workid=workitem.workid
+        left join productnode productnode on productnode.nodeid=workitem.node
+        left join person person on person.workerid=doctask.userid
+        left join department department on department.departmentno=doctask.departmentno
+        left join repayplan repayplan on repayplan.repayterm=postloaninfo.nextrefundissue and
+        postloaninfo.workid=repayplan.workid
+        left join (select group_concat(custname) AS custname,workid FROM custinfo WHERE custtype like '%4%' GROUP BY workid ) AS list ON list.workid=doctask.workid
+        where workitem.fork=0 and workitem.branch=0 and
+        0 &lt; DATEDIFF(postloaninfo.nextrepaydate,SYSDATE()) and DATEDIFF(postloaninfo.nextrepaydate,SYSDATE()) &lt;= 5
+        <if test=" orgbelongsto == '01'.toString() ">
+            and doctask.channelno = #{organizationno , jdbcType=VARCHAR}
+            <if test=" plevel != '9'.toString() ">
+                and (doctask.userid = #{workerid , jdbcType=VARCHAR} or person.supervisor =
+                #{workerid , jdbcType=VARCHAR})
+            </if>
+            <if test=" plevel == '9'.toString() and dlevel !=  '1'.toString() ">
+                and doctask.departmentno = #{departmentno , jdbcType=VARCHAR}
+            </if>
+        </if>
+        <if test=" orgbelongsto == '02'.toString() ">
+            and doctask.fundno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        <if test=" orgbelongsto == '03'.toString() ">
+            and doctask.aisleno = #{organizationno , jdbcType=VARCHAR}
+        </if>
+        ORDER BY DATEDIFF(postloaninfo.nextrepaydate,SYSDATE()) asc
+    </select>
+
+
+    <select id="getPostloaninfolist" resultType="com.grape.model.db.Postloaninfo" parameterType="map">
+        select * from postloaninfo where 1=1
+        <if test=" startDate !=null ">
+            and nextrepaydate &gt;= DATE_FORMAT(#{startDate ,jdbcType=TIMESTAMP},'%Y-%m-%d')
+        </if>
+        <if test=" endDate !=null ">
+            and nextrepaydate &lt;= NOW()
+        </if>
+    </select>
+
+    <select id="getRepaymentInfo" resultType="map" parameterType="map">
+        select plan.workid,plan.repaydate,plan.repaycapital,plan.repayaccrual,plan.repayterm,
+        info.realityrefunddate,info.refundmoney,info.refundinterest,info.refundissue
+        from repayplan plan
+        left join repayinfo info on plan.repayterm=info.refundissue and plan.workid=info.workid
+        where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and plan.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" refundissue !=null and refundissue !='' ">
+            and plan.repayterm = #{refundissue , jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getRepayplan" resultType="com.grape.model.db.Repayplan" parameterType="map">
+        select * from repayplan where 1=1
+        <if test=" workid !=null and workid !='' ">
+            and repayplan.workid = #{workid , jdbcType=VARCHAR}
+        </if>
+        <if test=" nextrefundissue !=null and nextrefundissue !='' ">
+            and repayplan.repayterm = #{nextrefundissue ,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

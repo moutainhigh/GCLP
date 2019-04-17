@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.BnkaccountMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Bnkaccount" >
+    <id column="workid" property="workid" jdbcType="VARCHAR" />
+    <result column="accountname" property="accountname" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="bnk" property="bnk" jdbcType="VARCHAR" />
+    <result column="repayaccountbnk" property="repayaccountbnk" jdbcType="VARCHAR" />
+    <result column="repayaccountname" property="repayaccountname" jdbcType="VARCHAR" />
+    <result column="repayaccount" property="repayaccount" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workid, accountname, account, bnk, repayaccountbnk, repayaccountname, repayaccount, 
+    chgdt, chgtl
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.BnkaccountExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bnkaccount
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bnkaccount
+    where workid = #{workid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bnkaccount
+    where workid = #{workid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.BnkaccountExample" >
+    delete from bnkaccount
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Bnkaccount" >
+    insert into bnkaccount (workid, accountname, account, 
+      bnk, repayaccountbnk, repayaccountname, 
+      repayaccount, chgdt, chgtl
+      )
+    values (#{workid,jdbcType=VARCHAR}, #{accountname,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{bnk,jdbcType=VARCHAR}, #{repayaccountbnk,jdbcType=VARCHAR}, #{repayaccountname,jdbcType=VARCHAR}, 
+      #{repayaccount,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, #{chgtl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Bnkaccount" >
+    insert into bnkaccount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        workid,
+      </if>
+      <if test="accountname != null" >
+        accountname,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="bnk != null" >
+        bnk,
+      </if>
+      <if test="repayaccountbnk != null" >
+        repayaccountbnk,
+      </if>
+      <if test="repayaccountname != null" >
+        repayaccountname,
+      </if>
+      <if test="repayaccount != null" >
+        repayaccount,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workid != null" >
+        #{workid,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null" >
+        #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="bnk != null" >
+        #{bnk,jdbcType=VARCHAR},
+      </if>
+      <if test="repayaccountbnk != null" >
+        #{repayaccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="repayaccountname != null" >
+        #{repayaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="repayaccount != null" >
+        #{repayaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.BnkaccountExample" resultType="java.lang.Integer" >
+    select count(*) from bnkaccount
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bnkaccount
+    <set >
+      <if test="record.workid != null" >
+        workid = #{record.workid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountname != null" >
+        accountname = #{record.accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bnk != null" >
+        bnk = #{record.bnk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repayaccountbnk != null" >
+        repayaccountbnk = #{record.repayaccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repayaccountname != null" >
+        repayaccountname = #{record.repayaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repayaccount != null" >
+        repayaccount = #{record.repayaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bnkaccount
+    set workid = #{record.workid,jdbcType=VARCHAR},
+      accountname = #{record.accountname,jdbcType=VARCHAR},
+      account = #{record.account,jdbcType=VARCHAR},
+      bnk = #{record.bnk,jdbcType=VARCHAR},
+      repayaccountbnk = #{record.repayaccountbnk,jdbcType=VARCHAR},
+      repayaccountname = #{record.repayaccountname,jdbcType=VARCHAR},
+      repayaccount = #{record.repayaccount,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Bnkaccount" >
+    update bnkaccount
+    <set >
+      <if test="accountname != null" >
+        accountname = #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="bnk != null" >
+        bnk = #{bnk,jdbcType=VARCHAR},
+      </if>
+      <if test="repayaccountbnk != null" >
+        repayaccountbnk = #{repayaccountbnk,jdbcType=VARCHAR},
+      </if>
+      <if test="repayaccountname != null" >
+        repayaccountname = #{repayaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="repayaccount != null" >
+        repayaccount = #{repayaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Bnkaccount" >
+    update bnkaccount
+    set accountname = #{accountname,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      bnk = #{bnk,jdbcType=VARCHAR},
+      repayaccountbnk = #{repayaccountbnk,jdbcType=VARCHAR},
+      repayaccountname = #{repayaccountname,jdbcType=VARCHAR},
+      repayaccount = #{repayaccount,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      chgtl = #{chgtl,jdbcType=VARCHAR}
+    where workid = #{workid,jdbcType=VARCHAR}
+  </update>
+</mapper>

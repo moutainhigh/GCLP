@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grape.model.mapper.base.AreaMapper" >
+  <resultMap id="BaseResultMap" type="com.grape.model.db.Area" >
+    <id column="areaid" property="areaid" jdbcType="VARCHAR" />
+    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
+    <result column="superiorarea" property="superiorarea" jdbcType="VARCHAR" />
+    <result column="agentclass" property="agentclass" jdbcType="CHAR" />
+    <result column="islimitsale" property="islimitsale" jdbcType="CHAR" />
+    <result column="areaweight" property="areaweight" jdbcType="DECIMAL" />
+    <result column="limitsaleyear" property="limitsaleyear" jdbcType="VARCHAR" />
+    <result column="chgtl" property="chgtl" jdbcType="VARCHAR" />
+    <result column="chgdt" property="chgdt" jdbcType="TIMESTAMP" />
+    <result column="gbcode" property="gbcode" jdbcType="VARCHAR" />
+    <result column="areacode" property="areacode" jdbcType="VARCHAR" />
+    <result column="areatype" property="areatype" jdbcType="VARCHAR" />
+    <result column="cityab" property="cityab" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    areaid, areaname, superiorarea, agentclass, islimitsale, areaweight, limitsaleyear, 
+    chgtl, chgdt, gbcode, areacode, areatype, cityab
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.grape.model.db.AreaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from area
+    where areaid = #{areaid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from area
+    where areaid = #{areaid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.grape.model.db.AreaExample" >
+    delete from area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.grape.model.db.Area" >
+    insert into area (areaid, areaname, superiorarea, 
+      agentclass, islimitsale, areaweight, 
+      limitsaleyear, chgtl, chgdt, 
+      gbcode, areacode, areatype, 
+      cityab)
+    values (#{areaid,jdbcType=VARCHAR}, #{areaname,jdbcType=VARCHAR}, #{superiorarea,jdbcType=VARCHAR}, 
+      #{agentclass,jdbcType=CHAR}, #{islimitsale,jdbcType=CHAR}, #{areaweight,jdbcType=DECIMAL}, 
+      #{limitsaleyear,jdbcType=VARCHAR}, #{chgtl,jdbcType=VARCHAR}, #{chgdt,jdbcType=TIMESTAMP}, 
+      #{gbcode,jdbcType=VARCHAR}, #{areacode,jdbcType=VARCHAR}, #{areatype,jdbcType=VARCHAR}, 
+      #{cityab,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.grape.model.db.Area" >
+    insert into area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="areaid != null" >
+        areaid,
+      </if>
+      <if test="areaname != null" >
+        areaname,
+      </if>
+      <if test="superiorarea != null" >
+        superiorarea,
+      </if>
+      <if test="agentclass != null" >
+        agentclass,
+      </if>
+      <if test="islimitsale != null" >
+        islimitsale,
+      </if>
+      <if test="areaweight != null" >
+        areaweight,
+      </if>
+      <if test="limitsaleyear != null" >
+        limitsaleyear,
+      </if>
+      <if test="chgtl != null" >
+        chgtl,
+      </if>
+      <if test="chgdt != null" >
+        chgdt,
+      </if>
+      <if test="gbcode != null" >
+        gbcode,
+      </if>
+      <if test="areacode != null" >
+        areacode,
+      </if>
+      <if test="areatype != null" >
+        areatype,
+      </if>
+      <if test="cityab != null" >
+        cityab,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="areaid != null" >
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="areaname != null" >
+        #{areaname,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorarea != null" >
+        #{superiorarea,jdbcType=VARCHAR},
+      </if>
+      <if test="agentclass != null" >
+        #{agentclass,jdbcType=CHAR},
+      </if>
+      <if test="islimitsale != null" >
+        #{islimitsale,jdbcType=CHAR},
+      </if>
+      <if test="areaweight != null" >
+        #{areaweight,jdbcType=DECIMAL},
+      </if>
+      <if test="limitsaleyear != null" >
+        #{limitsaleyear,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gbcode != null" >
+        #{gbcode,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode != null" >
+        #{areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="areatype != null" >
+        #{areatype,jdbcType=VARCHAR},
+      </if>
+      <if test="cityab != null" >
+        #{cityab,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.grape.model.db.AreaExample" resultType="java.lang.Integer" >
+    select count(*) from area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update area
+    <set >
+      <if test="record.areaid != null" >
+        areaid = #{record.areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaname != null" >
+        areaname = #{record.areaname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superiorarea != null" >
+        superiorarea = #{record.superiorarea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentclass != null" >
+        agentclass = #{record.agentclass,jdbcType=CHAR},
+      </if>
+      <if test="record.islimitsale != null" >
+        islimitsale = #{record.islimitsale,jdbcType=CHAR},
+      </if>
+      <if test="record.areaweight != null" >
+        areaweight = #{record.areaweight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.limitsaleyear != null" >
+        limitsaleyear = #{record.limitsaleyear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgtl != null" >
+        chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chgdt != null" >
+        chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gbcode != null" >
+        gbcode = #{record.gbcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areacode != null" >
+        areacode = #{record.areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areatype != null" >
+        areatype = #{record.areatype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityab != null" >
+        cityab = #{record.cityab,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update area
+    set areaid = #{record.areaid,jdbcType=VARCHAR},
+      areaname = #{record.areaname,jdbcType=VARCHAR},
+      superiorarea = #{record.superiorarea,jdbcType=VARCHAR},
+      agentclass = #{record.agentclass,jdbcType=CHAR},
+      islimitsale = #{record.islimitsale,jdbcType=CHAR},
+      areaweight = #{record.areaweight,jdbcType=DECIMAL},
+      limitsaleyear = #{record.limitsaleyear,jdbcType=VARCHAR},
+      chgtl = #{record.chgtl,jdbcType=VARCHAR},
+      chgdt = #{record.chgdt,jdbcType=TIMESTAMP},
+      gbcode = #{record.gbcode,jdbcType=VARCHAR},
+      areacode = #{record.areacode,jdbcType=VARCHAR},
+      areatype = #{record.areatype,jdbcType=VARCHAR},
+      cityab = #{record.cityab,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grape.model.db.Area" >
+    update area
+    <set >
+      <if test="areaname != null" >
+        areaname = #{areaname,jdbcType=VARCHAR},
+      </if>
+      <if test="superiorarea != null" >
+        superiorarea = #{superiorarea,jdbcType=VARCHAR},
+      </if>
+      <if test="agentclass != null" >
+        agentclass = #{agentclass,jdbcType=CHAR},
+      </if>
+      <if test="islimitsale != null" >
+        islimitsale = #{islimitsale,jdbcType=CHAR},
+      </if>
+      <if test="areaweight != null" >
+        areaweight = #{areaweight,jdbcType=DECIMAL},
+      </if>
+      <if test="limitsaleyear != null" >
+        limitsaleyear = #{limitsaleyear,jdbcType=VARCHAR},
+      </if>
+      <if test="chgtl != null" >
+        chgtl = #{chgtl,jdbcType=VARCHAR},
+      </if>
+      <if test="chgdt != null" >
+        chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gbcode != null" >
+        gbcode = #{gbcode,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode != null" >
+        areacode = #{areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="areatype != null" >
+        areatype = #{areatype,jdbcType=VARCHAR},
+      </if>
+      <if test="cityab != null" >
+        cityab = #{cityab,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where areaid = #{areaid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grape.model.db.Area" >
+    update area
+    set areaname = #{areaname,jdbcType=VARCHAR},
+      superiorarea = #{superiorarea,jdbcType=VARCHAR},
+      agentclass = #{agentclass,jdbcType=CHAR},
+      islimitsale = #{islimitsale,jdbcType=CHAR},
+      areaweight = #{areaweight,jdbcType=DECIMAL},
+      limitsaleyear = #{limitsaleyear,jdbcType=VARCHAR},
+      chgtl = #{chgtl,jdbcType=VARCHAR},
+      chgdt = #{chgdt,jdbcType=TIMESTAMP},
+      gbcode = #{gbcode,jdbcType=VARCHAR},
+      areacode = #{areacode,jdbcType=VARCHAR},
+      areatype = #{areatype,jdbcType=VARCHAR},
+      cityab = #{cityab,jdbcType=VARCHAR}
+    where areaid = #{areaid,jdbcType=VARCHAR}
+  </update>
+</mapper>
